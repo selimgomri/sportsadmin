@@ -19,6 +19,9 @@ class ClubMember
     #[ORM\ManyToOne(targetEntity: member::class, inversedBy: 'clubMembers')]
     private $member_id;
 
+    #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'clubmembers')]
+    private $user_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class ClubMember
     public function setMemberId(?member $member_id): self
     {
         $this->member_id = $member_id;
+
+        return $this;
+    }
+
+    public function getUserId(): ?user
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?user $user_id): self
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }

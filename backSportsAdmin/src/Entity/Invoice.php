@@ -25,6 +25,9 @@ class Invoice
     #[ORM\ManyToOne(targetEntity: club::class, inversedBy: 'invoices')]
     private $club_id;
 
+    #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'invoices')]
+    private $user_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Invoice
     public function setClubId(?club $club_id): self
     {
         $this->club_id = $club_id;
+
+        return $this;
+    }
+
+    public function getUserId(): ?user
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?user $user_id): self
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }

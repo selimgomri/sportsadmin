@@ -28,6 +28,9 @@ class Document
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $updated_at;
 
+    #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'documents')]
+    private $user_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +92,18 @@ class Document
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getUserId(): ?user
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?user $user_id): self
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }

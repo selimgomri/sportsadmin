@@ -39,9 +39,13 @@ class Guardian
     #[ORM\OneToMany(mappedBy: 'parent_id', targetEntity: Member::class)]
     private $members;
 
+    #[ORM\OneToMany(mappedBy: 'guardian_id', targetEntity: User::class)]
+    private $users;
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -157,6 +161,36 @@ class Guardian
             // set the owning side to null (unless already changed)
             if ($member->getParentId() === $this) {
                 $member->setParentId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setGuardianId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getGuardianId() === $this) {
+                $user->setGuardianId(null);
             }
         }
 

@@ -33,9 +33,13 @@ class Subscription
     #[ORM\Column(type: 'date', nullable: true)]
     private $end_date;
 
+    #[ORM\OneToMany(mappedBy: 'subscription_id', targetEntity: User::class)]
+    private $users;
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,6 +133,36 @@ class Subscription
     public function setEndDate(?\DateTimeInterface $end_date): self
     {
         $this->end_date = $end_date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setSubscriptionId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getSubscriptionId() === $this) {
+                $user->setSubscriptionId(null);
+            }
+        }
 
         return $this;
     }
