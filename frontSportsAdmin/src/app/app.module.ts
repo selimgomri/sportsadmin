@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { PageMyclubsComponent } from './page-myclubs/page-myclubs.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 
 @NgModule({
   declarations: [
@@ -13,8 +15,13 @@ import { HeaderBarComponent } from './header-bar/header-bar.component';
     LoginFormComponent,
     PageMyclubsComponent,
     HeaderBarComponent,
+    DashboardComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
