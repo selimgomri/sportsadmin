@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-page-myclubs',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageMyclubsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  redirect() {
+    this.router.navigate(['./dashboard']);
+  }
 
   ngOnInit(): void {
   }
-
 }
