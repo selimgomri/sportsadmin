@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Login } from './Login';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -10,13 +11,14 @@ import { Login } from './Login';
 export class LoginFormComponent implements OnInit {
 
   model : Login = new Login();
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
-  
+
   onSubmit() {
     console.log(this.model);
+    this.router.navigate(['/mes-clubs']);
  }
 
 }
