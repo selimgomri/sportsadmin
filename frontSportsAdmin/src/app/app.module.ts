@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { PageMyclubsComponent } from './page-myclubs/page-myclubs.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
