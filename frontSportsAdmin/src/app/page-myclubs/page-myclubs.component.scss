@@ -1,0 +1,41 @@
+$base-color: #4AC285;
+
+.club {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 35px;
+  height: 400px;
+  width: 400px;
+  margin: 50px;
+  transition: 0.5s;
+}
+
+.clubs {
+  display: inline-flex;
+}
+
+img {
+  margin: 50px;
+}
+
+.club:hover {
+  transform: translateY(-20px);
+  color: $base-color;
+  transition: 0.5s;
+  cursor: pointer;
+
+}
+
+@media screen and (max-width : 600px) {
+
+ .clubs {
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+ }
+}
