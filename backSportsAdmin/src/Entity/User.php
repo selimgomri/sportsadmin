@@ -59,6 +59,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Memberfield::class)]
     private $memberfields;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $gender;
+
+    #[ORM\Column(type: 'json', nullable: true)]
+    private $category_level = [];
+
     public function __construct()
     {
         $this->documents = new ArrayCollection();
@@ -337,6 +343,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $memberfield->setUserId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?string $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getCategoryLevel(): ?array
+    {
+        return $this->category_level;
+    }
+
+    public function setCategoryLevel(?array $category_level): self
+    {
+        $this->category_level = $category_level;
 
         return $this;
     }
