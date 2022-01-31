@@ -31,11 +31,13 @@ img {
 @media screen and (max-width : 600px) {
 
  .clubs {
-   display: flex;
-   flex-direction: column;
-   text-align: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   justify-content: center;
   align-items: center;
   margin: 30px;
- }
+  width: auto;
+  }
+
 }
