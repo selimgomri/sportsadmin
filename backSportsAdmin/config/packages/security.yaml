@@ -25,6 +25,15 @@ security:
         login_path: login
         check_path: login
 
+    secured_area:
+      # ...
+      form_login:
+        # ...
+        enable_csrf: true
+      login_throttling:
+        max_attempts: 3
+        interval: "15 minutes"
+
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#the-firewall
 
