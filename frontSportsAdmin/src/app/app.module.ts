@@ -7,6 +7,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { PageMyclubsComponent } from './page-myclubs/page-myclubs.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditClubComponent } from './edit-club/edit-club.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LoginFormComponent,
     PageMyclubsComponent,
     HeaderBarComponent,
-    DashboardComponent
+    DashboardComponent,
+    EditClubComponent
   ],
   imports: [
     BrowserModule,
