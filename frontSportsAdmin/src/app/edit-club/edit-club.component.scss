@@ -1,0 +1,49 @@
+$secondary-color: #4AC285;
+
+.edit {
+  background-color: #F6F4F5 ;
+  border-radius: 35px;
+  display: flex;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+  margin: 80px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.block1 {
+  display: flex;
+
+}
+
+button {
+  border-radius: 10px;
+  background-color : $secondary-color;
+  border: none;
+  font-weight: bold;
+  justify-content: end;
+}
+
+input {
+  border-radius: 20px;
+  width: 400px;
+}
+
+.form-group
+ {
+   margin: 30px;
+ }
+
+ .color {
+   height:50px;
+   width: 100px;
+   margin-bottom: 30px;
+ }
+
+ .button {
+   text-align: right;
+ }
+
+ svg {
+  height: 20px;
+}
