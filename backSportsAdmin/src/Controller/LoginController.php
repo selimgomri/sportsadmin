@@ -1,5 +1,6 @@
 <?php
 
+// src/Controller/LoginController.php
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,9 +19,11 @@ class LoginController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        // last username entered by the user
         return $this->render('login/index.html.twig', [
+            
             'last_username' => $lastUsername,
-            'error'         => $error,
+             'error'         => $error,
         ]);
     }
 }
