@@ -6,16 +6,16 @@ import { PageMyclubsComponent } from './page-myclubs/page-myclubs.component';
 const routes: Routes = [
   {
     path: '',
-    component: LoginFormComponent
+    component: LoginFormComponent,
   },
   {
     path: 'mes-clubs',
-    component: PageMyclubsComponent
-  }
+    component: PageMyclubsComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
