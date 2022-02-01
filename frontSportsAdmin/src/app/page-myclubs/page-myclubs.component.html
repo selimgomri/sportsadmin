@@ -4,12 +4,12 @@
   </svg> Créer un Club</button>
 </div>
 <div class="container-fluid clubs">
-  <div class="container club" *ngFor="let club of clubs">
+  <div class="container club" *ngFor="let club of clubs" (click)="redirect()">
     <div class="logo" >
       <img [src]="club.logo" width=200px/>
     </div>
     <div class="club-name">
-        <h1>{{ club.name}}</h1>
+        <h1>{{ club.name }}</h1>
     </div>
   </div>
 </div>

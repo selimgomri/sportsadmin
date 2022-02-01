@@ -1,0 +1,56 @@
+$secondary-color: #4AC285;
+
+.section {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 35px;
+  height: 800px;
+  width: 400px;
+  margin: 50px;
+}
+
+svg {
+  height: 150px;
+  margin: 30px;
+  color: $secondary-color;
+}
+
+h1 {
+  color: $secondary-color;
+}
+
+h5 {
+  text-align: left;
+  margin: 30px;
+}
+
+.dashboard {
+  display: inline-flex;
+}
+
+button {
+  border-radius: 10px;
+  background-color : $secondary-color;
+  border: none;
+  font-weight: bold;
+
+}
+
+@media screen and (max-width : 600px) {
+
+ .dashboard {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  width: auto;
+  }
+
+  h5 {
+    text-align: center;
+  }
+}
