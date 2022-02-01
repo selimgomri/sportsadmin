@@ -5,6 +5,9 @@ security:
     Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
     App\Entity\User:
       algorithm: auto
+  role_hierarchy:
+    ROLE_ADMIN: ROLE_USER
+    ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
   # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
   providers:
@@ -24,11 +27,13 @@ security:
         # "login" is the name of the route created previously
         login_path: login
         check_path: login
+        default_target_path: home
+        failure_path: login
       logout:
         path: app_logout
 
         # where to redirect after logout
-        # target: app_any_route
+        target: login
 
     secured_area:
       # ...
