@@ -27,11 +27,13 @@ security:
         # "login" is the name of the route created previously
         login_path: login
         check_path: login
+        default_target_path: home
+        failure_path: login
       logout:
         path: app_logout
 
         # where to redirect after logout
-        # target: app_any_route
+        target: login
 
     secured_area:
       # ...
