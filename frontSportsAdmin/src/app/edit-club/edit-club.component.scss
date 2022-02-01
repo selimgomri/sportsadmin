@@ -11,11 +11,6 @@ $secondary-color: #4AC285;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-.block1 {
-  display: flex;
-
-}
-
 button {
   border-radius: 10px;
   background-color : $secondary-color;
@@ -46,4 +41,32 @@ input {
 
  svg {
   height: 20px;
+}
+
+@media screen and (max-width : 600px) {
+
+  .edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  width: auto;
+  }
+
+  input {
+    width: auto;
+
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .form-group button {
+    margin: auto;
+    width: 150px;
+  }
 }
