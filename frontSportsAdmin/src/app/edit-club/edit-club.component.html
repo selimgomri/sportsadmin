@@ -1,0 +1,57 @@
+<div class="container edit">
+  <form name="editForm" (ngSubmit)="editForm.valid && onSubmit()" #editForm="ngForm" no validate>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+        <label for="name">Nom du Club*</label>
+        <input name="name" type="text" class="form-control" [(ngModel)]="model.name"
+        #name="ngModel" [ngClass]="{ 'is-invalid': editForm.submitted && name.invalid }"
+        required/>
+        <div *ngIf="editForm.submitted && name.invalid" class="invalid-feedback">
+          <div *ngIf="name.errors.required">Veuillez renseigner un nom de Club.</div>
+        </div>
+      </div>
+        <div class="form-group">
+          <label for="adress">Adresse*</label>
+          <input name="adress" class="form-control" type="text" [(ngModel)]="model.adress" #adress="ngModel"
+          [ngClass]="{'is-invalid': editForm.submitted && adress.invalid }" required/>
+          <div *ngIf="editForm.submitted && adress.invalid" class="invalid-feedback">
+              <div *ngIf="adress.errors.required">Veuillez renseigner une adresse.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="sport">Sport Pratiqué*</label>
+          <input name="sport" class="form-control" type="text" [(ngModel)]="model.sport" #sport="ngModel"
+          [ngClass]="{'is-invalid': editForm.submitted && sport.invalid }" required/>
+          <div *ngIf="editForm.submitted && sport.invalid" class="invalid-feedback">
+              <div *ngIf="sport.errors.required">Veuillez renseigner un sport.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+        <label for="logo">Logo*</label>
+        <input name="logo" class="form-control" type="file" [(ngModel)]="model.logo" #logo="ngModel"
+        [ngClass]="{'is-invalid': editForm.submitted && logo.invalid }" required/>
+        <div *ngIf="editForm.submitted && logo.invalid" class="invalid-feedback">
+            <div *ngIf="logo.errors.required">Veuillez télécharger un logo.</div>
+        </div>
+        </div>
+        <div class="form-group">
+          <label for="theme">Thème</label>
+          <input name="color1" class="form-control color" type="color" [(ngModel)]="model.color1" #color1="ngModel" value="#ffffff"/>
+          <input name="color2" class="form-control color" type="color" [(ngModel)]="model.color2" #color2="ngModel" value="#4ac285"/>
+        </div>
+      </div>
+    </div>
+    <div class="form-group button">
+      <button type="submit" class="btn btn-success">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4">
+        </path></svg>
+        Enregistrer</button>
+    </div>
+  </form>
+</div>

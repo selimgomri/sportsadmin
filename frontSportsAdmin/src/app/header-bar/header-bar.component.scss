@@ -1,0 +1,23 @@
+.header-Bar {
+  display: flex;
+  flex-direction: row;
+  padding: 50px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+h1 {
+  position: fixed;
+  left: 100px;
+}
+
+.search-bar {
+  position: fixed;
+  right: 300px;
+  border-radius: 20px;
+  padding-left: 20px;
+}
+
+.admin-profile {
+  position: fixed;
+  right: 100px;
+}

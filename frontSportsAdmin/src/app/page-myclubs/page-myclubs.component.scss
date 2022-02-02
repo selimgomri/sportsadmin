@@ -17,6 +17,24 @@ $base-color: #4AC285;
   display: inline-flex;
 }
 
+button {
+  border-radius: 10px;
+  background-color : $base-color;
+  border: none;
+  font-weight: bold;
+  margin: 30px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.button-create {
+  display: flex;
+  justify-content: end;
+}
+
+svg {
+  height: 20px;
+}
+
 img {
   margin: 50px;
 }
@@ -41,4 +59,12 @@ img {
   width: auto;
   }
 
+  .button-create {
+    justify-content: center;
+  }
+
+  button {
+    margin-top: 60px;
+    margin-bottom: 0px;
+  }
 }

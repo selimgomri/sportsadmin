@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { PageMyclubsComponent } from './page-myclubs/page-myclubs.component';
+import { HeaderBarComponent } from './header-bar/header-bar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditClubComponent } from './edit-club/edit-club.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
-    PageMyclubsComponent
+    PageMyclubsComponent,
+    HeaderBarComponent,
+    DashboardComponent,
+    EditClubComponent
   ],
   imports: [
     BrowserModule,
@@ -19,6 +25,6 @@ import { PageMyclubsComponent } from './page-myclubs/page-myclubs.component';
     FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
