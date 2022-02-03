@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Club } from '../club';
-import { Clubs } from '../mock-clubs';
+import { Club } from '../../club';
+import { Clubs } from '../../mock-clubs';
 import { Router } from '@angular/router';
 
 
