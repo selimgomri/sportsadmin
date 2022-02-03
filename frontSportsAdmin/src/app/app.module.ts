@@ -8,8 +8,12 @@ import { PageMyclubsComponent } from './shared/page-myclubs/page-myclubs.compone
 import { HeaderBarComponent } from './shared/header-bar/header-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditClubComponent } from './edit-club/edit-club.component';
+<<<<<<< HEAD
 import { SideBarComponent } from './shared/side-bar/side-bar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+=======
+import { SideBarComponent } from './side-bar/side-bar.component';
+>>>>>>> 45faadcb4ef2f72f333612e109cd09e1534f50c9
 
 
 @NgModule({
