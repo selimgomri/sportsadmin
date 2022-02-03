@@ -1,3 +1,4 @@
+<header-bar></header-bar>
 <div class="container edit">
   <form name="editForm" (ngSubmit)="editForm.valid && onSubmit()" #editForm="ngForm" no validate>
     <div class="row">
@@ -40,8 +41,12 @@
         </div>
         <div class="form-group">
           <label for="theme">Thème</label>
-          <input name="color1" class="form-control color" type="color" [(ngModel)]="model.color1" #color1="ngModel" value="#ffffff"/>
-          <input name="color2" class="form-control color" type="color" [(ngModel)]="model.color2" #color2="ngModel" value="#4ac285"/>
+          <input name="color1" class="form-control colorpicker" type="color"
+          (ngModelChange)="setColor1($event)"
+          [ngModel]="primaryColor">
+          <input name="color2" class="form-control colorpicker" type="color"
+          (ngModelChange)="setColor2($event)"
+          [ngModel]="secondaryColor">
         </div>
       </div>
     </div>
