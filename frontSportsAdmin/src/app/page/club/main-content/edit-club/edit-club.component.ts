@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Edit } from './Edit';
 import { FormsModule } from '@angular/forms';
 
+
 @Component({
   selector: 'edit-club',
   templateUrl: './edit-club.component.html',
@@ -10,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 export class EditClubComponent implements OnInit {
 
   model : Edit = new Edit();
+  public primaryColor = '#ffffff';
+  public secondaryColor = '#4ac285';
   constructor() { }
 
   ngOnInit(): void {
@@ -17,6 +20,17 @@ export class EditClubComponent implements OnInit {
 
   onSubmit() {
     console.log(this.model);
+  }
+
+  setColor1(newColor:string) {
+    console.log('value', newColor);
+    this.primaryColor = newColor;
+    this.secondaryColor = newColor;
+  }
+
+  setColor2(newColor:string) {
+    console.log('value', newColor);
+    this.secondaryColor = newColor;
   }
 
 }
