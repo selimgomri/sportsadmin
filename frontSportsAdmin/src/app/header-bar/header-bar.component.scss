@@ -1,23 +1,48 @@
-.header-Bar {
-  display: flex;
-  flex-direction: row;
-  padding: 50px;
+$secondary-color: #4AC285;
+
+header {
+  padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  background-color: #fafafa;
 }
 
 h1 {
-  position: fixed;
-  left: 100px;
+  margin-left: 40px;
+  font-family: 'Bebas Neue';
 }
 
-.search-bar {
-  position: fixed;
-  right: 300px;
+a {
+  font-family: 'Red Hat Display';
+}
+
+.btn {
+  border-radius: 10px;
+  background-color : $secondary-color;
+  border: none;
+  font-weight: bold;
+  color: white;
+}
+
+img, .form-control {
   border-radius: 20px;
-  padding-left: 20px;
+}
+svg {
+  height: 20px;
 }
 
-.admin-profile {
-  position: fixed;
-  right: 100px;
+#navbarDropdown {
+  color: black;
+  margin-right: 50px;
+  margin-left: 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.align {
+  display: flex;
+}
+
+.d-flex {
+  align-items: center;
+  margin-right: 50px;
 }
