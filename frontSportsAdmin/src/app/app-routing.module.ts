@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditClubComponent } from './edit-club/edit-club.component';
+import { BaseComponent } from './layouts/base/base.component';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { PageMyclubsComponent } from './shared/page-myclubs/page-myclubs.component';
 
 const routes: Routes = [
   {
@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'mes-clubs',
-    component: PageMyclubsComponent
+    component: BaseComponent
   },
   {
     path: 'dashboard',
