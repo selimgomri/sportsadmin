@@ -15,8 +15,7 @@ export class EditClubComponent implements OnInit {
   public secondaryColor = '#4ac285';
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     console.log(this.model);
@@ -25,7 +24,6 @@ export class EditClubComponent implements OnInit {
   setColor1(newColor:string) {
     console.log('value', newColor);
     this.primaryColor = newColor;
-    this.secondaryColor = newColor;
   }
 
   setColor2(newColor:string) {
