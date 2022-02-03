@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Field;
+use App\Entity\MemberField;
 use App\Entity\User;
+use App\Form\FieldType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,6 +29,9 @@ class UserController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
+        $memberField = new MemberField();
+        $user->getMemberfields()->add($memberField);
+        
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 

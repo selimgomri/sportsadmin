@@ -21,9 +21,16 @@ class UserType extends AbstractType
                 'entry_options' => ['choices' => [
                     'ROLE_ADMIN' => 'ROLE_ADMIN',
                     'ROLE_USER' => 'ROLE_USER',
-                ]
+                ],
+              
 ]
                 
+            ])
+            ->add('memberfields', CollectionType::class, [
+                'entry_type' => MemberFieldType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true
             ])
             ->add('password')
             ->add('lastname')

@@ -61,7 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $clubmembers;
 
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Memberfield::class)]
-    private $memberfields;
+    protected $memberfields;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $gender;
@@ -92,6 +92,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->email = $email;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->email;
     }
 
     /**
