@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-page-myclubs',
+  selector: 'page-myclubs',
   templateUrl: './page-myclubs.component.html',
   styleUrls: ['./page-myclubs.component.scss']
 })

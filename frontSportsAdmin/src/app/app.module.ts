@@ -8,6 +8,7 @@ import { PageMyclubsComponent } from './page-myclubs/page-myclubs.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditClubComponent } from './edit-club/edit-club.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { EditClubComponent } from './edit-club/edit-club.component';
     PageMyclubsComponent,
     HeaderBarComponent,
     DashboardComponent,
-    EditClubComponent
+    EditClubComponent,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,
