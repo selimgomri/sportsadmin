@@ -1,9 +1,9 @@
-import { ClubChoiceComponent } from './club-choice/club-choice.component';
+import { ClubChoiceComponent } from './page/club-choice/club-choice.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { EditClubComponent } from './edit-club/edit-club.component';
-import { LoginFormComponent } from './login-form/login-form.component';
+import { DashboardComponent } from './main-content/dashboard/dashboard.component';
+import { EditClubComponent } from './main-content/edit-club/edit-club.component';
+import { LoginFormComponent } from './page/landing-page/login-form.component';
 
 const routes: Routes = [
   {
