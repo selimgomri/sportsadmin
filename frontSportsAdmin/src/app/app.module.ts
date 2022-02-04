@@ -1,3 +1,4 @@
+import { EditClubComponent } from './main-content/edit-club/edit-club.component';
 import { PageMyclubsComponent } from './main-content/page-myclubs/page-myclubs.component';
 import { SideBarComponent } from './shared-content/side-bar/side-bar.component';
 import { HeaderBarComponent } from './shared-content/header-bar/header-bar.component';
@@ -11,7 +12,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ClubChoiceComponent } from './page/club-choice/club-choice.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent, ClubChoiceComponent, HeaderBarComponent, SideBarComponent,PageMyclubsComponent],
+  declarations: [AppComponent, LoginFormComponent, ClubChoiceComponent, HeaderBarComponent, SideBarComponent,PageMyclubsComponent, EditClubComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, FlexLayoutModule],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Edit } from './Edit';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'edit-club',
