@@ -10,9 +10,10 @@ import { FormsModule } from '@angular/forms';
 import { LoginFormComponent } from './page/landing-page/login-form.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ClubChoiceComponent } from './page/club-choice/club-choice.component';
+import { SideBarClubComponent } from './page/club/shared/side-bar-club/side-bar-club.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent, ClubChoiceComponent, HeaderBarComponent, SideBarComponent,PageMyclubsComponent, EditClubComponent],
+  declarations: [AppComponent, LoginFormComponent, ClubChoiceComponent, HeaderBarComponent, SideBarComponent,PageMyclubsComponent, EditClubComponent, SideBarClubComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, FlexLayoutModule],
   providers: [],
   bootstrap: [AppComponent],
