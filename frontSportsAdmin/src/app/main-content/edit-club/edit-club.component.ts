@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Edit } from './Edit';
 
 @Component({
-  selector: 'app-edit-club',
+  selector: 'edit-club',
   templateUrl: './edit-club.component.html',
   styleUrls: ['./edit-club.component.scss']
 })
