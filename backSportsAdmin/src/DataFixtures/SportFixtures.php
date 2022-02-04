@@ -8,7 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class SportFixtures extends Fixture
 {
-    public const SPORT_REFERENCE = 'sport-rugby';
+    public const SPORT_REFERENCE = 'sport-id';
 
     public function load(ObjectManager $manager): void
     {
