@@ -28,7 +28,7 @@ class ClubFixtures extends Fixture implements DependentFixtureInterface
 
         $club->setSportId($this->getReference(SportFixtures::SPORT_REFERENCE));
 
-        $this->addReference(self::CLUB_REFERENCE, $club);
+        $this->setReference(self::CLUB_REFERENCE, $club);
 
         $manager->persist($club);
 

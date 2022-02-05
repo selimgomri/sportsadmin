@@ -21,7 +21,7 @@ class SubscriptionFormulaFixtures extends Fixture
         $formula->setCreatedAt($createdDate);
         $formula->setUpdatedAt($updatedDate);
 
-        $this->addReference(self::SUBSCRIPTIONFORMULA_REFERENCE, $formula);
+        $this->setReference(self::SUBSCRIPTIONFORMULA_REFERENCE, $formula);
 
         $manager->persist($formula);
 

@@ -26,7 +26,7 @@ class GuardianFixtures extends Fixture
             $guardian->setCreatedAt($createdDate);
             $guardian->setUpdatedAt($updatedDate);
 
-            $this->addReference(self::GUARDIAN_REFERENCE, $guardian);
+            $this->setReference(self::GUARDIAN_REFERENCE, $guardian);
 
             $manager->persist($guardian);
         }

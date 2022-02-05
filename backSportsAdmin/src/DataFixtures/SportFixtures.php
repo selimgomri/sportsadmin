@@ -15,7 +15,7 @@ class SportFixtures extends Fixture
         $sport = new Sport();
         $sport->setName("rugby");
 
-        $this->addReference(self::SPORT_REFERENCE, $sport);
+        $this->setReference(self::SPORT_REFERENCE, $sport);
 
         $manager->persist($sport);
 

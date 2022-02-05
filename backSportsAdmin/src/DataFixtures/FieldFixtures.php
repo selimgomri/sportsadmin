@@ -23,7 +23,7 @@ class FieldFixtures extends Fixture implements DependentFixtureInterface
         $field->setPosition(1);
 
         $field->setClubId($this->getReference(ClubFixtures::CLUB_REFERENCE));
-        $this->addReference(self::FIELD_REFERENCE, $field);
+        $this->setReference(self::FIELD_REFERENCE, $field);
 
         $manager->persist($field);
 

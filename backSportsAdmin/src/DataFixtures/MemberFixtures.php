@@ -15,7 +15,7 @@ class MemberFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $birthdate = new \DateTime(10 / 10 / 1996);
+        $birthdate = new \DateTime(1996);
 
         for ($count = 0; $count < 20; $count++) {
             $member = new Member();
@@ -34,7 +34,7 @@ class MemberFixtures extends Fixture implements DependentFixtureInterface
             $member->setParentId($this->getReference(GuardianFixtures::GUARDIAN_REFERENCE));
             $member->setSubscriptionId($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE));
 
-            $this->addReference(self::MEMBER_REFERENCE, $member);
+            $this->setReference(self::MEMBER_REFERENCE, $member);
 
             $manager->persist($member);
         }
