@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditClubComponent } from './edit-club/edit-club.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { LoginComponent } from './login/login.component';
 import { PageMyclubsComponent } from './page-myclubs/page-myclubs.component';
 
 const routes: Routes = [
@@ -12,16 +13,20 @@ const routes: Routes = [
   },
   {
     path: 'mes-clubs',
-    component: PageMyclubsComponent
+    component: PageMyclubsComponent,
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
   },
   {
     path: 'editer-mon-club',
-    component: EditClubComponent
-  }
+    component: EditClubComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
 ];
 
 @NgModule({
