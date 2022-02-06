@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,64 +10,95 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Attribute;
+use Doctrine\Common\Annotations\Annotation\Attributes;
+use Doctrine\ORM\Mapping\OrderBy;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource(
+    attributes:[["pagination_items_per_page" => 10]],
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+)]
+//#[ApiFilter(SearchFilter::class, properties: ['post' => ['exact']])]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+   
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups(["read", "write"])]
     private $email;
 
     #[ORM\Column(type: 'json')]
+    #[Groups(["read", "write"])]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
+    #[Groups(["write"])]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["read", "write"])]
     private $lastname;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["read", "write"])]
     private $firstname;
 
     #[ORM\Column(type: 'date')]
+    #[Groups(["read", "write"])]
     private $birthdate;
 
     #[ORM\Column(type: 'string', length: 30)]
+    #[Groups(["read", "write"])]
     private $phone;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(["read", "write"])]
     private $license_number;
 
-    #[ORM\ManyToOne(targetEntity: Guardian::class, inversedBy: 'users')]
+    #[ORM\ManyToOne(targetEntity: guardian::class, inversedBy: 'users')]
+    #[Groups(["read", "write"])]
     private $guardian_id;
 
-    #[ORM\ManyToOne(targetEntity: Subscription::class, inversedBy: 'users')]
+    #[ORM\ManyToOne(targetEntity: subscription::class, inversedBy: 'users')]
+    #[Groups(["read", "write"])]
     private $subscription_id;
 
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Document::class)]
+    #[Groups(["read", "write"])]
     private $documents;
 
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Invoice::class)]
+    #[Groups(["read", "write"])]
     private $invoices;
 
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Clubmember::class)]
+   
     private $clubmembers;
 
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Memberfield::class)]
+   
     private $memberfields;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(["read", "write"])]
     private $gender;
 
     #[ORM\Column(type: 'json', nullable: true)]
+    #[Groups(["read", "write"])]
     private $category_level = [];
 
     public function __construct()
