@@ -1,0 +1,38 @@
+<div class="container">
+  <mat-card-header>
+    <h1>SimpleTech Login</h1>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <div>
+        <label>Username</label>
+        <input
+          matInput
+          placeholder="Username"
+          name="username"
+          [(ngModel)]="username"
+        />
+      </div>
+      <div>
+        <label>Password</label>
+        <input
+          matInput
+          placeholder="Password"
+          name="password"
+          type="password"
+          [(ngModel)]="password"
+        />
+      </div>
+      <button
+        id="btn-login"
+        mat-raised-button
+        color="primary"
+        (click)="login()"
+      >
+        Login
+      </button>
+
+      <div *ngIf="wrongCredentials">Invalid Credentials</div>
+    </form>
+  </mat-card-content>
+</div>

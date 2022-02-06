@@ -7,6 +7,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { LoginComponent } from './login/login.component';
+import {
+  HttpClientModule,
+  HttpClientXsrfModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { LoginFormComponent } from './page/landing-page/login-form.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ClubChoiceComponent } from './page/club-choice/club-choice.component';
@@ -27,6 +35,7 @@ import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club
     EditClubComponent,
     SideBarClubComponent,
     DashboardComponent,
+    LoginComponent,
     DashboardViewComponent,
     EditClubViewComponent
   ],
@@ -35,6 +44,12 @@ import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club
     AppRoutingModule,
     FormsModule,
     FlexLayoutModule
+    NoopAnimationsModule,
+    MatCardModule,
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'csrftoken',
+    }),
   ],
   providers: [],
   bootstrap: [
