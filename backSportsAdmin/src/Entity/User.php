@@ -45,10 +45,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $license_number;
 
-    #[ORM\ManyToOne(targetEntity: guardian::class, inversedBy: 'users')]
+    #[ORM\ManyToOne(targetEntity: Guardian::class, inversedBy: 'users')]
     private $guardian_id;
 
-    #[ORM\ManyToOne(targetEntity: subscription::class, inversedBy: 'users')]
+    #[ORM\ManyToOne(targetEntity: Subscription::class, inversedBy: 'users')]
     private $subscription_id;
 
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Document::class)]

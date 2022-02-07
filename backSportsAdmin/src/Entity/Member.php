@@ -51,7 +51,7 @@ class Member
     #[ORM\OneToMany(mappedBy: 'member_id', targetEntity: Invoice::class)]
     private $invoices;
 
-    #[ORM\ManyToOne(targetEntity: guardian::class, inversedBy: 'members')]
+    #[ORM\ManyToOne(targetEntity: Guardian::class, inversedBy: 'members')]
     private $parent_id;
 
     #[ORM\ManyToOne(targetEntity: subscription::class, inversedBy: 'members')]
