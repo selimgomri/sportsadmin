@@ -17,7 +17,9 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sessionLogin.getUser();
+  }
 
   login() {
     this.wrongCredentials = false;

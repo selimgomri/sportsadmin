@@ -47,9 +47,9 @@ import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club
     NoopAnimationsModule,
     MatCardModule,
     HttpClientModule,
-    HttpClientXsrfModule.withOptions({
-      cookieName: 'csrftoken',
-    }),
+    //HttpClientXsrfModule.withOptions({
+    //cookieName: 'csrftoken',
+    //}),
   ],
   providers: [],
   bootstrap: [
