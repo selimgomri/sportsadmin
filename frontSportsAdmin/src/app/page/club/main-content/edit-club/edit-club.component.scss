@@ -1,4 +1,5 @@
-$secondary-color: #4AC285;
+$primary: var(--primary-color);
+$secondary: var(--secondary-color);
 
 .edit {
   background-color: #F6F4F5 ;
@@ -13,7 +14,7 @@ $secondary-color: #4AC285;
 
 button {
   border-radius: 10px;
-  background-color : $secondary-color;
+  background-color : $secondary;
   border: none;
   font-weight: bold;
   justify-content: end;
