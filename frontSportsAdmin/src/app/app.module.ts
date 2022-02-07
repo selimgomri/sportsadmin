@@ -16,6 +16,7 @@ import {
   HttpClientXsrfModule,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
+import { HttpXsrfInterceptorService } from './interceptors/http-xsrf-interceptor/http-xsrf-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -34,11 +35,17 @@ import {
     NoopAnimationsModule,
     MatCardModule,
     HttpClientModule,
-    //HttpClientXsrfModule.withOptions({
-    //cookieName: 'csrftoken',
-    //}),
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'csrftoken',
+    }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpXsrfInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
