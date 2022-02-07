@@ -6,19 +6,16 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss']
+  styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent implements OnInit {
+  model: Login = new Login();
+  constructor(private router: Router) {}
 
-  model : Login = new Login();
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     console.log(this.model);
     this.router.navigate(['/mes-clubs']);
- }
-
+  }
 }

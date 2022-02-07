@@ -1,9 +1,9 @@
+import { DashboardViewComponent } from './page/club/view/dashboard-view/dashboard-view.component';
+import { ClubChoiceComponent } from './page/club-choice/club-choice.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { EditClubComponent } from './edit-club/edit-club.component';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { PageMyclubsComponent } from './page-myclubs/page-myclubs.component';
+import { LoginFormComponent } from './page/landing-page/login-form.component';
+import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
 
 const routes: Routes = [
   {
@@ -12,16 +12,16 @@ const routes: Routes = [
   },
   {
     path: 'mes-clubs',
-    component: PageMyclubsComponent
+    component: ClubChoiceComponent,
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardViewComponent,
   },
   {
     path: 'editer-mon-club',
-    component: EditClubComponent
-  }
+    component: EditClubViewComponent,
+  },
 ];
 
 @NgModule({

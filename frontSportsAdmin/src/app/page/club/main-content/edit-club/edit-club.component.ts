@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Edit } from './Edit';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-edit-club',
+  selector: 'edit-club',
   templateUrl: './edit-club.component.html',
   styleUrls: ['./edit-club.component.scss']
 })

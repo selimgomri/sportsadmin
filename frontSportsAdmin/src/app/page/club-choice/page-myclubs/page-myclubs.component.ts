@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Club } from '../club';
-import { Clubs } from '../mock-clubs';
+import { Clubs } from '../../../mock-clubs';
 import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-page-myclubs',
+  selector: 'page-myclubs',
   templateUrl: './page-myclubs.component.html',
   styleUrls: ['./page-myclubs.component.scss']
 })
