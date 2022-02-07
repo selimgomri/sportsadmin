@@ -1,6 +1,11 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Red+Hat+Display:wght@300&family=Roboto:ital,wght@1,900&display=swap");
 
+:root {
+  --primary-color: #911978;
+  --secondary-color: #1b25af;
+}
+
 body {
   background-color: #fafafa;
 }

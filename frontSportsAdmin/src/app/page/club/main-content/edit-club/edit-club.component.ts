@@ -11,9 +11,9 @@ import { FormsModule } from '@angular/forms';
 export class EditClubComponent implements OnInit {
 
   model : Edit = new Edit();
-  public primaryColor = '#ffffff';
-  public secondaryColor = '#4ac285';
-  constructor() { }
+  /*public primaryColor = '#ffffff';
+  public secondaryColor = '#4ac285';*/
+
 
   ngOnInit(): void {}
 
@@ -29,6 +29,18 @@ export class EditClubComponent implements OnInit {
   setColor2(newColor:string) {
     console.log('value', newColor);
     this.secondaryColor = newColor;
+  }
+
+  primaryColor!: string;
+  secondaryColor!: string;
+
+  constructor() {
+    this.changeTheme('red', 'yellow'); // Set default theme
+  }
+
+  changeTheme(primary: string, secondary: string) {
+    document.documentElement.style.setProperty('--primary-color', primary);
+    document.documentElement.style.setProperty('--secondary-color', secondary);
   }
 
 }
