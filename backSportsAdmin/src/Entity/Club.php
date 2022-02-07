@@ -2,20 +2,31 @@
 
 namespace App\Entity;
 
-use App\Repository\ClubRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ClubRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 #[ORM\Entity(repositoryClass: ClubRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read_tag' ]],
+    denormalizationContext: ['groups' => ['write_tag']]
+)]
+#[ApiFilter(OrderFilter::class, properties: ['id', 'name'], arguments: ['orderParameterName' => 'order'])]
 class Club
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read_tag'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read_tag', 'write_tag'])]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
