@@ -37,6 +37,28 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->persist($user);
 
+        $birthdate2 = new \DateTime(1999);
+
+        $user2 = new User();
+
+        $user2->setLastname("durand");
+        $user2->setFirstname("henry");
+        $user2->setBirthdate($birthdate2);
+        $user2->setCategoryLevel(['user']);
+        $user2->setEmail("durand@gmail.com");
+        $user2->setPhone("0607080910");
+        $user2->setGender("m");
+        $user2->setLicenseNumber("124a458b780c");
+        $user2->setPassword("abcabcee");
+        $user2->setRoles(['user']);
+
+        $this->setReference(self::USER_REFERENCE, $user2);
+
+        $user2->setGuardianId($this->getReference(GuardianFixtures::GUARDIAN_REFERENCE));
+        $user2->setSubscriptionId($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE));
+
+        $manager->persist($user2);
+
         $manager->flush();
     }
 
