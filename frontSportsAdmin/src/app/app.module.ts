@@ -34,9 +34,9 @@ import {
     NoopAnimationsModule,
     MatCardModule,
     HttpClientModule,
-    HttpClientXsrfModule.withOptions({
-      cookieName: 'csrftoken',
-    }),
+    //HttpClientXsrfModule.withOptions({
+    //cookieName: 'csrftoken',
+    //}),
   ],
   providers: [],
   bootstrap: [AppComponent],
