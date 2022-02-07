@@ -15,6 +15,7 @@ import {
   HttpClientXsrfModule,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
+import { HttpXsrfInterceptorService } from './interceptors/http-xsrf-interceptor/http-xsrf-interceptor.service';
 import { LoginFormComponent } from './page/landing-page/login-form.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ClubChoiceComponent } from './page/club-choice/club-choice.component';
@@ -47,11 +48,17 @@ import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club
     NoopAnimationsModule,
     MatCardModule,
     HttpClientModule,
-    //HttpClientXsrfModule.withOptions({
-    //cookieName: 'csrftoken',
-    //}),
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'csrftoken',
+    }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpXsrfInterceptorService,
+      multi: true,
+    },
+    ],
   bootstrap: [
     AppComponent
   ],

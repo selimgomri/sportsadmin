@@ -13,10 +13,10 @@ export class SessionLoginService {
   constructor(private httpClient: HttpClient) {}
 
   getUser() {
-    const url2 = `${environment.baseUrl}/api/users`;
-    const url = 'https://pokeapi.co/api/v2/pokemon/ditto';
-    console.log(url2);
-    this.httpClient.get(url2).subscribe((result) => console.log(result));
+    const url = `${environment.baseUrl}/api/users`;
+
+    console.log(url);
+    this.httpClient.get(url).subscribe((result) => console.log(result));
   }
 
   login(pUsername: string, pPassword: string) {
