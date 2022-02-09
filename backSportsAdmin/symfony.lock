@@ -195,6 +195,9 @@
     "psr/log": {
         "version": "3.0.0"
     },
+    "stripe/stripe-php": {
+        "version": "v7.113.0"
+    },
     "symfony/asset": {
         "version": "v6.0.3"
     },
