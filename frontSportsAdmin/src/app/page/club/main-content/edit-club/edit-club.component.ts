@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
 export class EditClubComponent implements OnInit {
 
   model : Edit = new Edit();
-
   ngOnInit(): void {}
 
   onSubmit() {
