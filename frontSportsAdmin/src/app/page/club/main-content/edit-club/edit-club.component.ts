@@ -11,9 +11,6 @@ import { FormsModule } from '@angular/forms';
 export class EditClubComponent implements OnInit {
 
   model : Edit = new Edit();
-  /*public primaryColor = '#ffffff';
-  public secondaryColor = '#4ac285';*/
-
 
   ngOnInit(): void {}
 
@@ -35,7 +32,7 @@ export class EditClubComponent implements OnInit {
   secondaryColor!: string;
 
   constructor() {
-    this.changeTheme('red', 'yellow'); // Set default theme
+    this.changeTheme('#F6F4F5', '#4ac285'); // Set default theme
   }
 
   changeTheme(primary: string, secondary: string) {
