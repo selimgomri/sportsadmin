@@ -1,6 +1,7 @@
 $base-color: #4AC285;
 $primary: var(--primary-color);
 $secondary: var(--secondary-color);
+
 .club {
   text-align: center;
   justify-content: center;
@@ -19,11 +20,10 @@ $secondary: var(--secondary-color);
 
 button {
   border-radius: 10px;
-  background-color : $secondary;
+  background-color : $base-color;
   border: none;
   font-weight: bold;
   margin: 30px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .button-create {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Edit } from './Edit';
 import { FormsModule } from '@angular/forms';
+import { getCurrencySymbol } from '@angular/common';
 
 
 @Component({
