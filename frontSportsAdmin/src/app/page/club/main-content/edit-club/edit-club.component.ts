@@ -28,7 +28,7 @@ export class EditClubComponent implements OnInit {
     this.secondaryColor = newColor;
   }
 
-  primaryColor = '#ffffff';
+  primaryColor = '#F6F4F5';
   secondaryColor = '#4ac285';
 
   constructor() {
