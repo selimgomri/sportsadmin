@@ -28,8 +28,8 @@ export class EditClubComponent implements OnInit {
     this.secondaryColor = newColor;
   }
 
-  primaryColor!: string;
-  secondaryColor!: string;
+  primaryColor = '#F6F4F5';
+  secondaryColor = '#4ac285';
 
   constructor() {
     this.changeTheme('#F6F4F5', '#4ac285'); // Set default theme
