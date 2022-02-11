@@ -11,18 +11,6 @@ const routes: Routes = [
     component: LoginFormComponent,
   },
   {
-    path: 'mes-clubs',
-    component: PageMyclubsComponent,
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-  },
-  {
-    path: 'editer-mon-club',
-    component: EditClubComponent,
-  },
-  {
     path: 'login',
     component: LoginComponent,
   },
