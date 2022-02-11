@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -48,8 +50,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(targetEntity: Guardian::class, inversedBy: 'users')]
     private $guardian;
 
-    #[ORM\ManyToOne(targetEntity: ClubMember::class, inversedBy: 'user')]
-    private $clubMember;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ClubUser::class)]
+    private $clubUsers;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Document::class)]
+    private $documents;
+
+    #[ORM\ManyToOne(targetEntity: Subscription::class, inversedBy: 'users')]
+    private $subscription;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Invoice::class)]
+    private $invoices;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserField::class)]
+    private $userFields;
+
+    public function __construct()
+    {
+        $this->clubUsers = new ArrayCollection();
+        $this->documents = new ArrayCollection();
+        $this->invoices = new ArrayCollection();
+        $this->userFields = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -217,14 +240,134 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getClubMember(): ?ClubMember
+    /**
+     * @return Collection|ClubUser[]
+     */
+    public function getClubUsers(): Collection
     {
-        return $this->clubMember;
+        return $this->clubUsers;
     }
 
-    public function setClubMember(?ClubMember $clubMember): self
+    public function addClubUser(ClubUser $clubUser): self
     {
-        $this->clubMember = $clubMember;
+        if (!$this->clubUsers->contains($clubUser)) {
+            $this->clubUsers[] = $clubUser;
+            $clubUser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClubUser(ClubUser $clubUser): self
+    {
+        if ($this->clubUsers->removeElement($clubUser)) {
+            // set the owning side to null (unless already changed)
+            if ($clubUser->getUser() === $this) {
+                $clubUser->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Document[]
+     */
+    public function getDocuments(): Collection
+    {
+        return $this->documents;
+    }
+
+    public function addDocument(Document $document): self
+    {
+        if (!$this->documents->contains($document)) {
+            $this->documents[] = $document;
+            $document->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocument(Document $document): self
+    {
+        if ($this->documents->removeElement($document)) {
+            // set the owning side to null (unless already changed)
+            if ($document->getUser() === $this) {
+                $document->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscription $subscription): self
+    {
+        $this->subscription = $subscription;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Invoice[]
+     */
+    public function getInvoices(): Collection
+    {
+        return $this->invoices;
+    }
+
+    public function addInvoice(Invoice $invoice): self
+    {
+        if (!$this->invoices->contains($invoice)) {
+            $this->invoices[] = $invoice;
+            $invoice->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvoice(Invoice $invoice): self
+    {
+        if ($this->invoices->removeElement($invoice)) {
+            // set the owning side to null (unless already changed)
+            if ($invoice->getUser() === $this) {
+                $invoice->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserField[]
+     */
+    public function getUserFields(): Collection
+    {
+        return $this->userFields;
+    }
+
+    public function addUserField(UserField $userField): self
+    {
+        if (!$this->userFields->contains($userField)) {
+            $this->userFields[] = $userField;
+            $userField->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserField(UserField $userField): self
+    {
+        if ($this->userFields->removeElement($userField)) {
+            // set the owning side to null (unless already changed)
+            if ($userField->getUser() === $this) {
+                $userField->setUser(null);
+            }
+        }
 
         return $this;
     }

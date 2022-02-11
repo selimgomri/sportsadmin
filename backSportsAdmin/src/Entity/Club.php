@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ClubRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClubRepository::class)]
@@ -32,6 +34,22 @@ class Club
 
     #[ORM\ManyToOne(targetEntity: Sport::class, inversedBy: 'clubs')]
     private $sport;
+
+    #[ORM\OneToMany(mappedBy: 'club', targetEntity: ClubUser::class)]
+    private $clubUsers;
+
+    #[ORM\OneToMany(mappedBy: 'club', targetEntity: Field::class)]
+    private $fields;
+
+    #[ORM\OneToMany(mappedBy: 'club', targetEntity: Invoice::class)]
+    private $invoices;
+
+    public function __construct()
+    {
+        $this->clubUsers = new ArrayCollection();
+        $this->fields = new ArrayCollection();
+        $this->invoices = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -106,6 +124,96 @@ class Club
     public function setSport(?Sport $sport): self
     {
         $this->sport = $sport;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ClubUser[]
+     */
+    public function getClubUsers(): Collection
+    {
+        return $this->clubUsers;
+    }
+
+    public function addClubUser(ClubUser $clubUser): self
+    {
+        if (!$this->clubUsers->contains($clubUser)) {
+            $this->clubUsers[] = $clubUser;
+            $clubUser->setClub($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClubUser(ClubUser $clubUser): self
+    {
+        if ($this->clubUsers->removeElement($clubUser)) {
+            // set the owning side to null (unless already changed)
+            if ($clubUser->getClub() === $this) {
+                $clubUser->setClub(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Field[]
+     */
+    public function getFields(): Collection
+    {
+        return $this->fields;
+    }
+
+    public function addField(Field $field): self
+    {
+        if (!$this->fields->contains($field)) {
+            $this->fields[] = $field;
+            $field->setClub($this);
+        }
+
+        return $this;
+    }
+
+    public function removeField(Field $field): self
+    {
+        if ($this->fields->removeElement($field)) {
+            // set the owning side to null (unless already changed)
+            if ($field->getClub() === $this) {
+                $field->setClub(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Invoice[]
+     */
+    public function getInvoices(): Collection
+    {
+        return $this->invoices;
+    }
+
+    public function addInvoice(Invoice $invoice): self
+    {
+        if (!$this->invoices->contains($invoice)) {
+            $this->invoices[] = $invoice;
+            $invoice->setClub($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvoice(Invoice $invoice): self
+    {
+        if ($this->invoices->removeElement($invoice)) {
+            // set the owning side to null (unless already changed)
+            if ($invoice->getClub() === $this) {
+                $invoice->setClub(null);
+            }
+        }
 
         return $this;
     }
