@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\SubscriptionFormulaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SubscriptionFormulaRepository::class)]
+#[ApiResource]
 class SubscriptionFormula
 {
     #[ORM\Id]
@@ -18,21 +20,15 @@ class SubscriptionFormula
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\Column(type: 'float')]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $amount;
 
-    #[ORM\OneToMany(mappedBy: 'susbscription_formula_id', targetEntity: Subscription::class)]
-    private $subscriptions;
-
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private $created_at;
-
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private $updated_at;
+    #[ORM\OneToMany(mappedBy: 'subscritpion_formula', targetEntity: Subscription::class)]
+    private $start_date;
 
     public function __construct()
     {
-        $this->subscriptions = new ArrayCollection();
+        $this->start_date = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -52,12 +48,12 @@ class SubscriptionFormula
         return $this;
     }
 
-    public function getAmount(): ?float
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
 
-    public function setAmount(float $amount): self
+    public function setAmount(?int $amount): self
     {
         $this->amount = $amount;
 
@@ -67,53 +63,29 @@ class SubscriptionFormula
     /**
      * @return Collection|Subscription[]
      */
-    public function getSubscriptions(): Collection
+    public function getStartDate(): Collection
     {
-        return $this->subscriptions;
+        return $this->start_date;
     }
 
-    public function addSubscription(Subscription $subscription): self
+    public function addStartDate(Subscription $startDate): self
     {
-        if (!$this->subscriptions->contains($subscription)) {
-            $this->subscriptions[] = $subscription;
-            $subscription->setSusbscriptionFormulaId($this);
+        if (!$this->start_date->contains($startDate)) {
+            $this->start_date[] = $startDate;
+            $startDate->setSubscritpionFormula($this);
         }
 
         return $this;
     }
 
-    public function removeSubscription(Subscription $subscription): self
+    public function removeStartDate(Subscription $startDate): self
     {
-        if ($this->subscriptions->removeElement($subscription)) {
+        if ($this->start_date->removeElement($startDate)) {
             // set the owning side to null (unless already changed)
-            if ($subscription->getSusbscriptionFormulaId() === $this) {
-                $subscription->setSusbscriptionFormulaId(null);
+            if ($startDate->getSubscritpionFormula() === $this) {
+                $startDate->setSubscritpionFormula(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(?\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updated_at;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
-    {
-        $this->updated_at = $updated_at;
 
         return $this;
     }

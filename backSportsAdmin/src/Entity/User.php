@@ -6,25 +6,39 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiResource;
 
-/**
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
- */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource(
+    collectionOperations: [],
+    itemOperations: [
+        'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
+        'me' => [
+            'method' => 'GET',
+            'path' => '/me',
+            'controller' => MeAction::class,
+            'read' => false,
+            'normalization_context' => [ 'groups' => [ 'read_profile' ]]
+        ]
+    ]
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read_profile'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups(['read_profile'])]
     private $email;
 
     #[ORM\Column(type: 'json')]
+    #[Groups(['read_profile'])]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
@@ -39,43 +53,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'date')]
     private $birthdate;
 
-    #[ORM\Column(type: 'string', length: 30)]
+    #[ORM\Column(type: 'string', length: 255)]
+    private $address;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $phone;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $license_number;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $category;
+
     #[ORM\ManyToOne(targetEntity: Guardian::class, inversedBy: 'users')]
-    private $guardian_id;
+    private $guardian;
 
-    #[ORM\ManyToOne(targetEntity: Subscription::class, inversedBy: 'users')]
-    private $subscription_id;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ClubUser::class)]
+    private $clubUsers;
 
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Document::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Document::class)]
     private $documents;
 
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Invoice::class)]
+    #[ORM\ManyToOne(targetEntity: Subscription::class, inversedBy: 'users')]
+    private $subscription;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Invoice::class)]
     private $invoices;
 
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Clubmember::class)]
-    private $clubmembers;
-
-    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Memberfield::class)]
-    private $memberfields;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $gender;
-
-    #[ORM\Column(type: 'json', nullable: true)]
-    private $category_level = [];
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserField::class)]
+    private $userFields;
 
     public function __construct()
     {
+        $this->clubUsers = new ArrayCollection();
         $this->documents = new ArrayCollection();
         $this->invoices = new ArrayCollection();
-        $this->clubmembers = new ArrayCollection();
-        $this->memberfields = new ArrayCollection();
+        $this->userFields = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -125,7 +140,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @see PasswordAuthenticatedUserInterface
-     * @return string the hashed password for this user
      */
     public function getPassword(): string
     {
@@ -184,50 +198,92 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
     public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(string $phone): self
+    public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
 
         return $this;
     }
 
-    public function getLicenseNumber(): ?string
+    public function getLicenseNumber(): ?int
     {
         return $this->license_number;
     }
 
-    public function setLicenseNumber(?string $license_number): self
+    public function setLicenseNumber(?int $license_number): self
     {
         $this->license_number = $license_number;
 
         return $this;
     }
 
-    public function getGuardianId(): ?guardian
+    public function getCategory(): ?string
     {
-        return $this->guardian_id;
+        return $this->category;
     }
 
-    public function setGuardianId(?guardian $guardian_id): self
+    public function setCategory(?string $category): self
     {
-        $this->guardian_id = $guardian_id;
+        $this->category = $category;
 
         return $this;
     }
 
-    public function getSubscriptionId(): ?subscription
+    public function getGuardian(): ?Guardian
     {
-        return $this->subscription_id;
+        return $this->guardian;
     }
 
-    public function setSubscriptionId(?subscription $subscription_id): self
+    public function setGuardian(?Guardian $guardian): self
     {
-        $this->subscription_id = $subscription_id;
+        $this->guardian = $guardian;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ClubUser[]
+     */
+    public function getClubUsers(): Collection
+    {
+        return $this->clubUsers;
+    }
+
+    public function addClubUser(ClubUser $clubUser): self
+    {
+        if (!$this->clubUsers->contains($clubUser)) {
+            $this->clubUsers[] = $clubUser;
+            $clubUser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClubUser(ClubUser $clubUser): self
+    {
+        if ($this->clubUsers->removeElement($clubUser)) {
+            // set the owning side to null (unless already changed)
+            if ($clubUser->getUser() === $this) {
+                $clubUser->setUser(null);
+            }
+        }
 
         return $this;
     }
@@ -244,7 +300,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->documents->contains($document)) {
             $this->documents[] = $document;
-            $document->setUserId($this);
+            $document->setUser($this);
         }
 
         return $this;
@@ -254,10 +310,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->documents->removeElement($document)) {
             // set the owning side to null (unless already changed)
-            if ($document->getUserId() === $this) {
-                $document->setUserId(null);
+            if ($document->getUser() === $this) {
+                $document->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscription $subscription): self
+    {
+        $this->subscription = $subscription;
 
         return $this;
     }
@@ -274,7 +342,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->invoices->contains($invoice)) {
             $this->invoices[] = $invoice;
-            $invoice->setUserId($this);
+            $invoice->setUser($this);
         }
 
         return $this;
@@ -284,8 +352,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->invoices->removeElement($invoice)) {
             // set the owning side to null (unless already changed)
-            if ($invoice->getUserId() === $this) {
-                $invoice->setUserId(null);
+            if ($invoice->getUser() === $this) {
+                $invoice->setUser(null);
             }
         }
 
@@ -293,85 +361,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection|Clubmember[]
+     * @return Collection|UserField[]
      */
-    public function getClubmembers(): Collection
+    public function getUserFields(): Collection
     {
-        return $this->clubmembers;
+        return $this->userFields;
     }
 
-    public function addClubmember(Clubmember $clubmember): self
+    public function addUserField(UserField $userField): self
     {
-        if (!$this->clubmembers->contains($clubmember)) {
-            $this->clubmembers[] = $clubmember;
-            $clubmember->setUserId($this);
+        if (!$this->userFields->contains($userField)) {
+            $this->userFields[] = $userField;
+            $userField->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeClubmember(Clubmember $clubmember): self
+    public function removeUserField(UserField $userField): self
     {
-        if ($this->clubmembers->removeElement($clubmember)) {
+        if ($this->userFields->removeElement($userField)) {
             // set the owning side to null (unless already changed)
-            if ($clubmember->getUserId() === $this) {
-                $clubmember->setUserId(null);
+            if ($userField->getUser() === $this) {
+                $userField->setUser(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Memberfield[]
-     */
-    public function getMemberfields(): Collection
-    {
-        return $this->memberfields;
-    }
-
-    public function addMemberfield(Memberfield $memberfield): self
-    {
-        if (!$this->memberfields->contains($memberfield)) {
-            $this->memberfields[] = $memberfield;
-            $memberfield->setUserId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMemberfield(Memberfield $memberfield): self
-    {
-        if ($this->memberfields->removeElement($memberfield)) {
-            // set the owning side to null (unless already changed)
-            if ($memberfield->getUserId() === $this) {
-                $memberfield->setUserId(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getGender(): ?string
-    {
-        return $this->gender;
-    }
-
-    public function setGender(?string $gender): self
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
-
-    public function getCategoryLevel(): ?array
-    {
-        return $this->category_level;
-    }
-
-    public function setCategoryLevel(?array $category_level): self
-    {
-        $this->category_level = $category_level;
 
         return $this;
     }

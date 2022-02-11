@@ -2,37 +2,28 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ClubRepository;
-use ApiPlatform\Core\Annotation\ApiFilter;
-use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\ClubRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClubRepository::class)]
-#[ApiResource(
-    normalizationContext: ['groups' => ['read_tag' ]],
-    denormalizationContext: ['groups' => ['write_tag']]
-)]
-#[ApiFilter(OrderFilter::class, properties: ['id', 'name'], arguments: ['orderParameterName' => 'order'])]
+#[ApiResource]
 class Club
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read_tag'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read_tag', 'write_tag'])]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $logo;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $address;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -41,24 +32,23 @@ class Club
     #[ORM\Column(type: 'string', length: 255)]
     private $secondarycolor;
 
-    #[ORM\ManyToOne(targetEntity: sport::class, inversedBy: 'clubs')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $sport_id;
+    #[ORM\ManyToOne(targetEntity: Sport::class, inversedBy: 'clubs')]
+    private $sport;
 
-    #[ORM\OneToMany(mappedBy: 'club_id', targetEntity: Field::class)]
+    #[ORM\OneToMany(mappedBy: 'club', targetEntity: ClubUser::class)]
+    private $clubUsers;
+
+    #[ORM\OneToMany(mappedBy: 'club', targetEntity: Field::class)]
     private $fields;
 
-    #[ORM\OneToMany(mappedBy: 'club_id', targetEntity: Invoice::class)]
+    #[ORM\OneToMany(mappedBy: 'club', targetEntity: Invoice::class)]
     private $invoices;
-
-    #[ORM\OneToMany(mappedBy: 'club_id', targetEntity: ClubMember::class)]
-    private $clubMembers;
 
     public function __construct()
     {
+        $this->clubUsers = new ArrayCollection();
         $this->fields = new ArrayCollection();
         $this->invoices = new ArrayCollection();
-        $this->clubMembers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,7 +85,7 @@ class Club
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAddress(?string $address): self
     {
         $this->address = $address;
 
@@ -126,14 +116,44 @@ class Club
         return $this;
     }
 
-    public function getSportId(): ?sport
+    public function getSport(): ?Sport
     {
-        return $this->sport_id;
+        return $this->sport;
     }
 
-    public function setSportId(?sport $sport_id): self
+    public function setSport(?Sport $sport): self
     {
-        $this->sport_id = $sport_id;
+        $this->sport = $sport;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ClubUser[]
+     */
+    public function getClubUsers(): Collection
+    {
+        return $this->clubUsers;
+    }
+
+    public function addClubUser(ClubUser $clubUser): self
+    {
+        if (!$this->clubUsers->contains($clubUser)) {
+            $this->clubUsers[] = $clubUser;
+            $clubUser->setClub($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClubUser(ClubUser $clubUser): self
+    {
+        if ($this->clubUsers->removeElement($clubUser)) {
+            // set the owning side to null (unless already changed)
+            if ($clubUser->getClub() === $this) {
+                $clubUser->setClub(null);
+            }
+        }
 
         return $this;
     }
@@ -150,7 +170,7 @@ class Club
     {
         if (!$this->fields->contains($field)) {
             $this->fields[] = $field;
-            $field->setClubId($this);
+            $field->setClub($this);
         }
 
         return $this;
@@ -160,8 +180,8 @@ class Club
     {
         if ($this->fields->removeElement($field)) {
             // set the owning side to null (unless already changed)
-            if ($field->getClubId() === $this) {
-                $field->setClubId(null);
+            if ($field->getClub() === $this) {
+                $field->setClub(null);
             }
         }
 
@@ -180,7 +200,7 @@ class Club
     {
         if (!$this->invoices->contains($invoice)) {
             $this->invoices[] = $invoice;
-            $invoice->setClubId($this);
+            $invoice->setClub($this);
         }
 
         return $this;
@@ -190,38 +210,8 @@ class Club
     {
         if ($this->invoices->removeElement($invoice)) {
             // set the owning side to null (unless already changed)
-            if ($invoice->getClubId() === $this) {
-                $invoice->setClubId(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|ClubMember[]
-     */
-    public function getClubMembers(): Collection
-    {
-        return $this->clubMembers;
-    }
-
-    public function addClubMember(ClubMember $clubMember): self
-    {
-        if (!$this->clubMembers->contains($clubMember)) {
-            $this->clubMembers[] = $clubMember;
-            $clubMember->setClubId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClubMember(ClubMember $clubMember): self
-    {
-        if ($this->clubMembers->removeElement($clubMember)) {
-            // set the owning side to null (unless already changed)
-            if ($clubMember->getClubId() === $this) {
-                $clubMember->setClubId(null);
+            if ($invoice->getClub() === $this) {
+                $invoice->setClub(null);
             }
         }
 

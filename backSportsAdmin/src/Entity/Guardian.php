@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\GuardianRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GuardianRepository::class)]
+#[ApiResource]
 class Guardian
 {
     #[ORM\Id]
@@ -27,24 +29,14 @@ class Guardian
     #[ORM\Column(type: 'string', length: 255)]
     private $email;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'string', length: 255)]
     private $phone;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private $created_at;
-
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private $updated_at;
-
-    #[ORM\OneToMany(mappedBy: 'parent_id', targetEntity: Member::class)]
-    private $members;
-
-    #[ORM\OneToMany(mappedBy: 'guardian_id', targetEntity: User::class)]
+    #[ORM\OneToMany(mappedBy: 'guardian', targetEntity: User::class)]
     private $users;
 
     public function __construct()
     {
-        $this->members = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
@@ -101,68 +93,14 @@ class Guardian
         return $this;
     }
 
-    public function getPhone(): ?int
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(int $phone): self
+    public function setPhone(string $phone): self
     {
         $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updated_at;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
-    {
-        $this->updated_at = $updated_at;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Member[]
-     */
-    public function getMembers(): Collection
-    {
-        return $this->members;
-    }
-
-    public function addMember(Member $member): self
-    {
-        if (!$this->members->contains($member)) {
-            $this->members[] = $member;
-            $member->setParentId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMember(Member $member): self
-    {
-        if ($this->members->removeElement($member)) {
-            // set the owning side to null (unless already changed)
-            if ($member->getParentId() === $this) {
-                $member->setParentId(null);
-            }
-        }
 
         return $this;
     }
@@ -179,7 +117,7 @@ class Guardian
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setGuardianId($this);
+            $user->setGuardian($this);
         }
 
         return $this;
@@ -189,8 +127,8 @@ class Guardian
     {
         if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
-            if ($user->getGuardianId() === $this) {
-                $user->setGuardianId(null);
+            if ($user->getGuardian() === $this) {
+                $user->setGuardian(null);
             }
         }
 

@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\DocumentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DocumentRepository::class)]
+#[ApiResource]
 class Document
 {
     #[ORM\Id]
@@ -19,17 +21,8 @@ class Document
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\ManyToOne(targetEntity: member::class, inversedBy: 'documents')]
-    private $member_id;
-
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private $created_at;
-
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private $updated_at;
-
-    #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'documents')]
-    private $user_id;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'documents')]
+    private $user;
 
     public function getId(): ?int
     {
@@ -60,50 +53,14 @@ class Document
         return $this;
     }
 
-    public function getMemberId(): ?member
+    public function getUser(): ?User
     {
-        return $this->member_id;
+        return $this->user;
     }
 
-    public function setMemberId(?member $member_id): self
+    public function setUser(?User $user): self
     {
-        $this->member_id = $member_id;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(?\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updated_at;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
-    {
-        $this->updated_at = $updated_at;
-
-        return $this;
-    }
-
-    public function getUserId(): ?user
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(?user $user_id): self
-    {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }

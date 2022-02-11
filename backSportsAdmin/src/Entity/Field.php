@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FieldRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FieldRepository::class)]
+#[ApiResource]
 class Field
 {
     #[ORM\Id]
@@ -27,18 +29,18 @@ class Field
     #[ORM\Column(type: 'boolean')]
     private $required;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $position;
 
-    #[ORM\ManyToOne(targetEntity: club::class, inversedBy: 'fields')]
-    private $club_id;
+    #[ORM\ManyToOne(targetEntity: Club::class, inversedBy: 'fields')]
+    private $club;
 
-    #[ORM\OneToMany(mappedBy: 'field_id', targetEntity: MemberField::class)]
-    private $memberFields;
+    #[ORM\OneToMany(mappedBy: 'field', targetEntity: UserField::class)]
+    private $userFields;
 
     public function __construct()
     {
-        $this->memberFields = new ArrayCollection();
+        $this->userFields = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -99,49 +101,49 @@ class Field
         return $this->position;
     }
 
-    public function setPosition(int $position): self
+    public function setPosition(?int $position): self
     {
         $this->position = $position;
 
         return $this;
     }
 
-    public function getClubId(): ?club
+    public function getClub(): ?Club
     {
-        return $this->club_id;
+        return $this->club;
     }
 
-    public function setClubId(?club $club_id): self
+    public function setClub(?Club $club): self
     {
-        $this->club_id = $club_id;
+        $this->club = $club;
 
         return $this;
     }
 
     /**
-     * @return Collection|MemberField[]
+     * @return Collection|UserField[]
      */
-    public function getMemberFields(): Collection
+    public function getUserFields(): Collection
     {
-        return $this->memberFields;
+        return $this->userFields;
     }
 
-    public function addMemberField(MemberField $memberField): self
+    public function addUserField(UserField $userField): self
     {
-        if (!$this->memberFields->contains($memberField)) {
-            $this->memberFields[] = $memberField;
-            $memberField->setFieldId($this);
+        if (!$this->userFields->contains($userField)) {
+            $this->userFields[] = $userField;
+            $userField->setField($this);
         }
 
         return $this;
     }
 
-    public function removeMemberField(MemberField $memberField): self
+    public function removeUserField(UserField $userField): self
     {
-        if ($this->memberFields->removeElement($memberField)) {
+        if ($this->userFields->removeElement($userField)) {
             // set the owning side to null (unless already changed)
-            if ($memberField->getFieldId() === $this) {
-                $memberField->setFieldId(null);
+            if ($userField->getField() === $this) {
+                $userField->setField(null);
             }
         }
 

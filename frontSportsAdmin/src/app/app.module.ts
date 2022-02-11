@@ -7,6 +7,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import {
+  HttpClientXsrfModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpXsrfInterceptorService } from './interceptors/http-xsrf-interceptor/http-xsrf-interceptor.service';
 import { LoginFormComponent } from './page/landing-page/login-form.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ClubChoiceComponent } from './page/club-choice/club-choice.component';
@@ -27,6 +34,7 @@ import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club
     EditClubComponent,
     SideBarClubComponent,
     DashboardComponent,
+    LoginComponent,
     DashboardViewComponent,
     EditClubViewComponent
   ],
@@ -34,9 +42,19 @@ import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'csrftoken',
+    }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpXsrfInterceptorService,
+      multi: true,
+    },
+    ],
   bootstrap: [
     AppComponent
   ],

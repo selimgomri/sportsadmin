@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\InvoiceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: InvoiceRepository::class)]
+#[ApiResource]
 class Invoice
 {
     #[ORM\Id]
@@ -13,34 +15,31 @@ class Invoice
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\ManyToOne(targetEntity: member::class, inversedBy: 'invoices')]
-    private $member_id;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'invoices')]
+    private $user;
 
     #[ORM\Column(type: 'date')]
     private $date;
 
-    #[ORM\Column(type: 'float')]
+    #[ORM\Column(type: 'integer')]
     private $price_paid;
 
-    #[ORM\ManyToOne(targetEntity: club::class, inversedBy: 'invoices')]
-    private $club_id;
-
-    #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'invoices')]
-    private $user_id;
+    #[ORM\ManyToOne(targetEntity: Club::class, inversedBy: 'invoices')]
+    private $club;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getMemberId(): ?member
+    public function getUser(): ?User
     {
-        return $this->member_id;
+        return $this->user;
     }
 
-    public function setMemberId(?member $member_id): self
+    public function setUser(?User $user): self
     {
-        $this->member_id = $member_id;
+        $this->user = $user;
 
         return $this;
     }
@@ -57,38 +56,26 @@ class Invoice
         return $this;
     }
 
-    public function getPricePaid(): ?float
+    public function getPricePaid(): ?int
     {
         return $this->price_paid;
     }
 
-    public function setPricePaid(float $price_paid): self
+    public function setPricePaid(int $price_paid): self
     {
         $this->price_paid = $price_paid;
 
         return $this;
     }
 
-    public function getClubId(): ?club
+    public function getClub(): ?Club
     {
-        return $this->club_id;
+        return $this->club;
     }
 
-    public function setClubId(?club $club_id): self
+    public function setClub(?Club $club): self
     {
-        $this->club_id = $club_id;
-
-        return $this;
-    }
-
-    public function getUserId(): ?user
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(?user $user_id): self
-    {
-        $this->user_id = $user_id;
+        $this->club = $club;
 
         return $this;
     }

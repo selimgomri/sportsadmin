@@ -2,7 +2,7 @@ import { DashboardViewComponent } from './page/club/view/dashboard-view/dashboar
 import { ClubChoiceComponent } from './page/club-choice/club-choice.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginFormComponent } from './page/landing-page/login-form.component';
+import { LoginComponent } from './login/login.component';import { LoginFormComponent } from './page/landing-page/login-form.component';
 import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
 
 const routes: Routes = [
@@ -11,8 +11,8 @@ const routes: Routes = [
     component: LoginFormComponent,
   },
   {
-    path: 'mes-clubs',
-    component: ClubChoiceComponent,
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: 'dashboard',
