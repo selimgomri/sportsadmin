@@ -7,3 +7,59 @@ $secondary: var(--secondary-color);
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px;
 }
+
+img {
+  margin: auto;
+  display: block;
+  padding-top: 30px;
+}
+
+h3 {
+  margin-top: 70px;
+  font-weight: bold;
+}
+
+.side-navbar {
+  width: 180px;
+  margin-left: -300px;
+  transition: 0.5s;
+}
+
+.my-container {
+  transition: 0.4s;
+}
+.active-nav {
+  margin-left: 0;
+}
+/* for main section */
+.active-cont {
+  margin-left: 180px;
+}
+#menu-btn {
+  color: #fff;
+  margin-left: -62px;
+}
+
+.mx-2:hover {
+  background-color: $secondary;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.flex-column {
+  width: 100%;
+}
+
+span {
+  color: black;
+}
+
+span:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.club:hover {
+  color: black;
+}
