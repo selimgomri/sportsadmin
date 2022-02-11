@@ -15,10 +15,30 @@ import { DashboardComponent } from './page/club/main-content/dashboard/dashboard
 import { DashboardViewComponent } from './page/club/view/dashboard-view/dashboard-view.component';
 import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
 
+
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent, ClubChoiceComponent, HeaderBarComponent, SideBarComponent,PageMyclubsComponent, EditClubComponent, SideBarClubComponent, DashboardComponent, DashboardViewComponent, EditClubViewComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, FlexLayoutModule],
+  declarations: [
+    AppComponent,
+    LoginFormComponent,
+    ClubChoiceComponent,
+    HeaderBarComponent,
+    SideBarComponent,
+    PageMyclubsComponent,
+    EditClubComponent,
+    SideBarClubComponent,
+    DashboardComponent,
+    DashboardViewComponent,
+    EditClubViewComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    FlexLayoutModule
+  ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [
+    AppComponent
+  ],
 })
 export class AppModule {}

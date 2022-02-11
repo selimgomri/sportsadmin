@@ -1,4 +1,27 @@
 <div class="side-bar">
-  <img src="/src/assets/img/LogoSportsAdminGreen.png" alt="">
-  <button>Mes clubs</button>
-</div>
+  <img src="/assets/img/BRFC Logo (est 1923).svg" alt="" height="120">
+  <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+    <ul class="nav flex-column text-white">
+      <a [routerLink]="['/dashboard']" class="nav-link h3 text-white my-2">
+        <span class="club">BRFC</span>
+      </a>
+      <li [routerLink]="['/mes-clubs']" class="nav-link">
+        <span class="mx-2"><i class="bi bi-house"></i> Mes Clubs</span>
+      </li>
+      <li [routerLink]="['/dashboard']" class="nav-link">
+        <span class="mx-2"><i class="bi bi-speedometer2"></i> Tableau de bord</span>
+      </li>
+      <li href="#" class="nav-link">
+        <span class="mx-2"><i class="bi bi-people"></i> Gestion des membres</span>
+      </li>
+      <li href="#" class="nav-link">
+        <span class="mx-2"><i class="bi bi-currency-euro"></i> Gestion des cotisations</span>
+      </li>
+      <li href="#" class="nav-link">
+        <span class="mx-2"><i class="bi bi-gear"></i> Réglages</span>
+      </li>
+    </ul>
+  </div>
+<footer>
+  <img src="/assets/img/LogoSportsAdminWhite.png">
+</footer>
