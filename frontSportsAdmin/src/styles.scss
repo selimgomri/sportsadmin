@@ -1,11 +1,30 @@
-@import "~bootstrap/dist/css/bootstrap.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Red+Hat+Display:wght@300&family=Roboto:ital,wght@1,900&display=swap");
+
+$primary: var(--primary-color);
+$secondary: var(--secondary-color);
 
 body {
   background-color: #fafafa;
 }
+
 html,
 body {
   padding: 0;
   margin: 0;
+  font-family: 'Red Hat Display';
+}
+
+h1 {
+  font-family: 'Bebas Neue';
+}
+
+button {
+  border-radius: 10px;
+  background-color : $secondary;
+  color: white;
+  border: none;
+  font-weight: bold;
+  justify-content: end;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }

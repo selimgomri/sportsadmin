@@ -1,4 +1,5 @@
-$secondary-color: #4AC285;
+$primary: var(--primary-color);
+$secondary: var(--secondary-color);
 
 .section {
   text-align: center;
@@ -6,7 +7,7 @@ $secondary-color: #4AC285;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   border-radius: 35px;
-  height: 800px;
+  height: 750px;
   width: 400px;
   margin: 50px;
 }
@@ -14,11 +15,11 @@ $secondary-color: #4AC285;
 svg {
   height: 150px;
   margin: 30px;
-  color: $secondary-color;
+  color: $secondary;
 }
 
 h1 {
-  color: $secondary-color;
+  color: $secondary;
 }
 
 h5 {
@@ -30,13 +31,6 @@ h5 {
   display: inline-flex;
 }
 
-button {
-  border-radius: 10px;
-  background-color : $secondary-color;
-  border: none;
-  font-weight: bold;
-
-}
 
 @media screen and (max-width : 600px) {
 
