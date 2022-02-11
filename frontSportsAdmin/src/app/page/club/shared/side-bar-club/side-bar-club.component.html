@@ -17,11 +17,21 @@
       <li href="#" class="nav-link">
         <span class="mx-2"><i class="bi bi-currency-euro"></i> Gestion des cotisations</span>
       </li>
-      <li href="#" class="nav-link">
-        <span class="mx-2"><i class="bi bi-gear"></i> Réglages</span>
+      <span class="mx-2"><li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-gear"></i> Réglages
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" [routerLink]="['/editer-mon-club']"><i class="bi bi-pencil-square"></i> Editer mon Club</a></li>
+          <li><a class="dropdown-item" href="#"><i class="bi bi-pencil-square"></i> Editer fiche membre</a></li>
+          <li><a class="dropdown-item" href="#"><i class="bi bi-currency-euro"></i> Infos paiement</a></li>
+        </ul>
       </li>
-    </ul>
-  </div>
+    </span>
+      </ul>
+    </div>
 <footer>
   <img src="/assets/img/LogoSportsAdminWhite.png">
 </footer>
+
+
