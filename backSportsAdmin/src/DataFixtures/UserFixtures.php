@@ -22,7 +22,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user->setLastname("dupond");
         $user->setFirstname("denis");
         $user->setBirthdate($birthdate);
-        $user->setCategoryLevel(['admin']);
+        $user->setCategoryLevel(['pro']);
         $user->setEmail("dupond@gmail.com");
         $user->setPhone("0102030405");
         $user->setGender("m");
@@ -44,7 +44,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user2->setLastname("durand");
         $user2->setFirstname("henry");
         $user2->setBirthdate($birthdate2);
-        $user2->setCategoryLevel(['user']);
+        $user2->setCategoryLevel(['amateur']);
         $user2->setEmail("durand@gmail.com");
         $user2->setPhone("0607080910");
         $user2->setGender("m");
