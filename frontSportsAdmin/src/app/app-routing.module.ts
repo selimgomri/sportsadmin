@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginFormComponent } from './page/landing-page/login-form.component';
 import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
-import { AjoutUserComponent } from './user/ajout-user/ajout-user.component';
+import { AjoutUserComponent } from './ajout-user/ajout-user.component';
 
 const routes: Routes = [
   {

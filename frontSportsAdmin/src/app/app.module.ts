@@ -14,7 +14,7 @@ import { SideBarClubComponent } from './page/club/shared/side-bar-club/side-bar-
 import { DashboardComponent } from './page/club/main-content/dashboard/dashboard.component';
 import { DashboardViewComponent } from './page/club/view/dashboard-view/dashboard-view.component';
 import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
-import { AjoutUserComponent } from './user/ajout-user/ajout-user.component';
+import { AjoutUserComponent } from './ajout-user/ajout-user.component';
 
 @NgModule({
   declarations: [AppComponent, LoginFormComponent, ClubChoiceComponent, HeaderBarComponent, SideBarComponent,PageMyclubsComponent, EditClubComponent, SideBarClubComponent, DashboardComponent, DashboardViewComponent, EditClubViewComponent, AjoutUserComponent],
