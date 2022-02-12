@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';import { LoginFormComponent } from './page/landing-page/login-form.component';
 import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
+import { PageMyclubsComponent } from './page/club-choice/page-myclubs/page-myclubs.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
     path: 'editer-mon-club',
     component: EditClubViewComponent,
   },
+  {
+    path: 'mes-clubs',
+    component: PageMyclubsComponent
+  }
 ];
 
 @NgModule({
