@@ -23,6 +23,7 @@ import { DashboardViewComponent } from './page/club/view/dashboard-view/dashboar
 import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
 import { ListMembersComponent } from './page/club/main-content/list-members/list-members.component';
 import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
+import { SearchExportComponent } from './search-export/search-export.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ListMembersViewComponent } from './page/club/view/list-members-view/lis
     DashboardViewComponent,
     EditClubViewComponent,
     ListMembersComponent,
-    ListMembersViewComponent
+    ListMembersViewComponent,
+    SearchExportComponent
   ],
   imports: [
     BrowserModule,
