@@ -7,13 +7,13 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class SessionLoginService {
-  LOGIN_URL = '/api/users';
+  LOGIN_URL = '/api';
   LOGOUT_URL = '/logout';
 
   constructor(private httpClient: HttpClient) {}
 
   getUser() {
-    const url = `${environment.baseUrl}/api/users`;
+    const url = `${environment.baseUrl}/api`;
 
     console.log(url);
     this.httpClient.get(url).subscribe((result) => console.log(result));
