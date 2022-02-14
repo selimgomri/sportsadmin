@@ -53,7 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'date')]
     private $birthdate;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $address;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -388,5 +388,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->email;
     }
 }
