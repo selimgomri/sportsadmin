@@ -21,6 +21,8 @@ import { SideBarClubComponent } from './page/club/shared/side-bar-club/side-bar-
 import { DashboardComponent } from './page/club/main-content/dashboard/dashboard.component';
 import { DashboardViewComponent } from './page/club/view/dashboard-view/dashboard-view.component';
 import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
+import { ListMembersComponent } from './page/club/main-content/list-members/list-members.component';
+import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club
     DashboardComponent,
     LoginComponent,
     DashboardViewComponent,
-    EditClubViewComponent
+    EditClubViewComponent,
+    ListMembersComponent,
+    ListMembersViewComponent
   ],
   imports: [
     BrowserModule,

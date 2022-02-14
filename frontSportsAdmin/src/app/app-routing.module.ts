@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';import { LoginFormComponent } from './page/landing-page/login-form.component';
 import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
 import { PageMyclubsComponent } from './page/club-choice/page-myclubs/page-myclubs.component';
+import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,11 @@ const routes: Routes = [
   },
   {
     path: 'mes-clubs',
-    component: PageMyclubsComponent
+    component: ClubChoiceComponent,
+  },
+  {
+    path: 'liste-membres',
+    component: ListMembersViewComponent
   }
 ];
 
