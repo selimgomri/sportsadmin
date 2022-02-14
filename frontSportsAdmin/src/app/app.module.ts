@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   HttpClientXsrfModule,
   HTTP_INTERCEPTORS,
@@ -24,6 +25,7 @@ import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club
 import { ListMembersComponent } from './page/club/main-content/list-members/list-members.component';
 import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
 import { SearchExportComponent } from './search-export/search-export.component';
+import { ListingComponent } from './listing/listing.component';
 
 
 @NgModule({
@@ -42,10 +44,13 @@ import { SearchExportComponent } from './search-export/search-export.component';
     EditClubViewComponent,
     ListMembersComponent,
     ListMembersViewComponent,
-    SearchExportComponent
+    SearchExportComponent,
+    ListingComponent,
+
   ],
   imports: [
     BrowserModule,
+    NgbModule,
     AppRoutingModule,
     FormsModule,
     FlexLayoutModule,
@@ -62,7 +67,8 @@ import { SearchExportComponent } from './search-export/search-export.component';
     },
     ],
   bootstrap: [
-    AppComponent
-  ],
+    AppComponent,
+  ]
 })
 export class AppModule {}
+
