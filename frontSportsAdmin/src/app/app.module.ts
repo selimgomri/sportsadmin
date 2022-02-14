@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   HttpClientXsrfModule,
   HTTP_INTERCEPTORS,
@@ -21,6 +22,10 @@ import { SideBarClubComponent } from './page/club/shared/side-bar-club/side-bar-
 import { DashboardComponent } from './page/club/main-content/dashboard/dashboard.component';
 import { DashboardViewComponent } from './page/club/view/dashboard-view/dashboard-view.component';
 import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
+import { ListMembersComponent } from './page/club/main-content/list-members/list-members.component';
+import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
+import { SearchExportComponent } from './search-export/search-export.component';
+import { ListingComponent } from './listing/listing.component';
 
 
 @NgModule({
@@ -36,10 +41,16 @@ import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club
     DashboardComponent,
     LoginComponent,
     DashboardViewComponent,
-    EditClubViewComponent
+    EditClubViewComponent,
+    ListMembersComponent,
+    ListMembersViewComponent,
+    SearchExportComponent,
+    ListingComponent,
+
   ],
   imports: [
     BrowserModule,
+    NgbModule,
     AppRoutingModule,
     FormsModule,
     FlexLayoutModule,
@@ -56,7 +67,8 @@ import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club
     },
     ],
   bootstrap: [
-    AppComponent
-  ],
+    AppComponent,
+  ]
 })
 export class AppModule {}
+
