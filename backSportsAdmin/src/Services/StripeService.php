@@ -2,8 +2,7 @@
 
 namespace App\Services;
 
-use App\Entity\Order;
-use App\Entity\Product;
+use App\Entity\Subscription;
 
 class StripeService
 {
@@ -19,17 +18,17 @@ class StripeService
     }
 
     /**
-     * @param Product $product
+     * @param Subscription $subscription
      * @return \Stripe\PaymentIntent
      * @throws \Stripe\Exception\ApiErrorException
      */
-    public function paymentIntent(Product $product)
+    public function paymentIntent(Subscription $subscription)
     {
         \Stripe\Stripe::setApiKey($this->privateKey);
 
         return \Stripe\PaymentIntent::create([
-            'amount' => $product->getPrice() * 100,
-            'currency' => Order::DEVISE,
+            'amount' => $subscription->getAmount() * 100,
+            'currency' => '€',
             'payment_method_types' => ['card']
         ]);
     }
@@ -59,15 +58,15 @@ class StripeService
 
     /**
      * @param array $stripeParameter
-     * @param Product $product
+     * @param Subscription $subscription
      * @return \Stripe\PaymentIntent|null
      */
-    public function stripe(array $stripeParameter, Product $product)
+    public function stripe(array $stripeParameter, Subscription $subscription)
     {
         return $this->paiement(
-            $product->getPrice() * 100,
-            Order::DEVISE,
-            $product->getName(),
+            $subscription->getAmount() * 100,
+            '€',
+            $subscription->getType(),
             $stripeParameter
         );
     }
