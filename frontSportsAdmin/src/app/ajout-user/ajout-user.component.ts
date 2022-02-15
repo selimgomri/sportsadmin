@@ -8,12 +8,27 @@ import { User } from './user';
 })
 export class AjoutUserComponent implements OnInit {
   model : User = new User();
+  levelUser = [
+    'Pro',
+    'Amateur',
+  ];
+
+  sexeUser = [
+    '',
+    'Masculin',
+    'Feminin',
+  ];
+
+
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  submitted =false;
   onSubmit() {
+    this.submitted = true;
     console.log(this.model);
   }
 }

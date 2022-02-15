@@ -6,7 +6,7 @@ export class User {
   public birthDate!: Date;
   public phone!: number;
   public licenseNumber!:string;
-  public sexe!: string;
+  public genre!:string;
   public level!: [];
   public additionnalField!: [];
 
