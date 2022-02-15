@@ -27,7 +27,7 @@ class StripeService
         \Stripe\Stripe::setApiKey($this->privateKey);
 
         return \Stripe\PaymentIntent::create([
-            'amount' => $subscription->getAmount() * 100,
+            'amount' => $subscription->getAmount() * 100, //stripe price calculation method
             'currency' => '€',
             'payment_method_types' => ['card']
         ]);
