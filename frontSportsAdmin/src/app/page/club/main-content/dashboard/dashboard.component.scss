@@ -31,17 +31,15 @@ h5 {
   display: inline-flex;
 }
 
-
-@media screen and (max-width : 600px) {
-
- .dashboard {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  margin: 30px;
-  width: auto;
+@media screen and (max-width: 600px) {
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+    width: auto;
   }
 
   h5 {

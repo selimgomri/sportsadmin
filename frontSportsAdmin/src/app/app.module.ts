@@ -9,10 +9,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {
-  HttpClientXsrfModule,
-  HTTP_INTERCEPTORS,
-} from '@angular/common/http';
+import { HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpXsrfInterceptorService } from './interceptors/http-xsrf-interceptor/http-xsrf-interceptor.service';
 import { LoginFormComponent } from './page/landing-page/login-form.component';
@@ -26,7 +23,7 @@ import { ListMembersComponent } from './page/club/main-content/list-members/list
 import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
 import { SearchExportComponent } from './search-export/search-export.component';
 import { ListingComponent } from './listing/listing.component';
-
+import { HeaderBarMesClubsComponent } from './shared-content/header-bar-mes-clubs/header-bar-mes-clubs.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +43,7 @@ import { ListingComponent } from './listing/listing.component';
     ListMembersViewComponent,
     SearchExportComponent,
     ListingComponent,
-
+    HeaderBarMesClubsComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,10 +62,7 @@ import { ListingComponent } from './listing/listing.component';
       useClass: HttpXsrfInterceptorService,
       multi: true,
     },
-    ],
-  bootstrap: [
-    AppComponent,
-  ]
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
-
