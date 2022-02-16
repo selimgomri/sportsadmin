@@ -23,7 +23,7 @@ class SubscriptionFormula
     #[ORM\Column(type: 'integer', nullable: true)]
     private $amount;
 
-    #[ORM\OneToMany(mappedBy: 'subscritpion_formula', targetEntity: Subscription::class)]
+    #[ORM\OneToMany(mappedBy: 'subscription_formula', targetEntity: Subscription::class)]
     private $start_date;
 
     public function __construct()
@@ -72,7 +72,7 @@ class SubscriptionFormula
     {
         if (!$this->start_date->contains($startDate)) {
             $this->start_date[] = $startDate;
-            $startDate->setSubscritpionFormula($this);
+            $startDate->setSubscriptionFormula($this);
         }
 
         return $this;
@@ -82,8 +82,8 @@ class SubscriptionFormula
     {
         if ($this->start_date->removeElement($startDate)) {
             // set the owning side to null (unless already changed)
-            if ($startDate->getSubscritpionFormula() === $this) {
-                $startDate->setSubscritpionFormula(null);
+            if ($startDate->getSubscriptionFormula() === $this) {
+                $startDate->setSubscriptionFormula(null);
             }
         }
 

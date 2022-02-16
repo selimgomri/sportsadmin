@@ -91,6 +91,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserField::class)]
     private $userFields;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $photo;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $sexe;
+
     public function __construct()
     {
         $this->clubUsers = new ArrayCollection();
@@ -401,5 +407,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUsername(): string
     {
         return $this->email;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(string $sexe): self
+    {
+        $this->sexe = $sexe;
+
+        return $this;
     }
 }

@@ -24,7 +24,7 @@ import { ListMembersViewComponent } from './page/club/view/list-members-view/lis
 import { SearchExportComponent } from './search-export/search-export.component';
 import { ListingComponent } from './listing/listing.component';
 import { HeaderBarMesClubsComponent } from './shared-content/header-bar-mes-clubs/header-bar-mes-clubs.component';
-
+import { AjoutUserComponent } from './ajout-user/ajout-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +43,7 @@ import { HeaderBarMesClubsComponent } from './shared-content/header-bar-mes-club
     ListMembersViewComponent,
     SearchExportComponent,
     ListingComponent,
-    HeaderBarMesClubsComponent,
+    HeaderBarMesClubsComponent,AjoutUserComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +63,7 @@ import { HeaderBarMesClubsComponent } from './shared-content/header-bar-mes-club
       multi: true,
     },
   ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

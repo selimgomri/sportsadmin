@@ -1,5 +1,25 @@
+$base-color: #4AC285;
 $primary: var(--primary-color);
 $secondary: var(--secondary-color);
+
+/*button {
+  border-radius: 10px;
+  background-color : $base-color;
+  border: none;
+  font-weight: bold;
+  margin: 30px;
+}*/
+
+.button-ajout {
+  font-weight: bold;
+  margin: 30px;
+}
+
+.plus {
+  height: 20px;
+margin: auto;
+
+}
 
 .section {
   text-align: center;
