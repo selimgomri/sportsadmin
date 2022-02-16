@@ -24,7 +24,7 @@ class Subscription
     private $amount;
 
     #[ORM\ManyToOne(targetEntity: SubscriptionFormula::class, inversedBy: 'start_date')]
-    private $subscritpion_formula;
+    private $subscription_formula;
 
     #[ORM\Column(type: 'date')]
     private $start_date;
@@ -69,14 +69,14 @@ class Subscription
         return $this;
     }
 
-    public function getSubscritpionFormula(): ?SubscriptionFormula
+    public function getsubscriptionFormula(): ?SubscriptionFormula
     {
-        return $this->subscritpion_formula;
+        return $this->subscription_formula;
     }
 
-    public function setSubscritpionFormula(?SubscriptionFormula $subscritpion_formula): self
+    public function setsubscriptionFormula(?SubscriptionFormula $subscription_formula): self
     {
-        $this->subscritpion_formula = $subscritpion_formula;
+        $this->subscription_formula = $subscription_formula;
 
         return $this;
     }
