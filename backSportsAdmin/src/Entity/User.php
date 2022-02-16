@@ -10,14 +10,17 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\Api\MeAction;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
     collectionOperations: [],
     itemOperations: [
         'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
+        
         'me' => [
             'method' => 'GET',
+            'security' => 'is_granted("ROLE_USER")',
             'path' => '/me',
             'controller' => MeAction::class,
             'read' => false,
@@ -45,18 +48,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read_profile'])]
     private $lastname;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read_profile'])]
     private $firstname;
 
     #[ORM\Column(type: 'date')]
+    #[Groups(['read_profile'])]
     private $birthdate;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['read_profile'])]
     private $address;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['read_profile'])]
     private $phone;
 
     #[ORM\Column(type: 'integer', nullable: true)]
