@@ -1,9 +1,5 @@
-$base-color: #4AC285;
-$primary: var(--primary-color);
-$secondary: var(--secondary-color);
-
 h1 {
-  margin : 30px;
+  margin: 30px;
 }
 
 svg {
@@ -12,7 +8,7 @@ svg {
 
 button {
   border-radius: 10px;
-  background-color : $secondary;
+  background-color: var(--secondary-color);
   border: none;
   font-weight: bold;
   margin: 30px;
@@ -25,7 +21,7 @@ button {
 }
 
 .list-content {
-  border : 1px solid black;
+  border: 1px solid black;
 }
 
 #myTabContent {
@@ -41,8 +37,4 @@ button {
 .nav-link {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-}
-
-.nav-link {
-  color: $secondary;
-}
+}/*# sourceMappingURL=list-members.component.css.map */
