@@ -39,11 +39,6 @@ const routes: Routes = [
   {    path: 'ajouter-un-membre',
     component: AjoutUserComponent,
   },
-  {
-    path: 'editer-fiche-membre',
-    component: MemberSubcriptionComponent
-  }
-
 ];
 
 @NgModule({
