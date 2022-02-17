@@ -9,6 +9,11 @@ import { FormControl } from '@angular/forms';
 export class FormUserComponent {
 
 member = new FormControl('');
+member2 = new FormControl('');
+
+updateMember() {
+  this.member2.setValue(this.member.value);
+}
 
 
 }

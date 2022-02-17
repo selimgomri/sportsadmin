@@ -25,7 +25,9 @@ import { SearchExportComponent } from './search-export/search-export.component';
 import { ListingComponent } from './listing/listing.component';
 import { HeaderBarMesClubsComponent } from './shared-content/header-bar-mes-clubs/header-bar-mes-clubs.component';
 import { AjoutUserComponent } from './formMember/ajout-user/ajout-user.component';
+import { FormUserComponent } from './formMember/form-user/form-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormFieldComponent } from './formMember/form-field/form-field.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListMembersViewComponent,
     SearchExportComponent,
     ListingComponent,
-    HeaderBarMesClubsComponent,AjoutUserComponent
+    HeaderBarMesClubsComponent,AjoutUserComponent,FormUserComponent, FormFieldComponent,
   ],
   imports: [
     BrowserModule,

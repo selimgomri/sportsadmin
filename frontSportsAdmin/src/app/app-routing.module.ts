@@ -7,6 +7,7 @@ import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club
 import { PageMyclubsComponent } from './page/club-choice/page-myclubs/page-myclubs.component';
 import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
 import { AjoutUserComponent } from './formMember/ajout-user/ajout-user.component';
+import { FormUserComponent } from './formMember/form-user/form-user.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,9 @@ const routes: Routes = [
 
   {    path: 'ajouter-un-membre',
     component: AjoutUserComponent,
+  },
+  {    path: 'ajouter-un-membre2',
+    component: FormUserComponent,
   },
 ];
 
