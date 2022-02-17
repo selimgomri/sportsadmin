@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <table class="table table-borderless table-responsive card-1 p-4">
       <thead>
-          <tr class="header-table">
+          <tr class="header-table" *ngFor="let user of users">
               <th> <span class="ml-2">Membre</span> </th>
               <th> <span class="ml-2">Validité de licence</span> </th>
               <th> <span class="ml-2">Catégorie</span> </th>
@@ -91,6 +91,6 @@
       </tbody>
   </table>
   <div class="container">
-    pagination
+    <button (click)="fetchAllMembers()">load</button>
   </div>
 </div>
