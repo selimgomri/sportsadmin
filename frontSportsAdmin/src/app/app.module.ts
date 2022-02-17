@@ -24,7 +24,8 @@ import { ListMembersViewComponent } from './page/club/view/list-members-view/lis
 import { SearchExportComponent } from './search-export/search-export.component';
 import { ListingComponent } from './listing/listing.component';
 import { HeaderBarMesClubsComponent } from './shared-content/header-bar-mes-clubs/header-bar-mes-clubs.component';
-import { AjoutUserComponent } from './ajout-user/ajout-user.component';
+import { AjoutUserComponent } from './formMember/ajout-user/ajout-user.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import { AjoutUserComponent } from './ajout-user/ajout-user.component';
     AppRoutingModule,
     FormsModule,
     FlexLayoutModule,
+    ReactiveFormsModule,
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'csrftoken',

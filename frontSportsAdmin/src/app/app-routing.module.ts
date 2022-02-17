@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';import { LoginFormCompo
 import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
 import { PageMyclubsComponent } from './page/club-choice/page-myclubs/page-myclubs.component';
 import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
-import { AjoutUserComponent } from './ajout-user/ajout-user.component';
+import { AjoutUserComponent } from './formMember/ajout-user/ajout-user.component';
 
 
 const routes: Routes = [
