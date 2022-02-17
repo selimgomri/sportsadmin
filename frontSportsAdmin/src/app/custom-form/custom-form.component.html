@@ -1,31 +1,56 @@
 <div class="container">
-<h1>Fiche d’informations requises adhérent</h1>
-<div class="container box">
-  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-    <p>
-      <label for="name">Field Name:</label>
-      <input type="text" id="name" name="name" formControlName="name" class="form-control">
-    </p>
-    <table class="table table-bordered" formArrayName="fields">
-      <tr>
-        <th colspan="2">Add Field:</th>
-        <th width="150px"><button type="button" (click)="addfield()" class="btn btn-primary">Add More</button></th>
-      </tr>
-      <tr *ngFor="let field of fields().controls; let i=index" [formGroupName]="i">
-        <td>
-            New field :
-            <input type="text" formControlName="qty" class="form-control">
-        </td>
-        <td>
-            <button (click)="removefield(i)" class="btn btn-danger">Remove</button>
-        </td>
-      </tr>
-    </table>
-    <button type="submit" class="btn btn-success">Submit</button>
-  </form>
-  <br/>
+  <h1>Fiche d’informations requises adhérent</h1>
+  <div class="container box">
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h1 class="modal-title" id="modal-basic-title">Ajouter un champ</h1>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+          <p>
+            <label for="name">Label:</label>
+            <input type="text" id="name" name="name" formControlName="name" class="form-control">
+          </p>
+          <table class="table" formArrayName="fields">
+            <tr>
+              <th colspan="2">Ajouter un champ:</th>
+              <th width="150px"><button type="button" (click)="addfield()" class="btn btn-primary">Ajouter</button></th>
+            </tr>
+            <tr *ngFor="let field of fields().controls; let i=index" [formGroupName]="i">
+              <td>
+                  Nouveau champ :
+                  <input type="text" formControlName="field" class="form-control">
+              </td>
+              <td>
+                  <button (click)="removefield(i)" class="btn btn-danger">Supprimer</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" (click)="modal.close('Save click')">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4">
+            </path>
+          </svg> Enregistrer
+        </button>
 
-  {{this.myForm.value | json}}
+        <hr>
+        <pre>{{ closeResult }}</pre>
+        <br/>
+        {{this.myForm.value | json}}
 
-</div>
-</div>
+      </div>
+    </ng-template>
+
+  <button class="btn btn-success" (click)="openLg(content)"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+    </path></svg> Ajouter un champ
+  </button>
+  </div>
+
