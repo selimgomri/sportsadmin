@@ -28,6 +28,7 @@ import { AjoutUserComponent } from './formMember/ajout-user/ajout-user.component
 import { FormUserComponent } from './formMember/form-user/form-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent } from './formMember/form-field/form-field.component';
+import { CustomFormComponent } from './custom-form/custom-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,11 @@ import { FormFieldComponent } from './formMember/form-field/form-field.component
     ListMembersViewComponent,
     SearchExportComponent,
     ListingComponent,
-    HeaderBarMesClubsComponent,AjoutUserComponent,FormUserComponent, FormFieldComponent,
+    HeaderBarMesClubsComponent,
+    AjoutUserComponent,
+    FormUserComponent,
+    FormFieldComponent,
+    CustomFormComponent,
   ],
   imports: [
     BrowserModule,
