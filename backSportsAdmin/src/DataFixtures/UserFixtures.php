@@ -41,7 +41,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user->setLicenseNumber(123456789);
         $user->setPhone("0102030405");
         $user->setSexe("Masculin");
-
+        $manager->persist($user);
 
         for ($i = 0; $i < 3; $i++) {
             $user = new User();
@@ -88,7 +88,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user->setGuardian($this->getReference(GuardianFixtures::GUARDIAN_REFERENCE));
         $user->setSubscription($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE));
 
-        $manager->persist($user);
+        
         $manager->flush();
     }
 
