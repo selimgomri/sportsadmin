@@ -39,7 +39,6 @@ const routes: Routes = [
   {    path: 'ajouter-un-membre',
     component: AjoutUserComponent,
   },
-
 ];
 
 @NgModule({
