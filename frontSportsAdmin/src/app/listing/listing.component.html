@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <table class="table table-borderless table-responsive card-1 p-4">
       <thead>
-          <tr class="header-table">
+          <tr class="header-table" *ngFor="let user of users">
               <th> <span class="ml-2">Membre</span> </th>
               <th> <span class="ml-2">Validité de licence</span> </th>
               <th> <span class="ml-2">Catégorie</span> </th>
@@ -12,21 +12,21 @@
       <tbody>
           <tr class="list-item">
               <td>
-                  <div class="p-2 d-flex flex-row align-items-center mb-2"> <img src="https://i.imgur.com/ZSkeqnd.jpg" width="40" class="rounded-circle">
-                      <div class="d-flex flex-column ml-2"> <span class="d-block font-weight-bold">Jennifer john</span>
-                        <small class="text-muted">Loisirs</small>
-                        <small class="text-muted">123 456</small>
+                  <div class="p-2 d-flex flex-row align-items-center mb-2"> <img src="https://i.imgur.com/ZSkeqnd.jpg" width="50" class="rounded-circle">
+                      <div class="d-flex flex-column ml-2"> <span class="d-block fw-bold">Jennifer John</span>
+                        <span class="text-muted">Loisirs</span>
+                        <span class="text-muted">123 456</span>
                       </div>
                   </div>
               </td>
               <td>
-                <div class="p-2 d-flex flex-column"> <span>Licencié</span> <span>Saison 2021/2022</span> </div>
+                <div class="p-2 d-flex flex-column fst-italic"> <span>Licencié</span> <span>Saison 2021/2022</span> </div>
               </td>
               <td>
-                  <div class="p-2 d-flex flex-column"> <span>Adulte</span> <span>Expire le 18/05/2022</span> </div>
+                  <div class="p-2 d-flex flex-column fst-italic"> <span>Adulte</span> <span>Expire le 18/05/2022</span> </div>
               </td>
               <td>
-                <div class="p-2 d-flex flex-column"> <span>jennifer@mail.com</span> <span>06 50 50 54 51</span> </div>
+                <div class="p-2 d-flex flex-column fst-italic"> <span>jennifer@mail.com</span> <span>06 50 50 54 51</span> </div>
             </td>
               <td>
                   <div class="p-2 icons"> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -38,21 +38,21 @@
           </tr>
           <tr class="list-item">
               <td>
-                  <div class="p-2 d-flex flex-row align-items-center mb-2"> <img src="https://i.imgur.com/C4egmYM.jpg" class="rounded-circle" width="40">
-                      <div class="d-flex flex-column ml-2"> <span class="d-block font-weight-bold">David Smith</span>
-                        <small class="text-muted">Loisirs</small>
-                        <small class="text-muted">555 456</small>
+                  <div class="p-2 d-flex flex-row align-items-center mb-2"> <img src="https://i.imgur.com/C4egmYM.jpg" class="rounded-circle" width="50">
+                      <div class="d-flex flex-column ml-2"> <span class="d-block fw-bold">David Smith</span>
+                        <span class="text-muted">Loisirs</span>
+                        <span class="text-muted">555 456</span>
                       </div>
                   </div>
               </td>
               <td>
-                <div class="p-2 d-flex flex-column"> <span>Licencié</span> <span>Saison 2021/2022</span> </div>
+                <div class="p-2 d-flex flex-column fst-italic"> <span>Licencié</span> <span>Saison 2021/2022</span> </div>
               </td>
               <td>
-                  <div class="p-2 d-flex flex-column"> <span>Adulte</span> <span>Expire le 18/05/2022</span> </div>
+                  <div class="p-2 d-flex flex-column fst-italic"> <span>Adulte</span> <span>Expire le 18/05/2022</span> </div>
               </td>
               <td>
-                <div class="p-2 d-flex flex-column"> <span>david@mail.com</span> <span>06 10 20 30 40</span> </div>
+                <div class="p-2 d-flex flex-column fst-italic"> <span>david@mail.com</span> <span>06 10 20 30 40</span> </div>
             </td>
               <td>
                   <div class="p-2 icons"> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -64,21 +64,21 @@
           </tr>
           <tr class="list-item">
               <td>
-                  <div class="p-2 d-flex flex-row align-items-center mb-2"> <img src="https://i.imgur.com/hczKIze.jpg" width="40" class="rounded-circle">
-                      <div class="d-flex flex-column ml-2"> <span class="d-block font-weight-bold">Nick Jones</span>
-                        <small class="text-muted">Compétiteur</small>
-                        <small class="text-muted">505 476</small>
+                  <div class="p-2 d-flex flex-row align-items-center mb-2"> <img src="https://i.imgur.com/hczKIze.jpg" width="50" class="rounded-circle">
+                      <div class="d-flex flex-column ml-2"> <span class="d-block fw-bold">Nick Jones</span>
+                        <span class="text-muted">Compétiteur</span>
+                        <span class="text-muted">505 476</span>
                       </div>
                   </div>
               </td>
               <td>
-                <div class="p-2 d-flex flex-column"> <span>Licence en attente de validation</span> <span>Saison 2021/2022</span> </div>
+                <div class="p-2 d-flex flex-column fst-italic"> <span>Licence en attente de validation</span> <span>Saison 2021/2022</span> </div>
               </td>
               <td>
-                  <div class="p-2 d-flex flex-column"> <span>Etudiant</span> <span>Expire le 18/05/2022</span> </div>
+                  <div class="p-2 d-flex flex-column fst-italic"> <span>Etudiant</span> <span>Expire le 18/05/2022</span> </div>
               </td>
               <td>
-                <div class="p-2 d-flex flex-column"> <span>nick@mail.com</span> <span>06 10 54 54 54</span> </div>
+                <div class="p-2 d-flex flex-column fst-italic"> <span>nick@mail.com</span> <span>06 10 54 54 54</span> </div>
               </td>
               <td>
                   <div class="p-2 icons"> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -90,4 +90,7 @@
           </tr>
       </tbody>
   </table>
+  <div class="container">
+    <button (click)="fetchAllMembers()">load</button>
+  </div>
 </div>
