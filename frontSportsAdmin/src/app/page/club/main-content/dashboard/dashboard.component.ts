@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EditClubComponent } from '../edit-club/edit-club.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'dashboard',
@@ -7,7 +8,14 @@ import { EditClubComponent } from '../edit-club/edit-club.component';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  constructor() {}
 
-  ngOnInit(): void {}
+  constructor(private router: Router) { }
+
+  redirectToAddMember2() {
+    this.router.navigate(['./ajouter-un-membre2']);
+  }
+
+  ngOnInit(): void {
+  }
+
 }

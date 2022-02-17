@@ -1,0 +1,12 @@
+<form [formGroup]="fieldForm" (ngSubmit)="onSubmit()">
+
+  <label for="label">Label du champ: </label>
+  <input id="label" type="text" formControlName="label">
+
+  <label for="type">Type du champ: </label>
+  <input id="type" type="text" formControlName="type" required>
+
+  <p>Complete the form to enable button.</p>
+<button type="submit" [disabled]="fieldForm.invalid">Submit</button>
+
+</form>
