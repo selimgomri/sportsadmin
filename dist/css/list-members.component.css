@@ -1,0 +1,40 @@
+h1 {
+  margin: 30px;
+}
+
+svg {
+  height: 20px;
+}
+
+button {
+  border-radius: 10px;
+  background-color: var(--secondary-color);
+  border: none;
+  font-weight: bold;
+  margin: 30px;
+}
+
+.inline {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.list-content {
+  border: 1px solid black;
+}
+
+#myTabContent {
+  background-color: #F6F4F5;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.nav-link.active {
+  background-color: #F6F4F5;
+}
+
+.nav-link {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}/*# sourceMappingURL=list-members.component.css.map */
