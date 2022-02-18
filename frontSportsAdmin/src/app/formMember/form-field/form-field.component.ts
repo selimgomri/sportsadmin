@@ -14,7 +14,7 @@ export class FormFieldComponent {
   constructor(private fb: FormBuilder) { }
 
   fieldForm = this.fb.group({
-    label: ['', Validators.required],
+    label: ['',],
     type: [''],
     address: this.fb.group({
       street: [''],

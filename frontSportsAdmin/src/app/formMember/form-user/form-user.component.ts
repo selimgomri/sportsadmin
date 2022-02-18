@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'app-form-user',
@@ -8,12 +10,17 @@ import { FormControl } from '@angular/forms';
 })
 export class FormUserComponent {
 
+
+  constructor(private fb: FormBuilder) { }
+
 member = new FormControl('');
 member2 = new FormControl('');
 
 updateMember() {
   this.member2.setValue(this.member.value);
-}
+};
+
+
 
 
 }

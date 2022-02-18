@@ -1,31 +1,32 @@
-$base-color: #4AC285;
+$base-color: #4ac285;
 $primary: var(--primary-color);
 $secondary: var(--secondary-color);
 
-button {
+/*button {
   border-radius: 10px;
   background-color :$secondary;
   border: none;
   font-weight: bold;
   justify-content: end;
-}
+}*/
 
 svg {
   height: 20px;
 }
-.form-control, .form-select {
+.form-control,
+.form-select {
   border-radius: 20px;
   width: 400px;
 }
 
 .box {
-  background-color: #F6F4F5 ;
+  background-color: #f6f4f5;
   border-radius: 35px;
   margin-top: 80px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-::ng-deep .modal-content  {
-  background-color: #F6F4F5;
+::ng-deep .modal-content {
+  background-color: #f6f4f5;
   border-radius: 15px;
 }
