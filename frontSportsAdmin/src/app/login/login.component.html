@@ -10,7 +10,7 @@
           matInput
           placeholder="Username"
           name="username"
-          [(ngModel)]="username"
+          [(ngModel)]="user.email"
         />
       </div>
       <div>
@@ -20,7 +20,7 @@
           placeholder="Password"
           name="password"
           type="password"
-          [(ngModel)]="password"
+          [(ngModel)]="user.password"
         />
       </div>
       <button
@@ -31,8 +31,6 @@
       >
         Login
       </button>
-
-      <div *ngIf="wrongCredentials">Invalid Credentials</div>
     </form>
   </div>
 </div>
