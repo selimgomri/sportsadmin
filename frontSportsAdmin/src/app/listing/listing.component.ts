@@ -9,10 +9,10 @@ import { ApiService } from '../services/session-login/api.service';
 export class ListingComponent {
   users: any[] = [];
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {;
+  }
 
   async fetchAllMembers() {
     this.users = await this.apiService.fetchMemberList();
   }
-
 }
