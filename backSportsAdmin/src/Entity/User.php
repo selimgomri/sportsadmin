@@ -14,18 +14,20 @@ use App\Controller\Api\MeAction;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
-    collectionOperations: [],
-    itemOperations: [
-        'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
-        
+    collectionOperations: [
         'me' => [
+            'pagination_enabled' => false,
             'method' => 'GET',
-            'security' => 'is_granted("ROLE_USER")',
             'path' => '/me',
             'controller' => MeAction::class,
             'read' => false,
             'normalization_context' => [ 'groups' => [ 'read_profile' ]]
         ]
+    ],
+    itemOperations: [
+        'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
+        
+        
     ]
 )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
