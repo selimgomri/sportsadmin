@@ -77,6 +77,10 @@ input {
   width: 55%;
 }
 
+.forgot-password {
+  margin-top: 15px;
+}
+
 @media screen and (max-width : 600px) {
   .welcome-page {
     display: none;
@@ -87,5 +91,8 @@ input {
     align-items: center;
     justify-content: center;
     width: 100%;
+  }
+  .login {
+    background-color: white;
   }
 }
