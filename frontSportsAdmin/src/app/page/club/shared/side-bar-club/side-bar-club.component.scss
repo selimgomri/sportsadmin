@@ -12,9 +12,6 @@ $secondary: var(--secondary-color);
 }
 
 img {
-  margin: auto;
-  display: block;
-  padding-top: 30px;
   border-radius: 30px;
 }
 
@@ -74,10 +71,17 @@ span:hover, .nav-link:hover {
   color: black;
 }
 
-/*
+.logoSA {
+  position: absolute;
+  bottom: 30px;
+}
 
-.nav-item:hover {
-  background-color: $secondary;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  border-radius: 10px;
-}*/
+.logoClub {
+  position: absolute;
+  top:30px;
+}
+
+#sidebar
+{
+  margin-top: 200px;
+}
