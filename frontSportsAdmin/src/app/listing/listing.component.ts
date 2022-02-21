@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../services/session-login/api.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-listing',
@@ -10,9 +10,9 @@ export class ListingComponent {
   users: any[] = [];
 
   constructor(private apiService: ApiService) { }
-
+/*
   async fetchAllMembers() {
     this.users = await this.apiService.fetchMemberList();
-  }
+  } */
 
 }
