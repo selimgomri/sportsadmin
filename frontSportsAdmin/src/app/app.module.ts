@@ -28,6 +28,8 @@ import { FormUserComponent } from './formMember/form-user/form-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent } from './formMember/form-field/form-field.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
+import { CRUDSubscriptionComponent } from './page/club/main-content/crud-subscription/crud-subscription.component';
+import { CRUDSubscriptionViewComponent } from './page/club/view/crud-subscription-view/crud-subscription-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +52,8 @@ import { CustomFormComponent } from './custom-form/custom-form.component';
     FormUserComponent,
     FormFieldComponent,
     CustomFormComponent,
+    CRUDSubscriptionComponent,
+    CRUDSubscriptionViewComponent,
   ],
   imports: [
     BrowserModule,
