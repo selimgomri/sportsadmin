@@ -12,6 +12,6 @@ export class ApiService {
     constructor(private http: HttpClient) {}
 
     getUsers(): Observable<IUser> {
-      return this.http.get<IUser>(`${this.$url}/me`);
+      return this.http.get<IUser>(`${this.$url}/users`);
     }
   }
