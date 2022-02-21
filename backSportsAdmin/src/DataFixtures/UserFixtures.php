@@ -47,9 +47,9 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 0; $i < 3; $i++) {
             $user = new User();
-        $user->setEmail('member' . $i . '@member.fr');
+            $user->setEmail('member' . $i . '@member.fr');
 
-        $password = $this->hasher->hashPassword($user, '123456');
+            $password = $this->hasher->hashPassword($user, '123456');
 
         $user->setPassword($password);
         $user->setLastname($faker->lastName);
@@ -63,14 +63,14 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user->setGuardian($this->getReference(GuardianFixtures::GUARDIAN_REFERENCE));
         $user->setSubscription($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE));
 
-        $manager->persist($user);
+            $manager->persist($user);
         }
 
         for ($i = 0; $i < 3; $i++) {
             $user = new User();
-        $user->setEmail('user' . $i . '@user.fr');
+            $user->setEmail('user' . $i . '@user.fr');
 
-        $password = $this->hasher->hashPassword($user, '123456');
+            $password = $this->hasher->hashPassword($user, '123456');
         
        
 
