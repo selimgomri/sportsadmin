@@ -22,7 +22,8 @@ use App\Controller\Api\MeAction;
             'controller' => MeAction::class,
             'read' => false,
             'normalization_context' => [ 'groups' => [ 'read_profile' ]]
-        ]
+        ],
+        'get'
     ],
     itemOperations: [
         'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
