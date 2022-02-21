@@ -41,6 +41,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user->setLicenseNumber(123456789);
         $user->setPhone("0102030405");
         $user->setSexe("Masculin");
+        $user->setGuardian($this->getReference(GuardianFixtures::GUARDIAN_REFERENCE));
+        $user->setSubscription($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE));
         $manager->persist($user);
 
         for ($i = 0; $i < 3; $i++) {
@@ -58,6 +60,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user->setLicenseNumber(123456789);
         $user->setPhone("0102030405");
         $user->setSexe("Feminin");
+        $user->setGuardian($this->getReference(GuardianFixtures::GUARDIAN_REFERENCE));
+        $user->setSubscription($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE));
 
         $manager->persist($user);
         }
@@ -79,15 +83,13 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user->setLicenseNumber(123456789);
         $user->setPhone("0102030405");
         $user->setSexe("Masculin");
+        $user->setGuardian($this->getReference(GuardianFixtures::GUARDIAN_REFERENCE));
+        $user->setSubscription($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE));
 
         $manager->persist($user);
         }
 
         $this->setReference(self::USER_REFERENCE, $user);
-
-        $user->setGuardian($this->getReference(GuardianFixtures::GUARDIAN_REFERENCE));
-        $user->setSubscription($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE));
-
         
         $manager->flush();
     }

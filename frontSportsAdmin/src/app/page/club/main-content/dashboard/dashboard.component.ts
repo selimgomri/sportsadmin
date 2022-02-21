@@ -11,8 +11,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  redirectToAddMember() {
-    this.router.navigate(['./ajouter-un-membre']);
+  redirectToAddMember2() {
+    this.router.navigate(['./ajouter-un-membre2']);
   }
 
   ngOnInit(): void {
