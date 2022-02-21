@@ -19,7 +19,7 @@
       <h2>Se connecter</h2>
       <form
         name="loginForm"
-        (ngSubmit)="loginForm.valid && onSubmit()"
+        (ngSubmit)="loginForm.valid"
         #loginForm="ngForm"
         no
         validate
@@ -73,7 +73,7 @@
           </div>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-success">Se connecter</button>
+          <button type="submit" class="btn btn-success" (click)="login()">Se connecter</button>
           <div><a href="#">Mot de passe oublié</a></div>
         </div>
       </form>

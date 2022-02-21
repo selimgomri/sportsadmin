@@ -1,27 +1,46 @@
-<div class="container">
+<div class="container-fluid layout">
+  <div class="container welcome-page">
+    <img src="./assets/img/LogoSportsAdminWhite.png" class="logo" />
+    <div class="container subscribe-block white-text text-start">
+      <h1>Bienvenue sur SportsAdmin !</h1>
+      <h2>Vous gérez un club ?</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, rerum
+        reiciendis. Qui porro quisquam iste repellat, delectus totam! Quas dolor
+        necessitatibus consequatur magni,quae excepturi sequi iure dolore
+        accusantium culpa.
+      </p>
+      <a class="subscribe" [routerLink]="['/editer-mon-club']">Inscrire mon Club</a>
+    </div>
+  </div>
+  <div class="container login">
+    <div class="container login-form">
+      <img src="./assets/img/LogoSportsAdminGreen.png" class="green-logo" />
+      <h2>Se connecter</h2>
   <div>
     <h1>SimpleTech Login</h1>
   </div>
   <div>
     <form>
-      <div>
-        <label>Username</label>
+      <div class="form-group">
+        <label>Identifiant*</label>
         <input
-          matInput
-          placeholder="Username"
-          name="username"
-          [(ngModel)]="user.email"
+        name="email"
+        type="text"
+        class="form-control"
+        [(ngModel)]="user.email"
+        #email="ngModel"
         />
       </div>
-      <div>
-        <label>Password</label>
+      <div class="form-group">
+        <label>Mot de passe*</label>
         <input
-          matInput
-          placeholder="Password"
-          name="password"
-          type="password"
-          [(ngModel)]="user.password"
-        />
+        name="password"
+        class="form-control"
+        type="password"
+        [(ngModel)]="user.password"
+        #password="ngModel"
+      />
       </div>
       <button
         id="btn-login"
@@ -29,7 +48,7 @@
         color="primary"
         (click)="login()"
       >
-        Login
+        Se connecter
       </button>
     </form>
   </div>
