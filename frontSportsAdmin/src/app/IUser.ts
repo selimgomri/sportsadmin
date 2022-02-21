@@ -5,4 +5,5 @@ export interface IUser {
   email: string;
   phone: string;
   roles: string[];
+  licenseNumber: number;
 }
