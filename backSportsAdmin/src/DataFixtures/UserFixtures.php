@@ -41,6 +41,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user->setLicenseNumber(123456789);
         $user->setPhone("0102030405");
         $user->setSexe("Masculin");
+        $user->setGuardian($this->getReference(GuardianFixtures::GUARDIAN_REFERENCE));
+        $user->setSubscription($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE));
         $manager->persist($user);
 
         for ($i = 0; $i < 3; $i++) {
@@ -49,15 +51,17 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
             $password = $this->hasher->hashPassword($user, '123456');
 
-            $user->setPassword($password);
-            $user->setLastname($faker->lastName);
-            $user->setFirstname($faker->firstNameFemale);
-            $user->setRoles(['ROLE_USER']);
-            $user->setBirthdate($faker->dateTimeBetween('-70years', '-15years'));
-            $user->setAddress($faker->address);
-            $user->setLicenseNumber(123456789);
-            $user->setPhone("0102030405");
-            $user->setSexe("Feminin");
+        $user->setPassword($password);
+        $user->setLastname($faker->lastName);
+        $user->setFirstname($faker->firstNameFemale);
+        $user->setRoles(['ROLE_USER']);
+        $user->setBirthdate($faker->dateTimeBetween('-70years', '-15years'));
+        $user->setAddress($faker->address);
+        $user->setLicenseNumber(123456789);
+        $user->setPhone("0102030405");
+        $user->setSexe("Feminin");
+        $user->setGuardian($this->getReference(GuardianFixtures::GUARDIAN_REFERENCE));
+        $user->setSubscription($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE));
 
             $manager->persist($user);
         }
@@ -70,24 +74,22 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         
        
 
-            $user->setPassword($password);
-            $user->setLastname($faker->lastName);
-            $user->setFirstname($faker->firstNameMale);
-            $user->setRoles(['ROLE_USER']);
-            $user->setBirthdate($faker->dateTimeBetween('-70years', '-15years'));
-            $user->setAddress($faker->address);
-            $user->setLicenseNumber(123456789);
-            $user->setPhone("0102030405");
-            $user->setSexe("Masculin");
-
-            $manager->persist($user);
-        }
-
-        $this->setReference(self::USER_REFERENCE, $user);
-
+        $user->setPassword($password);
+        $user->setLastname($faker->lastName);
+        $user->setFirstname($faker->firstNameMale);
+        $user->setRoles(['ROLE_USER']);
+        $user->setBirthdate($faker->dateTimeBetween('-70years', '-15years'));
+        $user->setAddress($faker->address);
+        $user->setLicenseNumber(123456789);
+        $user->setPhone("0102030405");
+        $user->setSexe("Masculin");
         $user->setGuardian($this->getReference(GuardianFixtures::GUARDIAN_REFERENCE));
         $user->setSubscription($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE));
 
+        $manager->persist($user);
+        }
+
+        $this->setReference(self::USER_REFERENCE, $user);
         
         $manager->flush();
     }

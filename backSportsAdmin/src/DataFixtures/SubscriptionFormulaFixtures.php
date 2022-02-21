@@ -15,7 +15,7 @@ class SubscriptionFormulaFixtures extends Fixture
 
         $formula = new SubscriptionFormula();
         $formula->setName('1 an');
-        $formula->setAmount(129.5);
+        $formula->setAmount(129);
 
         $this->setReference(self::SUBSCRIPTIONFORMULA_REFERENCE, $formula);
 

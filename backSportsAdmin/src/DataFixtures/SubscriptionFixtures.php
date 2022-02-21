@@ -19,7 +19,7 @@ class SubscriptionFixtures extends Fixture implements DependentFixtureInterface
 
         $subscription = new Subscription();
         $subscription->setType("annuelle");
-        $subscription->setAmount(129.5);
+        $subscription->setAmount(129);
         $subscription->setStartDate($start);
         $subscription->setEndDate($end);
 
