@@ -149,7 +149,6 @@
     "tslib" "^2.3.0"
 
 "@angular/cdk@^13.0.0", "@angular/cdk@13.2.1", "@angular/cdk@github:angular/cdk-builds":
-  "integrity" "sha512-McTCUwqTPpEBYuIs9+3MJ//x5qXXbvfAJWvhX2w/OyspQs3k3GVtqp7XYLFdb+QUo/gM0bOvNlHI2YqxJH+zmw=="
   "resolved" "git+ssh://git@github.com/angular/cdk-builds.git#b02a1486108b499ffdde5c8ac74038f4c36650cc"
   "version" "14.0.0-next.1"
   dependencies:
@@ -221,7 +220,6 @@
     "tslib" "^2.3.0"
 
 "@angular/flex-layout@github:angular/flex-layout-builds":
-  "integrity" "sha512-4pgXVYzV1mKk2H5CsbSdK+3zUWG+3mJX6kCKruOEHOfVQPQwm5FFDemPUzskSXTVmg3euS0BAMLgJHt8biAMZQ=="
   "resolved" "git+ssh://git@github.com/angular/flex-layout-builds.git#a84cd16660106e1e8ebad7fe3e44b5b3d37ab5e0"
   "version" "13.0.0-beta.37-e8e172b"
   dependencies:

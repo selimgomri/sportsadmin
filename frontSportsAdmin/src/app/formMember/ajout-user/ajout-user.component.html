@@ -1,4 +1,3 @@
-
 <div class="container edit">
   <h1>CREATION DU FORMULAIRE D'INSCRIPTION</h1>
   <form
@@ -102,10 +101,17 @@
 
         <div class="form-group">
           <label for="sexe">Sexe</label>
-          <select class="form-control" [(ngModel)]="model.genre"
-          #genre="ngModel" name="genre"
-          [ngClass]="{ 'is-invalid': addForm.submitted && genre.invalid }" required>
-            <option *ngFor="let sexe of sexeUser" [value]="sexe">{{ sexe }}</option>
+          <select
+            class="form-control"
+            [(ngModel)]="model.genre"
+            #genre="ngModel"
+            name="genre"
+            [ngClass]="{ 'is-invalid': addForm.submitted && genre.invalid }"
+            required
+          >
+            <option *ngFor="let sexe of sexeUser" [value]="sexe">
+              {{ sexe }}
+            </option>
           </select>
           <div
             *ngIf="addForm.submitted && genre.invalid"

@@ -11,6 +11,7 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpXsrfInterceptorService } from './interceptors/http-xsrf-interceptor/http-xsrf-interceptor.service';
+import { LoginComponent } from './page/landing-page/login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ClubChoiceComponent } from './page/club-choice/club-choice.component';
 import { SideBarClubComponent } from './page/club/shared/side-bar-club/side-bar-club.component';
@@ -27,11 +28,11 @@ import { FormUserComponent } from './formMember/form-user/form-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent } from './formMember/form-field/form-field.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
+import { FormModalComponent } from './formMember/form-modal/form-modal.component';
 
 
 import { CRUDSubscriptionComponent } from './page/club/main-content/crud-subscription/crud-subscription.component';
 import { CRUDSubscriptionViewComponent } from './page/club/view/crud-subscription-view/crud-subscription-view.component';
-import { LoginComponent } from './page/landing-page/login/login.component';
 import { VerifyModal } from './page/club/main-content/crud-subscription/verify-modal/verify-modal';
 import { NgbdSortableHeader } from './listing/listing.component';
 
@@ -59,10 +60,11 @@ import { NgbdSortableHeader } from './listing/listing.component';
     FormUserComponent,
     FormFieldComponent,
     CustomFormComponent,
+    FormModalComponent,
     CRUDSubscriptionComponent,
     CRUDSubscriptionViewComponent,
     VerifyModal,
-    NgbdSortableHeader,
+    NgbdSortableHeader
 
   ],
   imports: [

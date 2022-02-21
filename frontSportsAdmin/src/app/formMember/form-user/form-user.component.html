@@ -1,11 +1,11 @@
-<app-ajout-user></app-ajout-user>
+<app-ajout-user>[user] = model.value </app-ajout-user>
 <label for="name">Name: </label>
 
-<input id="name" type="text" [formControl]="member">
+<input id="name" type="text" [formControl]="member" />
 <p>Value: {{ member.value }}</p>
-<label for="name">Name: </label>
-<input id="name" type="{{ member.value }}" [formControl]="member2">
+<label for="nom">Name: </label>
+<input id="nom" type="{{ member.value }}" [formControl]="member2" />
 <p>Value: {{ member2.value }}</p>
 <button type="button" (click)="updateMember()">Update Member</button>
 
-<app-form-field></app-form-field>
+<app-form-modal></app-form-modal>

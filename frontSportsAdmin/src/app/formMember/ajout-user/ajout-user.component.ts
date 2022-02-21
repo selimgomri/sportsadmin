@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from './user';
 
 @Component({
@@ -7,6 +7,7 @@ import { User } from './user';
   styleUrls: ['./ajout-user.component.scss']
 })
 export class AjoutUserComponent implements OnInit {
+  @Input() user = new User();
   model : User = new User();
   levelUser = [
     'Pro',
