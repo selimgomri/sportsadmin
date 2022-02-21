@@ -1,31 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { IUser } from 'src/app/IUser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  constructor(private httpClient: HttpClient) {}
+    private $url = 'https://localhost:8000/api';
+    constructor(private http: HttpClient) {}
 
-  apiUrl = `${environment.baseUrl}/api`;
-
-  fetchMemberList(): Promise<any> {
-    return fetch(this.apiUrl)
-      .then((response) => response.json())
-      .then(
-        (result) => {
-          return result.results;
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
+    getUsers(): Observable<IUser> {
+      return this.http.get<IUser>(`${this.$url}/me`);
+    }
   }
-
-  getMemberList(): Observable<any> {
-    return this.httpClient.get(this.apiUrl);
-  }
-}

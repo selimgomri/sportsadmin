@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../services/session-login/api.service';
+import { IUser } from '../IUser';
 
 @Component({
   selector: 'app-listing',
@@ -7,12 +8,14 @@ import { ApiService } from '../services/session-login/api.service';
   styleUrls: ['./listing.component.scss']
 })
 export class ListingComponent {
-  users: any[] = [];
+  users!: [IUser];
 
-  constructor(private apiService: ApiService) {;
-  }
+  constructor(private apiService: ApiService) {};
 
-  async fetchAllMembers() {
-    this.users = await this.apiService.fetchMemberList();
+  ngOnInit(): void {
+    this.apiService.getUsers().subscribe((datas: any) => {
+      this.users = datas['hydra:member'];
+      console.log(this.users);
+    });
   }
 }
