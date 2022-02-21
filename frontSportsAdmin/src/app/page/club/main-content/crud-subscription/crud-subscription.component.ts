@@ -8,6 +8,7 @@ import { ISubscription } from 'src/app/services/subscription/ISubscription';
   styleUrls: ['./crud-subscription.component.scss'],
 })
 export class CRUDSubscriptionComponent implements OnInit {
+  @Input() subscription: Subscription | undefined;
   subscriptions!: [ISubscription];
 
   constructor(private subscriptionService: SubscriptionService) {}
@@ -15,10 +16,14 @@ export class CRUDSubscriptionComponent implements OnInit {
     this.subscriptionService.getSubscriptions().subscribe((datas: any) => {
       this.subscriptions = datas['hydra:member'];
       console.log(this.subscriptions);
+  });
 
-    /*   this.subscriptions.forEach((a: any) => {
-        Object.assign(a, { quantity: 1, total: a.retail_price });
-      }); */
-    });
+    onRemoveClick() {
+      if (!this.subscription) return;
+      this.subscriptionService.deleteSubscription(this.subscription.id).subscribe(() => {
+        if (!this.subscription) return;
+        this.subscriptionService.deleteSubscription(this.subscription);
+      });
+    }
   }
 }

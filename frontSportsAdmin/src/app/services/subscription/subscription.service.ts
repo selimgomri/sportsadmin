@@ -13,4 +13,8 @@ export class SubscriptionService {
   getSubscriptions(): Observable<ISubscription> {
     return this.http.get<ISubscription>(`${this.$url}/subscriptions`);
   }
+
+  deleteSubscription(): Observable<ISubscription> {
+    return this.http.delete<ISubscription>(`${this.$url}/subscriptions`);
+  }
 }
