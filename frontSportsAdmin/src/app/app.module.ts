@@ -7,12 +7,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './page/landing-page/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpXsrfInterceptorService } from './interceptors/http-xsrf-interceptor/http-xsrf-interceptor.service';
-import { LoginFormComponent } from './page/landing-page/login-form.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ClubChoiceComponent } from './page/club-choice/club-choice.component';
 import { SideBarClubComponent } from './page/club/shared/side-bar-club/side-bar-club.component';
@@ -32,7 +31,6 @@ import { CustomFormComponent } from './custom-form/custom-form.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginFormComponent,
     ClubChoiceComponent,
     HeaderBarComponent,
     SideBarComponent,

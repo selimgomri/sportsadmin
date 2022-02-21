@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IUser } from '../IUser';
-import { SessionLoginService } from '../services/session-login/session-login.service';
+import { IUser } from '../../../IUser';
+import { SessionLoginService } from '../../../services/session-login/session-login.service';
 
 @Component({
   selector: 'app-login',
