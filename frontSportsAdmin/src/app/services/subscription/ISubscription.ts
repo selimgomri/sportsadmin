@@ -5,4 +5,5 @@ export interface ISubscription {
   amount: number;
   start_date: Date;
   end_date: Date;
+  
 }
