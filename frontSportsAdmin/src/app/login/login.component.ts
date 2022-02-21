@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IUser } from '../IUser';
 import { SessionLoginService } from '../services/session-login/session-login.service';
 
 @Component({
@@ -8,28 +9,30 @@ import { SessionLoginService } from '../services/session-login/session-login.ser
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  username = '';
-  password = '';
-  wrongCredentials = false;
+  public user = {
+    email: '',
+    password: '',
+  };
+
+  private userConnected!: IUser;
 
   constructor(
-    private sessionLogin: SessionLoginService,
-    private router: Router
+    private SessionLoginService: SessionLoginService,
+    private route: Router
   ) {}
 
-  ngOnInit(): void {
-    this.sessionLogin.getUser();
-  }
+  ngOnInit(): void {}
 
   login() {
-    this.wrongCredentials = false;
-    this.sessionLogin.login(this.username, this.password).subscribe(
-      (result) => {
-        this.router.navigate(['/dashboard']);
+    this.SessionLoginService.authentication(this.user).subscribe(
+      () => {
+        this.SessionLoginService.me().subscribe((responseMe) => {
+          this.userConnected = responseMe;
+          console.log(this.userConnected);
+          this.route.navigate(['/dashboard']);
+        });
       },
-      (error) => {
-        this.wrongCredentials = true;
-      }
+      (err) => console.log('Error: ', err)
     );
   }
 }
