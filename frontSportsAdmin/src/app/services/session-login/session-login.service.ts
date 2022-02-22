@@ -1,12 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IUser } from 'src/app/IUser';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SessionLoginService {
+  userProfile: BehaviorSubject<IUser> = new BehaviorSubject<IUser>({
+    id: 0,
+    firstname: '',
+    lastname: '',
+    email: '',
+    phone: '',
+    roles: [],
+    licenseNumber: 0,
+  });
+
   constructor(private http: HttpClient) {}
 
   authentication(user: any) {
@@ -16,8 +27,13 @@ export class SessionLoginService {
   }
 
   me() {
-    return this.http.get<any>('https://localhost:8000/api/me', {
+    return this.http.get<IUser>('https://localhost:8000/api/me', {
       withCredentials: true,
     });
+  }
+
+  saveUserToLocalStorage(user: IUser) {
+    this.userProfile.next(user);
+    localStorage.setItem('me', JSON.stringify(user));
   }
 }
