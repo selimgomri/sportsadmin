@@ -25,14 +25,22 @@ tr {
 
 ngb-pagination ::ng-deep ul > li:not(.active) > a {
   color: black;
-  border-radius: 30px;
+  border-radius: 50px;
   border: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 ngb-pagination ::ng-deep ul > li.active > a {
   background-color: $secondary !important;
-  border-radius: 30px;
+  border-radius: 50px;
   border: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 ngb-pagination ::ng-deep span.sr-only {
