@@ -8,41 +8,34 @@ import { PageMyclubsComponent } from './page/club-choice/page-myclubs/page-myclu
 import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
 import { AjoutUserComponent } from './formMember/ajout-user/ajout-user.component';
 import { FormUserComponent } from './formMember/form-user/form-user.component';
-
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
+
   {
     path: 'dashboard',
     component: DashboardViewComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'editer-mon-club',
     component: EditClubViewComponent,
   },
   {
-
     path: 'mes-clubs',
     component: ClubChoiceComponent,
   },
   {
     path: 'liste-membres',
-    component: ListMembersViewComponent
+    component: ListMembersViewComponent,
   },
 
-  {    path: 'ajouter-un-membre',
-    component: AjoutUserComponent,
-  },
-  {    path: 'ajouter-un-membre2',
-    component: FormUserComponent,
-  },
+  { path: 'ajouter-un-membre', component: AjoutUserComponent },
+  { path: 'ajouter-un-membre2', component: FormUserComponent },
 ];
 
 @NgModule({
