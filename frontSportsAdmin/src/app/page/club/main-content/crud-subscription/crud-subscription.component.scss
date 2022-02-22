@@ -1,7 +1,7 @@
 .content-card {
   display: flex;
-  justify-content: space-evenly;
   flex-wrap: wrap;
+  justify-content: center;
 }
 svg.w-6 {
   height: 30px;
@@ -9,4 +9,8 @@ svg.w-6 {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.subscription {
+  margin: 10px;
 }
