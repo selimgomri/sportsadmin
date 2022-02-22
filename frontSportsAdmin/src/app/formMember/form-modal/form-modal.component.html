@@ -4,7 +4,7 @@
       <h1 class="modal-title" id="modal-basic-title">Ajouter un champ</h1>
       <button
         type="button"
-        class="close"
+        class="close button"
         aria-label="Close"
         (click)="modal.dismiss('Cross click')"
       >
@@ -21,10 +21,11 @@
         <div class="row">
           <div class="col">
             <div class="form-group">
-              <label for="label">Label:</label>
+              <label for="label">Label: *</label>
               <input
+                id="label"
                 type="text"
-                name="name"
+                name="label"
                 #label="ngModel"
                 [(ngModel)]="supplyFields.label"
                 class="form-control"
@@ -33,37 +34,80 @@
                 }"
                 required
               />
-            </div>
-            <div
-              *ngIf="addField.submitted && label.invalid"
-              class="invalid-feedback"
-            >
-              <div *ngIf="label.errors.required">
-                Veuillez renseignez un label
+              <div
+                *ngIf="addField.submitted && label.invalid"
+                class="invalid-feedback"
+              >
+                <div *ngIf="label.errors.required">
+                  Veuillez renseignez un label
+                </div>
               </div>
             </div>
+
             <div class="form-group">
-              <label for="type">Type:</label>
-              <input
-                type="{{ label.value }}"
-                name="type"
-                #type="ngModel"
+              <label for="type">Type du champ: *</label>
+              <select
+                id="type"
+                class="form-select"
                 [(ngModel)]="supplyFields.type"
-                class="form-control"
-                [ngClass]="{
-                  'is-invalid': addField.submitted && type.invalid
-                }"
+                #type="ngModel"
+                name="type"
+                [ngClass]="{ 'is-invalid': addField.submitted && type.invalid }"
                 required
-              />
-            </div>
-            <div
-              *ngIf="addField.submitted && label.invalid"
-              class="invalid-feedback"
-            >
-              <div *ngIf="label.errors.required">
-                Veuillez renseignez un type de champ
+              >
+                <option *ngFor="let type of typeField" [value]="type">
+                  {{ type }}
+                </option>
+              </select>
+              <div
+                *ngIf="addField.submitted && type.invalid"
+                class="invalid-feedback"
+              >
+                <div *ngIf="type.errors.required">
+                  Veuillez renseigner un type pour le champ
+                </div>
+              </div>
+              <div *ngIf="supplyFields.type == 'text'">
+                Ce type de champ permet de rentrer des données sous forme de
+                texte exemple: (nom, prénom ...)
+              </div>
+              <div *ngIf="supplyFields.type == 'number'">
+                Ce type de champ permet de rentrer des données sous forme de
+                nombre exemple: (poids, taille...)
+              </div>
+              <div *ngIf="supplyFields.type == 'date'">
+                Ce type de champ permet de rentrer des données sous forme de
+                date exemple: (dernier match pro joué, dernière compétition...)
+              </div>
+              <div *ngIf="supplyFields.type == 'select'">
+                Ce type de champ permet de rentrer des données sous forme de
+                d'option exemple: (taille pour l'équipement...)
+                <div class="form-group">
+                  <label for="option">Option du select: *</label>
+                  <input
+                    id="option"
+                    type="text"
+                    name="option"
+                    #option="ngModel"
+                    [(ngModel)]="optionSelect"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': addField.submitted && option.invalid
+                    }"
+                    required
+                  />
+                  <div
+                    *ngIf="addField.submitted && option.invalid"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="option.errors.required">
+                      Veuillez renseignez un label
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="form-group button">
               <button type="submit" class="btn btn-primary">Ajouter</button>
             </div>

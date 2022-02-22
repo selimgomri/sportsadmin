@@ -11,6 +11,8 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
 })
 export class FormModalComponent implements OnInit {
   supplyFields: Field = new Field();
+  typeField = ['text', 'select', 'number', 'date'];
+  optionSelect: [] = [];
 
   constructor(private modalService: NgbModal) {}
 
@@ -43,10 +45,11 @@ export class FormModalComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     console.log(this.supplyFields);
+    console.log(this.optionSelect);
   }
 
   /*addfield() {
-    this.supplyFields.push(this.newField);
+    this.option.push(this.optionSelect);
   }
 
   removefield(i: number) {
