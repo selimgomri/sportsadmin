@@ -9,7 +9,9 @@ import { IUser } from '../IUser';
 })
 export class ListingComponent {
   users!: [IUser];
-
+  page = 1;
+  pageSize = 4;
+  
   constructor(private apiService: ApiService) {};
 
   ngOnInit(): void {
