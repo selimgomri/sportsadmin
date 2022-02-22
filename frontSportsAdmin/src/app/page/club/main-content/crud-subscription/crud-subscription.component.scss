@@ -1,6 +1,7 @@
 .content-card {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 svg.w-6 {
   height: 30px;

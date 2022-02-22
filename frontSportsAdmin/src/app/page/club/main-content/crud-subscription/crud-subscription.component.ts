@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./crud-subscription.component.scss'],
 })
 export class CRUDSubscriptionComponent implements OnInit {
-  subscriptions!: [ISubscription];
+  subscriptions!: ISubscription[];
 
   constructor(
     private subscriptionService: SubscriptionService,
@@ -25,14 +25,18 @@ export class CRUDSubscriptionComponent implements OnInit {
 
   onRemoveClick(subscription: any) {
     if (!subscription) return;
-    console.log(subscription);
+    //console.log(subscription);
     this.subscriptionService
       .deleteSubscription(subscription.id)
       .subscribe(() => {
         if (!subscription) return;
-        this.subscriptionService.deleteSubscription(subscription.id);
-        console.log('blabla');
-        this.route.navigate(['/gestion-des-cotisations']);
+        this.subscriptions = this.subscriptions.filter((deleted) => {
+          console.log(deleted.id);
+          console.log('separation');
+          return deleted.id !== subscription.id;
+        }); //subscription.id != deleted);
+        //console.log(this.subscriptions);
+        //this.route.navigate(['/gestion-des-cotisations']);
       });
   }
 }
