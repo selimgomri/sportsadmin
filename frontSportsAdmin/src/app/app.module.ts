@@ -1,3 +1,4 @@
+import { ConfirmationModalComponent } from './page/club/main-content/crud-subscription/confirmation-modal/confirmation-modal.component';
 import { EditClubComponent } from './page/club/main-content/edit-club/edit-club.component';
 import { PageMyclubsComponent } from './page/club-choice/page-myclubs//page-myclubs.component';
 import { SideBarComponent } from './shared-content/side-bar/side-bar.component';
@@ -7,8 +8,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './page/landing-page/login/login.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './login/login.component';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpXsrfInterceptorService } from './interceptors/http-xsrf-interceptor/http-xsrf-interceptor.service';
@@ -30,6 +31,10 @@ import { FormFieldComponent } from './formMember/form-field/form-field.component
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { CRUDSubscriptionComponent } from './page/club/main-content/crud-subscription/crud-subscription.component';
 import { CRUDSubscriptionViewComponent } from './page/club/view/crud-subscription-view/crud-subscription-view.component';
+import {
+  NgbdModalConfirmAutofocus,
+  NgbdModalFocus,
+} from './page/club/main-content/crud-subscription/modal-focus';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +59,9 @@ import { CRUDSubscriptionViewComponent } from './page/club/view/crud-subscriptio
     CustomFormComponent,
     CRUDSubscriptionComponent,
     CRUDSubscriptionViewComponent,
+    NgbdModalConfirmAutofocus,
+    NgbdModalFocus,
+    ConfirmationModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +76,7 @@ import { CRUDSubscriptionViewComponent } from './page/club/view/crud-subscriptio
     }),
   ],
   providers: [
+    NgbActiveModal,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpXsrfInterceptorService,
