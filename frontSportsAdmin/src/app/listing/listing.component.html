@@ -15,7 +15,7 @@
                   <div class="p-2 d-flex flex-row align-items-center mb-2"> <img src="https://i.imgur.com/ZSkeqnd.jpg" width="50" class="rounded-circle">
                       <div class="d-flex flex-column ml-2"> <span class="d-block fw-bold">{{ user.firstname }} {{ user.lastname }}</span>
                         <span class="text-muted">Loisirs</span>
-                        <span class="text-muted">{{ user.licenseNumber}}</span>
+                        <span class="text-muted">{{ user.licenseNumber }}</span>
                       </div>
                   </div>
               </td>
@@ -41,6 +41,9 @@
   <ngb-pagination
   [(page)]="page"
   [pageSize]="pageSize"
-  [collectionSize]="users.length"></ngb-pagination>
+  [collectionSize]="users.length"
+  [boundaryLinks]="false"
+  [rotate]="true">
+</ngb-pagination>
 </div>
 

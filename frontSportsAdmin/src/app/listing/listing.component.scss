@@ -1,3 +1,8 @@
+$base-color: #4AC285;
+$primary: var(--primary-color);
+$secondary: var(--secondary-color);
+
+
 img {
   border-radius: 30px;
   margin-right: 15px;
@@ -6,6 +11,7 @@ img {
 svg {
  height: 20px;
 }
+
 tr {
   border-collapse: collapse;
   border-radius: 50px;
@@ -17,8 +23,30 @@ tr {
   box-shadow: none;
 }
 
-/*
-:host ::ng-deep .nav-link.active{
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+ngb-pagination ::ng-deep ul > li:not(.active) > a {
+  color: black;
+  border-radius: 50px;
+  border: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 30px;
+  margin-top: 30px;
 }
-*/
+
+ngb-pagination ::ng-deep ul > li.active > a {
+  background-color: $secondary !important;
+  border-radius: 50px;
+  border: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+ngb-pagination ::ng-deep span.sr-only {
+  display: none;
+}
+
+ngb-pagination ::ng-deep ul.pagination {
+  justify-content: center;
+}
