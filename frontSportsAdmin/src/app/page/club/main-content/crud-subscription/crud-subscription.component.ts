@@ -10,9 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class CRUDSubscriptionComponent implements OnInit {
   subscriptions!: ISubscription[];
 
-  constructor(
-    private subscriptionService: SubscriptionService,
-  ) {}
+  constructor(private subscriptionService: SubscriptionService) {}
 
   ngOnInit(): void {
     this.subscriptionService.getSubscriptions().subscribe((datas: any) => {
@@ -21,6 +19,7 @@ export class CRUDSubscriptionComponent implements OnInit {
   }
 
   onRemoveClick(subscription: any) {
+    console.log(subscription);
     if (!subscription) return;
     this.subscriptionService
       .deleteSubscription(subscription.id)
