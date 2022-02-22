@@ -1,7 +1,7 @@
 import { Component, Type } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-@Component({
+/* @Component({
   selector: 'delete-modal',
   template: `
     <div class="modal-header">
@@ -46,7 +46,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class DeleteModalComponent {
   constructor(public modal: NgbActiveModal) {}
-}
+} */
 
 @Component({
   selector: 'ngbd-modal-confirm-autofocus',
@@ -72,7 +72,7 @@ export class NgbdModalConfirmAutofocus {
 }
 
 const MODALS: { [name: string]: Type<any> } = {
-  focusFirst: DeleteModalComponent,
+  //focusFirst: DeleteModalComponent,
   autofocus: NgbdModalConfirmAutofocus
 };
 
