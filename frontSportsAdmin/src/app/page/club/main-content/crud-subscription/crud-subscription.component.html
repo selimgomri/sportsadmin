@@ -6,6 +6,8 @@
     <div class="card" style="width: 18rem">
       <div class="card-body">
         <h5 class="card-title">Catégorie: {{ subscription.type }}</h5>
+
+        <confirmation-modal class="delete-button"></confirmation-modal>
         <div (click)="onRemoveClick(subscription)"></div>
 
         <h6 class="card-subtitle mb-2 text-muted">
@@ -19,4 +21,3 @@
     <button>Editer</button>
   </div>
 </div>
-<confirmation-modal></confirmation-modal>
