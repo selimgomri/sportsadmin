@@ -6,9 +6,7 @@
     <div class="card" style="width: 18rem">
       <div class="card-body">
         <h5 class="card-title">Catégorie: {{ subscription.type }}</h5>
-        <div (click)="onRemoveClick(subscription)">
-          <ngbd-modal-focus></ngbd-modal-focus>
-        </div>
+        <div (click)="onRemoveClick(subscription)"></div>
 
         <h6 class="card-subtitle mb-2 text-muted">
           Tarif: {{ subscription.amount }}€
@@ -21,3 +19,4 @@
     <button>Editer</button>
   </div>
 </div>
+<confirmation-modal></confirmation-modal>
