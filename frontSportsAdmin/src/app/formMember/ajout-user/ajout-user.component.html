@@ -13,6 +13,7 @@
         <div class="form-group">
           <label for="lastName">Nom *</label>
           <input
+            id="lastName"
             type="text"
             name="lastName"
             class="form-control"
@@ -34,6 +35,7 @@
         <div class="form-group">
           <label for="firstName">Prénom *</label>
           <input
+            id="firstName"
             name="firstName"
             class="form-control"
             type="text"
@@ -55,6 +57,7 @@
         <div class="form-group">
           <label for="tel">Téléphone *</label>
           <input
+            id="tel"
             name="tel"
             class="form-control"
             type="tel"
@@ -80,6 +83,7 @@
         <div class="form-group">
           <label for="birthdate">Date de naissance *</label>
           <input
+            id="birthdate"
             name="birthdate"
             class="form-control"
             type="date"
@@ -102,7 +106,8 @@
         <div class="form-group">
           <label for="sexe">Sexe</label>
           <select
-            class="form-control"
+            id="sexe"
+            class="form-select"
             [(ngModel)]="model.genre"
             #genre="ngModel"
             name="genre"
@@ -119,6 +124,30 @@
           >
             <div *ngIf="genre.errors.required">
               Veuillez renseigner un type de sexe
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="level">Niveau sportif</label>
+          <select
+            id="level"
+            class="form-select"
+            [(ngModel)]="model.level"
+            #level="ngModel"
+            name="level"
+            [ngClass]="{ 'is-invalid': addForm.submitted && level.invalid }"
+            required
+          >
+            <option *ngFor="let level of levelUser" [value]="level">
+              {{ level }}
+            </option>
+          </select>
+          <div
+            *ngIf="addForm.submitted && level.invalid"
+            class="invalid-feedback"
+          >
+            <div *ngIf="level.errors.required">
+              Veuillez renseigner un niveau sportif
             </div>
           </div>
         </div>
@@ -151,14 +180,13 @@
         <div class="form-group">
           <label for="password">Mot de passe *</label>
           <input
+            id="password"
             name="password"
             class="form-control"
             type="password"
             [(ngModel)]="model.password"
             #password="ngModel"
-            [ngClass]="{
-              'is-invalid': addForm.submitted && password.invalid
-            }"
+            [ngClass]="{ 'is-invalid': addForm.submitted && password.invalid }"
             required
             minlength="6"
           />
