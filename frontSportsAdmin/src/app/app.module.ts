@@ -1,6 +1,6 @@
 import {
   ConfirmationModalComponent,
-  DeleteModalComponent,
+  //DeleteModalComponent,
 } from './page/club/main-content/crud-subscription/confirmation-modal/confirmation-modal.component';
 import { EditClubComponent } from './page/club/main-content/edit-club/edit-club.component';
 import { PageMyclubsComponent } from './page/club-choice/page-myclubs//page-myclubs.component';
@@ -60,7 +60,7 @@ import { CRUDSubscriptionViewComponent } from './page/club/view/crud-subscriptio
     CRUDSubscriptionComponent,
     CRUDSubscriptionViewComponent,
     ConfirmationModalComponent,
-    DeleteModalComponent,
+    //DeleteModalComponent,
   ],
   imports: [
     BrowserModule,
