@@ -14,12 +14,19 @@ const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
+    canActivate: [AuthGuard],
+    data: {
+      userType: 'non-logged-in',
+    },
   },
 
   {
     path: 'dashboard',
     component: DashboardViewComponent,
     canActivate: [AuthGuard],
+    data: {
+      userType: 'logged-in',
+    },
   },
   {
     path: 'editer-mon-club',

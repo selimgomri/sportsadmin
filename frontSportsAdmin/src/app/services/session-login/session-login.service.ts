@@ -18,7 +18,9 @@ export class SessionLoginService {
     licenseNumber: 0,
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.loadUserFromLocalStorage();
+  }
 
   authentication(user: any) {
     return this.http.post('https://localhost:8000/authentication_token', user, {
@@ -35,5 +37,17 @@ export class SessionLoginService {
   saveUserToLocalStorage(user: IUser) {
     this.userProfile.next(user);
     localStorage.setItem('me', JSON.stringify(user));
+  }
+
+  loadUserFromLocalStorage(): IUser {
+    if (this.userProfile.value.id == 0) {
+      let fromLocalStorage = localStorage.getItem('me');
+      if (fromLocalStorage) {
+        let userInfo = JSON.parse(fromLocalStorage);
+        this.userProfile.next(userInfo);
+      }
+    }
+
+    return this.userProfile.value;
   }
 }
