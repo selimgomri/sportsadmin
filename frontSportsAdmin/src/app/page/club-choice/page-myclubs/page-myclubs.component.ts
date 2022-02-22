@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Clubs } from '../../../mock-clubs';
 import { Router } from '@angular/router';
-
+import { ApiService } from 'src/app/services/session-login/api.service';
 
 @Component({
   selector: 'page-myclubs',
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class PageMyclubsComponent implements OnInit {
   clubs = Clubs;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiService: ApiService) { }
 
   redirectToDashboard() {
     this.router.navigate(['./dashboard']);
@@ -22,5 +22,9 @@ export class PageMyclubsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.apiService.getClubs().subscribe((datas: any) => {
+      this.clubs = datas['hydra:member'];
+      console.log(this.clubs);
+    });
   }
 }
