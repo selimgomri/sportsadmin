@@ -1,4 +1,5 @@
-import { Component, Type } from '@angular/core';
+import { ISubscription } from './../../../../../services/subscription/ISubscription';
+import { Component, Input, Output, Type, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -39,6 +40,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
         type="button"
         ngbAutofocus
         class="btn btn-danger"
+        (click)="remove()"
         (click)="modal.close('Ok click')"
       >
         Ok
@@ -47,7 +49,15 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   `,
 })
 export class NgbdModalConfirmAutofocus {
+  @Input() subscription!: ISubscription;
+  @Output() removeClick: EventEmitter<ISubscription> = new EventEmitter();
+
   constructor(public modal: NgbActiveModal) {}
+
+  remove() {
+    console.log(this.subscription);
+    this.removeClick.emit(this.subscription);
+  }
 }
 
 const MODALS: { [name: string]: Type<any> } = {
@@ -64,7 +74,10 @@ export class ConfirmationModalComponent {
 
   constructor(private _modalService: NgbModal) {}
 
+  @Input() subscription!: ISubscription;
+
   open(name: string) {
     this._modalService.open(MODALS[name]);
+    console.log(this.subscription);
   }
 }
