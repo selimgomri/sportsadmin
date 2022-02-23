@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'crud-subscription-view',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CRUDSubscriptionViewComponent implements OnInit {
 
-  constructor() { }
+  title: string = 'Gestion des cotisations';
+  val!: string;
+
+  constructor(private route: Router) {
+    this.val = '';
+  }
+
+  changedTitle(val: string) {
+    this.title = val;
+  }
+
 
   ngOnInit(): void {
   }

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-members-view.component.scss'],
 })
 export class ListMembersViewComponent implements OnInit {
-  title: string = 'Liste des membres';
+  title: string = 'Gestion des membres';
   val!: string;
   constructor(private route: Router) {
     this.val = '';
