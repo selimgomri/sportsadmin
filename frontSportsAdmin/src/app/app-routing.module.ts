@@ -45,6 +45,13 @@ const routes: Routes = [
     component: CRUDSubscriptionViewComponent,
   },
 
+  {    path: 'ajouter-un-membre',
+    component: AjoutUserComponent,
+  },
+  {    path: 'ajouter-un-membre2',
+    component: FormUserComponent,
+  },
+
   { path: 'ajouter-un-membre', component: AjoutUserComponent },
   { path: 'ajouter-un-membre2', component: FormUserComponent },
 ];
