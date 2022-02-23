@@ -10,9 +10,11 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
   styleUrls: ['./form-modal.component.scss'],
 })
 export class FormModalComponent implements OnInit {
+  buttonAddCliked = false;
   supplyFields: Field = new Field();
   typeField = ['text', 'select', 'number', 'date'];
-  optionSelect: [] = [];
+  optionName = '';
+  optionSelect: string[] = [];
 
   constructor(private modalService: NgbModal) {}
 
@@ -48,11 +50,18 @@ export class FormModalComponent implements OnInit {
     console.log(this.optionSelect);
   }
 
-  /*addfield() {
-    this.option.push(this.optionSelect);
+  addfield() {
+    console.log(this.optionName);
+
+    if (this.optionName !== '') {
+      this.buttonAddCliked = true;
+      this.optionSelect.push(this.optionName);
+      console.log(this.optionSelect);
+      this.optionName = '';
+    }
   }
 
-  removefield(i: number) {
+  /*removefield(i: number) {
     this.fields().removeAt(i);
   }*/
 }
