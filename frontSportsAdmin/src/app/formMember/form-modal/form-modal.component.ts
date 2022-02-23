@@ -1,24 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Field } from './field';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormControl } from '@angular/forms';
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
+import { NgForm, NgModel} from '@angular/forms';
 
 @Component({
   selector: 'app-form-modal',
   templateUrl: './form-modal.component.html',
   styleUrls: ['./form-modal.component.scss'],
 })
-export class FormModalComponent implements OnInit {
+export class FormModalComponent {
   buttonAddCliked = false;
   supplyFields: Field = new Field();
   typeField = ['text', 'select', 'number', 'date'];
-  optionName = '';
+  optionName:any;
   optionSelect: string[] = [];
+
+  @ViewChild("addField") addField!: NgForm;
 
   constructor(private modalService: NgbModal) {}
 
-  ngOnInit(): void {}
+
 
   closeResult = '';
 
@@ -44,20 +45,25 @@ export class FormModalComponent implements OnInit {
   }
 
   submitted = false;
-  onSubmit() {
+  onSubmit(form: NgForm) {
+    console.log(form)
     this.submitted = true;
     console.log(this.supplyFields);
     console.log(this.optionSelect);
+    form.resetForm();
   }
 
-  addfield() {
+
+  addOption(formOption: NgModel) {
     console.log(this.optionName);
+
 
     if (this.optionName !== '') {
       this.buttonAddCliked = true;
+
       this.optionSelect.push(this.optionName);
-      console.log(this.optionSelect);
       this.optionName = '';
+      formOption.reset;
     }
   }
 

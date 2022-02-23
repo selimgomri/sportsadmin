@@ -1,5 +1,6 @@
 <div class="container box">
   <ng-template #content let-modal>
+    <!--titre et bouton de fermeture de modal-->
     <div class="modal-header">
       <h1 class="modal-title" id="modal-basic-title">Ajouter un champ</h1>
       <button
@@ -11,15 +12,16 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body">
+    <!--corp de la modal-->
+
       <form
-        name="addField"
-        (ngSubmit)="addField.valid && onSubmit()"
+        (ngSubmit)="addField.valid && onSubmit(addField)"
         #addField="ngForm"
-        novalidate
       >
+      <div class="modal-body">
         <div class="row">
           <div class="col">
+            <!--champ label-->
             <div class="form-group">
               <label for="label">Label: <span class="etoile">*</span></label>
               <input
@@ -34,6 +36,7 @@
                 }"
                 required
               />
+              <!--phrase d'erreur du label-->
               <div
                 *ngIf="addField.submitted && label.invalid"
                 class="invalid-feedback"
@@ -43,7 +46,7 @@
                 </div>
               </div>
             </div>
-
+            <!--champ type-->
             <div class="form-group">
               <label for="type"
                 >Type du champ: <span class="etoile">*</span></label
@@ -61,18 +64,22 @@
                   {{ type }}
                 </option>
               </select>
+              <!--phrases d'erreur pour le type des champs-->
               <div
                 *ngIf="addField.submitted && type.invalid"
                 class="invalid-feedback"
               >
                 <div *ngIf="type.errors.required">
-                  Veuillez renseigner un type pour le champ
+                  Veuillez renseignez un type de champ
                 </div>
               </div>
+
+              <!--phrases d'explication des champs-->
               <div *ngIf="supplyFields.type == 'text'">
                 Ce type de champ permet de rentrer des données sous forme de
                 texte exemple: (nom, prénom ...)
               </div>
+
               <div *ngIf="supplyFields.type == 'number'">
                 Ce type de champ permet de rentrer des données sous forme de
                 nombre exemple: (poids, taille...)
@@ -82,8 +89,9 @@
                 date exemple: (dernier match pro joué, dernière compétition...)
               </div>
               <div *ngIf="supplyFields.type == 'select'">
-                Ce type de champ permet de rentrer des données sous forme de
+                Ce type de champ permet de rentrer des données sous forme
                 d'option exemple: (taille pour l'équipement...)
+                <h3>Ajouter des options à votre champ select</h3>
                 <div class="form-group">
                   <label for="option"
                     >Option du select: <span class="etoile">*</span></label
@@ -108,43 +116,41 @@
                       Veuillez renseignez une option
                     </div>
                   </div>
+                  <div>
+                    <button type="submit"  class="btn btn-success" (click)="addOption(optionName)">
+                      ajouter une option
+                    </button>
+                  </div>
                 </div>
+
               </div>
             </div>
+          </div>
+          <div class="form-group button">
+            <button type="submit" class="btn btn-success" [hidden]="supplyFields.type != 'select'" [disabled]="optionSelect.length == 0">enregistre56565656r</button>
+            <button type="submit" class="btn btn-success" [hidden]="supplyFields.type === 'select'">enregistrer</button>
 
-            <div class="form-group button">
-              <button type="submit" class="btn btn-primary">Ajouter</button>
-            </div>
           </div>
         </div>
-      </form>
-    </div>
+
+       </div>
+    <!--bouton d'effacement de la modal-->
     <div class="modal-footer">
-      <p>Value: {{ label.value }}</p>
-      <button type="button" class="btn" (click)="modal.close('Save click')">
-        <svg
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
-          ></path>
-        </svg>
-        Enregistrer
+      <p>Value: {{ optionName}}</p>
+      <button type="button" class="btn" (click)="modal.dismiss('Cross click')">
+
+
+
+        fermer la fenetre
       </button>
 
       <hr />
-      <pre>{{ closeResult }}</pre>
+
       <br />
     </div>
+  </form>
   </ng-template>
-
+  <!--bouton d'ouverture de la modal-->
   <button class="btn btn-success" (click)="openLg(content)">
     <svg
       class="w-6 h-6"
