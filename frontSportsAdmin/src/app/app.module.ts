@@ -26,7 +26,6 @@ import { HeaderBarMesClubsComponent } from './shared-content/header-bar-mes-club
 import { AjoutUserComponent } from './formMember/ajout-user/ajout-user.component';
 import { FormUserComponent } from './formMember/form-user/form-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormFieldComponent } from './formMember/form-field/form-field.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { FormModalComponent } from './formMember/form-modal/form-modal.component';
 
@@ -58,7 +57,6 @@ import { NgbdSortableHeader } from './listing/listing.component';
     HeaderBarMesClubsComponent,
     AjoutUserComponent,
     FormUserComponent,
-    FormFieldComponent,
     CustomFormComponent,
     FormModalComponent,
     CRUDSubscriptionComponent,
