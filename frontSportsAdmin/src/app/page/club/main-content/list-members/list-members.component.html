@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <span class="inline">
-  <h1>Nombre total de membres : 87</h1>
+  <h1>Nombre total de membres : {{ users }}</h1>
   <button><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
   </svg> Créer un membre</button>
@@ -21,7 +21,7 @@
     <div class="tab-content" id="myTabContent">
       <app-search-export></app-search-export>
       <div class="tab-pane fade show active" id="members" role="tabpanel" aria-labelledby="members-tab">
-        <app-listing></app-listing>
+        <app-listing (length)="getUsersLength($event)"></app-listing>
       </div>
       <div class="tab-pane fade" id="licenced" role="tabpanel" aria-labelledby="licenced-tab">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis excepturi ex incidunt aspernatur perferendis iusto quas optio nihil sint ea rerum eaque, doloremque adipisci. Repudiandae nemo provident itaque laborum voluptatem.</div>
       <div class="tab-pane fade" id="licensed-in-waiting" role="tabpanel" aria-labelledby="licensed-in-waiting-tab">Hello World</div>
