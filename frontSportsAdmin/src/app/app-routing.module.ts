@@ -1,10 +1,10 @@
+import { CRUDSubscriptionViewComponent } from './page/club/view/crud-subscription-view/crud-subscription-view.component';
 import { DashboardViewComponent } from './page/club/view/dashboard-view/dashboard-view.component';
 import { ClubChoiceComponent } from './page/club-choice/club-choice.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './page/landing-page/login/login.component';
 import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
-import { PageMyclubsComponent } from './page/club-choice/page-myclubs/page-myclubs.component';
 import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
 import { AjoutUserComponent } from './formMember/ajout-user/ajout-user.component';
 import { FormUserComponent } from './formMember/form-user/form-user.component';
@@ -39,6 +39,17 @@ const routes: Routes = [
   {
     path: 'liste-membres',
     component: ListMembersViewComponent,
+  },
+  {
+    path: 'gestion-des-cotisations',
+    component: CRUDSubscriptionViewComponent,
+  },
+
+  {    path: 'ajouter-un-membre',
+    component: AjoutUserComponent,
+  },
+  {    path: 'ajouter-un-membre2',
+    component: FormUserComponent,
   },
 
   { path: 'ajouter-un-membre', component: AjoutUserComponent },

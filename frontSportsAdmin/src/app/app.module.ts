@@ -7,8 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './page/landing-page/login/login.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpXsrfInterceptorService } from './interceptors/http-xsrf-interceptor/http-xsrf-interceptor.service';
@@ -28,7 +27,12 @@ import { FormUserComponent } from './formMember/form-user/form-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent } from './formMember/form-field/form-field.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
+import { CRUDSubscriptionComponent } from './page/club/main-content/crud-subscription/crud-subscription.component';
+import { CRUDSubscriptionViewComponent } from './page/club/view/crud-subscription-view/crud-subscription-view.component';
+import { LoginComponent } from './page/landing-page/login/login.component';
+import { VerifyModal } from './page/club/main-content/crud-subscription/verify-modal/verify-modal';
 import { NgbdSortableHeader } from './listing/listing.component';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +56,11 @@ import { NgbdSortableHeader } from './listing/listing.component';
     FormUserComponent,
     FormFieldComponent,
     CustomFormComponent,
+    CRUDSubscriptionComponent,
+    CRUDSubscriptionViewComponent,
+    VerifyModal,
     NgbdSortableHeader,
+
   ],
   imports: [
     BrowserModule,
@@ -67,6 +75,7 @@ import { NgbdSortableHeader } from './listing/listing.component';
     }),
   ],
   providers: [
+    NgbActiveModal,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpXsrfInterceptorService,

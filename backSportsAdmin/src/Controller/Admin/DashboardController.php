@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Club;
 use App\Entity\Guardian;
 use App\Entity\Sport;
+use App\Entity\Subscription;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -52,5 +53,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Clubs', 'fas fa-list', Club::class);
         yield MenuItem::linkToCrud('Sports', 'fas fa-list', Sport::class);
         yield MenuItem::linkToCrud('Guardians', 'fas fa-list', Guardian::class);
+        yield MenuItem::linkToCrud('Subscriptions', 'fas fa-list', Subscription::class);
+
     }
 }
