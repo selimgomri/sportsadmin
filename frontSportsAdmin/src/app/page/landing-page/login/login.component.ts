@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
-  private userConnected!: IUser;
+  //private userConnected!: IUser;
 
   constructor(
     private SessionLoginService: SessionLoginService,
