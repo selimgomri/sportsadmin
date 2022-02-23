@@ -8,7 +8,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,6 +30,7 @@ import { FormFieldComponent } from './formMember/form-field/form-field.component
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { CRUDSubscriptionComponent } from './page/club/main-content/crud-subscription/crud-subscription.component';
 import { CRUDSubscriptionViewComponent } from './page/club/view/crud-subscription-view/crud-subscription-view.component';
+import { LoginComponent } from './page/landing-page/login/login.component';
 
 @NgModule({
   declarations: [
