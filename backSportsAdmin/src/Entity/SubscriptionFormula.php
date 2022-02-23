@@ -26,6 +26,9 @@ class SubscriptionFormula
     #[ORM\OneToMany(mappedBy: 'subscription_formula', targetEntity: Subscription::class)]
     private $start_date;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $duration_in_months;
+
     public function __construct()
     {
         $this->start_date = new ArrayCollection();
@@ -86,6 +89,18 @@ class SubscriptionFormula
                 $startDate->setSubscriptionFormula(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDurationInMonths(): ?int
+    {
+        return $this->duration_in_months;
+    }
+
+    public function setDurationInMonths(?int $duration_in_months): self
+    {
+        $this->duration_in_months = $duration_in_months;
 
         return $this;
     }
