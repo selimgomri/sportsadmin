@@ -5,7 +5,7 @@
   <div class="subscription" *ngFor="let subscription of subscriptions">
     <div class="card" style="width: 18rem">
       <div class="card-body">
-        <h5 class="card-title">Catégorie: {{ subscription.type }}</h5>
+        <h5 class="card-title">Catégorie: {{ subscription.name }}</h5>
         <verify-modal
           class="delete-button"
           [subscription]="subscription"
@@ -15,7 +15,7 @@
           Tarif: {{ subscription.amount }}€
         </h6>
         <p class="card-text">
-          Date d'expiration {{ subscription.end_date | date: "dd/MM/yyyy" }}
+          Validité de la cotisation :  {{ subscription.durationInMonths  }} mois
         </p>
       </div>
     </div>
