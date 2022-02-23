@@ -13,13 +13,16 @@ class SubscriptionFormulaFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
-        $formula = new SubscriptionFormula();
-        $formula->setName('1 an');
-        $formula->setAmount(129);
+        for ($i=0;$i<10;$i++) {
+            $formula = new SubscriptionFormula();
+            $formula->setName($i);
+            $formula->setAmount(100+$i);
+            $formula->setDurationInMonths($i);
 
-        $this->setReference(self::SUBSCRIPTIONFORMULA_REFERENCE, $formula);
+            $this->setReference(self::SUBSCRIPTIONFORMULA_REFERENCE, $formula);
 
-        $manager->persist($formula);
+            $manager->persist($formula);
+        }
 
         $manager->flush();
     }
