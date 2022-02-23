@@ -3,7 +3,7 @@ import { PageMyclubsComponent } from './page/club-choice/page-myclubs//page-mycl
 import { SideBarComponent } from './shared-content/side-bar/side-bar.component';
 import { HeaderBarComponent } from './shared-content/header-bar/header-bar.component';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -28,6 +28,7 @@ import { FormUserComponent } from './formMember/form-user/form-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent } from './formMember/form-field/form-field.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +70,7 @@ import { CustomFormComponent } from './custom-form/custom-form.component';
       useClass: HttpXsrfInterceptorService,
       multi: true,
     },
+    Title,
   ],
 
   bootstrap: [AppComponent],

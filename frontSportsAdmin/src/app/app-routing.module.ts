@@ -26,23 +26,50 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {
       userType: 'logged-in',
+      Title: 'Tableau de bord',
     },
   },
   {
     path: 'editer-mon-club',
     component: EditClubViewComponent,
+    canActivate: [AuthGuard],
+    data: {
+      userType: 'logged-in',
+    },
   },
   {
     path: 'mes-clubs',
     component: ClubChoiceComponent,
+    canActivate: [AuthGuard],
+    data: {
+      userType: 'logged-in',
+    },
   },
   {
     path: 'liste-membres',
     component: ListMembersViewComponent,
+    canActivate: [AuthGuard],
+    data: {
+      userType: 'logged-in',
+    },
   },
 
-  { path: 'ajouter-un-membre', component: AjoutUserComponent },
-  { path: 'ajouter-un-membre2', component: FormUserComponent },
+  {
+    path: 'ajouter-un-membre',
+    component: AjoutUserComponent,
+    canActivate: [AuthGuard],
+    data: {
+      userType: 'logged-in',
+    },
+  },
+  {
+    path: 'ajouter-un-membre2',
+    component: FormUserComponent,
+    canActivate: [AuthGuard],
+    data: {
+      userType: 'logged-in',
+    },
+  },
 ];
 
 @NgModule({
