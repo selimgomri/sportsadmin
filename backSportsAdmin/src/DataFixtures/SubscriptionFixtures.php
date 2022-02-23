@@ -15,19 +15,20 @@ class SubscriptionFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $start = new \DateTime(2020);
-        $end = new \DateTime(10 / 10 / 2021);
+        $end = new \DateTime(2024);
+        for ($i=0;$i<10;$i++) {
+            $subscription = new Subscription();
+            $subscription->setType($i+1);
+            $subscription->setAmount(129);
+            $subscription->setStartDate($start);
+            $subscription->setEndDate($end);
+        
 
-        $subscription = new Subscription();
-        $subscription->setType("annuelle");
-        $subscription->setAmount(129);
-        $subscription->setStartDate($start);
-        $subscription->setEndDate($end);
+            $this->setReference(self::SUBSCRIPTION_REFERENCE, $subscription);
+            $subscription->setsubscriptionFormula($this->getReference(SubscriptionFormulaFixtures::SUBSCRIPTIONFORMULA_REFERENCE));
 
-        $this->setReference(self::SUBSCRIPTION_REFERENCE, $subscription);
-        $subscription->setsubscriptionFormula($this->getReference(SubscriptionFormulaFixtures::SUBSCRIPTIONFORMULA_REFERENCE));
-
-        $manager->persist($subscription);
-
+            $manager->persist($subscription);
+        }
         $manager->flush();
     }
 
