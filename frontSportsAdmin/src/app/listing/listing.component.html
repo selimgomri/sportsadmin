@@ -2,15 +2,15 @@
   <table class="table table-borderless table-responsive card-1 p-4">
       <thead>
           <tr class="header-table">
-              <th> <span class="ml-2">Membre</span> </th>
-              <th> <span class="ml-2">Validité de licence</span> </th>
-              <th> <span class="ml-2">Catégorie</span> </th>
-              <th> <span class="ml-2">Contact</span> </th>
-              <th> <span class="ml-4">Editer</span> </th>
+              <th scope="col" sortable="lastname" (sort)="onSort($event)"> <span class="ml-2">Membre</span> </th>
+              <th scope="col"> <span class="ml-2">Validité de licence</span> </th>
+              <th scope="col"> <span class="ml-2">Catégorie</span> </th>
+              <th scope="col"> <span class="ml-2">Contact</span> </th>
+              <th scope="col"> <span class="ml-4">Editer</span> </th>
           </tr>
       </thead>
       <tbody>
-          <tr class="list-item" *ngFor="let user of users | slice: (page-1) * pageSize : page * pageSize">
+          <tr class="list-item" *ngFor="let user of sortedUsers | slice: (page-1) * pageSize : page * pageSize">
               <td>
                   <div class="p-2 d-flex flex-row align-items-center mb-2"> <img src="https://i.imgur.com/ZSkeqnd.jpg" width="50" class="rounded-circle">
                       <div class="d-flex flex-column ml-2"> <span class="d-block fw-bold">{{ user.firstname }} {{ user.lastname }}</span>
@@ -46,4 +46,3 @@
   [rotate]="true">
 </ngb-pagination>
 </div>
-
