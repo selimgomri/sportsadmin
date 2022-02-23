@@ -28,6 +28,8 @@ import { FormUserComponent } from './formMember/form-user/form-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent } from './formMember/form-field/form-field.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
+import { NgbdSortableHeader } from './listing/listing.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +52,7 @@ import { CustomFormComponent } from './custom-form/custom-form.component';
     FormUserComponent,
     FormFieldComponent,
     CustomFormComponent,
+    NgbdSortableHeader,
   ],
   imports: [
     BrowserModule,
