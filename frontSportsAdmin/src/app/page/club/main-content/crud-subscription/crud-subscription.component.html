@@ -6,13 +6,11 @@
     <div class="card" style="width: 18rem">
       <div class="card-body">
         <h5 class="card-title">Catégorie: {{ subscription.type }}</h5>
-
         <verify-modal
           class="delete-button"
           [subscription]="subscription"
           (removeClick)="onRemoveClick($event)"
         ></verify-modal>
-
         <h6 class="card-subtitle mb-2 text-muted">
           Tarif: {{ subscription.amount }}€
         </h6>
