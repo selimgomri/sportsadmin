@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ISubscription } from 'src/app/services/subscription/ISubscription';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
@@ -7,6 +8,9 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './verify-modal.html',
 })
 export class VerifyModal {
+  @Input() subscription!: ISubscription;
+  @Output() removeClick: EventEmitter<ISubscription> = new EventEmitter();
+
   closeResult = '';
 
   constructor(private modalService: NgbModal) {}
@@ -32,5 +36,10 @@ export class VerifyModal {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  remove() {
+    console.log(this.subscription);
+    this.removeClick.emit(this.subscription);
   }
 }

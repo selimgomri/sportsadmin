@@ -1,4 +1,3 @@
-import { ConfirmationModalComponent } from './page/club/main-content/crud-subscription/confirmation-modal/confirmation-modal.component';
 import { EditClubComponent } from './page/club/main-content/edit-club/edit-club.component';
 import { PageMyclubsComponent } from './page/club-choice/page-myclubs//page-myclubs.component';
 import { SideBarComponent } from './shared-content/side-bar/side-bar.component';
@@ -57,7 +56,6 @@ import { VerifyModal } from './page/club/main-content/crud-subscription/verify-m
     CustomFormComponent,
     CRUDSubscriptionComponent,
     CRUDSubscriptionViewComponent,
-    ConfirmationModalComponent,
     VerifyModal,
   ],
   imports: [

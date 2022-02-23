@@ -19,7 +19,6 @@ export class CRUDSubscriptionComponent implements OnInit {
   }
 
   onRemoveClick(subscription: any) {
-    console.log(subscription);
     if (!subscription) return;
     this.subscriptionService
       .deleteSubscription(subscription.id)
