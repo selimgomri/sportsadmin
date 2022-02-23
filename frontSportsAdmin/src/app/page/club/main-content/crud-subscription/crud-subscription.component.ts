@@ -15,6 +15,7 @@ export class CRUDSubscriptionComponent implements OnInit {
   ngOnInit(): void {
     this.subscriptionService.getSubscriptions().subscribe((datas: any) => {
       this.subscriptions = datas['hydra:member'];
+      console.log(this.subscriptions);
     });
   }
 
@@ -24,8 +25,8 @@ export class CRUDSubscriptionComponent implements OnInit {
       .deleteSubscription(subscription.id)
       .subscribe(() => {
         if (!subscription) return;
-        this.subscriptions = this.subscriptions.filter((deleted) => {
-          return deleted.id !== subscription.id;
+        this.subscriptions = this.subscriptions.filter((toDelete) => {
+          return toDelete.id !== subscription.id;
         });
       });
   }

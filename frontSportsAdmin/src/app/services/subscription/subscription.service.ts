@@ -11,10 +11,10 @@ export class SubscriptionService {
   constructor(private http: HttpClient) {}
 
   getSubscriptions(): Observable<ISubscription> {
-    return this.http.get<ISubscription>(`${this.$url}/subscriptions`);
+    return this.http.get<ISubscription>(`${this.$url}/subscription_formulas`);
   }
 
   deleteSubscription(id: Number): Observable<any> {
-    return this.http.delete(`${this.$url}/subscriptions/${id}`);
+    return this.http.delete(`${this.$url}/subscription_formulas/${id}`);
   }
 }
