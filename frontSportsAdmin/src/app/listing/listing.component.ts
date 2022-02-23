@@ -44,6 +44,8 @@ export class ListingComponent {
   page = 1;
   pageSize = 4;
 
+  @Output() length = new EventEmitter<number>();
+
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
   onSort({column, direction}: SortEvent) {
@@ -73,6 +75,8 @@ export class ListingComponent {
       this.users = datas['hydra:member'];
       this.sortedUsers = this.users;
       console.log(this.users);
+      this.length.emit(this.users.length);
     });
+
   }
 }
