@@ -1,11 +1,11 @@
 import { ISubscription } from 'src/app/services/subscription/ISubscription';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
-
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'verify-modal',
   templateUrl: './verify-modal.html',
+  styleUrls: ['./verify-modal.scss'],
 })
 export class VerifyModal {
   @Input() subscription!: ISubscription;
