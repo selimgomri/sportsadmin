@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Field } from './field';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { NgForm, NgModel} from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-form-modal',
@@ -9,17 +9,16 @@ import { NgForm, NgModel} from '@angular/forms';
   styleUrls: ['./form-modal.component.scss'],
 })
 export class FormModalComponent {
-  buttonAddCliked = false;
+  buttonRemoveClicked = false;
+  buttonAddClicked = false;
   supplyFields: Field = new Field();
   typeField = ['text', 'select', 'number', 'date'];
-  optionName:string = '';
+  optionName: string = '';
   optionSelect: string[] = [];
 
-  @ViewChild("addField") addField!: NgForm;
+  @ViewChild('addField') addField!: NgForm;
 
   constructor(private modalService: NgbModal) {}
-
-
 
   closeResult = '';
 
@@ -46,43 +45,36 @@ export class FormModalComponent {
 
   submitted = false;
   onSubmit(form: NgForm) {
-    console.log(form)
     this.submitted = true;
     console.log(this.supplyFields);
-    console.log(this.optionSelect);
     form.resetForm();
-    this.optionName='';
-    this.optionSelect=[];
-
+    this.optionName = '';
+    this.optionSelect = [];
   }
 
   onSubmit2(form: NgForm, formOption: NgModel) {
     this.submitted = true;
     console.log(this.supplyFields);
-    console.log(this.optionSelect);
-    this.supplyFields.optionOfSelect =[];
-    this.optionName='';
-    this.optionSelect=[];
+    this.supplyFields.optionOfSelect = [];
+    this.optionName = '';
+    this.optionSelect = [];
     formOption.reset();
     form.resetForm();
   }
 
-
-  addOption(formOption: NgModel) {
-    console.log(this.optionName);
-
-
-    if (this.optionName != '') {
-      this.buttonAddCliked = true;
-
+  addOption() {
+    if (this.optionName !== '') {
+      this.buttonAddClicked = true;
       this.optionSelect.push(this.optionName);
-      this.supplyFields.optionOfSelect = this.optionSelect
-      this.optionName ='';
-
+      this.supplyFields.optionOfSelect = this.optionSelect;
+      this.optionName = '';
     }
   }
 
-  /*removefield(i: number) {
-    this.fields().removeAt(i);
-  }*/
+  removeOption(index: number) {
+    this.buttonRemoveClicked = true;
+    this.buttonAddClicked = false;
+    this.optionSelect.length -= 1;
+    this.optionSelect.splice(index, 0);
+  }
 }

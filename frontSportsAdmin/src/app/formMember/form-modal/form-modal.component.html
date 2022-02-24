@@ -119,7 +119,7 @@
                     <button
                       type="button"
                       class="btn btn-primary"
-                      (click)="addOption(option)"
+                      (click)="addOption()"
                     >
                       ajouter une option
                     </button>
@@ -127,6 +127,15 @@
                       <p>
                         Vous avez {{ optionSelect.length }} options dans votre
                         champs select
+                      </p>
+                      <p *ngFor="let option of optionSelect; let i = index">
+                        {{ optionSelect[i] }}
+                        <button
+                          (click)="removeOption(i)"
+                          class="btn btn-danger"
+                        >
+                          remove
+                        </button>
                       </p>
                     </div>
                   </div>
@@ -153,7 +162,7 @@
                     type="button"
                     class="btn btn-success"
                     [hidden]="supplyFields.type != 'select'"
-                    [disabled]="optionSelect.length == 0 && addField.invalid"
+                    [disabled]="optionSelect.length < 1 && addField.invalid"
                     (click)="onSubmit2(addField, option)"
                   >
                     enregistrer votre champ
@@ -189,10 +198,34 @@
       </div>
       <!--bouton d'effacement de la modal-->
       <div class="modal-footer">
-        <p>
-          Value: {{ supplyFields.label }}{{ supplyFields.type
-          }}{{ supplyFields.optionOfSelect }}{{ supplyFields.required }}
-        </p>
+        <div class="form-group" [hidden]="label.invalid">
+          <h3>le champ que vous etes en train de creer</h3>
+          <label for="{{ supplyFields.label }}">{{ supplyFields.label }}</label>
+
+          <div class="form-control" *ngIf="supplyFields.type != 'select'">
+            <input
+              type="{{ supplyFields.type }}"
+              id="{{ supplyFields.label }}"
+              name="{{ supplyFields.label }}"
+              [hidden]="supplyFields.type === 'select'"
+            />
+          </div>
+          <div class="form-control" *ngIf="supplyFields.type === 'select'">
+            <select
+              id="{{ supplyFields.label }}"
+              name="{{ supplyFields.label }}"
+              class="form-select"
+            >
+              <option
+                *ngFor="let option of supplyFields.optionOfSelect"
+                [value]="option"
+              >
+                {{ option }}
+              </option>
+            </select>
+          </div>
+        </div>
+
         <button
           type="button"
           class="btn"

@@ -28,14 +28,10 @@ import { FormUserComponent } from './formMember/form-user/form-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { FormModalComponent } from './formMember/form-modal/form-modal.component';
-
-
 import { CRUDSubscriptionComponent } from './page/club/main-content/crud-subscription/crud-subscription.component';
 import { CRUDSubscriptionViewComponent } from './page/club/view/crud-subscription-view/crud-subscription-view.component';
 import { VerifyModal } from './page/club/main-content/crud-subscription/verify-modal/verify-modal';
 import { NgbdSortableHeader } from './listing/listing.component';
-
-
 
 @NgModule({
   declarations: [
@@ -62,8 +58,7 @@ import { NgbdSortableHeader } from './listing/listing.component';
     CRUDSubscriptionComponent,
     CRUDSubscriptionViewComponent,
     VerifyModal,
-    NgbdSortableHeader
-
+    NgbdSortableHeader,
   ],
   imports: [
     BrowserModule,
