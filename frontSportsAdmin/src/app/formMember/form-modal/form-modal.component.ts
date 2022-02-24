@@ -12,7 +12,7 @@ export class FormModalComponent {
   buttonAddCliked = false;
   supplyFields: Field = new Field();
   typeField = ['text', 'select', 'number', 'date'];
-  optionName:any;
+  optionName:string = '';
   optionSelect: string[] = [];
 
   @ViewChild("addField") addField!: NgForm;
@@ -51,6 +51,20 @@ export class FormModalComponent {
     console.log(this.supplyFields);
     console.log(this.optionSelect);
     form.resetForm();
+    this.optionName='';
+    this.optionSelect=[];
+
+  }
+
+  onSubmit2(form: NgForm, formOption: NgModel) {
+    this.submitted = true;
+    console.log(this.supplyFields);
+    console.log(this.optionSelect);
+    this.supplyFields.optionOfSelect =[];
+    this.optionName='';
+    this.optionSelect=[];
+    formOption.reset();
+    form.resetForm();
   }
 
 
@@ -58,12 +72,13 @@ export class FormModalComponent {
     console.log(this.optionName);
 
 
-    if (this.optionName !== '') {
+    if (this.optionName != '') {
       this.buttonAddCliked = true;
 
       this.optionSelect.push(this.optionName);
-      this.optionName = '';
-      formOption.reset;
+      this.supplyFields.optionOfSelect = this.optionSelect
+      this.optionName ='';
+
     }
   }
 

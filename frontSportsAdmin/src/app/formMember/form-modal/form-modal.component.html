@@ -14,13 +14,10 @@
     </div>
     <!--corp de la modal-->
 
-      <form
-        (ngSubmit)="addField.valid && onSubmit(addField)"
-        #addField="ngForm"
-      >
+    <form (ngSubmit)="addField.valid && onSubmit(addField)" #addField="ngForm">
       <div class="modal-body">
         <div class="row">
-          <div class="col">
+          <div class="col-10">
             <!--champ label-->
             <div class="form-group">
               <label for="label">Label: <span class="etoile">*</span></label>
@@ -91,6 +88,7 @@
               <div *ngIf="supplyFields.type == 'select'">
                 Ce type de champ permet de rentrer des données sous forme
                 d'option exemple: (taille pour l'équipement...)
+                <!--champ d'option du select-->
                 <h3>Ajouter des options à votre champ select</h3>
                 <div class="form-group">
                   <label for="option"
@@ -108,6 +106,7 @@
                     }"
                     required
                   />
+                  <!--phrase d'erreur des options-->
                   <div
                     *ngIf="addField.submitted && option.invalid"
                     class="invalid-feedback"
@@ -117,38 +116,96 @@
                     </div>
                   </div>
                   <div>
-                    <button type="submit"  class="btn btn-success" (click)="addOption(optionName)">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="addOption(option)"
+                    >
                       ajouter une option
                     </button>
+                    <div>
+                      <p>
+                        Vous avez {{ optionSelect.length }} options dans votre
+                        champs select
+                      </p>
+                    </div>
                   </div>
+                  <div
+                    class="form-group"
+                    [hidden]="supplyFields.type != 'select'"
+                  >
+                    <label for="optionField">
+                      le champ est t'il obligatoire ?
+                    </label>
+                    <input
+                      type="checkbox"
+                      name="optionField"
+                      id="optionField"
+                      #optionField="ngModel"
+                      [(ngModel)]="supplyFields.required"
+                      class="form-check-input"
+                      [ngClass]="{
+                        'is-invalid': addField.submitted && optionField.invalid
+                      }"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    [hidden]="supplyFields.type != 'select'"
+                    [disabled]="optionSelect.length == 0 && addField.invalid"
+                    (click)="onSubmit2(addField, option)"
+                  >
+                    enregistrer votre champ
+                  </button>
                 </div>
-
               </div>
+            </div>
+            <div class="form-group" [hidden]="supplyFields.type === 'select'">
+              <label for="optionField"> le champ est t'il obligatoire ? </label>
+              <input
+                type="checkbox"
+                name="optionField"
+                id="optionField"
+                #optionField="ngModel"
+                [(ngModel)]="supplyFields.required"
+                class="form-check-input"
+                [ngClass]="{
+                  'is-invalid': addField.submitted && optionField.invalid
+                }"
+              />
             </div>
           </div>
           <div class="form-group button">
-            <button type="submit" class="btn btn-success" [hidden]="supplyFields.type != 'select'" [disabled]="optionSelect.length == 0">enregistre56565656r</button>
-            <button type="submit" class="btn btn-success" [hidden]="supplyFields.type === 'select'">enregistrer</button>
-
+            <button
+              type="submit"
+              class="btn btn-success"
+              [hidden]="supplyFields.type === 'select'"
+            >
+              enregistrer votre champ
+            </button>
           </div>
         </div>
+      </div>
+      <!--bouton d'effacement de la modal-->
+      <div class="modal-footer">
+        <p>
+          Value: {{ supplyFields.label }}{{ supplyFields.type
+          }}{{ supplyFields.optionOfSelect }}{{ supplyFields.required }}
+        </p>
+        <button
+          type="button"
+          class="btn"
+          (click)="modal.dismiss('Cross click')"
+        >
+          fermer la fenetre
+        </button>
 
-       </div>
-    <!--bouton d'effacement de la modal-->
-    <div class="modal-footer">
-      <p>Value: {{ optionName}}</p>
-      <button type="button" class="btn" (click)="modal.dismiss('Cross click')">
+        <hr />
 
-
-
-        fermer la fenetre
-      </button>
-
-      <hr />
-
-      <br />
-    </div>
-  </form>
+        <br />
+      </div>
+    </form>
   </ng-template>
   <!--bouton d'ouverture de la modal-->
   <button class="btn btn-success" (click)="openLg(content)">

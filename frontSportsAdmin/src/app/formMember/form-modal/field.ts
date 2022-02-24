@@ -1,7 +1,7 @@
 export class Field {
   public label!: string;
   public type!: string;
-  public optionOfSelect!: [];
-  public optionField!: [];
+  public optionOfSelect!:string [];
+  public required!: string;
   public position!: number;
 }
