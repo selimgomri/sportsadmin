@@ -67,7 +67,7 @@ import { CreateSubscription } from './page/club/main-content/crud-subscription/c
     NgbdSortableHeader,
     ProfileComponent,
     ProfileViewComponent,
-    ViewComponent
+    ViewComponent,
     CreateSubscription,
   ],
   imports: [
