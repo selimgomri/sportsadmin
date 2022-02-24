@@ -9,6 +9,7 @@ export class User {
   public genre!:string;
   public level!: [];
   public additionnalField!: [];
-
+  public photo!: string;
+  public adress!: string;
 
 }

@@ -1,0 +1,70 @@
+.user {
+  background-color: #F6F4F5 ;
+  border-radius: 35px;
+  display: flex;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+  margin: 80px;
+  width: 1800px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+img {
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.photo {
+  width: 250px;
+}
+input {
+  border-radius: 20px;
+  width: 400px;
+}
+
+.form-group
+ {
+   margin: 30px;
+ }
+
+ .colorpicker {
+   height:50px;
+   width: 100px;
+   margin-bottom: 30px;
+ }
+
+ .button {
+   text-align: right;
+ }
+
+ svg {
+  height: 20px;
+}
+
+@media screen and (max-width : 600px) {
+
+  .user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  }
+
+  input {
+    width: auto;
+
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .form-group button {
+    margin: auto;
+    width: 150px;
+  }
+}

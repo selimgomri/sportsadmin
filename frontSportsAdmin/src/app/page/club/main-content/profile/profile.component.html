@@ -1,0 +1,94 @@
+<div class="container-fluid user">
+  <form name="userForm" (ngSubmit)="userForm.valid && onSubmit()" #userForm="ngForm" no validate>
+    <div class="row">
+      <div class ="col">
+        <div class="form-group">
+          <img src="./assets/img/johndoe.jpg">
+          <input name="photo" class="form-control photo" type="file" [(ngModel)]="model.photo" #photo="ngModel"
+          [ngClass]="{'is-invalid': userForm.submitted && photo.invalid }" required/>
+          <div *ngIf="userForm.submitted && photo.invalid" class="invalid-feedback">
+              <div *ngIf="photo.errors.required">Veuillez télécharger un photo.</div>
+          </div>
+          </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="lastname">Nom</label>
+          <input name="lastname" class="form-control" type="text" [(ngModel)]="model.lastName" #lastname="ngModel"
+          [ngClass]="{'is-invalid': userForm.submitted && lastname.invalid }" required/>
+          <div *ngIf="userForm.submitted && lastname.invalid" class="invalid-feedback">
+              <div *ngIf="lastname.errors.required">Veuillez renseigner un nom.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input name="email" class="form-control" type="text" [(ngModel)]="model.email" #email="ngModel"
+          [ngClass]="{'is-invalid': userForm.submitted && email.invalid }" email required/>
+          <div *ngIf="userForm.submitted && email.invalid" class="invalid-feedback">
+              <div *ngIf="email.errors.required">Veuillez renseigner une adresse email valide.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="birthdate">Date de naissance</label>
+          <input name="birthdate" class="form-control" type="date" [(ngModel)]="model.birthDate" #birthdate="ngModel"
+          [ngClass]="{'is-invalid': userForm.submitted && birthdate.invalid }" required/>
+          <div *ngIf="userForm.submitted && birthdate.invalid" class="invalid-feedback">
+              <div *ngIf="birthdate.errors.required">Veuillez renseigner une date de naissance.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="adress">Adresse*</label>
+          <input name="adress" class="form-control" type="text" [(ngModel)]="model.adress" #adress="ngModel"
+          [ngClass]="{'is-invalid': userForm.submitted && adress.invalid }" required/>
+          <div *ngIf="userForm.submitted && adress.invalid" class="invalid-feedback">
+              <div *ngIf="adress.errors.required">Veuillez renseigner une adresse.</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="firstname">Prénom</label>
+          <input name="firstname" class="form-control" type="text" [(ngModel)]="model.firstName" #firstname="ngModel"
+          [ngClass]="{'is-invalid': userForm.submitted && firstname.invalid }" required/>
+          <div *ngIf="userForm.submitted && firstname.invalid" class="invalid-feedback">
+              <div *ngIf="firstname.errors.required">Veuillez renseigner un prénom.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phone">Téléphone</label>
+          <input name="phone" class="form-control" type="text" [(ngModel)]="model.phone" #phone="ngModel"
+          [ngClass]="{'is-invalid': userForm.submitted && phone.invalid }" required/>
+          <div *ngIf="userForm.submitted && phone.invalid" class="invalid-feedback">
+              <div *ngIf="phone.errors.required">Veuillez renseigner un numéro de téléphone.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="genre">Genre</label>
+          <input name="genre" class="form-control" type="text" [(ngModel)]="model.genre" #genre="ngModel"
+          [ngClass]="{'is-invalid': userForm.submitted && genre.invalid }" required/>
+          <div *ngIf="userForm.submitted && genre.invalid" class="invalid-feedback">
+              <div *ngIf="genre.errors.required">Veuillez renseigner le genre.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input name="password" class="form-control" type="text" [(ngModel)]="model.password" #password="ngModel"
+          [ngClass]="{'is-invalid': userForm.submitted && password.invalid }" required/>
+          <div *ngIf="userForm.submitted && password.invalid" class="invalid-feedback">
+              <div *ngIf="password.errors.required">Veuillez renseigner le mot de passe.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="form-group button">
+      <button type="submit">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4">
+        </path></svg>
+        Enregistrer</button>
+    </div>
+  </form>
+</div>

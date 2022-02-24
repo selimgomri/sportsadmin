@@ -34,6 +34,8 @@ import { CRUDSubscriptionViewComponent } from './page/club/view/crud-subscriptio
 import { LoginComponent } from './page/landing-page/login/login.component';
 import { VerifyModal } from './page/club/main-content/crud-subscription/verify-modal/verify-modal';
 import { NgbdSortableHeader } from './listing/listing.component';
+import { ProfileComponent } from './page/club/main-content/profile/profile.component';
+import { ProfileViewComponent } from './page/club/view/profile-view/profile-view.component';
 
 
 
@@ -63,6 +65,8 @@ import { NgbdSortableHeader } from './listing/listing.component';
     CRUDSubscriptionViewComponent,
     VerifyModal,
     NgbdSortableHeader,
+    ProfileComponent,
+    ProfileViewComponent,
 
   ],
   imports: [

@@ -40,7 +40,7 @@
         </form>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="profile-picture">
+            <li class="profile-picture" [routerLink]="['/mon-profil']">
               <img src="./assets/img/johndoe.jpg" height="60" />
             </li>
             <li class="nav-item dropdown" *ngIf="(userInfo?.id ?? 0) !== 0">
@@ -56,7 +56,7 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item" [routerLink]="['/mon-profil']">
                     <svg
                       class="w-6 h-6"
                       fill="none"
@@ -75,7 +75,7 @@
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item" [routerLink]="['']">
                     <svg
                       class="w-6 h-6"
                       fill="none"
