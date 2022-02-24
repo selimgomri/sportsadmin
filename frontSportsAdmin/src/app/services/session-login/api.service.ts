@@ -12,6 +12,10 @@ export class ApiService {
     private $url = 'https://localhost:8000/api';
     constructor(private http: HttpClient) {}
 
+    getUser(): Observable<IUser> {
+      return this.http.get<IUser>(`${this.$url}/me`)
+    }
+
     getUsers(): Observable<IUser> {
       return this.http.get<IUser>(`${this.$url}/users`);
     }
@@ -19,4 +23,9 @@ export class ApiService {
     getClubs(): Observable<Club> {
       return this.http.get<Club>(`${this.$url}/club_users/{id}`);
     }
+
+    updateProfile(id: any, data: any): Observable<any> {
+      return this.http.put(`${this.$url}/me`, data);
+    }
+
   }

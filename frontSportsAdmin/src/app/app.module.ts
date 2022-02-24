@@ -36,8 +36,7 @@ import { VerifyModal } from './page/club/main-content/crud-subscription/verify-m
 import { NgbdSortableHeader } from './listing/listing.component';
 import { ProfileComponent } from './page/club/main-content/profile/profile.component';
 import { ProfileViewComponent } from './page/club/view/profile-view/profile-view.component';
-
-
+import { ViewComponent } from './page/club/main-content/profile/view.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +66,7 @@ import { ProfileViewComponent } from './page/club/view/profile-view/profile-view
     NgbdSortableHeader,
     ProfileComponent,
     ProfileViewComponent,
+    ViewComponent
 
   ],
   imports: [

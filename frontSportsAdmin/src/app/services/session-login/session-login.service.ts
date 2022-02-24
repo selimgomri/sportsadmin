@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+
 import { IUser } from 'src/app/IUser';
 
 @Injectable({
@@ -16,6 +16,13 @@ export class SessionLoginService {
     phone: '',
     roles: [],
     licenseNumber: 0,
+    password: '',
+    birthdate: new Date,
+    sexe:'',
+    level: [],
+    additionnalField: [],
+    photo: '',
+    address:'',
   });
 
   constructor(private http: HttpClient) {

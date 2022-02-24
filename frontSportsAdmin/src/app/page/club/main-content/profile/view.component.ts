@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/formMember/ajout-user/user';
-import { IUser } from 'src/app/IUser';
 import { SessionLoginService } from 'src/app/services/session-login/session-login.service';
-
+import { IUser } from 'src/app/IUser';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  selector: 'app-view',
+  templateUrl: './view.component.html',
+  styleUrls: ['./view.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ViewComponent implements OnInit {
 
-  model : User = new User();
   user?: IUser;
 
   constructor(private sessionLoginService: SessionLoginService) { }
@@ -21,10 +18,6 @@ export class ProfileComponent implements OnInit {
       this.user = data;
       console.log(this.user);
     });
-  }
-
-  onSubmit() {
-    console.log(this.model);
   }
 
 }
