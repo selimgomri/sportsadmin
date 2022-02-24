@@ -65,8 +65,12 @@
         </div>
         <div class="form-group">
           <label for="genre">Genre</label>
-          <input name="genre" class="form-control" type="text" [(ngModel)]="model.genre" #genre="ngModel"
-          [ngClass]="{'is-invalid': userForm.submitted && genre.invalid }" required/>
+          <select name="genre" class="form-control" [(ngModel)]="model.genre" #genre="ngModel"
+          [ngClass]="{'is-invalid': userForm.submitted && genre.invalid }" required>
+          <option value="">--Veuillez choisir un genre--</option>
+          <option value="M">Masculin</option>
+          <option value="F">Féminin</option>
+          <option value="other">Autre</option></select>
           <div *ngIf="userForm.submitted && genre.invalid" class="invalid-feedback">
               <div *ngIf="genre.errors.required">Veuillez renseigner le genre.</div>
           </div>

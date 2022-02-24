@@ -18,11 +18,15 @@ img {
 .photo {
   width: 250px;
 }
-input {
+input, select {
   border-radius: 20px;
   width: 400px;
 }
 
+form {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
 .form-group
  {
    margin: 30px;
