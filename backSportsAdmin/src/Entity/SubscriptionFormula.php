@@ -27,7 +27,7 @@ class SubscriptionFormula
     private $start_date;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private $duration_in_months;
+    private $durationInMonths;
 
     public function __construct()
     {
@@ -95,12 +95,12 @@ class SubscriptionFormula
 
     public function getDurationInMonths(): ?int
     {
-        return $this->duration_in_months;
+        return $this->durationInMonths;
     }
 
-    public function setDurationInMonths(?int $duration_in_months): self
+    public function setDurationInMonths(?int $durationInMonths): self
     {
-        $this->duration_in_months = $duration_in_months;
+        $this->durationInMonths = $durationInMonths;
 
         return $this;
     }

@@ -7,14 +7,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class SubscriptionService {
-  private $url = 'https://localhost:8000/api';
+  private $url = 'https://localhost:8000/api/subscription_formulas';
   constructor(private http: HttpClient) {}
 
   getSubscriptions(): Observable<ISubscription> {
-    return this.http.get<ISubscription>(`${this.$url}/subscription_formulas`);
+    return this.http.get<ISubscription>(this.$url);
   }
 
   deleteSubscription(id: Number): Observable<any> {
-    return this.http.delete(`${this.$url}/subscription_formulas/${id}`);
+    return this.http.delete(`${this.$url}/${id}`);
+  }
+
+  createSubscription(subscription: any): Observable<ISubscription> {
+    return this.http.post<ISubscription>(this.$url, subscription);
   }
 }

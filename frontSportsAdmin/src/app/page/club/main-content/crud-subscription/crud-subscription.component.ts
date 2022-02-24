@@ -15,7 +15,6 @@ export class CRUDSubscriptionComponent implements OnInit {
   ngOnInit(): void {
     this.subscriptionService.getSubscriptions().subscribe((datas: any) => {
       this.subscriptions = datas['hydra:member'];
-      console.log(this.subscriptions);
     });
   }
 

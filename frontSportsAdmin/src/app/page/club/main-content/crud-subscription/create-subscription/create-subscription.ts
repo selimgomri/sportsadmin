@@ -1,6 +1,8 @@
+import { SubscriptionService } from './../../../../../services/subscription/subscription.service';
 import { ISubscription } from 'src/app/services/subscription/ISubscription';
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'create-subscription',
@@ -8,12 +10,12 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./create-subscription.scss'],
 })
 export class CreateSubscription {
-  @Input() subscription!: ISubscription;
-  //@Output() removeClick: EventEmitter<ISubscription> = new EventEmitter();
-
   closeResult = '';
 
-  constructor(private modalService: NgbModal) {}
+  constructor(
+    private modalService: NgbModal,
+    private subscriptionService: SubscriptionService
+  ) {}
 
   open(content: any) {
     this.modalService
@@ -38,7 +40,26 @@ export class CreateSubscription {
     }
   }
 
-  /* remove() {
-    this.removeClick.emit(this.subscription);
+  /* private subscription {
+    name:
+    amount:
+    durationInMonths:
   } */
+
+  onSubmit(value: any) {
+    console.log(value);
+    const subscription: any = {
+      'name': value.name,
+      'amount': value.amount,
+      'durationInMonths': value.durationInMonths
+    };
+    this.subscriptionService
+      .createSubscription(subscription)
+      .subscribe((z) => console.log(z));
+  }
 }
+
+/*  save() {
+    this.subscriptionService.createSubscription(subscription).subscribe() {
+
+    }; */

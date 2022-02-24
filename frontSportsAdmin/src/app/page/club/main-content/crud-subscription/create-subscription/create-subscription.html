@@ -8,19 +8,24 @@
       (click)="modal.dismiss('Cross click')"
     ></button>
   </div>
-  <form>
+  <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
     <div class="modal-body">
-      <label for=""></label>
-      <input />
+      <label for="name">Catégorie : </label>
+      <input id="name" type="text" name="name" ngModel />
 
-      <label for=""></label>
-      <input />
+      <label for="amount">Tarif (€) : </label>
+      <input id="amount" type="number" name="amount" ngModel />
 
-      <label for=""></label>
-      <input />
+      <label for="durationInMonths">Validité de la cotisation (mois) : </label>
+      <input
+        id="durationInMonths"
+        type="number"
+        name="durationInMonths"
+        ngModel
+      />
     </div>
     <div class="modal-footer">
-      <button type="button" (click)="modal.close('Save click')">
+      <button type="submit" (click)="modal.close('Save click')">
         <svg
           class="w-6 h-6"
           fill="none"
