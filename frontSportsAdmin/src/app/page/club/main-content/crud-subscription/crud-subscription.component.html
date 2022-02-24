@@ -14,12 +14,10 @@
             [subscription]="subscription"
             (removeClick)="onRemoveClick($event)"
           ></verify-modal>
-          <h6 class="card-subtitle mb-2 text-muted">
-            Tarif: {{ subscription.amount }}€
-          </h6>
-          <p class="card-text">
+          <h5 class="card-title">Tarif: {{ subscription.amount }}€</h5>
+          <h5 class="card-title">
             Validité de la cotisation : {{ subscription.durationInMonths }} mois
-          </p>
+          </h5>
         </div>
       </div>
       <button class="edit-subscription">
