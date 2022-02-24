@@ -11,5 +11,6 @@ export class User {
   public additionnalField!: [];
   public photo!: string;
   public adress!: string;
+  public roles!: string;
 
 }
