@@ -1,3 +1,9 @@
+.modal-header,
+.modal-body,
+.modal-footer {
+  background-color: #f6f4f5;
+}
+
 .add-subscription {
   display: flex;
   justify-content: end;
@@ -6,4 +12,12 @@
   height: 50px;
   margin-top: 20px;
   align-items: center;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+}
+.w-6 {
+  height: 25px;
 }

@@ -1,5 +1,6 @@
 <ng-template #content let-modal>
   <div class="modal-header">
+    <h2>Créer une cotisation</h2>
     <button
       type="button"
       class="btn-close"
@@ -7,20 +8,52 @@
       (click)="modal.dismiss('Cross click')"
     ></button>
   </div>
-  <div class="modal-body">
-    <h3>Etes-vous sûr de vouloir supprimer cette cotisation ?</h3>
-  </div>
-  <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-danger btn-outline-dark"
-      (click)="modal.close('Save click')"
-    >
-      Oui
-    </button>
-  </div>
+  <form>
+    <div class="modal-body">
+      <label for=""></label>
+      <input />
+
+      <label for=""></label>
+      <input />
+
+      <label for=""></label>
+      <input />
+    </div>
+    <div class="modal-footer">
+      <button type="button" (click)="modal.close('Save click')">
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+          ></path>
+        </svg>
+        Enregistrer la cotisation
+      </button>
+    </div>
+  </form>
 </ng-template>
 
 <button type="button" class="add-subscription" (click)="open(content)">
-  + Créer une nouvelle cotisation
+  <svg
+    class="w-6"
+    className="w-6 h-6"
+    fill="currentColor"
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fillRule="evenodd"
+      d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+      clipRule="evenodd"
+    />
+  </svg>
+  Créer une nouvelle cotisation
 </button>
