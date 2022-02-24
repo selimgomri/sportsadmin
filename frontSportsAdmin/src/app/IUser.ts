@@ -6,4 +6,11 @@ export interface IUser {
   phone: string;
   roles: string[];
   licenseNumber: number;
+  password: string;
+  birthdate: Date;
+  sexe:string;
+  level: [];
+  additionnalField: [];
+  photo: string;
+  address: string;
 }

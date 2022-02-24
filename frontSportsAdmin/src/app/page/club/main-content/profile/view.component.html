@@ -1,0 +1,77 @@
+<div class="container user">
+  <div class="row">
+    <div class="col">
+      <div>
+        <img src="./assets/img/johndoe.jpg" />
+      </div>
+      <p class="info">Rôle: {{ user?.roles }}</p>
+    </div>
+    <div class="col">
+      <div>
+        <p class="italic">Nom:</p>
+        <p class="info">{{ user?.lastname }}</p>
+      </div>
+      <div class="label">
+        <p class="italic">Email:</p>
+        <p class="info">{{ user?.email }}</p>
+      </div>
+      <div class="label">
+        <p class="italic">Date de naissance:</p>
+        <p class="info">{{ user?.birthdate }}</p>
+      </div>
+      <div class="label">
+        <p class="italic">Adresse:</p>
+        <p class="info">{{ user?.address }}</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="label">
+        <p class="italic">Prénom:</p>
+        <p class="info">{{ user?.firstname }}</p>
+      </div>
+      <div class="label">
+        <p class="italic">Téléphone:</p>
+        <p class="info">{{ user?.phone }}</p>
+      </div>
+      <div class="label">
+        <p class="italic">Genre:</p>
+        <p class="info">{{ user?.sexe }}</p>
+      </div>
+      <a href="#">Modifier mon mot de passe</a>
+
+      <button (click)="openXl(content)">
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+          ></path>
+        </svg>
+        Modifier
+      </button>
+
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h1 class="modal-title" id="modal-basic-title">éditer profil</h1>
+          <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+          <app-profile></app-profile>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="('Save click')">Enregistrer les modifications</button>
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</div>
