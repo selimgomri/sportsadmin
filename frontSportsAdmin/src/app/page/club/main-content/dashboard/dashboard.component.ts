@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EditClubComponent } from '../edit-club/edit-club.component';
 import { Router } from '@angular/router';
 
 @Component({

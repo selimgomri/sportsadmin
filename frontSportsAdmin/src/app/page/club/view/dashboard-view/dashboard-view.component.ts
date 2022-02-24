@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'dashboard-view',
@@ -9,7 +8,7 @@ import { Router } from '@angular/router';
 export class DashboardViewComponent implements OnInit {
   title: string = 'Tableau de bord';
   val!: string;
-  constructor(private route: Router) {
+  constructor() {
     this.val = '';
   }
 
