@@ -7,7 +7,6 @@ import { LoginComponent } from './page/landing-page/login/login.component';
 import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
 import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
 import { AjoutUserComponent } from './formMember/ajout-user/ajout-user.component';
-import { FormUserComponent } from './formMember/form-user/form-user.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
@@ -58,12 +57,8 @@ const routes: Routes = [
     component: CRUDSubscriptionViewComponent,
   },
 
-  {    path: 'ajouter-un-membre',
-    component: AjoutUserComponent,
-  },
-  {    path: 'ajouter-un-membre2',
-    component: FormUserComponent,
-  },
+  { path: 'ajouter-un-membre', component: AjoutUserComponent },
+  { path: 'ajouter-un-membre2', component: AjoutUserComponent },
 
   {
     path: 'ajouter-un-membre',
@@ -75,7 +70,7 @@ const routes: Routes = [
   },
   {
     path: 'ajouter-un-membre2',
-    component: FormUserComponent,
+    component: AjoutUserComponent,
     canActivate: [AuthGuard],
     data: {
       userType: 'logged-in',

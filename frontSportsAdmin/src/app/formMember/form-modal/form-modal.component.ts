@@ -15,6 +15,7 @@ export class FormModalComponent {
   typeField = ['text', 'select', 'number', 'date'];
   optionName: string = '';
   optionSelect: string[] = [];
+  require: string = '';
 
   @ViewChild('addField') addField!: NgForm;
 

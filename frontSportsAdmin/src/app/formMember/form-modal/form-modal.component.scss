@@ -1,3 +1,10 @@
 .etoile {
   color: red;
 }
+
+.cestbon:valid {
+  background-color: green;
+}
+.cestbon:invalid {
+  background-color: red;
+}

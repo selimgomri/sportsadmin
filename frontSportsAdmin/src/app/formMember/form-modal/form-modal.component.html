@@ -1,16 +1,8 @@
 <div class="container box">
   <ng-template #content let-modal>
-    <!--titre et bouton de fermeture de modal-->
+    <!--entete de modal-->
     <div class="modal-header">
       <h1 class="modal-title" id="modal-basic-title">Ajouter un champ</h1>
-      <button
-        type="button"
-        class="close button"
-        aria-label="Close"
-        (click)="modal.dismiss('Cross click')"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
     </div>
     <!--corp de la modal-->
 
@@ -123,6 +115,7 @@
                     >
                       ajouter une option
                     </button>
+                    <!--récapitulatif et gestion des options du select-->
                     <div>
                       <p>
                         Vous avez {{ optionSelect.length }} options dans votre
@@ -139,6 +132,7 @@
                       </p>
                     </div>
                   </div>
+                  <!--bouton radio pour le champ obligatoire pour tout les types sauf select-->
                   <div
                     class="form-group"
                     [hidden]="supplyFields.type != 'select'"
@@ -146,18 +140,53 @@
                     <label for="optionField">
                       le champ est t'il obligatoire ?
                     </label>
-                    <input
-                      type="checkbox"
-                      name="optionField"
-                      id="optionField"
-                      #optionField="ngModel"
-                      [(ngModel)]="supplyFields.required"
-                      class="form-check-input"
-                      [ngClass]="{
-                        'is-invalid': addField.submitted && optionField.invalid
-                      }"
-                    />
+                    <div>
+                      <label>oui</label>
+                      <input
+                        type="radio"
+                        name="optionField"
+                        id="optionField"
+                        value="required"
+                        #optionField="ngModel"
+                        [(ngModel)]="supplyFields.required"
+                        class="form-check-input"
+                        [ngClass]="{
+                          'is-invalid':
+                            addField.submitted && optionField.invalid
+                        }"
+                      />
+                    </div>
+                    <div>
+                      <label>non</label>
+                      <input
+                        type="radio"
+                        name="optionField"
+                        id="optionField"
+                        value=""
+                        #optionField="ngModel"
+                        [(ngModel)]="supplyFields.required"
+                        class="form-check-input"
+                        [ngClass]="{
+                          'is-invalid':
+                            addField.submitted && optionField.invalid
+                        }"
+                      />
+                    </div>
+                    <!--texte explicatif pour le champ obligatoire pour tout les types sauf select-->
+                    <p>
+                      un champ obligatoire bloque l'enregistrement du formulaire
+                      tant qu'il n'est pas remplis
+                    </p>
+                    <div *ngIf="label.valid">
+                      <p>
+                        La couleur du champs ne sera pas présente, c'est pour
+                        bien voir la différence :
+                      </p>
+                      <p>rouge: champ obligatoire</p>
+                      <p>vert: champ non obligatoire</p>
+                    </div>
                   </div>
+                  <!--bouton d'enregistrement des champ pour le type select-->
                   <button
                     type="button"
                     class="btn btn-success"
@@ -170,21 +199,55 @@
                 </div>
               </div>
             </div>
+            <!--bouton radio pour le champ obligatoire pour le type select-->
             <div class="form-group" [hidden]="supplyFields.type === 'select'">
               <label for="optionField"> le champ est t'il obligatoire ? </label>
-              <input
-                type="checkbox"
-                name="optionField"
-                id="optionField"
-                #optionField="ngModel"
-                [(ngModel)]="supplyFields.required"
-                class="form-check-input"
-                [ngClass]="{
-                  'is-invalid': addField.submitted && optionField.invalid
-                }"
-              />
+              <div>
+                <label>oui</label>
+                <input
+                  type="radio"
+                  name="optionField"
+                  id="optionField"
+                  value="required"
+                  #optionField="ngModel"
+                  [(ngModel)]="supplyFields.required"
+                  class="form-check-input"
+                  [ngClass]="{
+                    'is-invalid': addField.submitted && optionField.invalid
+                  }"
+                />
+              </div>
+              <div>
+                <label>non</label>
+                <input
+                  type="radio"
+                  name="optionField"
+                  id="optionField"
+                  value=""
+                  #optionField="ngModel"
+                  [(ngModel)]="supplyFields.required"
+                  class="form-check-input"
+                  [ngClass]="{
+                    'is-invalid': addField.submitted && optionField.invalid
+                  }"
+                />
+                <!--texte explicatif pour le champ obligatoire pour le types select-->
+                <p>
+                  un champ obligatoire bloque l'enregistrement du formulaire
+                  tant qu'il n'est pas remplis
+                </p>
+                <div *ngIf="label.valid && supplyFields.type == 'select'">
+                  <p>
+                    La couleur du champs ne sera pas présente, c'est pour bien
+                    voir la différence :
+                  </p>
+                  <p>rouge: champ obligatoire</p>
+                  <p>vert: champ non obligatoire</p>
+                </div>
+              </div>
             </div>
           </div>
+          <!--bouton d'enregistrement des champ pour tout les type sauf select-->
           <div class="form-group button">
             <button
               type="submit"
@@ -196,36 +259,93 @@
           </div>
         </div>
       </div>
-      <!--bouton d'effacement de la modal-->
+      <!--footer de la modal-->
       <div class="modal-footer">
+        <!--représentation du champ crée-->
         <div class="form-group" [hidden]="label.invalid">
           <h3>le champ que vous etes en train de creer</h3>
-          <label for="{{ supplyFields.label }}">{{ supplyFields.label }}</label>
+          <label for="{{ supplyFields.label }}"
+            >{{ supplyFields.label
+            }}<span class="etoile" *ngIf="supplyFields.required === 'required'"
+              >*</span
+            ></label
+          >
 
-          <div class="form-control" *ngIf="supplyFields.type != 'select'">
+          <div
+            *ngIf="
+              supplyFields.type != 'select' &&
+              supplyFields.required === 'required'
+            "
+          >
             <input
               type="{{ supplyFields.type }}"
               id="{{ supplyFields.label }}"
               name="{{ supplyFields.label }}"
               [hidden]="supplyFields.type === 'select'"
+              required
+              class="form-control cestbon"
             />
           </div>
-          <div class="form-control" *ngIf="supplyFields.type === 'select'">
+          <div
+            *ngIf="
+              supplyFields.type != 'select' &&
+              supplyFields.required != 'required'
+            "
+          >
+            <input
+              type="{{ supplyFields.type }}"
+              id="{{ supplyFields.label }}"
+              name="{{ supplyFields.label }}"
+              [hidden]="supplyFields.type === 'select'"
+              class="form-control cestbon"
+            />
+          </div>
+
+          <div
+            class="form-control cestbon"
+            *ngIf="
+              supplyFields.type === 'select' &&
+              supplyFields.required === 'required'
+            "
+          >
             <select
               id="{{ supplyFields.label }}"
               name="{{ supplyFields.label }}"
-              class="form-select"
+              class="form-select cestbon"
+              required
             >
               <option
                 *ngFor="let option of supplyFields.optionOfSelect"
                 [value]="option"
+                class="cestbon"
+              >
+                {{ option }}
+              </option>
+            </select>
+          </div>
+          <div
+            class="form-control cestbon"
+            *ngIf="
+              supplyFields.type === 'select' &&
+              supplyFields.required != 'required'
+            "
+          >
+            <select
+              id="{{ supplyFields.label }}"
+              name="{{ supplyFields.label }}"
+              class="form-select cestbon"
+            >
+              <option
+                *ngFor="let option of supplyFields.optionOfSelect"
+                [value]="option"
+                class="cestbon"
               >
                 {{ option }}
               </option>
             </select>
           </div>
         </div>
-
+        <!--bouton d'effacement de la modal-->
         <button
           type="button"
           class="btn"
@@ -243,7 +363,6 @@
   <!--bouton d'ouverture de la modal-->
   <button class="btn btn-success" (click)="openLg(content)">
     <svg
-      class="w-6 h-6"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
