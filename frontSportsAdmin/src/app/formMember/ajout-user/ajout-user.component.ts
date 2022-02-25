@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { User } from './user';
 
 @Component({
-  selector: 'app-ajout-user',
+  selector: 'ajout-user',
   templateUrl: './ajout-user.component.html',
   styleUrls: ['./ajout-user.component.scss'],
 })

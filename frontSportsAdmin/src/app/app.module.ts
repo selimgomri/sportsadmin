@@ -35,6 +35,7 @@ import { ProfileComponent } from './page/club/main-content/profile/profile.compo
 import { ProfileViewComponent } from './page/club/view/profile-view/profile-view.component';
 import { ViewComponent } from './page/club/main-content/profile/view.component';
 import { CreateSubscription } from './page/club/main-content/crud-subscription/create-subscription/create-subscription';
+import { AjoutUserViewComponent } from './page/club/view/ajout-user-view/ajout-user-view.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { CreateSubscription } from './page/club/main-content/crud-subscription/c
     ProfileViewComponent,
     ViewComponent,
     CreateSubscription,
+    AjoutUserViewComponent,
   ],
   imports: [
     BrowserModule,

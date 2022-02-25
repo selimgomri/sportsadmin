@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './page/landing-page/login/login.component';
 import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club-view.component';
 import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
-import { AjoutUserComponent } from './formMember/ajout-user/ajout-user.component';
+import { AjoutUserViewComponent } from './page/club/view/ajout-user-view/ajout-user-view.component';
 import { AuthGuard } from './shared/auth.guard';
 import { ProfileComponent } from './page/club/main-content/profile/profile.component';
 import { ProfileViewComponent } from './page/club/view/profile-view/profile-view.component';
@@ -59,12 +59,12 @@ const routes: Routes = [
     component: CRUDSubscriptionViewComponent,
   },
 
-  { path: 'ajouter-un-membre', component: AjoutUserComponent },
-  { path: 'ajouter-un-membre2', component: AjoutUserComponent },
+  { path: 'ajouter-un-membre', component: AjoutUserViewComponent },
+  { path: 'ajouter-un-membre2', component: AjoutUserViewComponent },
 
   {
     path: 'ajouter-un-membre',
-    component: AjoutUserComponent,
+    component: AjoutUserViewComponent,
     canActivate: [AuthGuard],
     data: {
       userType: 'logged-in',
@@ -72,7 +72,7 @@ const routes: Routes = [
   },
   {
     path: 'ajouter-un-membre2',
-    component: AjoutUserComponent,
+    component: AjoutUserViewComponent,
     canActivate: [AuthGuard],
     data: {
       userType: 'logged-in',
@@ -81,7 +81,7 @@ const routes: Routes = [
   {
     path: 'mon-profil',
     component: ProfileViewComponent,
-  }
+  },
 ];
 
 @NgModule({

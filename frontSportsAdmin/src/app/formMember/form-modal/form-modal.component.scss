@@ -1,3 +1,8 @@
+$base-color: #4ac285;
+$font-color-dark: white;
+$font-color-light: black;
+$font-title: "Bebas Neue";
+$font-text: "Red Hat Display";
 .etoile {
   color: red;
 }
@@ -7,4 +12,20 @@
 }
 .cestbon:invalid {
   background-color: red;
+}
+
+button {
+  border-radius: 10px;
+  background-color: $base-color;
+  border: none;
+  font-weight: bold;
+}
+
+input,
+select {
+  border-radius: 20px;
+}
+
+svg {
+  height: 20px;
 }
