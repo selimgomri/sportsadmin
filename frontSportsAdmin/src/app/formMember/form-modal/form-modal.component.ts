@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { Field } from './field';
+import { Component, ViewChild, Input } from '@angular/core';
+import { Field } from '../field';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm, NgModel } from '@angular/forms';
 
@@ -9,9 +9,9 @@ import { NgForm, NgModel } from '@angular/forms';
   styleUrls: ['./form-modal.component.scss'],
 })
 export class FormModalComponent {
+  @Input() supplyFields: Field = new Field();
   buttonRemoveClicked = false;
   buttonAddClicked = false;
-  supplyFields: Field = new Field();
   typeField = ['text', 'select', 'number', 'date'];
   optionName: string = '';
   optionSelect: string[] = [];

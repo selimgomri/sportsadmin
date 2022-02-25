@@ -1,5 +1,5 @@
 <div class="form-group col ajout">
-  <app-form-modal></app-form-modal>
+  <app-form-modal>[supplyFields]="fields"</app-form-modal>
 </div>
 <div class="form-group">
   <b>ÉDITER MA FICHE D'INFORMATION REQUISES ADHÉRENT</b>
@@ -238,8 +238,8 @@
         Enregistrer votre formulaire
       </button>
     </div>
-    <div *ngIf="addForm.submitted" class="invalid-feedback">
-      <div *ngIf="addForm.submitted">Votrre formulaire a bien été crées</div>
+    <div *ngIf="addForm.submitted">
+      La création de votre formulaire est réussie
     </div>
   </form>
 </div>
