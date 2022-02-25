@@ -15,9 +15,13 @@ export class VerifyModal {
 
   constructor(private modalService: NgbModal) {}
 
-  open(content: any) {
+  /* openVerticallyCentered(content) {
+    this.modalService.open(content, { centered: true });
+  } */
+
+  openVerticallyCentered(content: any) {
     this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' })
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;

@@ -18,9 +18,9 @@ export class CreateSubscription {
     private subscriptionService: SubscriptionService
   ) {}
 
-  open(content: any) {
+  openVerticallyCentered(content: any) {
     this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' })
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;

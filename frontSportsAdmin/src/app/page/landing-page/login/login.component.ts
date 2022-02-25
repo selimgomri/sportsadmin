@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     authFlow.subscribe({
       next: (user: IUser) => {
         this.SessionLoginService.saveUserToLocalStorage(user);
-        this.route.navigate(['/dashboard']);
+        this.route.navigate(['/editer-mon-club']);
       },
       error: (err) => {
         alert('login failed');
