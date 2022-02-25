@@ -1,8 +1,5 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { Data } from '@angular/router';
-import { IUser } from 'src/app/IUser';
-import { ListingComponent } from 'src/app/listing/listing.component';
-import { updateLanguageServiceSourceFile, UserPreferences } from 'typescript';
+import { Component, OnInit} from '@angular/core';
+
 
 @Component({
   selector: 'app-list-members',

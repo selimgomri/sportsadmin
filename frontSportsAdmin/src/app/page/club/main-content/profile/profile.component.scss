@@ -1,0 +1,57 @@
+
+img {
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.photo {
+  width: 250px;
+}
+input, select {
+  border-radius: 20px;
+  width: 400px;
+}
+
+form {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+.form-group
+ {
+   margin: 30px;
+ }
+
+
+ .button {
+   text-align: right;
+ }
+
+ svg {
+  height: 20px;
+}
+
+@media screen and (max-width : 600px) {
+
+  .user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  }
+
+  input {
+    width: auto;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .form-group button {
+    margin: auto;
+    width: 150px;
+  }
+}

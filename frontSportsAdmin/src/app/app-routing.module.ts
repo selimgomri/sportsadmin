@@ -8,6 +8,8 @@ import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club
 import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
 import { AjoutUserComponent } from './formMember/ajout-user/ajout-user.component';
 import { AuthGuard } from './shared/auth.guard';
+import { ProfileComponent } from './page/club/main-content/profile/profile.component';
+import { ProfileViewComponent } from './page/club/view/profile-view/profile-view.component';
 
 const routes: Routes = [
   {
@@ -76,6 +78,10 @@ const routes: Routes = [
       userType: 'logged-in',
     },
   },
+  {
+    path: 'mon-profil',
+    component: ProfileViewComponent,
+  }
 ];
 
 @NgModule({

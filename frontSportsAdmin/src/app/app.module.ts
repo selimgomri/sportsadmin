@@ -31,6 +31,10 @@ import { CRUDSubscriptionComponent } from './page/club/main-content/crud-subscri
 import { CRUDSubscriptionViewComponent } from './page/club/view/crud-subscription-view/crud-subscription-view.component';
 import { VerifyModal } from './page/club/main-content/crud-subscription/verify-modal/verify-modal';
 import { NgbdSortableHeader } from './listing/listing.component';
+import { ProfileComponent } from './page/club/main-content/profile/profile.component';
+import { ProfileViewComponent } from './page/club/view/profile-view/profile-view.component';
+import { ViewComponent } from './page/club/main-content/profile/view.component';
+import { CreateSubscription } from './page/club/main-content/crud-subscription/create-subscription/create-subscription';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,10 @@ import { NgbdSortableHeader } from './listing/listing.component';
     CRUDSubscriptionViewComponent,
     VerifyModal,
     NgbdSortableHeader,
+    ProfileComponent,
+    ProfileViewComponent,
+    ViewComponent,
+    CreateSubscription,
   ],
   imports: [
     BrowserModule,

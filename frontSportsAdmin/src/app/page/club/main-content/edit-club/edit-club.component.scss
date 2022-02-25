@@ -1,5 +1,5 @@
 .edit {
-  background-color: #F6F4F5 ;
+  background-color: #f6f4f5;
   border-radius: 35px;
   display: flex;
   text-align: left;
@@ -14,38 +14,39 @@ input {
   width: 400px;
 }
 
-.form-group
- {
-   margin: 30px;
- }
+.form-group {
+  margin: 30px;
+}
 
- .colorpicker {
-   height:50px;
-   width: 100px;
-   margin-bottom: 30px;
- }
+.colorpicker {
+  height: 50px;
+  width: 100px;
+  margin-bottom: 30px;
+}
 
- .button {
-   text-align: right;
- }
+.button {
+  text-align: right;
+}
 
- svg {
+svg {
   height: 20px;
 }
 
-@media screen and (max-width : 600px) {
+.file-input {
+  display: none;
+}
 
+@media screen and (max-width: 600px) {
   .edit {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
   }
 
   input {
     width: auto;
-
   }
 
   .form-group {
