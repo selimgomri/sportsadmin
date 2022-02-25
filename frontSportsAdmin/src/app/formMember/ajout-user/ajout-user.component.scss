@@ -1,21 +1,23 @@
-$base-color: #4AC285;
+$base-color: #4ac285;
 $font-color-dark: white;
 $font-color-light: black;
-$font-title: 'Bebas Neue';
-$font-text: 'Red Hat Display';
+$font-title: "Bebas Neue";
+$font-text: "Red Hat Display";
 
 .green-logo {
   display: none;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: $font-title;
 }
 
 p {
   font-family: $font-text;
 }
-h1, .white-text {
+h1,
+.white-text {
   color: $font-color-light;
 }
 
@@ -35,13 +37,13 @@ h1 {
 }
 
 .form-group {
-  margin : 30px;
+  margin: 30px;
   font-family: $font-text;
 }
 
 button {
   border-radius: 10px;
-  background-color : $base-color;
+  background-color: $base-color;
   border: none;
   font-weight: bold;
 }
@@ -77,15 +79,18 @@ input {
   width: 55%;
 }
 
-@media screen and (max-width : 600px) {
+@media screen and (max-width: 600px) {
   .welcome-page {
     display: none;
   }
   .green-logo {
-
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
   }
+}
+
+.etoile {
+  color: red;
 }
