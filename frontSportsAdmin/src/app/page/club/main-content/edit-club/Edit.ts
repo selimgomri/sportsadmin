@@ -1,4 +1,4 @@
-export class Edit  {
+export class Edit {
   public name!: string;
   public adress!: string;
   public sport!: string;
