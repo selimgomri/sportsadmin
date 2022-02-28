@@ -13,10 +13,14 @@ export class ViewComponent implements OnInit {
 
   user?: IUser;
 
-  constructor(private sessionLoginService: SessionLoginService, config: NgbModalConfig, private modalService: NgbModal) {
+  constructor(
+    private sessionLoginService: SessionLoginService,
+    config: NgbModalConfig,
+    private modalService: NgbModal) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
+
   openXl(content:any) {
     this.modalService.open(content, { size: 'xl' });
   }

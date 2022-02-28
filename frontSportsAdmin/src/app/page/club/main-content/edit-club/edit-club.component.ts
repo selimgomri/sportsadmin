@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Edit } from './Edit';
-import { FormsModule } from '@angular/forms';
-import { getCurrencySymbol } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { ApiService } from 'src/app/services/session-login/api.service';
 
 @Component({
   selector: 'edit-club',
@@ -12,10 +11,13 @@ import { HttpClient } from '@angular/common/http';
 export class EditClubComponent implements OnInit {
   model: Edit = new Edit();
   file: File | undefined;
-  ngOnInit(): void {}
+  club: any;
+
+  ngOnInit(): void {
+
+  }
 
   onSubmit() {
-    console.log('test');
     console.log({
       ...this.model,
       file: this.file,
@@ -34,16 +36,17 @@ export class EditClubComponent implements OnInit {
     this.secondaryColor = newColor;
   }
 
-  primaryColor = '#F6F4F5';
-  secondaryColor = '#4ac285';
+  primaryColor = '#fafafa';
+  secondaryColor = '#4AC285';
 
-  constructor(private http: HttpClient) {
-    this.changeTheme('#F6F4F5', '#4ac285'); // Set default theme
+  constructor(private http: HttpClient, private apiService: ApiService) {
+    this.changeTheme(this.primaryColor, this.secondaryColor); // Set default theme
   }
 
   changeTheme(primary: string, secondary: string) {
     document.documentElement.style.setProperty('--primary-color', primary);
     document.documentElement.style.setProperty('--secondary-color', secondary);
+    console.log('changetheme', primary);
   }
 
   onFileSelected(event: any) {
