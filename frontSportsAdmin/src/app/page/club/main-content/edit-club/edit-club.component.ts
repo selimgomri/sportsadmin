@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Edit } from './Edit';
-import { FormsModule } from '@angular/forms';
-import { getCurrencySymbol } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'src/app/services/session-login/api.service';
 
@@ -20,7 +18,6 @@ export class EditClubComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('test');
     console.log({
       ...this.model,
       file: this.file,
@@ -39,8 +36,8 @@ export class EditClubComponent implements OnInit {
     this.secondaryColor = newColor;
   }
 
-  primaryColor = '#76E464';
-  secondaryColor = '#ffffff';
+  primaryColor = '#fafafa';
+  secondaryColor = '#4AC285';
 
   constructor(private http: HttpClient, private apiService: ApiService) {
     this.changeTheme(this.primaryColor, this.secondaryColor); // Set default theme
