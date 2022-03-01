@@ -23,13 +23,13 @@ use App\Controller\Api\MeAction;
             'read' => false,
             'normalization_context' => [ 'groups' => [ 'read_profile' ]]
         ],
-        'get',
-        'post'
+        'get'  => [ 'security' => 'is_granted("ROLE_ADMIN")'],
+        'post'  => [ 'security' => 'is_granted("ROLE_ADMIN")']
     ],
     itemOperations: [
         'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
-        'put',
-        'delete'
+        'put' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
+        'delete' => [ 'security' => 'is_granted("ROLE_ADMIN")'],
         
         
     ]
