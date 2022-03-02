@@ -9,9 +9,13 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-input, select {
-  border-radius: 20px;
+input, select, .alert-danger {
+  border-radius: 30px;
   width: 400px;
+}
+
+.alert-danger {
+  padding-left: 13px;
 }
 
 .form-group {
