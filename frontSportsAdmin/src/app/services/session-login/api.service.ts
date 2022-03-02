@@ -20,6 +20,14 @@ export class ApiService {
     return this.http.get<IUser>(`${this.$url}/users`);
   }
 
+  createUser(data: any): Observable<any> {
+    return this.http.post(`${this.$url}/users`, data);
+  }
+
+  deleteUser(id:number): Observable<any> {
+    return this.http.delete(`${this.$url}/users/${id}`, this.httpOptions);
+  }
+
   getClubs(): Observable<Club> {
     return this.http.get<Club>(`${this.$url}/clubs`);
   }
