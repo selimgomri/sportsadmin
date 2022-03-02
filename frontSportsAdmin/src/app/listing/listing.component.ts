@@ -77,6 +77,12 @@ export class ListingComponent {
       console.log(this.users);
       this.length.emit(this.users.length);
     });
+  }
 
+  delete(id:number){
+    this.apiService.deleteUser(id).subscribe(res => {
+         this.users = this.users.filter(item => item.id !== id);
+         console.log('Post deleted successfully!');
+    })
   }
 }
