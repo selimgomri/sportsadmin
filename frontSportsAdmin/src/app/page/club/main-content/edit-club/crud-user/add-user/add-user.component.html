@@ -1,0 +1,84 @@
+
+  <h2>Créer un membre</h2>
+  <div class="container box">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="form-group">
+          <label for="firstname">Prénom</label>
+          <input
+              formControlName="firstname"
+              id="firstname"
+              type="text"
+              class="form-control">
+          <div *ngIf="f['firstname'].touched && f['firstname'].invalid" class="alert alert-danger">
+              <div *ngIf="f['firstname'].errors && f['firstname'].errors['required']">Un prénom est requis.</div>
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="lastname">Nom</label>
+          <input
+              formControlName="lastname"
+              id="lastname"
+              type="text"
+              class="form-control">
+          <div *ngIf="f['lastname'].touched && f['lastname'].invalid" class="alert alert-danger">
+              <div *ngIf="f['lastname'].errors && f['lastname'].errors['required']">Un nom de famille est requis.</div>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Téléphone</label>
+        <input
+            formControlName="phone"
+            id="phone"
+            type="phone"
+            class="form-control">
+        <div *ngIf="f['phone'].touched && f['phone'].invalid" class="alert alert-danger">
+            <div *ngIf="f['phone'].errors && f['phone'].errors['required']">Un numéro de téléphone est requis.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+            formControlName="email"
+            id="email"
+            type="email"
+            class="form-control">
+        <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+            <div *ngIf="f['email'].errors && f['email'].errors['required']">Une adresse mail est requise.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="sexe">Genre</label>
+        <select
+            formControlName="sexe"
+            id="sexe"
+            type="select"
+            class="form-control">
+            <option value="">--Choisir un genre--</option>
+            <option value="F">Féminin</option>
+            <option value="M">Masculin</option>
+            <option value="Other">Autre</option></select>
+        <div *ngIf="f['sexe'].touched && f['sexe'].invalid" class="alert alert-danger">
+            <div *ngIf="f['sexe'].errors && f['sexe'].errors['required']">Veuillez sélectionner un genre.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="birthdate">Date de naissance</label>
+        <input
+            formControlName="birthdate"
+            id="birthdate"
+            type="date"
+            class="form-control">
+        <div *ngIf="f['birthdate'].touched && f['birthdate'].invalid" class="alert alert-danger">
+            <div *ngIf="f['birthdate'].errors && f['birthdate'].errors['required']">Une date de naissance est requise.</div>
+        </div>
+      </div>
+
+      <button class="button" type="submit">Enregistrer</button>
+  </form>
+</div>

@@ -10,6 +10,7 @@ import { AjoutUserViewComponent } from './page/club/view/ajout-user-view/ajout-u
 import { AuthGuard } from './shared/auth.guard';
 import { ProfileComponent } from './page/club/main-content/profile/profile.component';
 import { ProfileViewComponent } from './page/club/view/profile-view/profile-view.component';
+import { AddUserComponent } from './page/club/main-content/edit-club/crud-user/add-user/add-user.component';
 
 const routes: Routes = [
   {
@@ -82,6 +83,10 @@ const routes: Routes = [
     path: 'mon-profil',
     component: ProfileViewComponent,
   },
+  {
+    path: 'ajouter-membre',
+    component: AddUserComponent,
+  }
 ];
 
 @NgModule({
