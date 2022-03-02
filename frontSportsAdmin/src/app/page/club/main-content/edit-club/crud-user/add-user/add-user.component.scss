@@ -24,8 +24,14 @@ input, select {
   margin-bottom: 30px;
 }
 
-.button {
-  text-align: right;
+.align-right {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 30px;
+}
+
+.red {
+  color: red;
 }
 
 svg {

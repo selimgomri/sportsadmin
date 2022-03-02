@@ -37,7 +37,7 @@ import { ViewComponent } from './page/club/main-content/profile/view.component';
 import { CreateSubscription } from './page/club/main-content/crud-subscription/create-subscription/create-subscription';
 import { AjoutUserViewComponent } from './page/club/view/ajout-user-view/ajout-user-view.component';
 import { AddUserComponent } from './page/club/main-content/edit-club/crud-user/add-user/add-user.component';
-
+import { CreateUserViewComponent } from './page/club/view/create-user-view/create-user-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +68,9 @@ import { AddUserComponent } from './page/club/main-content/edit-club/crud-user/a
     ViewComponent,
     CreateSubscription,
     AjoutUserViewComponent,
-    AddUserComponent
+    AddUserComponent,
+    CreateUserViewComponent,
+
 
   ],
   imports: [
