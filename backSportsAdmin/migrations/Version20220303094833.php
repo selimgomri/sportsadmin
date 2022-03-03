@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220224133054 extends AbstractMigration
+final class Version20220303094833 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -26,9 +26,11 @@ final class Version20220224133054 extends AbstractMigration
         $this->addSql('CREATE TABLE field (id INT AUTO_INCREMENT NOT NULL, club_id INT DEFAULT NULL, label VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, choice LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json)\', required TINYINT(1) NOT NULL, position INT DEFAULT NULL, INDEX IDX_5BF5455861190A32 (club_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE guardian (id INT AUTO_INCREMENT NOT NULL, lastname VARCHAR(255) NOT NULL, firstname VARCHAR(255) NOT NULL, address VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, phone VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE invoice (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, club_id INT DEFAULT NULL, date DATE NOT NULL, price_paid INT NOT NULL, INDEX IDX_90651744A76ED395 (user_id), INDEX IDX_9065174461190A32 (club_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE media_object (id INT AUTO_INCREMENT NOT NULL, file_path VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE sport (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE subscription (id INT AUTO_INCREMENT NOT NULL, subscription_formula_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, amount INT DEFAULT NULL, start_date DATE NOT NULL, end_date DATE NOT NULL, INDEX IDX_A3C664D367EF23E3 (subscription_formula_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE subscription_formula (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, amount INT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE subscription_formula (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, amount INT DEFAULT NULL, duration_in_months INT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE test_simple (id INT AUTO_INCREMENT NOT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, guardian_id INT DEFAULT NULL, subscription_id INT DEFAULT NULL, email VARCHAR(180) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', password VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL, firstname VARCHAR(255) NOT NULL, birthdate DATE NOT NULL, address VARCHAR(255) DEFAULT NULL, phone VARCHAR(255) DEFAULT NULL, license_number INT DEFAULT NULL, category VARCHAR(255) DEFAULT NULL, photo VARCHAR(255) DEFAULT NULL, sexe VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), INDEX IDX_8D93D64911CC8B0A (guardian_id), INDEX IDX_8D93D6499A1887DC (subscription_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user_field (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, field_id INT DEFAULT NULL, value VARCHAR(255) NOT NULL, INDEX IDX_B937BE00A76ED395 (user_id), INDEX IDX_B937BE00443707B0 (field_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE club ADD CONSTRAINT FK_B8EE3872AC78BCF8 FOREIGN KEY (sport_id) REFERENCES sport (id)');
@@ -66,9 +68,11 @@ final class Version20220224133054 extends AbstractMigration
         $this->addSql('DROP TABLE field');
         $this->addSql('DROP TABLE guardian');
         $this->addSql('DROP TABLE invoice');
+        $this->addSql('DROP TABLE media_object');
         $this->addSql('DROP TABLE sport');
         $this->addSql('DROP TABLE subscription');
         $this->addSql('DROP TABLE subscription_formula');
+        $this->addSql('DROP TABLE test_simple');
         $this->addSql('DROP TABLE user');
         $this->addSql('DROP TABLE user_field');
     }
