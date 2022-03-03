@@ -38,6 +38,7 @@ import { CreateSubscription } from './page/club/main-content/crud-subscription/c
 import { AjoutUserViewComponent } from './page/club/view/ajout-user-view/ajout-user-view.component';
 import { AddUserComponent } from './page/club/main-content/edit-club/crud-user/add-user/add-user.component';
 import { CreateUserViewComponent } from './page/club/view/create-user-view/create-user-view.component';
+import { OubliPasswordComponent } from './oubli-password/oubli-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +71,7 @@ import { CreateUserViewComponent } from './page/club/view/create-user-view/creat
     AjoutUserViewComponent,
     AddUserComponent,
     CreateUserViewComponent,
+    OubliPasswordComponent,
 
 
   ],
