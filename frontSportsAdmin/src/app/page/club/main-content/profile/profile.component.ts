@@ -49,10 +49,11 @@ export class ProfileComponent implements OnInit {
     return this.form.controls;
   }
 
-  onSubmit() {
+  submit() {
     console.log(this.form.value);
     this.apiService.updateProfile(this.id, this.form.value).subscribe((res:any) => {
-         console.log('Post updated successfully!');
+         console.log('Profile updated successfully!');
+         this.router.navigateByUrl('mon-profil');
         })
       }
 }
