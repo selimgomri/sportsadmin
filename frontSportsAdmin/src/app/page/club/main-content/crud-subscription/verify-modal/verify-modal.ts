@@ -43,7 +43,6 @@ export class VerifyModal {
   }
 
   remove() {
-    console.log(this.subscription);
     this.removeClick.emit(this.subscription);
   }
 }

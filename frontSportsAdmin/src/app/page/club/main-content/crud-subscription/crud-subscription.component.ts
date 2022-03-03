@@ -14,9 +14,15 @@ export class CRUDSubscriptionComponent implements OnInit {
   constructor(private subscriptionService: SubscriptionService) {}
 
   ngOnInit(): void {
-    this.subscriptionService.getSubscriptions().subscribe((datas: any) => {
-      this.subscriptions = datas['hydra:member'];
-    });
+    this.getSubscriptions();
+  }
+
+  getSubscriptions() {
+    return this.subscriptionService
+      .getSubscriptions()
+      .subscribe((datas: any) => {
+        this.subscriptions = datas['hydra:member'];
+      });
   }
 
   onRemoveClick(subscription: any) {
@@ -30,9 +36,8 @@ export class CRUDSubscriptionComponent implements OnInit {
         });
       });
   }
-  onAddClick(newSubscription: any) {
-    /* if (!newSubscription) return; */
-    console.log(newSubscription);
-    return this.subscriptions.push(newSubscription);
+  addSubscription(newSubscription: any) {
+    this.subscriptions.push(newSubscription);
+    this.getSubscriptions();
   }
 }
