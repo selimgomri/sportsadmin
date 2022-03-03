@@ -48,11 +48,7 @@ export class CreateSubscription {
       amount: value.amount,
       durationInMonths: value.durationInMonths,
     };
-    this.subscriptionService
-      .createSubscription(newSubscription)
-      .subscribe((res) => {
-        this.newSubs = res;
-      });
+    this.subscriptionService.createSubscription(newSubscription).subscribe();
   }
 
   addNew(value: any) {

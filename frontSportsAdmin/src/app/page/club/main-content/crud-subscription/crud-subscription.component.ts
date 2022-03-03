@@ -38,6 +38,9 @@ export class CRUDSubscriptionComponent implements OnInit {
   }
   addSubscription(newSubscription: any) {
     this.subscriptions.push(newSubscription);
-    this.getSubscriptions();
+    setTimeout((e: any) => {
+      this.getSubscriptions();
+      console.log('timeUp');
+    }, 100);
   }
 }
