@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\Api\MeAction;
+use App\Controller\Api\UserImageAction;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
@@ -23,13 +24,39 @@ use App\Controller\Api\MeAction;
             'read' => false,
             'normalization_context' => [ 'groups' => [ 'read_profile' ]]
         ],
-        'get',
+        'get' => ['normalization_context' => ['groups' => ['read_profile']],],
         'post'
     ],
     itemOperations: [
-        'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
+        'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())',
+        'normalization_context' => ['groups' => ['read_detail_profile']],],
         'put',
-        'delete'
+        'delete',
+        'user_image' => [
+            'method' => 'POST',
+            'path' => '/users/{id}/image',
+            'controller' => UserImageAction::class,
+            'deserialize' => false,
+            'openapi_context' => [
+                'requestBody' => [
+                'content' => [
+                    'multipart/form-data' => [
+                    'schema' => [
+                        'type' => 'object',
+                        'properties' => [
+                        'image' => [
+                            'type' => 'string',
+                            'format' => 'binary',
+                        ],
+                        ],
+                    ],
+                    ],
+                ],
+                ],
+            ],
+
+        ]
+        
         
         
     ]
@@ -97,11 +124,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserField::class)]
     private $userFields;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $photo;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $sexe;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserImage::class, cascade: ['persist'], orphanRemoval: true)]
+    #[Groups(["read_profile", "read_detail_profile"])]
+    private $photo;
 
     public function __construct()
     {
@@ -109,6 +138,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->documents = new ArrayCollection();
         $this->invoices = new ArrayCollection();
         $this->userFields = new ArrayCollection();
+        $this->photo = new ArrayCollection();
     }
 
 
@@ -415,17 +445,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function getPhoto(): ?string
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(?string $photo): self
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
+  
 
     public function getSexe(): ?string
     {
@@ -435,6 +455,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSexe(string $sexe): self
     {
         $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserImage>
+     */
+    public function getPhoto(): Collection
+    {
+        return $this->photo;
+    }
+
+    public function addPhoto(UserImage $photo): self
+    {
+        if (!$this->photo->contains($photo)) {
+            $this->photo[] = $photo;
+            $photo->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhoto(UserImage $photo): self
+    {
+        if ($this->photo->removeElement($photo)) {
+            // set the owning side to null (unless already changed)
+            if ($photo->getUser() === $this) {
+                $photo->setUser(null);
+            }
+        }
 
         return $this;
     }
