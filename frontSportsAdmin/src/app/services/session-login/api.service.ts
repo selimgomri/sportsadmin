@@ -12,6 +12,12 @@ export class ApiService {
   private $url = 'https://localhost:8000/api';
   constructor(private http: HttpClient) {}
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
+
   getUser(): Observable<IUser> {
     return this.http.get<IUser>(`${this.$url}/me`);
   }
@@ -24,8 +30,21 @@ export class ApiService {
     return this.http.post(`${this.$url}/users`, data);
   }
 
-  deleteUser(id:number): Observable<any> {
-    return this.http.delete(`${this.$url}/users/${id}`, this.httpOptions);
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete(`${this.$url}/users/${id}`)
+    .pipe(catchError(this.errorHandler));
+  }
+
+  updateUser(id: number, data: IUser): Observable<any> {
+    return this.http
+    .put(`${this.$url}/users/${id}`, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  updateProfile(id: number, data: IUser): Observable<any> {
+    return this.http
+    .put(`${this.$url}/users/${id}`, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
   }
 
   getClubs(): Observable<Club> {
@@ -34,19 +53,6 @@ export class ApiService {
 
   getClub(id: Number): Observable<any> {
     return this.http.get<any>(`${this.$url}/clubs/${id}`);
-  }
-
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    }),
-  };
-
-  updateProfile(id: number, data: IUser): Observable<any> {
-    return this.http
-      .put(`${this.$url}/me`, JSON.stringify(data), this.httpOptions)
-
-      .pipe(catchError(this.errorHandler));
   }
 
   errorHandler(error: any) {
@@ -60,6 +66,6 @@ export class ApiService {
   }
 
   find(id: number): Observable<any> {
-    return this.http.get(`${this.$url}/me`).pipe(catchError(this.errorHandler));
+    return this.http.get(`${this.$url}/users/${id}`).pipe(catchError(this.errorHandler));
   }
 }

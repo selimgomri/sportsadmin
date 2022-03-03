@@ -1,6 +1,9 @@
 import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
 import { ApiService } from '../services/session-login/api.service';
 import { IUser } from '../IUser';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export type SortColumn = keyof IUser | '';
 export type SortDirection = 'asc' | 'desc' | '';
@@ -43,6 +46,10 @@ export class ListingComponent {
   sortedUsers = this.users;
   page = 1;
   pageSize = 4;
+  closeResult = '';
+  id!: number;
+  user!: IUser;
+  form!: FormGroup;
 
   @Output() length = new EventEmitter<number>();
 
@@ -68,21 +75,74 @@ export class ListingComponent {
     }
   }
 
-  constructor(private apiService: ApiService) {};
+  constructor(
+    private apiService: ApiService,
+    private modalService: NgbModal,
+    private router: Router,
+    private route: ActivatedRoute) {};
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
+    console.log('ID RECUP',  this.id);
+    this.apiService.find(this.id).subscribe((data: IUser) => {
+      this.user = data;
+    });
+
     this.apiService.getUsers().subscribe((datas: any) => {
       this.users = datas['hydra:member'];
       this.sortedUsers = this.users;
       console.log(this.users);
       this.length.emit(this.users.length);
     });
+
+    this.form = new FormGroup({
+      photo: new FormControl('', [Validators.required]),
+      roles: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      birthdate: new FormControl('', [Validators.required]),
+      adress: new FormControl('', [Validators.required]),
+      firstname: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
+      sexe: new FormControl('', [Validators.required]),
+
+    });
+  }
+
+  get f(){
+    return this.form.controls;
   }
 
   delete(id:number){
     this.apiService.deleteUser(id).subscribe(res => {
          this.users = this.users.filter(item => item.id !== id);
          console.log('Post deleted successfully!');
+    })
+  }
+
+  openLg(content:any) {
+    this.modalService.open(content, { size: 'lg' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  submit(){
+    console.log(this.form.value);
+    this.apiService.updateUser(this.id, this.form.value).subscribe((res:any) => {
+      console.log('User updated successfully!');
+      this.router.navigateByUrl('liste-membres');
     })
   }
 }
