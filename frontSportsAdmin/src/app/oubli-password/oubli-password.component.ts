@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/session-login/api.service';
+import { IUser } from 'src/app/IUser';
 
 @Component({
   selector: 'app-oubli-password',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OubliPasswordComponent implements OnInit {
 
-  constructor() { }
+  users: IUser[] = [];
+  sortedUsers = this.users;
+
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
+    this.apiService.getUsers().subscribe((datas: any) => {
+      this.users = datas['hydra:member'];
+      this.sortedUsers = this.users;
+    });
   }
 
 }
