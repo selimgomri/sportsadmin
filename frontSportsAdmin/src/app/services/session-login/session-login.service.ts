@@ -17,12 +17,12 @@ export class SessionLoginService {
     roles: [],
     licenseNumber: 0,
     password: '',
-    birthdate: new Date,
-    sexe:'',
+    birthdate: new Date(),
+    sexe: '',
     level: [],
     additionnalField: [],
     photo: '',
-    address:'',
+    address: '',
   });
 
   constructor(private http: HttpClient) {
