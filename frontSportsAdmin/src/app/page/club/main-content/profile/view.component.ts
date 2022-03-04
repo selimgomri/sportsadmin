@@ -7,21 +7,21 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.scss'],
-  providers: [NgbModalConfig, NgbModal]
+  providers: [NgbModalConfig, NgbModal],
 })
 export class ViewComponent implements OnInit {
-
   user?: IUser;
 
   constructor(
     private sessionLoginService: SessionLoginService,
     config: NgbModalConfig,
-    private modalService: NgbModal) {
+    private modalService: NgbModal
+  ) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
-  openXl(content:any) {
+  openXl(content: any) {
     this.modalService.open(content, { size: 'xl' });
   }
 
@@ -31,5 +31,4 @@ export class ViewComponent implements OnInit {
       console.log(this.user);
     });
   }
-
 }

@@ -39,7 +39,11 @@ class UserImage
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'photo')]
     private $user;
 
-
+ 
+    /**
+     * @var string|null
+     */
+    private $fileUrl;
   
 
     public function getId(): ?int
@@ -99,6 +103,18 @@ class UserImage
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getFileUrl(): ?string
+    {
+        return $this->fileUrl;
+    }
+
+    public function setFileUrl(?string $fileUrl): self
+    {
+        $this->fileUrl = $fileUrl;
 
         return $this;
     }
