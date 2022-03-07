@@ -7,9 +7,9 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-
 import { IUser } from 'src/app/IUser';
 import { SessionLoginService } from 'src/app/services/session-login/session-login.service';
+
 @Component({
   selector: 'header-bar',
   templateUrl: './header-bar.component.html',
@@ -20,16 +20,18 @@ export class HeaderBarComponent implements OnInit, OnChanges {
   @Input() title: string = '';
   @Output() titleChanged: EventEmitter<string> = new EventEmitter<string>();
 
-  userInfo?: IUser;
+  user!: IUser;
 
   constructor(private auth: SessionLoginService) {}
+
   ngOnChanges(changes: SimpleChanges): void {
     this.titleChanged.emit(this.title);
   }
 
   ngOnInit(): void {
-    this.auth.userProfile.subscribe((data) => {
-      this.userInfo = data;
+    this.auth.me().subscribe((data) => {
+      this.user = data;
+      setTimeout(() => { this.ngOnInit() }, 1000 * 1);
     });
   }
 }

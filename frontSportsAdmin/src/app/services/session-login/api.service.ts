@@ -19,7 +19,7 @@ export class ApiService {
   };
 
   getUsers(): Observable<IUser> {
-    return this.http.get<IUser>(`${this.$url}/users`);
+    return this.http.get<IUser>(`${this.$url}/users`, { withCredentials: true });
   }
 
   createUser(data: any): Observable<any> {

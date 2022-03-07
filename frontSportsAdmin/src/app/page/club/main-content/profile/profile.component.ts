@@ -1,38 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/formMember/ajout-user/user';
+import { Component, Input, OnInit } from '@angular/core';
 import { IUser } from 'src/app/IUser';
 import { SessionLoginService } from 'src/app/services/session-login/session-login.service';
-import { ApiService } from 'src/app/services/session-login/api.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/services/profile.service';
+
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-
-  //model : User = new User();
+  @Input() user!: IUser;
   id!: number;
-  user!: IUser;
+  //user!: IUser;
   form!: FormGroup;
 
   constructor(
     private sessionLoginService: SessionLoginService,
-    private ApiService: ApiService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private profileService: ProfileService) { }
+    private profileService: ProfileService
+  ) {}
 
   ngOnInit(): void {
-    this.sessionLoginService.userProfile.subscribe((data) => {
+    console.log(this.user);
+    this.sessionLoginService.me().subscribe((data) => {
       this.user = data;
       this.id = this.user.id;
     });
 
-   // this.id = this.route.snapshot.params['id'];
+    // this.id = this.route.snapshot.params['id'];
     /*this.apiService.find(this.id).subscribe((data: IUser)=>{
       this.user = data;
     });*/
@@ -47,18 +43,20 @@ export class ProfileComponent implements OnInit {
       firstname: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       sexe: new FormControl('', [Validators.required]),
-
     });
   }
 
-  get f(){
+  get f() {
     return this.form.controls;
   }
 
   submit() {
-    this.profileService.updateProfile(this.id, this.form.value).subscribe((res:any) => {
-         console.log('Profile updated successfully!');
-         this.router.navigateByUrl('mon-profil');
-        })
-      }
+    this.profileService
+      .updateProfile(this.id, this.form.value)
+      .subscribe((res: any) => {
+        console.log('Profile updated successfully!');
+        this.user = this.form.value;
+        console.log(this.user);
+      });
+  }
 }

@@ -11,12 +11,13 @@ export class ProfileService {
 
   constructor(private http: HttpClient) {}
 
-  getUser(): Observable<IUser> {
-    return this.http.get<IUser>(`${environment.baseUrl}/api/me`);
-  }
-
   updateProfile(id: number, data: any): Observable<any> {
     return this.http
     .put(`${environment.baseUrl}/api/users/${id}`, data, { withCredentials: true });
   }
+
+  getUsers(): Observable<IUser> {
+    return this.http.get<IUser>(`${environment.baseUrl}/api/users`, { withCredentials: true });
+  }
+
 }

@@ -19,7 +19,7 @@
             <li class="profile-picture" [routerLink]="['/mon-profil']">
               <img src="./assets/img/johndoe.jpg" height="60" />
             </li>
-            <li class="nav-item dropdown" *ngIf="(userInfo?.id ?? 0) !== 0">
+            <li class="nav-item dropdown" *ngIf="(user?.id ?? 0) !== 0">
               <a
                 class="nav-link dropdown-toggle"
                 href="#"
@@ -28,7 +28,7 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {{ userInfo?.firstname }} {{ userInfo?.lastname }}
+                {{ user?.firstname }} {{ user?.lastname }}
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
