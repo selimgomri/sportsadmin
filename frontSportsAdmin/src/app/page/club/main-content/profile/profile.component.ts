@@ -5,6 +5,7 @@ import { SessionLoginService } from 'src/app/services/session-login/session-logi
 import { ApiService } from 'src/app/services/session-login/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,13 +19,17 @@ export class ProfileComponent implements OnInit {
   user!: IUser;
   form!: FormGroup;
 
-  constructor(private sessionLoginService: SessionLoginService, private apiService: ApiService, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private sessionLoginService: SessionLoginService,
+    private ApiService: ApiService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private profileService: ProfileService) { }
 
   ngOnInit(): void {
     this.sessionLoginService.userProfile.subscribe((data) => {
       this.user = data;
       this.id = this.user.id;
-      console.log(this.id);
     });
 
    // this.id = this.route.snapshot.params['id'];
@@ -51,11 +56,7 @@ export class ProfileComponent implements OnInit {
   }
 
   submit() {
-    //console.log(this.form.value);
-    let data=this.form.value;
-    console.log(data);
-
-    this.apiService.updateProfile(this.id, data).subscribe((res:any) => {
+    this.profileService.updateProfile(this.id, this.form.value).subscribe((res:any) => {
          console.log('Profile updated successfully!');
          this.router.navigateByUrl('mon-profil');
         })
