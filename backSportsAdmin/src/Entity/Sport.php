@@ -7,6 +7,7 @@ use App\Repository\SportRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SportRepository::class)]
 #[ApiResource]
@@ -18,6 +19,7 @@ class Sport
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read_club'])]
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'sport', targetEntity: Club::class)]
