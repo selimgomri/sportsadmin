@@ -17,8 +17,8 @@ class ClubFixtures extends Fixture implements DependentFixtureInterface
 
         $name = "le club des cinq";
         $address = "2 rue du bouquin";
-        $primary = "bleu";
-        $secondary = "jaune";
+        $primary = "blue";
+        $secondary = "yellow";
 
         $club = new Club();
         $club->setName($name);
