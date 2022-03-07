@@ -14,7 +14,12 @@ use App\Controller\Api\MeAction;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
+    security: 'is_granted("ROLE_USER")',
     collectionOperations: [
+        'get',
+        'post'
+    ],
+    itemOperations: [
         'me' => [
             'pagination_enabled' => false,
             'method' => 'GET',
@@ -23,13 +28,10 @@ use App\Controller\Api\MeAction;
             'read' => false,
             'normalization_context' => [ 'groups' => [ 'read_profile' ]]
         ],
-        'get',
-        'post'
-    ],
-    itemOperations: [
         'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
-        'put',
-        'delete'
+        'put', //=> [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
+        'delete' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
+       
         
         
     ]
@@ -101,6 +103,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $photo;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read_profile'])]
     private $sexe;
 
     public function __construct()

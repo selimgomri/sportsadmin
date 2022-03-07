@@ -17,7 +17,7 @@
       </div>
       <div class="label">
         <p class="italic">Date de naissance:</p>
-        <p class="info">{{ user?.birthdate }}</p>
+        <p class="info">{{ user?.birthdate | date: 'dd/MM/yyyy'}}</p>
       </div>
       <div class="label">
         <p class="italic">Adresse:</p>

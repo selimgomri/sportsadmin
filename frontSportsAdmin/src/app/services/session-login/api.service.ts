@@ -41,10 +41,9 @@ export class ApiService {
       .pipe(catchError(this.errorHandler));
   }
 
-  updateProfile(id: number, data: IUser): Observable<any> {
+  updateProfile(id: number, data: any): Observable<any> {
     return this.http
-    .put(`${this.$url}/users/${id}`, this.httpOptions)
-      .pipe(catchError(this.errorHandler));
+    .put(`${this.$url}/users/${id}`, data, { withCredentials: true });
   }
 
   getClubs(): Observable<Club> {

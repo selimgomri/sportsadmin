@@ -16,8 +16,8 @@ class MeAction extends AbstractController
     {
     }
 
-    public function __invoke()
+    public function __invoke(): User
     {
-        return $this->json($this->security->getUser(), 200, [], ['groups' => 'read_profile']);
+        return $this->security->getUser();
     }
 }

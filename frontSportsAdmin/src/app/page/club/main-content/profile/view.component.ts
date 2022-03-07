@@ -28,7 +28,6 @@ export class ViewComponent implements OnInit {
   ngOnInit(): void {
     this.sessionLoginService.userProfile.subscribe((data) => {
       this.user = data;
-      console.log(this.user);
     });
   }
 

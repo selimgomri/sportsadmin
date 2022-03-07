@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
 
   //model : User = new User();
   id!: number;
-  user?: IUser;
+  user!: IUser;
   form!: FormGroup;
 
   constructor(private sessionLoginService: SessionLoginService, private apiService: ApiService, private router: Router, private route: ActivatedRoute) { }
@@ -23,13 +23,14 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.sessionLoginService.userProfile.subscribe((data) => {
       this.user = data;
-      console.log(this.user);
+      this.id = this.user.id;
+      console.log(this.id);
     });
 
-    this.id = this.route.snapshot.params['postId'];
-    this.apiService.find(this.id).subscribe((data: IUser)=>{
+   // this.id = this.route.snapshot.params['id'];
+    /*this.apiService.find(this.id).subscribe((data: IUser)=>{
       this.user = data;
-    });
+    });*/
 
     this.form = new FormGroup({
       photo: new FormControl('', [Validators.required]),
@@ -50,8 +51,11 @@ export class ProfileComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form.value);
-    this.apiService.updateProfile(this.id, this.form.value).subscribe((res:any) => {
+    //console.log(this.form.value);
+    let data=this.form.value;
+    console.log(data);
+
+    this.apiService.updateProfile(this.id, data).subscribe((res:any) => {
          console.log('Profile updated successfully!');
          this.router.navigateByUrl('mon-profil');
         })
