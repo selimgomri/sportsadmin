@@ -13,7 +13,6 @@ export class EditSubscription {
   @Output() editedSubscription: EventEmitter<any> = new EventEmitter();
 
   closeResult = '';
-  newSubs!: ISubscription;
 
   constructor(
     private modalService: NgbModal,
@@ -31,7 +30,7 @@ export class EditSubscription {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }
       );
-      console.log(this.subscription);
+    const test = this.subscription;
   }
 
   private getDismissReason(reason: any): string {
@@ -45,12 +44,14 @@ export class EditSubscription {
   }
 
   onSubmit(value: any) {
-    const editedSubscription : any = {
+    const editedSubscription: any = {
       name: value.name,
       amount: value.amount,
       durationInMonths: value.durationInMonths,
     };
-    this.subscriptionService.editSubscription(this.subscription.id, editedSubscription).subscribe();
+    this.subscriptionService
+      .editSubscription(this.subscription.id, editedSubscription)
+      .subscribe();
   }
 
   editNew(value: any) {

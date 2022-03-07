@@ -15,7 +15,7 @@
         id="name"
         type="text"
         name="name"
-        value="{{subscription.name}}"
+        [(ngModel)]="subscription.name"
         ngModel
       />
 
@@ -24,7 +24,7 @@
         id="amount"
         type="number"
         name="amount"
-        value="{{subscription.amount}}"
+        [(ngModel)]="subscription.amount"
         ngModel
       />
 
@@ -33,7 +33,7 @@
         id="durationInMonths"
         type="number"
         name="durationInMonths"
-        value="{{subscription.durationInMonths}}"
+        [(ngModel)]="subscription.durationInMonths"
         ngModel
       />
     </div>
