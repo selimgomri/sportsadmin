@@ -1,5 +1,6 @@
+import { ISubscription } from './../../../../../services/subscription/ISubscription';
 import { SubscriptionService } from './../../../../../services/subscription/subscription.service';
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,10 +9,10 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./create-subscription.scss'],
 })
 export class CreateSubscription {
-  @Input() newSubscription: any;
-  @Output() addClick: EventEmitter<any> = new EventEmitter();
+  @Output() newSubscription: EventEmitter<any> = new EventEmitter();
 
   closeResult = '';
+  newSubs!: ISubscription;
 
   constructor(
     private modalService: NgbModal,
@@ -50,8 +51,7 @@ export class CreateSubscription {
     this.subscriptionService.createSubscription(newSubscription).subscribe();
   }
 
-  add() {
-    console.log(this.newSubscription);
-    this.addClick.emit(this.newSubscription);
+  addNew(value: any) {
+    this.newSubscription.emit(value);
   }
 }

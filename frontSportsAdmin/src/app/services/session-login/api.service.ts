@@ -36,7 +36,7 @@ export class ApiService {
   }
 
   getClubs(): Observable<Club> {
-    return this.http.get<Club>(`${this.$url}/clubs`);
+    return this.http.get<Club>(`${this.$url}/clubs`,);
   }
 
   getClub(id: Number): Observable<any> {

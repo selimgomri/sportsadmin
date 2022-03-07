@@ -1,8 +1,7 @@
-import { SubscriptionService } from '../../../../../services/subscription/subscription.service';
-import { ISubscription } from 'src/app/services/subscription/ISubscription';
-import { Component } from '@angular/core';
+import { ISubscription } from './../../../../../services/subscription/ISubscription';
+import { SubscriptionService } from './../../../../../services/subscription/subscription.service';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'edit-subscription',
@@ -10,6 +9,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./edit-subscription.scss'],
 })
 export class EditSubscription {
+  @Input() subscription!: ISubscription;
+  @Output() editedSubscription: EventEmitter<any> = new EventEmitter();
+
   closeResult = '';
 
   constructor(
@@ -17,9 +19,9 @@ export class EditSubscription {
     private subscriptionService: SubscriptionService
   ) {}
 
-  open(content: any) {
+  openVerticallyCentered(content: any) {
     this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .open(content, { centered: true, ariaLabelledBy: 'modal-basic-title' })
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;
@@ -28,6 +30,7 @@ export class EditSubscription {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }
       );
+    const test = this.subscription;
   }
 
   private getDismissReason(reason: any): string {
@@ -40,22 +43,18 @@ export class EditSubscription {
     }
   }
 
-  /* private subscription {
-    name:
-    amount:
-    durationInMonths:
-  } */
-
   onSubmit(value: any) {
-    console.log(value);
-    const subscription: any = {
-      'name': value.name,
-      'amount': value.amount,
-      'durationInMonths': value.durationInMonths
+    const editedSubscription: any = {
+      name: value.name,
+      amount: value.amount,
+      durationInMonths: value.durationInMonths,
     };
     this.subscriptionService
-      .createSubscription(subscription)
-      .subscribe((z) => console.log(z));
+      .editSubscription(this.subscription.id, editedSubscription)
+      .subscribe();
+  }
+
+  editNew(value: any) {
+    this.editedSubscription.emit(value);
   }
 }
-

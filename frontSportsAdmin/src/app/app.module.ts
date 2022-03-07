@@ -1,3 +1,4 @@
+import { EditSubscription } from './page/club/main-content/crud-subscription/edit-subscription/edit-subscription';
 import { EditClubComponent } from './page/club/main-content/edit-club/edit-club.component';
 import { PageMyclubsComponent } from './page/club-choice/page-myclubs//page-myclubs.component';
 import { SideBarComponent } from './shared-content/side-bar/side-bar.component';
@@ -71,7 +72,9 @@ import { EditUserComponent } from './page/club/main-content/edit-club/crud-user/
     AjoutUserViewComponent,
     AddUserComponent,
     CreateUserViewComponent,
+    EditSubscription,
     EditUserComponent,
+
 
 
   ],
