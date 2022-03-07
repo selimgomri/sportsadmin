@@ -14,34 +14,15 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="align">
-        <form class="d-flex">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Rechercher..."
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">
-            <svg
-              class="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              ></path>
-            </svg>
-          </button>
-        </form>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="profile-picture" [routerLink]="['/mon-profil']">
-              <img src="./assets/img/johndoe.jpg" height="60" />
+              <img
+                src="https://localhost:8000/images/users/{{
+                  userInfo?.photo[0].path
+                }}"
+                height="60"
+              />
             </li>
             <li class="nav-item dropdown" *ngIf="(userInfo?.id ?? 0) !== 0">
               <a
