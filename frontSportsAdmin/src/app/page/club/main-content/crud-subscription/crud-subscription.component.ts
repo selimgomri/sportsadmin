@@ -1,5 +1,5 @@
 import { SubscriptionService } from './../../../../services/subscription/subscription.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { ISubscription } from './../../../../services/subscription/ISubscription';
 
 @Component({
@@ -9,14 +9,21 @@ import { ISubscription } from './../../../../services/subscription/ISubscription
 })
 export class CRUDSubscriptionComponent implements OnInit {
   @Input() newSubscription: any;
+  @Output() toEditSubscription: any
   subscriptions!: ISubscription[];
 
   constructor(private subscriptionService: SubscriptionService) {}
 
   ngOnInit(): void {
-    this.subscriptionService.getSubscriptions().subscribe((datas: any) => {
-      this.subscriptions = datas['hydra:member'];
-    });
+    this.getSubscriptions();
+  }
+
+  getSubscriptions() {
+    return this.subscriptionService
+      .getSubscriptions()
+      .subscribe((datas: any) => {
+        this.subscriptions = datas['hydra:member'];
+      });
   }
 
   onRemoveClick(subscription: any) {
@@ -30,9 +37,16 @@ export class CRUDSubscriptionComponent implements OnInit {
         });
       });
   }
-  onAddClick(newSubscription: any) {
-    /* if (!newSubscription) return; */
-    console.log(newSubscription);
-    return this.subscriptions.push(newSubscription);
+  addSubscription(newSubscription: any) {
+    this.subscriptions.push(newSubscription);
+    setTimeout((e: any) => {
+      this.getSubscriptions();
+    }, 100);
+  }
+
+  editSubscription(toEditSubscription: any) {
+    setTimeout((e: any) => {
+      this.getSubscriptions();
+    }, 100);
   }
 }

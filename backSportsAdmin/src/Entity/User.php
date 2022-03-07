@@ -24,14 +24,15 @@ use App\Controller\Api\UserImageAction;
             'read' => false,
             'normalization_context' => [ 'groups' => [ 'read_profile' ]]
         ],
-        'get' => ['normalization_context' => ['groups' => ['read_profile']],],
-        'post'
+
+        'get'  => [ 'security' => 'is_granted("ROLE_ADMIN")'],
+        'post'  => [ 'security' => 'is_granted("ROLE_ADMIN")']
     ],
     itemOperations: [
         'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())',
         'normalization_context' => ['groups' => ['read_detail_profile']],],
-        'put',
-        'delete',
+        'put' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
+        'delete' => [ 'security' => 'is_granted("ROLE_ADMIN")'],
         'user_image' => [
             'method' => 'POST',
             'path' => '/users/{id}/image',

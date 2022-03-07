@@ -4,15 +4,6 @@
   background-color: #f6f4f5;
 }
 
-.add-subscription {
-  display: flex;
-  justify-content: end;
-  margin-bottom: 40px;
-  width: auto;
-  height: 50px;
-  margin-top: 20px;
-  align-items: center;
-}
 
 .modal-footer {
   display: flex;
@@ -36,4 +27,18 @@ input {
   display: flex;
   flex-direction: column;
   padding: 20px 50px;
+}
+
+.edit-subscription {
+  width: 200px;
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+
+.edit-subscription-icon {
+  width: 40px;
+  height: auto;
+  color: #ffffff;
+  padding: 5px;
 }

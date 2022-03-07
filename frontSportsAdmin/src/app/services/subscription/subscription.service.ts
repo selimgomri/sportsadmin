@@ -21,4 +21,11 @@ export class SubscriptionService {
   createSubscription(subscription: any): Observable<ISubscription> {
     return this.http.post<ISubscription>(this.$url, subscription);
   }
+
+  editSubscription(
+    id: Number,
+    editedSubscribtion: ISubscription
+  ): Observable<any> {
+    return this.http.put(`${this.$url}/${id}`, editedSubscribtion);
+  }
 }
