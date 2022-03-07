@@ -35,11 +35,11 @@ final class JwtDecorator implements OpenApiFactoryInterface
             'properties' => [
                 'email' => [
                     'type' => 'string',
-                    'example' => 'oceanezara@yahoo.fr',
+                    'example' => 'admin@admin.fr',
                 ],
                 'password' => [
                     'type' => 'string',
-                    'example' => 'pass_1234',
+                    'example' => '123456',
                 ],
             ],
         ]);

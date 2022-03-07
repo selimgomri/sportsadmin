@@ -20,7 +20,7 @@
       </div>
       <div class="label">
         <p class="italic">Date de naissance:</p>
-        <p class="info">{{ user?.birthdate }}</p>
+        <p class="info">{{ user?.birthdate | date: "dd/MM/yyyy" }}</p>
       </div>
       <div class="label">
         <p class="italic">Adresse:</p>
@@ -72,7 +72,9 @@
         </div>
         <div class="modal-body">
           <div class="container">
-            <app-profile></app-profile>
+
+            <app-profile (submit)="c('Close click')" [user]='user'></app-profile>
+
           </div>
         </div>
       </ng-template>

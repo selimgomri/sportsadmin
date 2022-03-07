@@ -15,7 +15,12 @@ use App\Controller\Api\UserImageAction;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
+    security: 'is_granted("ROLE_USER")',
     collectionOperations: [
+        'get',
+        'post'
+    ],
+    itemOperations: [
         'me' => [
             'pagination_enabled' => false,
             'method' => 'GET',
@@ -25,8 +30,9 @@ use App\Controller\Api\UserImageAction;
             'normalization_context' => [ 'groups' => [ 'read_profile' ]]
         ],
 
-        'get'  => [ 'security' => 'is_granted("ROLE_ADMIN")'],
-        'post'  => [ 'security' => 'is_granted("ROLE_ADMIN")']
+        'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
+        'put', //=> [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
+        'delete' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
     ],
     itemOperations: [
         'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())',
@@ -58,6 +64,7 @@ use App\Controller\Api\UserImageAction;
 
         ]
         
+
         
         
     ]
@@ -127,6 +134,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read_profile'])]
     private $sexe;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserImage::class, cascade: ['persist'], orphanRemoval: true)]
