@@ -41,15 +41,15 @@ use App\Controller\Api\UserImageAction;
                 'requestBody' => [
                 'content' => [
                     'multipart/form-data' => [
-                    'schema' => [
-                        'type' => 'object',
-                        'properties' => [
-                        'image' => [
-                            'type' => 'string',
-                            'format' => 'binary',
+                        'schema' => [
+                            'type' => 'object',
+                            'properties' => [
+                            'image' => [
+                                'type' => 'string',
+                                'format' => 'binary',
+                            ],
+                            ],
                         ],
-                        ],
-                    ],
                     ],
                 ],
                 ],
