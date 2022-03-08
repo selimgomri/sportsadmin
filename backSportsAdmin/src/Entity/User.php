@@ -33,12 +33,6 @@ use App\Controller\Api\UserImageAction;
         'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
         'put', //=> [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
         'delete' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
-    ],
-    itemOperations: [
-        'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())',
-        'normalization_context' => ['groups' => ['read_detail_profile']],],
-        'put' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
-        'delete' => [ 'security' => 'is_granted("ROLE_ADMIN")'],
         'user_image' => [
             'method' => 'POST',
             'path' => '/users/{id}/image',
