@@ -25,6 +25,7 @@
         type="number"
         name="amount"
         [(ngModel)]="subscription.amount"
+        min=0
         ngModel
       />
 
@@ -34,6 +35,7 @@
         type="number"
         name="durationInMonths"
         [(ngModel)]="subscription.durationInMonths"
+        min=0
         ngModel
       />
     </div>
