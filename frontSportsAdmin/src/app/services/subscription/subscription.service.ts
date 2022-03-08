@@ -11,21 +11,25 @@ export class SubscriptionService {
   constructor(private http: HttpClient) {}
 
   getSubscriptions(): Observable<ISubscription> {
-    return this.http.get<ISubscription>(this.$url);
+    return this.http.get<ISubscription>(this.$url, { withCredentials: true });
   }
 
   deleteSubscription(id: Number): Observable<any> {
-    return this.http.delete(`${this.$url}/${id}`);
+    return this.http.delete(`${this.$url}/${id}`, { withCredentials: true });
   }
 
   createSubscription(subscription: any): Observable<ISubscription> {
-    return this.http.post<ISubscription>(this.$url, subscription);
+    return this.http.post<ISubscription>(this.$url, subscription, {
+      withCredentials: true,
+    });
   }
 
   editSubscription(
     id: Number,
     editedSubscribtion: ISubscription
   ): Observable<any> {
-    return this.http.put(`${this.$url}/${id}`, editedSubscribtion);
+    return this.http.put(`${this.$url}/${id}`, editedSubscribtion, {
+      withCredentials: true,
+    });
   }
 }

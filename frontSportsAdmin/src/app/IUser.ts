@@ -11,6 +11,6 @@ export interface IUser {
   sexe: string;
   level: [];
   additionnalField: [];
-  photo: any;
+  photo: any[];
   address: string;
 }

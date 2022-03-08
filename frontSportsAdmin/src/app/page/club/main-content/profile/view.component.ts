@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { SessionLoginService } from 'src/app/services/session-login/session-login.service';
 import { IUser } from 'src/app/IUser';
 import {
@@ -46,6 +53,7 @@ export class ViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.sessionLoginService.me().subscribe((data) => {
+      console.log(data);
       this.user = data;
     });
   }
