@@ -15,7 +15,7 @@ use App\Controller\Api\UserImageAction;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
-    
+    security: 'is_granted("ROLE_USER")',
     collectionOperations: [
         'get',
         'post'
