@@ -1,9 +1,9 @@
 import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
-import { ApiService } from '../services/session-login/api.service';
 import { IUser } from '../IUser';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsersService } from '../services/users.service';
 
 export type SortColumn = keyof IUser | '';
 export type SortDirection = 'asc' | 'desc' | '';
@@ -76,7 +76,7 @@ export class ListingComponent {
   }
 
   constructor(
-    private apiService: ApiService,
+    private apiService: UsersService,
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute) {};
