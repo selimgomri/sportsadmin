@@ -124,7 +124,7 @@ function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher
         // The session is cleaned up after the password has been changed.
         $this->cleanSessionAfterReset();
 
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('home');
     }
 
     return $this->render('reset_password/reset.html.twig', [
@@ -161,7 +161,7 @@ function processSendingPasswordResetEmail(string $emailFormData, MailerInterface
     }
 
     $email = (new TemplatedEmail())
-        ->from(new Address('smectaz57@gmail.com', 'base'))
+        ->from(new Address('smectaz57@gmail.com', 'sportsadmin'))
         ->to($user->getEmail())
         ->subject('Your password reset request')
         ->htmlTemplate('reset_password/email.html.twig')
