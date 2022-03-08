@@ -20,7 +20,6 @@ export class SideBarClubComponent implements OnInit {
 
   ngOnInit(): void {  this.apiService.getClubs().subscribe((datas: any) => {
     this.clubs = datas['hydra:member'];
-    console.log(this.clubs);
   });
   }
 
