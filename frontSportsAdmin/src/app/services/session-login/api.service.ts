@@ -23,16 +23,16 @@ export class ApiService {
   }
 
   createUser(data: any): Observable<any> {
-    return this.http.post(`${this.$url}/users`, data);
+    return this.http.post(`${this.$url}/users`, data, { withCredentials: true });
   }
 
   deleteUser(id: number): Observable<any> {
-    return this.http.delete(`${this.$url}/users/${id}`);
+    return this.http.delete(`${this.$url}/users/${id}`, { withCredentials: true });
   }
 
   updateUser(id: number, data: IUser): Observable<any> {
     return this.http
-    .put(`${this.$url}/users/${id}`, this.httpOptions);
+    .put(`${this.$url}/users/${id}`, data, { withCredentials: true });
   }
 
   getClubs(): Observable<Club> {

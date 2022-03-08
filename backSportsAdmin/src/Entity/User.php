@@ -18,7 +18,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
-    normalizationContext: [ 'groups' => ['read_profile'] ],
+
     collectionOperations: [
         'get',
         'post'

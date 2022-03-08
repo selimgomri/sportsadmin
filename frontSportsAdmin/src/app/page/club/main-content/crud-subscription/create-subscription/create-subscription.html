@@ -15,13 +15,14 @@
       <input id="name" type="text" name="name" ngModel />
 
       <label for="amount">Tarif (€) : </label>
-      <input id="amount" type="number" name="amount" ngModel />
+      <input id="amount" type="number" name="amount" min=0  ngModel />
 
       <label for="durationInMonths">Validité de la cotisation (mois) : </label>
       <input
         id="durationInMonths"
         type="number"
         name="durationInMonths"
+        min=0 
         ngModel
       />
     </div>

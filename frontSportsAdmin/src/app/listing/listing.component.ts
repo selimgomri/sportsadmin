@@ -82,12 +82,6 @@ export class ListingComponent {
     private route: ActivatedRoute) {};
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
-    console.log('ID RECUP',  this.id);
-    this.apiService.find(this.id).subscribe((data: IUser) => {
-      this.user = data;
-    });
-
     this.apiService.getUsers().subscribe((datas: any) => {
       this.users = datas['hydra:member'];
       this.sortedUsers = this.users;
@@ -96,7 +90,8 @@ export class ListingComponent {
     });
 
     this.form = new FormGroup({
-      photo: new FormControl('', [Validators.required]),
+      //photo: new FormControl('', [Validators.required]),
+      id: new FormControl(''),
       roles: new FormControl('', [Validators.required]),
       lastname: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
@@ -140,7 +135,7 @@ export class ListingComponent {
 
   submit(){
     console.log(this.form.value);
-    this.apiService.updateUser(this.id, this.form.value).subscribe((res:any) => {
+    this.apiService.updateUser(this.form.value.id, this.form.value).subscribe((res:any) => {
       console.log('User updated successfully!');
       this.router.navigateByUrl('liste-membres');
     })
