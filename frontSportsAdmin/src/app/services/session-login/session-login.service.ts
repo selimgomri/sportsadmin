@@ -21,7 +21,7 @@ export class SessionLoginService {
     sexe: '',
     level: [],
     additionnalField: [],
-    photo: '',
+    photo: [],
     address: '',
   });
 

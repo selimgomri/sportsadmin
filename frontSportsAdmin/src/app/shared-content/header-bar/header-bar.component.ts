@@ -31,7 +31,6 @@ export class HeaderBarComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.auth.me().subscribe((data) => {
       this.user = data;
-      setTimeout(() => { this.ngOnInit() }, 1000 * 1);
     });
   }
 }
