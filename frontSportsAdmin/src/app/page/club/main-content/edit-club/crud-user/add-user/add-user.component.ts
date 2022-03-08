@@ -1,9 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { IUser } from 'src/app/IUser';
-import { ApiService } from 'src/app/services/session-login/api.service';
-import { User } from 'src/app/formMember/ajout-user/user';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-add-user',
@@ -12,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AddUserComponent implements OnInit {
 
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router) {}
+  constructor(private apiService: UsersService, private formBuilder: FormBuilder, private router: Router) {}
 
   form!: FormGroup;
 

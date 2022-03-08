@@ -18,22 +18,7 @@ export class ApiService {
     }),
   };
 
-  getUsers(): Observable<IUser> {
-    return this.http.get<IUser>(`${this.$url}/users`, { withCredentials: true });
-  }
 
-  createUser(data: any): Observable<any> {
-    return this.http.post(`${this.$url}/users`, data, { withCredentials: true });
-  }
-
-  deleteUser(id: number): Observable<any> {
-    return this.http.delete(`${this.$url}/users/${id}`, { withCredentials: true });
-  }
-
-  updateUser(id: number, data: IUser): Observable<any> {
-    return this.http
-    .put(`${this.$url}/users/${id}`, data, { withCredentials: true });
-  }
 
   getClubs(): Observable<Club> {
     return this.http.get<Club>(`${this.$url}/clubs`,);

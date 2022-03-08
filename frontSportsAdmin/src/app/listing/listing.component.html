@@ -189,7 +189,22 @@
                 </form>
               </div>
           </ng-template
-            ><svg
+            >
+            <ng-template #content2 let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                  <h1 class="modal-title" id="modal-basic-title">Supprimer un membre</h1>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <p>Êtes-vous sûr de vouloir supprimer {{user.firstname}} {{user.lastname}} de la liste des membres ?</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Non</button>
+                  <button type="button" class="btn btn-outline-dark" (click)="c('yes')" (click)="delete(user.id)">Oui</button>
+              </div>
+            </ng-template><svg
               (click)="openLg(content)"
               class="w-6 h-6 edit"
               fill="none"
@@ -205,7 +220,7 @@
               ></path>
             </svg>
             <svg
-              (click)="delete(user.id)"
+              (click)="open(content2)"
               class="w-6 h-6 delete"
               fill="none"
               stroke="currentColor"
@@ -233,3 +248,4 @@
   >
   </ngb-pagination>
 </div>
+
