@@ -3,7 +3,6 @@
 namespace App\Controller\Api;
 
 use App\Entity\Club;
-use App\Entity\Logo;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;

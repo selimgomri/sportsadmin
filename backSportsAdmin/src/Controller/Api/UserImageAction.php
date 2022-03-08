@@ -3,7 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\User;
-use App\Entity\UserImage;
+
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
@@ -15,16 +15,12 @@ final class UserImageAction extends AbstractController
 {
     public function __invoke(User $data, Request $request): User
     {
-        $uploadedFile = $request->files->get('image');
+        $uploadedFile = $request->files->get('file');
 
         if (!$uploadedFile) {
             throw new BadRequestHttpException('image is required');
         }
-        $userImage = new UserImage();
-        $userImage->setImage($uploadedFile);
-        $userImage->setPath($uploadedFile->getClientOriginalName());
-        $userImage->setUser($data);
-        $data->addPhoto($userImage);
+        $data->setFile($uploadedFile);
 
         return $data;
     }
