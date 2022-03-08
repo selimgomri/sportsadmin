@@ -12,10 +12,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\Api\MeAction;
 use App\Controller\Api\UserImageAction;
+use Symfony\Component\HttpFoundation\File\File;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
-    
+
     collectionOperations: [
         'get',
         'post'
@@ -35,7 +38,7 @@ use App\Controller\Api\UserImageAction;
         'delete' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
         'user_image' => [
             'method' => 'POST',
-            'path' => '/users/{id}/image',
+            'path' => '/users/{id}/photo',
             'controller' => UserImageAction::class,
             'deserialize' => false,
             'openapi_context' => [
@@ -45,7 +48,7 @@ use App\Controller\Api\UserImageAction;
                         'schema' => [
                             'type' => 'object',
                             'properties' => [
-                            'image' => [
+                            'file' => [
                                 'type' => 'string',
                                 'format' => 'binary',
                             ],
@@ -63,8 +66,13 @@ use App\Controller\Api\UserImageAction;
         
     ]
 )]
+/**
+ * @Vich\Uploadable
+ */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -131,9 +139,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['read_profile'])]
     private $sexe;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserImage::class, cascade: ['persist'], orphanRemoval: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(["read_profile", "read_detail_profile"])]
     private $photo;
+
+    /**
+    * @Vich\UploadableField(mapping="user_image", fileNameProperty="photo")
+    */
+    public ?File $file = null;
+
 
     public function __construct()
     {
@@ -141,7 +155,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->documents = new ArrayCollection();
         $this->invoices = new ArrayCollection();
         $this->userFields = new ArrayCollection();
-        $this->photo = new ArrayCollection();
     }
 
 
@@ -462,33 +475,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, UserImage>
-     */
-    public function getPhoto(): Collection
+    public function getPhoto(): string
     {
         return $this->photo;
     }
 
-    public function addPhoto(UserImage $photo): self
+    public function setPhoto(string $photo): self
     {
-        if (!$this->photo->contains($photo)) {
-            $this->photo[] = $photo;
-            $photo->setUser($this);
-        }
+        $this->photo = $photo;
 
         return $this;
     }
 
-    public function removePhoto(UserImage $photo): self
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setFile(?File $file = null): void
     {
-        if ($this->photo->removeElement($photo)) {
-            // set the owning side to null (unless already changed)
-            if ($photo->getUser() === $this) {
-                $photo->setUser(null);
-            }
-        }
+        $this->file = $file;
 
-        return $this;
+        if (null !== $file) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
     }
 }
