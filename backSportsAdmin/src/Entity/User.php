@@ -2,15 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\Api\MeAction;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use App\Controller\Api\ResetAction;
+use App\Controller\ResetPasswordController;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
@@ -23,10 +26,19 @@ use App\Controller\Api\MeAction;
             'read' => false,
             'normalization_context' => [ 'groups' => [ 'read_profile' ]]
         ],
+        
         'get',
         'post'
     ],
     itemOperations: [
+        'reset' => [
+            'pagination_enabled' => false,
+            'method' => 'PUT',
+            'path' => '{token}/reset',
+            'controller' => ResetPasswordController::class,
+            'read' => false,
+            'normalization_context' => [ 'groups' => [ 'reset_password' ]]
+        ],
         'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
         'put',
         'delete'
@@ -43,7 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(['read_profile'])]
+    #[Groups(['read_profile'], ['reset_password'])]
     private $email;
 
     #[ORM\Column(type: 'json')]
@@ -51,6 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
+    #[Groups(['reset_password'])]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]

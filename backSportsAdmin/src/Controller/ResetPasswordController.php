@@ -34,6 +34,8 @@ class ResetPasswordController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+    
+
     /**
      * Display & process form to request a password reset.
      */
@@ -80,6 +82,7 @@ function checkEmail(): Response
 function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher, TranslatorInterface $translator, string $token = null): Response
     {
     if ($token) {
+        var_dump($token);
         // We store the token in session and remove it from the URL, to avoid the URL being
         // loaded in a browser and potentially leaking the token to 3rd party JavaScript.
         $this->storeTokenInSession($token);
@@ -117,7 +120,6 @@ function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher
             $user,
             $form->get('plainPassword')->getData()
         );
-
         $user->setPassword($encodedPassword);
         $this->entityManager->flush();
 
@@ -167,11 +169,12 @@ function processSendingPasswordResetEmail(string $emailFormData, MailerInterface
         ->htmlTemplate('reset_password/email.html.twig')
         ->context([
             'resetToken' => $resetToken,
+            $resetToken
         ])
     ;
 
     $mailer->send($email);
-
+    
     // Store the token object in session for retrieval in check-email route.
     $this->setTokenObjectInSession($resetToken);
 
