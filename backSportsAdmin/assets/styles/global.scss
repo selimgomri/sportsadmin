@@ -1,5 +1,25 @@
-// customize some Bootstrap variables
-$primary: darken(#428bca, 20%);
+.corp,
+.button {
+	display: flex;
+	justify-content: center;
+}
+
+.corp {
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+input {
+	margin-left: 20px !important;
+	border: 0.5px solid black;
+	border-radius: 20px !important;
+}
+h1 {
+	margin-top: 50px;
+	text-align: center;
+}
+.page {
+	margin-top: 50px;
+}
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
