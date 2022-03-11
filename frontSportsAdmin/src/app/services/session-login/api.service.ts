@@ -12,54 +12,24 @@ export class ApiService {
   private $url = 'https://localhost:8000/api';
   constructor(private http: HttpClient) {}
 
-  getUser(): Observable<IUser> {
-    return this.http.get<IUser>(`${this.$url}/me`);
-  }
-
-  getUsers(): Observable<IUser> {
-    return this.http.get<IUser>(`${this.$url}/users`);
-  }
-
-  createUser(data: any): Observable<any> {
-    return this.http.post(`${this.$url}/users`, data);
-  }
-
-  deleteUser(id:number): Observable<any> {
-    return this.http.delete(`${this.$url}/users/${id}`, this.httpOptions);
-  }
-
-  getClubs(): Observable<Club> {
-    return this.http.get<Club>(`${this.$url}/clubs`);
-  }
-
-  getClub(id: Number): Observable<any> {
-    return this.http.get<any>(`${this.$url}/clubs/${id}`);
-  }
-
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
   };
 
-  updateProfile(id: number, data: IUser): Observable<any> {
-    return this.http
-      .put(`${this.$url}/me`, JSON.stringify(data), this.httpOptions)
 
-      .pipe(catchError(this.errorHandler));
+
+  getClubs(): Observable<Club> {
+    return this.http.get<Club>(`${this.$url}/clubs`,);
   }
 
-  errorHandler(error: any) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
-    } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(errorMessage);
+  getClub(id: Number): Observable<any> {
+    return this.http.get<any>(`${this.$url}/clubs/${id}`);
   }
+
 
   find(id: number): Observable<any> {
-    return this.http.get(`${this.$url}/me`).pipe(catchError(this.errorHandler));
+    return this.http.get(`${this.$url}/users/${id}`);
   }
 }

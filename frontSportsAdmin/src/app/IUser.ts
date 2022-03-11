@@ -8,9 +8,9 @@ export interface IUser {
   licenseNumber: number;
   password: string;
   birthdate: Date;
-  sexe:string;
+  sexe: string;
   level: [];
   additionnalField: [];
-  photo: string;
+  photo: any[];
   address: string;
 }

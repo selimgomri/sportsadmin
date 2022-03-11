@@ -1,49 +1,251 @@
 <div class="container mt-5">
   <table class="table table-borderless table-responsive card-1 p-4">
-      <thead>
-          <tr class="header-table">
-              <th scope="col" sortable="firstname" (sort)="onSort($event)"> <span class="ml-2 member">Membre <i class="fa-solid fa-sort"></i></span></th>
-              <th scope="col"> <span class="ml-2">Validité de licence</span> </th>
-              <th scope="col"> <span class="ml-2">Catégorie</span> </th>
-              <th scope="col"> <span class="ml-2">Contact</span> </th>
-              <th scope="col"> <span class="ml-4">Editer/Suppimer</span> </th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr class="list-item" *ngFor="let user of sortedUsers | slice: (page-1) * pageSize : page * pageSize">
-              <td>
-                  <div class="p-2 d-flex flex-row align-items-center mb-2"> <img src="https://i.imgur.com/ZSkeqnd.jpg" width="50" class="rounded-circle">
-                      <div class="d-flex flex-column ml-2"> <span class="d-block fw-bold">{{ user.firstname }} {{ user.lastname }}</span>
-                        <span class="text-muted">Loisirs</span>
-                        <span class="text-muted">{{ user.licenseNumber }}</span>
+    <thead>
+      <tr class="header-table">
+        <th scope="col" sortable="firstname" (sort)="onSort($event)">
+          <span class="ml-2 member"
+            >Membre <i class="fa-solid fa-sort"></i
+          ></span>
+        </th>
+        <th scope="col"><span class="ml-2">Validité de licence</span></th>
+        <th scope="col"><span class="ml-2">Catégorie</span></th>
+        <th scope="col"><span class="ml-2">Contact</span></th>
+        <th scope="col"><span class="ml-4">Editer/Suppimer</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="list-item"
+        *ngFor="
+          let user of sortedUsers | slice: (page - 1) * pageSize:page * pageSize
+        "
+      >
+        <td>
+          <div class="p-2 d-flex flex-row align-items-center mb-2">
+            <img
+              src="https://localhost:8000/images/users/{{user.photo}}"
+              width="50"
+              class="rounded-circle"
+            />
+            <div class="d-flex flex-column ml-2">
+              <span class="d-block fw-bold"
+                >{{ user.firstname }} {{ user.lastname }}</span
+              >
+              <span class="text-muted">Loisirs</span>
+              <span class="text-muted">{{ user.licenseNumber }}</span>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="p-2 d-flex flex-column fst-italic">
+            <span>Licencié</span> <span>Saison 2021/2022</span>
+          </div>
+        </td>
+        <td>
+          <div class="p-2 d-flex flex-column fst-italic">
+            <span>Adulte</span> <span>Expire le 18/05/2022</span>
+          </div>
+        </td>
+        <td>
+          <div class="p-2 d-flex flex-column fst-italic">
+            <span>{{ user.email }}</span> <span> {{ user.phone }}</span>
+          </div>
+        </td>
+        <td>
+          <div class="p-2 icons">
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h1 class="modal-title" id="modal-basic-title">
+                  Editer membre
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  aria-label="Close"
+                  (click)="modal.dismiss('Cross click')"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="submit()">
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <img src="./assets/img/johndoe.jpg" />
+                        <!--<input
+                              formControlName="photo"
+                              class="form-control photo"
+                              type="file"
+                              [(ngModel)]="user.photo"/>-->
                       </div>
+                    </div>
+                    <div class="col" style="display: none">
+                      <div class="form-group" >
+                        <input
+                          formControlName="id"
+                          class="form-control id"
+                          type="hidden"
+                          [(ngModel)]="user.id"
+                        />
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="roles">Rôle</label>
+                        <input
+                          formControlName="roles"
+                          class="form-control role"
+                          type="text"
+                          [(ngModel)]="user.roles"
+                        />
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="lastname">Nom</label>
+                        <input
+                          formControlName="lastname"
+                          class="form-control"
+                          type="text"
+                          [(ngModel)]="user.lastname"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input
+                          formControlName="email"
+                          class="form-control"
+                          type="text"
+                          [(ngModel)]="user.email"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="birthdate">Date de naissance</label>
+                        <input
+                          formControlName="birthdate"
+                          class="form-control"
+                          type="date"
+                          [(ngModel)]="user.birthdate"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="adress">Adresse*</label>
+                        <input
+                          formControlName="adress"
+                          class="form-control"
+                          type="text"
+                          [(ngModel)]="user.address"
+                        />
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="firstname">Prénom</label>
+                        <input
+                          formControlName="firstname"
+                          class="form-control"
+                          type="text"
+                          [(ngModel)]="user.firstname"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="phone">Téléphone</label>
+                        <input
+                          formControlName="phone"
+                          class="form-control"
+                          type="text"
+                          [(ngModel)]="user.phone"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="sexe">Genre</label>
+                        <input
+                          formControlName="sexe"
+                          class="form-control"
+                          type="text"
+                          [(ngModel)]="user.sexe"
+                        />
+                      </div>
+                    </div>
                   </div>
-              </td>
-              <td>
-                <div class="p-2 d-flex flex-column fst-italic"> <span>Licencié</span> <span>Saison 2021/2022</span> </div>
-              </td>
-              <td>
-                  <div class="p-2 d-flex flex-column fst-italic"> <span>Adulte</span> <span>Expire le 18/05/2022</span> </div>
-              </td>
-              <td>
-                <div class="p-2 d-flex flex-column fst-italic"> <span>{{ user.email }}</span> <span> {{ user.phone }}</span> </div>
-            </td>
-              <td>
-                  <div class="p-2 icons"> <svg class="w-6 h-6 edit" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                    </path></svg>
-                    <svg (click)="delete(user.id)" class="w-6 h-6 delete" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                  <div class="form-group button">
+                    <button type="submit" (click)="modal.close('Save click')">
+                      <svg
+                        class="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+                        ></path>
+                      </svg>
+                      Mettre à jour
+                    </button>
                   </div>
-              </td>
-          </tr>
-      </tbody>
+                </form>
+              </div>
+          </ng-template
+            >
+            <ng-template #content2 let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                  <h1 class="modal-title" id="modal-basic-title">Supprimer un membre</h1>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <p>Êtes-vous sûr de vouloir supprimer {{user.firstname}} {{user.lastname}} de la liste des membres ?</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Non</button>
+                  <button type="button" class="btn btn-outline-dark" (click)="c('yes')" (click)="delete(user.id)">Oui</button>
+              </div>
+            </ng-template><svg
+              (click)="openLg(content)"
+              class="w-6 h-6 edit"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+              ></path>
+            </svg>
+            <svg
+              (click)="open(content2)"
+              class="w-6 h-6 delete"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              ></path>
+            </svg>
+          </div>
+        </td>
+      </tr>
+    </tbody>
   </table>
   <ngb-pagination
-  [(page)]="page"
-  [pageSize]="pageSize"
-  [collectionSize]="users.length"
-  [boundaryLinks]="false"
-  [rotate]="true">
-</ngb-pagination>
+    [(page)]="page"
+    [pageSize]="pageSize"
+    [collectionSize]="users.length"
+    [boundaryLinks]="false"
+    [rotate]="true"
+  >
+  </ngb-pagination>
 </div>
+

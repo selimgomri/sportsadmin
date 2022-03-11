@@ -17,16 +17,16 @@ export class SessionLoginService {
     roles: [],
     licenseNumber: 0,
     password: '',
-    birthdate: new Date,
-    sexe:'',
+    birthdate: new Date(),
+    sexe: '',
     level: [],
     additionnalField: [],
-    photo: '',
-    address:'',
+    photo: [],
+    address: '',
   });
 
   constructor(private http: HttpClient) {
-    this.loadUserFromLocalStorage();
+    /* this.loadUserFromLocalStorage(); */
   }
 
   authentication(user: any) {
@@ -46,7 +46,7 @@ export class SessionLoginService {
     localStorage.setItem('me', JSON.stringify(user));
   }
 
-  loadUserFromLocalStorage(): IUser {
+/*   loadUserFromLocalStorage(): IUser {
     if (this.userProfile.value.id == 0) {
       let fromLocalStorage = localStorage.getItem('me');
       if (fromLocalStorage) {
@@ -56,5 +56,5 @@ export class SessionLoginService {
     }
 
     return this.userProfile.value;
-  }
+  } */
 }

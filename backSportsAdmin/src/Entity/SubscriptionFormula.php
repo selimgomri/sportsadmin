@@ -4,12 +4,12 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\SubscriptionFormulaRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SubscriptionFormulaRepository::class)]
-#[ApiResource]
+#[ApiResource( security: 'is_granted("ROLE_USER")')]
+
 class SubscriptionFormula
 {
     #[ORM\Id]
@@ -23,16 +23,12 @@ class SubscriptionFormula
     #[ORM\Column(type: 'integer', nullable: true)]
     private $amount;
 
-    #[ORM\OneToMany(mappedBy: 'subscription_formula', targetEntity: Subscription::class)]
-    private $start_date;
+   
 
     #[ORM\Column(type: 'integer', nullable: true)]
     private $durationInMonths;
 
-    public function __construct()
-    {
-        $this->start_date = new ArrayCollection();
-    }
+
 
     public function getId(): ?int
     {
@@ -66,32 +62,8 @@ class SubscriptionFormula
     /**
      * @return Collection|Subscription[]
      */
-    public function getStartDate(): Collection
-    {
-        return $this->start_date;
-    }
 
-    public function addStartDate(Subscription $startDate): self
-    {
-        if (!$this->start_date->contains($startDate)) {
-            $this->start_date[] = $startDate;
-            $startDate->setSubscriptionFormula($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStartDate(Subscription $startDate): self
-    {
-        if ($this->start_date->removeElement($startDate)) {
-            // set the owning side to null (unless already changed)
-            if ($startDate->getSubscriptionFormula() === $this) {
-                $startDate->setSubscriptionFormula(null);
-            }
-        }
-
-        return $this;
-    }
+   
 
     public function getDurationInMonths(): ?int
     {

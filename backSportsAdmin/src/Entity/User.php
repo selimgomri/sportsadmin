@@ -9,15 +9,28 @@ use App\Controller\Api\ResetAction;
 use App\Controller\ResetPasswordController;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 
+use App\Controller\Api\MeAction;
+use App\Controller\Api\UserImageAction;
+use Symfony\Component\HttpFoundation\File\File;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
+    security: 'is_granted("ROLE_USER")',
     collectionOperations: [
+        'get',
+        'post'
+    ],
+    itemOperations: [
         'me' => [
             'pagination_enabled' => false,
             'method' => 'GET',
@@ -26,28 +39,47 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             'read' => false,
             'normalization_context' => [ 'groups' => [ 'read_profile' ]]
         ],
-        
-        'get',
-        'post'
-    ],
-    itemOperations: [
-        'reset' => [
-            'pagination_enabled' => false,
-            'method' => 'PUT',
-            'path' => '{token}/reset',
-            'controller' => ResetPasswordController::class,
-            'read' => false,
-            'normalization_context' => [ 'groups' => [ 'reset_password' ]]
-        ],
+
         'get' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
-        'put',
-        'delete'
+        'put', //=> [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
+        'delete' => [ 'security' => 'is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and user.getId() == object.getId())'],
+        'user_image' => [
+            'method' => 'POST',
+            'path' => '/users/{id}/photo',
+            'controller' => UserImageAction::class,
+            'deserialize' => false,
+            'openapi_context' => [
+                'requestBody' => [
+                'content' => [
+                    'multipart/form-data' => [
+                        'schema' => [
+                            'type' => 'object',
+                            'properties' => [
+                            'file' => [
+                                'type' => 'string',
+                                'format' => 'binary',
+                            ],
+                            ],
+                        ],
+                    ],
+                ],
+                ],
+            ],
+
+        ]
+        
+
         
         
     ]
 )]
+/**
+ * @Vich\Uploadable
+ */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -110,11 +142,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserField::class)]
     private $userFields;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $photo;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read_profile'])]
     private $sexe;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(["read_profile", "read_detail_profile"])]
+    private $photo;
+
+    /**
+    * @Vich\UploadableField(mapping="user_image", fileNameProperty="photo")
+    */
+    public ?File $file = null;
+
 
     public function __construct()
     {
@@ -428,6 +469,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
+  
+
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(string $sexe): self
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
     public function getPhoto(): ?string
     {
         return $this->photo;
@@ -440,15 +495,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSexe(): ?string
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setFile(?File $file = null): void
     {
-        return $this->sexe;
+        $this->file = $file;
+
+        if (null !== $file) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
-    public function setSexe(string $sexe): self
+    public function getFile(): ?File
     {
-        $this->sexe = $sexe;
-
-        return $this;
+        return $this->file;
     }
 }

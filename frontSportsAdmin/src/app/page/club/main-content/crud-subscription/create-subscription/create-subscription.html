@@ -6,6 +6,7 @@
       class="btn-close"
       aria-label="Close"
       (click)="modal.dismiss('Cross click')"
+
     ></button>
   </div>
   <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
@@ -14,21 +15,22 @@
       <input id="name" type="text" name="name" ngModel />
 
       <label for="amount">Tarif (€) : </label>
-      <input id="amount" type="number" name="amount" ngModel />
+      <input id="amount" type="number" name="amount" min=0  ngModel />
 
       <label for="durationInMonths">Validité de la cotisation (mois) : </label>
       <input
         id="durationInMonths"
         type="number"
         name="durationInMonths"
+        min=0 
         ngModel
       />
     </div>
     <div class="modal-footer">
       <button
         type="submit"
-        (click)="add()"
         (click)="modal.close('Save click')"
+        (click)="addNew(form.value)"
       >
         <svg
           class="w-6 h-6"

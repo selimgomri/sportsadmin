@@ -1,9 +1,6 @@
 <div class="body-component">
   <div class="add-subscription">
-    <create-subscription
-      [newSubscription]="newSubscription"
-      (addClick)="onAddClick($event)"
-    >
+    <create-subscription (newSubscription)="addSubscription($event)">
     </create-subscription>
   </div>
   <h2 class="heading2">MES COTISATIONS</h2>
@@ -18,30 +15,19 @@
             [subscription]="subscription"
             (removeClick)="onRemoveClick($event)"
           ></verify-modal>
-          <h5 class="card-title">Tarif: {{ subscription.amount }}€</h5>
+          <h5 class="card-title">Tarif: {{ subscription.amount }} €</h5>
           <h5 class="card-title">
             Validité de la cotisation : {{ subscription.durationInMonths }} mois
           </h5>
         </div>
       </div>
-      <button class="edit-subscription">
-        <svg
-          class="edit-subscription-icon"
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="{2}"
-            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-          />
-        </svg>
-        Modifier la cotisation
-      </button>
+      <edit-subscription
+        [subscription]="subscription"
+        (editedSubscription)="editSubscription($event)"
+      >
+      </edit-subscription>
+
+
     </div>
   </div>
 </div>

@@ -2,7 +2,10 @@
   <div class="row">
     <div class="col">
       <div>
-        <img src="./assets/img/johndoe.jpg" />
+        <img
+          src="https://localhost:8000/images/users/{{ user?.photo }}
+          " class="photo"
+        />
       </div>
       <p class="info">Rôle: {{ user?.roles }}</p>
     </div>
@@ -17,7 +20,7 @@
       </div>
       <div class="label">
         <p class="italic">Date de naissance:</p>
-        <p class="info">{{ user?.birthdate }}</p>
+        <p class="info">{{ user?.birthdate | date: "dd/MM/yyyy" }}</p>
       </div>
       <div class="label">
         <p class="italic">Adresse:</p>
@@ -60,18 +63,21 @@
       <ng-template #content let-c="close" let-d="dismiss">
         <div class="modal-header">
           <h1 class="modal-title" id="modal-basic-title">éditer profil</h1>
-          <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="d('Cross click')"
+          ></button>
         </div>
         <div class="modal-body">
           <div class="container">
-          <app-profile></app-profile>
-        </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" (click)="('Save click')">Enregistrer les modifications</button>
+
+            <app-profile (submit)="c('Close click')" [user]='user'></app-profile>
+
+          </div>
         </div>
       </ng-template>
-
     </div>
   </div>
 </div>

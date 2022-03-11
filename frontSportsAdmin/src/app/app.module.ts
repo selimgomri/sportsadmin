@@ -1,3 +1,4 @@
+import { EditSubscription } from './page/club/main-content/crud-subscription/edit-subscription/edit-subscription';
 import { EditClubComponent } from './page/club/main-content/edit-club/edit-club.component';
 import { PageMyclubsComponent } from './page/club-choice/page-myclubs//page-myclubs.component';
 import { SideBarComponent } from './shared-content/side-bar/side-bar.component';
@@ -39,6 +40,7 @@ import { AjoutUserViewComponent } from './page/club/view/ajout-user-view/ajout-u
 import { AddUserComponent } from './page/club/main-content/edit-club/crud-user/add-user/add-user.component';
 import { CreateUserViewComponent } from './page/club/view/create-user-view/create-user-view.component';
 import { OubliPasswordComponent } from './oubli-password/oubli-password.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,10 +75,14 @@ import { OubliPasswordComponent } from './oubli-password/oubli-password.componen
     CreateUserViewComponent,
     OubliPasswordComponent,
 
+    EditSubscription,
+
+
+
 
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     NgbModule,
     AppRoutingModule,
     FormsModule,
