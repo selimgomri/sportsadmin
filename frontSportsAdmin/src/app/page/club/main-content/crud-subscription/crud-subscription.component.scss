@@ -6,7 +6,7 @@
 // button add subscription
 .add-subscription {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin-bottom: 40px;
   width: auto;
   height: 50px;
@@ -49,7 +49,6 @@
   border-radius: 30%;
   background-color: #f57777;
 }
-
 
 .subscription {
   margin: 10px;
