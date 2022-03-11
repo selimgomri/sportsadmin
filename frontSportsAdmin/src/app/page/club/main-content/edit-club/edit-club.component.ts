@@ -31,7 +31,6 @@ export class EditClubComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required]),
-      sport: new FormControl('', [Validators.required]),
       logo: new FormControl('', [Validators.required]),
       primarycolor: new FormControl('', [Validators.required]),
       secondarycolor: new FormControl('', [Validators.required]),
