@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container page">
-    <form class="form-control">
+    <div class="form-control">
         {% for flash_error in app.flashes('reset_password_error') %}
             <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
         {% endfor %}
@@ -17,7 +17,7 @@
                 </div>
             
         {{ form_end(requestForm) }}
-    </form>
+    </div>
 </div>
 {% endblock %}
 
