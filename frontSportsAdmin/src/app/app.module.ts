@@ -73,10 +73,6 @@ import { CreateUserViewComponent } from './page/club/view/create-user-view/creat
     AddUserComponent,
     CreateUserViewComponent,
     EditSubscription,
-
-
-
-
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

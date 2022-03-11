@@ -34,8 +34,6 @@ class ResetPasswordController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    
-
     /**
      * Display & process form to request a password reset.
      */
@@ -169,7 +167,7 @@ public function reset(Request $request, UserPasswordHasherInterface $userPasswor
         ->htmlTemplate('reset_password/email.html.twig')
         ->context([
             'resetToken' => $resetToken,
-            $resetToken
+            $resetToken,
         ])
     ;
 

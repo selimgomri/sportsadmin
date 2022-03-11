@@ -9,6 +9,7 @@ import { ListMembersViewComponent } from './page/club/view/list-members-view/lis
 import { AjoutUserViewComponent } from './page/club/view/ajout-user-view/ajout-user-view.component';
 import { AuthGuard } from './shared/auth.guard';
 import { ProfileViewComponent } from './page/club/view/profile-view/profile-view.component';
+import { AddUserComponent } from './page/club/main-content/edit-club/crud-user/add-user/add-user.component';
 import { CreateUserViewComponent } from './page/club/view/create-user-view/create-user-view.component';
 
 const routes: Routes = [
