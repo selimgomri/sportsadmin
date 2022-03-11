@@ -4,4 +4,6 @@ export interface Club {
   id: number;
   primarycolor: string;
   secondarycolor: string;
+  sport: string;
+  address: string;
 }

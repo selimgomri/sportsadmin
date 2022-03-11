@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Edit } from './Edit';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ApiService } from 'src/app/services/session-login/api.service';
+import { Club } from 'src/app/club';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ClubService } from 'src/app/services/club.service';
 
 @Component({
   selector: 'edit-club',
@@ -9,17 +10,40 @@ import { ApiService } from 'src/app/services/session-login/api.service';
   styleUrls: ['./edit-club.component.scss'],
 })
 export class EditClubComponent implements OnInit {
-  model: Edit = new Edit();
+  //model: Edit = new Edit();
+  @Input() club!: Club;
   file: File | undefined;
-  club: any;
+  form!: FormGroup;
+  id!: number;
+
+  constructor(private http: HttpClient, private clubService: ClubService) {
+    this.changeTheme(this.primaryColor, this.secondaryColor); // Set default theme
+  }
 
   ngOnInit(): void {
+    this.clubService.getClub(1).subscribe((datas: any) => {
+      console.log(datas);
+      this.club = datas;
+      console.log(this.club);
+      //this.id = this.club.id;
+    });
 
+    this.form = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required]),
+      sport: new FormControl('', [Validators.required]),
+      logo: new FormControl('', [Validators.required]),
+      //primaryColor: new FormControl('', [Validators.required]),
+      //secondaryColor: new FormControl('', [Validators.required]),
+    });
+  }
+
+  get f() {
+    return this.form.controls;
   }
 
   onSubmit() {
     console.log({
-      ...this.model,
       file: this.file,
     });
 
@@ -39,14 +63,9 @@ export class EditClubComponent implements OnInit {
   primaryColor = '#fafafa';
   secondaryColor = '#4AC285';
 
-  constructor(private http: HttpClient, private apiService: ApiService) {
-    this.changeTheme(this.primaryColor, this.secondaryColor); // Set default theme
-  }
-
   changeTheme(primary: string, secondary: string) {
     document.documentElement.style.setProperty('--primary-color', primary);
     document.documentElement.style.setProperty('--secondary-color', secondary);
-    console.log('changetheme', primary);
   }
 
   onFileSelected(event: any) {
@@ -65,5 +84,13 @@ export class EditClubComponent implements OnInit {
 
       upload$.subscribe(); */
     }
+  }
+
+  submit() {
+    this.clubService
+      .updateClub(this.form.value.id, this.form.value)
+      .subscribe((res: any) => {
+        console.log('club updated successfully!');
+      });
   }
 }
