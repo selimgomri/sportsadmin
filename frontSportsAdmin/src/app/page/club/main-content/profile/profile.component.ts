@@ -13,7 +13,6 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class ProfileComponent implements OnInit {
   @Input() user!: IUser;
   id!: number;
-  //user!: IUser;
   form!: FormGroup;
 
   constructor(
