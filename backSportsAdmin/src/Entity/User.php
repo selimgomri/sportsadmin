@@ -16,7 +16,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 
-use App\Controller\Api\MeAction;
 use App\Controller\Api\UserImageAction;
 use Symfony\Component\HttpFoundation\File\File;
 use Gedmo\Timestampable\Traits\TimestampableEntity;

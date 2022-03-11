@@ -8,10 +8,7 @@ import { EditClubViewComponent } from './page/club/view/edit-club-view/edit-club
 import { ListMembersViewComponent } from './page/club/view/list-members-view/list-members-view.component';
 import { AjoutUserViewComponent } from './page/club/view/ajout-user-view/ajout-user-view.component';
 import { AuthGuard } from './shared/auth.guard';
-import { ProfileComponent } from './page/club/main-content/profile/profile.component';
 import { ProfileViewComponent } from './page/club/view/profile-view/profile-view.component';
-import { AddUserComponent } from './page/club/main-content/edit-club/crud-user/add-user/add-user.component';
-import { OubliPasswordComponent } from './oubli-password/oubli-password.component';
 import { CreateUserViewComponent } from './page/club/view/create-user-view/create-user-view.component';
 
 const routes: Routes = [
@@ -89,16 +86,14 @@ const routes: Routes = [
     path: 'ajouter-membre',
     component: CreateUserViewComponent,
   },
-  {
-    path: 'oubli-password',
-    component: OubliPasswordComponent,
-  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-})],
+  imports: [
+    RouterModule.forRoot(routes, {
+      initialNavigation: 'enabledBlocking',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
