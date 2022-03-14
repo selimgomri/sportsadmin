@@ -20,8 +20,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/reset-password')]
-class ResetPasswordController extends AbstractController
+#[Route('/modify', name:'modify')]
+class ModifyPasswordController extends AbstractController
 {
     use ResetPasswordControllerTrait;
 
@@ -37,7 +37,7 @@ class ResetPasswordController extends AbstractController
     /**
      * Display & process form to request a password reset.
      */
-    #[Route('', name:'app_forgot_password_request')]
+    #[Route('', name:'app_modify_password_request')]
 function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
     {
     $form = $this->createForm(ResetPasswordRequestFormType::class);
@@ -51,7 +51,7 @@ function request(Request $request, MailerInterface $mailer, TranslatorInterface 
         );
     }
 
-    return $this->render('reset_password/request.html.twig', [
+    return $this->render('modify_password/modify_request.html.twig', [
         'requestForm' => $form->createView(),
     ]);
 }
@@ -68,7 +68,7 @@ function checkEmail(): Response
         $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
     }
 
-    return $this->render('reset_password/check_email.html.twig', [
+    return $this->render('modify_password/check_email.html.twig', [
         'resetToken' => $resetToken,
     ]);
 }
@@ -76,7 +76,7 @@ function checkEmail(): Response
 /**
  * Validates and process the reset URL that the user clicked in their email.
  */
-#[Route('/reset/{token}', name:'app_reset_password')]
+#[Route('/modify/{token}', name:'app_modify_password')]
 function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher, TranslatorInterface $translator, string $token = null): Response
     {
     if ($token) {
@@ -85,7 +85,7 @@ function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher
         // loaded in a browser and potentially leaking the token to 3rd party JavaScript.
         $this->storeTokenInSession($token);
 
-        return $this->redirectToRoute('app_reset_password');
+        return $this->redirectToRoute('app_modify_password');
     }
 
     $token = $this->getTokenFromSession();
@@ -102,7 +102,7 @@ function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher
             $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
         ));
 
-        return $this->redirectToRoute('app_forgot_password_request');
+        return $this->redirectToRoute('app_modify_password_request');
     }
 
     // The token is valid; allow the user to change their password.
@@ -127,7 +127,7 @@ function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher
         return $this->redirectToRoute('home');
     }
 
-    return $this->render('reset_password/reset.html.twig', [
+    return $this->render('modify_password/modify.html.twig', [
         'resetForm' => $form->createView(),
     ]);
 }
@@ -164,7 +164,7 @@ function processSendingPasswordResetEmail(string $emailFormData, MailerInterface
         ->from(new Address('smectaz57@gmail.com', 'sportsadmin'))
         ->to($user->getEmail())
         ->subject('Your password modify request')
-        ->htmlTemplate('reset_password/email.html.twig')
+        ->htmlTemplate('modify_password/email.html.twig')
         ->context([
             'resetToken' => $resetToken,
             $resetToken,
