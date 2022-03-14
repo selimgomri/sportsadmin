@@ -34,5 +34,11 @@ button {
 	margin-top: 50px;
 }
 
+.button2 {
+	margin-top: 15px !important;
+	display: flex;
+	justify-content: center;
+}
+
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
