@@ -1,18 +1,19 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
-  selector: 'app-add-user',
-  templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.scss']
+  selector: 'app-create-profile',
+  templateUrl: './create-profile.component.html',
+  styleUrls: ['./create-profile.component.scss']
 })
-export class AddUserComponent implements OnInit {
+export class CreateProfileComponent implements OnInit {
 
   constructor(private apiService: UsersService, private formBuilder: FormBuilder, private router: Router) {}
 
   form!: FormGroup;
+
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -36,7 +37,7 @@ export class AddUserComponent implements OnInit {
     console.log(this.form.value);
     this.apiService.createUser(this.form.value).subscribe((res:any) => {
          console.log('user created successfully!');
-         this.router.navigateByUrl('liste-membres');
+         this.router.navigateByUrl('creer-mon-club');
     })
 
   }

@@ -11,7 +11,8 @@ import { AuthGuard } from './shared/auth.guard';
 import { ProfileViewComponent } from './page/club/view/profile-view/profile-view.component';
 import { AddUserComponent } from './page/club/main-content/edit-club/crud-user/add-user/add-user.component';
 import { CreateUserViewComponent } from './page/club/view/create-user-view/create-user-view.component';
-
+import { CreateProfileComponent } from './page/club/main-content/crud-club/create-profile.component';
+import { CreateClubComponent } from './page/club/main-content/crud-club/create-club/create-club.component';
 const routes: Routes = [
   {
     path: '',
@@ -87,6 +88,14 @@ const routes: Routes = [
     path: 'ajouter-membre',
     component: CreateUserViewComponent,
   },
+  {
+    path: 'creer-mon-profil',
+    component:CreateProfileComponent,
+  },
+  {
+    path: 'creer-mon-club',
+    component:CreateClubComponent,
+  }
 ];
 
 @NgModule({

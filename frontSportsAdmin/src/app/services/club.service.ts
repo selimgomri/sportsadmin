@@ -19,4 +19,8 @@ export class ClubService {
     return this.http
     .put(`${environment.baseUrl}/api/clubs/${id}`, data, { withCredentials: true });
   }
+
+  createClub(data: any): Observable<any> {
+    return this.http.post(`${environment.baseUrl}/api/clubs`, data, { withCredentials: true });
+  }
 }
