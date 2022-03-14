@@ -34,11 +34,6 @@ class ResetPasswordController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    
-
-    /**
-     * Display & process form to request a password reset.
-     */
     #[Route('', name:'app_forgot_password_request')]
 function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
     {
@@ -169,12 +164,12 @@ function processSendingPasswordResetEmail(string $emailFormData, MailerInterface
         ->htmlTemplate('reset_password/email.html.twig')
         ->context([
             'resetToken' => $resetToken,
-            $resetToken
+            $resetToken,
         ])
     ;
 
     $mailer->send($email);
-    
+
     // Store the token object in session for retrieval in check-email route.
     $this->setTokenObjectInSession($resetToken);
 
