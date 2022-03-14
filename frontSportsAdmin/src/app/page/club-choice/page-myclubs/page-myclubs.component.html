@@ -6,7 +6,7 @@
 <div class="container-fluid clubs">
   <div class="container club" *ngFor="let club of clubs" (click)="redirectToDashboard()">
     <div class="logo">
-     <img src="https://localhost:8000/images/logo/{{ club.logo }}" width=200px/>
+     <img class ="logo" src="https://localhost:8000/images/logo/{{ club.logo }}" width=200px/>
     </div>
     <div class="club-name">
         <h1>{{ club.name }}</h1>

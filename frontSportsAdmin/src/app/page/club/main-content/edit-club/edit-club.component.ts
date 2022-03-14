@@ -59,8 +59,8 @@ export class EditClubComponent implements OnInit {
     this.secondarycolor = newColor;
   }
 
-  primarycolor = '#FFFFFF';
-  secondarycolor = '#FF0000';
+  primarycolor = '#F6F4F5';
+  secondarycolor = '#4AC285';
 
   changeTheme(primary: string, secondary: string) {
     document.documentElement.style.setProperty('--primary-color', primary);

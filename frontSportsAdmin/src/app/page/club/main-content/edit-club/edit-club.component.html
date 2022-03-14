@@ -20,6 +20,25 @@
             [(ngModel)]="club.address"
           />
         </div>
+
+        <div class="form-group">
+          <label for="theme">Choisir la couleur du menu latéral</label>
+          <input
+            formControlName="primarycolor"
+            class="form-control colorpicker"
+            type="color"
+            (ngModelChange)="setColor1($event)"
+            [(ngModel)]="primarycolor"
+          />
+          <label for="theme">Choisir la couleur des boutons</label>
+          <input
+            formControlName="secondarycolor"
+            class="form-control colorpicker"
+            type="color"
+            (ngModelChange)="setColor2($event)"
+            [(ngModel)]="secondarycolor"
+          />
+        </div>
         <!-- <div class="form-group">
           <label for="sport">Sport Pratiqué*</label>
           <input
@@ -33,7 +52,10 @@
 
       <div class="col">
         <div class="form-group">
-          <label for="logo">Logo*</label>
+          <div>
+            <label for="logo">Logo*</label>
+          </div>
+          <img class="logo" src="https://localhost:8000/images/logo/{{ club.logo }}">
           <input
             formControlName="logo"
             class="form-control"
@@ -41,23 +63,7 @@
             [(ngModel)]="club.logo"
           />
         </div>
-        <div class="form-group">
-          <label for="theme">Thème</label>
-          <input
-            formControlName="primarycolor"
-            class="form-control colorpicker"
-            type="color"
-            (ngModelChange)="setColor1($event)"
-            [(ngModel)]="primarycolor"
-          />
-          <input
-            formControlName="secondarycolor"
-            class="form-control colorpicker"
-            type="color"
-            (ngModelChange)="setColor2($event)"
-            [(ngModel)]="secondarycolor"
-          />
-        </div>
+
       </div>
     </div>
     <div class="form-group button">
