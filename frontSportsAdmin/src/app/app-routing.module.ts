@@ -13,6 +13,8 @@ import { AddUserComponent } from './page/club/main-content/edit-club/crud-user/a
 import { CreateUserViewComponent } from './page/club/view/create-user-view/create-user-view.component';
 import { CreateProfileComponent } from './page/club/main-content/crud-club/create-profile.component';
 import { CreateClubComponent } from './page/club/main-content/crud-club/create-club/create-club.component';
+import { CreateClubViewComponent } from './page/club/view/create-club-view/create-club-view.component';
+import { CreateProfileViewComponent } from './page/club/view/create-profile-view/create-profile-view.component';
 const routes: Routes = [
   {
     path: '',
@@ -90,11 +92,11 @@ const routes: Routes = [
   },
   {
     path: 'creer-mon-profil',
-    component:CreateProfileComponent,
+    component:CreateProfileViewComponent,
   },
   {
     path: 'creer-mon-club',
-    component:CreateClubComponent,
+    component:CreateClubViewComponent,
   }
 ];
 

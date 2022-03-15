@@ -41,6 +41,8 @@ import { AddUserComponent } from './page/club/main-content/edit-club/crud-user/a
 import { CreateUserViewComponent } from './page/club/view/create-user-view/create-user-view.component';
 import { CreateClubComponent } from './page/club/main-content/crud-club/create-club/create-club.component';
 import { CreateProfileComponent } from './page/club/main-content/crud-club/create-profile.component';
+import { CreateClubViewComponent } from './page/club/view/create-club-view/create-club-view.component';
+import { CreateProfileViewComponent } from './page/club/view/create-profile-view/create-profile-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +78,8 @@ import { CreateProfileComponent } from './page/club/main-content/crud-club/creat
     EditSubscription,
     CreateProfileComponent,
     CreateClubComponent,
+    CreateClubViewComponent,
+    CreateProfileViewComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

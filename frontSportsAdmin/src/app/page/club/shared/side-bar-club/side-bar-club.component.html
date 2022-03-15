@@ -1,8 +1,15 @@
 <div class="side-bar">
   <div class="d-flex justify-content-center">
-    <img
+    <img *ngIf="club.logo != null"
       class="logoClub"
       src="https://localhost:8000/images/logo/{{ club.logo }}"
+      alt=""
+      height="120"
+      width="120"
+    />
+    <img *ngIf="club.logo == null"
+      class="logoClub"
+      src="/assets/img/LogoSportsAdmin.png"
       alt=""
       height="120"
       width="120"
