@@ -22,9 +22,7 @@ export class EditClubComponent implements OnInit {
 
   ngOnInit(): void {
     this.clubService.getClub(5).subscribe((datas: any) => {
-      console.log(datas);
       this.club = datas;
-      console.log(this.club);
       //this.id = this.club.id;
     });
 
