@@ -17,10 +17,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="profile-picture" [routerLink]="['/mon-profil']">
-              <img
+              <img *ngIf="user.photo != null"
                 src="https://localhost:8000/images/users/{{
                   user?.photo
                 }}"
+                height="60"
+                width="60"
+              />
+              <img *ngIf="user.photo == null"
+                src="/assets/img/person-circle.svg"
                 height="60"
                 width="60"
               />

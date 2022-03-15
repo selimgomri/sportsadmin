@@ -22,9 +22,7 @@ export class EditClubComponent implements OnInit {
 
   ngOnInit(): void {
     this.clubService.getClub(5).subscribe((datas: any) => {
-      console.log(datas);
       this.club = datas;
-      console.log(this.club);
       //this.id = this.club.id;
     });
 
@@ -59,8 +57,8 @@ export class EditClubComponent implements OnInit {
     this.secondarycolor = newColor;
   }
 
-  primarycolor = '#FFFFFF';
-  secondarycolor = '#FF0000';
+  primarycolor = '#F6F4F5';
+  secondarycolor = '#4AC285';
 
   changeTheme(primary: string, secondary: string) {
     document.documentElement.style.setProperty('--primary-color', primary);
