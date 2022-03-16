@@ -77,7 +77,6 @@ function checkEmail(): Response
 function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher, TranslatorInterface $translator, string $token = null): Response
     {
     if ($token) {
-        var_dump($token);
         // We store the token in session and remove it from the URL, to avoid the URL being
         // loaded in a browser and potentially leaking the token to 3rd party JavaScript.
         $this->storeTokenInSession($token);
