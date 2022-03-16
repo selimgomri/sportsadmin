@@ -1,4 +1,12 @@
 <div class="container mt-5">
+
+  <div class="mb-3 row">
+    <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label fw-bold">Rechercher un membre:</label>
+    <div class="col-xs-3 col-sm-auto">
+      <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter">
+    </div>
+  </div>
+
   <table class="table table-borderless table-responsive card-1 p-4">
     <thead>
       <tr class="header-table">
@@ -17,8 +25,7 @@
       <tr
         class="list-item"
         *ngFor="
-          let user of sortedUsers | slice: (page - 1) * pageSize:page * pageSize
-        "
+          let user of sortedUsers | slice: (page - 1) * pageSize:page * pageSize"
       >
         <td>
           <div class="p-2 d-flex flex-row align-items-center mb-2">
@@ -33,9 +40,11 @@
               class="rounded-circle"
             />
             <div class="d-flex flex-column ml-2">
-              <span class="d-block fw-bold"
-                >{{ user.firstname }} {{ user.lastname }}</span
-              >
+              <span class="d-block">
+                <ngb-highlight [result]="user.firstname" [term]="filter.value"></ngb-highlight>
+                <ngb-highlight [result]="user.lastname" [term]="filter.value"></ngb-highlight>
+              </span>
+
               <span class="text-muted">Loisirs</span>
               <span class="text-muted">{{ user.licenseNumber }}</span>
             </div>
@@ -253,4 +262,5 @@
   >
   </ngb-pagination>
 </div>
+
 
