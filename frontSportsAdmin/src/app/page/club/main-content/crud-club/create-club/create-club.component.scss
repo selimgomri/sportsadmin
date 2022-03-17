@@ -1,4 +1,4 @@
-.edit {
+.box {
   background-color: #f6f4f5;
   border-radius: 35px;
   display: flex;
@@ -9,19 +9,17 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-input {
-  border-radius: 20px;
+input, select, .alert-danger {
+  border-radius: 30px;
   width: 400px;
+}
+
+.alert-danger {
+  padding-left: 13px;
 }
 
 .form-group {
   margin: 30px;
-}
-
-.logo {
-  border-radius: 30px;
-  height: 200px;
-  margin-bottom: 50px;
 }
 
 .colorpicker {
@@ -30,8 +28,14 @@ input {
   margin-bottom: 30px;
 }
 
-.button {
-  text-align: right;
+.align-right {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 30px;
+}
+
+.red {
+  color: red;
 }
 
 svg {
@@ -43,7 +47,7 @@ svg {
 }
 
 @media screen and (max-width: 600px) {
-  .edit {
+  .box {
     display: flex;
     flex-direction: column;
     justify-content: center;

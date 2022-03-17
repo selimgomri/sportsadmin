@@ -18,6 +18,14 @@
     "@angular-devkit/core" "13.1.4"
     "rxjs" "6.6.7"
 
+"@angular-devkit/architect@0.1302.1":
+  "integrity" "sha512-h5LA1VTmWKLLzYvnLPqwdyLI9l43FVIUflvmDf6s2ScTrVf3Bb7B4KkCBDdNa8FxnBitfFqKJBf6RGcKjjeDcw=="
+  "resolved" "https://registry.npmjs.org/@angular-devkit/architect/-/architect-0.1302.1.tgz"
+  "version" "0.1302.1"
+  dependencies:
+    "@angular-devkit/core" "13.1.4"
+    "rxjs" "6.6.7"
+
 "@angular-devkit/architect@0.1302.3":
   "integrity" "sha512-0m8jMKrFfIqsYt33zTUwSmyekyfuS67hna08RQ6USjzWQSE3z4S8ulCUARSjM6AzdMblX+whfy56nJUpT17NSA=="
   "resolved" "https://registry.npmjs.org/@angular-devkit/architect/-/architect-0.1302.3.tgz"

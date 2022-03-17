@@ -4,9 +4,9 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\Api\MeAction;
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Controller\Api\UserImageAction;
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -76,84 +76,83 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 #[Groups(['read_profile'])]
 private $id;
 
-#[ORM\Column(type:'string', length:180, unique:true)]
-#[Groups(['read_profile'], ['reset_password'])]
+    #[ORM\Column(type:'string', length:180, unique:true)]
+#[Groups(['read_profile'])]
 private $email;
 
-#[ORM\Column(type:'json')]
+    #[ORM\Column(type:'json')]
 #[Groups(['read_profile'])]
 private $roles = [];
 
-#[ORM\Column(type:'string')]
-#[Groups(['reset_password'])]
+    #[ORM\Column(type:'string')]
 private $password;
 
-#[ORM\Column(type:'string', length:255)]
+    #[ORM\Column(type:'string', length:255)]
 #[Groups(['read_profile'])]
 private $lastname;
 
-#[ORM\Column(type:'string', length:255)]
+    #[ORM\Column(type:'string', length:255)]
 #[Groups(['read_profile'])]
 private $firstname;
 
-#[ORM\Column(type:'date')]
+    #[ORM\Column(type:'date')]
 #[Groups(['read_profile'])]
 private $birthdate;
 
-#[ORM\Column(type:'string', length:255, nullable:true)]
+    #[ORM\Column(type:'string', length:255, nullable:true)]
 #[Groups(['read_profile'])]
 private $address;
 
-#[ORM\Column(type:'string', length:255, nullable:true)]
+    #[ORM\Column(type:'string', length:255, nullable:true)]
 #[Groups(['read_profile'])]
 private $phone;
 
-#[ORM\Column(type:'integer', nullable:true)]
+    #[ORM\Column(type:'integer', nullable:true)]
 private $license_number;
 
-#[ORM\Column(type:'string', length:255, nullable:true)]
+    #[ORM\Column(type:'string', length:255, nullable:true)]
 private $category;
 
-#[ORM\ManyToOne(targetEntity:Guardian::class, inversedBy:'users')]
+    #[ORM\ManyToOne(targetEntity:Guardian::class, inversedBy:'users')]
 private $guardian;
 
-#[ORM\OneToMany(mappedBy:'user', targetEntity:ClubUser::class)]
+    #[ORM\OneToMany(mappedBy:'user', targetEntity:ClubUser::class)]
 private $clubUsers;
 
-#[ORM\OneToMany(mappedBy:'user', targetEntity:Document::class)]
+    #[ORM\OneToMany(mappedBy:'user', targetEntity:Document::class)]
 private $documents;
 
-#[ORM\ManyToOne(targetEntity:Subscription::class, inversedBy:'users')]
+    #[ORM\ManyToOne(targetEntity:Subscription::class, inversedBy:'users')]
 private $subscription;
 
-#[ORM\OneToMany(mappedBy:'user', targetEntity:Invoice::class)]
+    #[ORM\OneToMany(mappedBy:'user', targetEntity:Invoice::class)]
 private $invoices;
 
-#[ORM\OneToMany(mappedBy:'user', targetEntity:UserField::class)]
+    #[ORM\OneToMany(mappedBy:'user', targetEntity:UserField::class)]
 private $userFields;
 
-#[ORM\Column(type:'string', length:255)]
+    #[ORM\Column(type:'string', length:255)]
 #[Groups(['read_profile'])]
 private $sexe;
 
-#[ORM\Column(type:'string', length:255, nullable:true)]
+    #[ORM\Column(type:'string', length:255, nullable:true)]
 #[Groups(["read_profile", "read_detail_profile"])]
 private $photo;
 
-/**
- * @Vich\UploadableField(mapping="user_image", fileNameProperty="photo")
- */
-public  ? File $file = null;
+    /**
+     * @Vich\UploadableField(mapping="user_image", fileNameProperty="photo")
+     */
+    public ? File $file = null;
 
 public function __construct()
     {
-    $this->clubUsers = new ArrayCollection();
-    $this->documents = new ArrayCollection();
-    $this->invoices = new ArrayCollection();
-    $this->userFields = new ArrayCollection();
-}
+        $this->clubUsers = new ArrayCollection();
+        $this->documents = new ArrayCollection();
+        $this->invoices = new ArrayCollection();
+        $this->userFields = new ArrayCollection();
+    }
 
-function getId() : ?int
+    public function getId() : ?int
     {
     return $this->id;
 }
@@ -219,9 +218,9 @@ function setPassword(string $password): self
  */
 function eraseCredentials()
     {
-    // If you store any temporary, sensitive data on the user, clear it here
+        // If you store any temporary, sensitive data on the user, clear it here
     // $this->plainPassword = null;
-}
+    }
 
 function getLastname(): ?string
     {
@@ -252,7 +251,7 @@ function getBirthdate(): ?\DateTimeInterface
     return $this->birthdate;
 }
 
-function setBirthdate(\DateTimeInterface$birthdate): self
+    public function setBirthdate(\DateTimeInterface$birthdate): self
     {
     $this->birthdate = $birthdate;
 
@@ -451,12 +450,7 @@ function removeUserField(UserField $userField): self
     return $this;
 }
 
-function getUsername(): string
-    {
-    return $this->email;
-}
-
-function getSexe(): ?string
+    public function getSexe(): ?string
     {
     return $this->sexe;
 }

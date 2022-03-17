@@ -18,6 +18,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     normalizationContext: [ 'groups' => ['read_club'] ],
     itemOperations:[
         'get',
+        'put',
         'logo' => [
             'method' => 'POST',
             'path' => 'clubs/{id}/logo',

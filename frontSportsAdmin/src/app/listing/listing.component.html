@@ -22,7 +22,12 @@
       >
         <td>
           <div class="p-2 d-flex flex-row align-items-center mb-2">
-            <img
+            <img *ngIf="user.photo == null"
+              src="/assets/img/person-circle.svg"
+              width="50"
+              class="rounded-circle"
+              />
+              <img *ngIf="user.photo != null"
               src="https://localhost:8000/images/users/{{user.photo}}"
               width="50"
               class="rounded-circle"

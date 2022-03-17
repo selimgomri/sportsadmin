@@ -35,7 +35,6 @@ class ModifyPasswordType extends AbstractType
             'label' => 'Ancien mot de passe',
         ])
         ->add('Password', RepeatedType::class, [
-            'row_attr' => ['class' => 'form-control corp'],
             'type' => PasswordType::class,
             'first_options' => [
                 'attr' => ['autocomplete' => 'new-password'],
