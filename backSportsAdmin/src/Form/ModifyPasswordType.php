@@ -23,11 +23,11 @@ class ModifyPasswordType extends AbstractType
             'row_attr' => ['class' => 'input-control corp'],
             'constraints' => [
                 new NotBlank([
-                    'message' => 'Please enter a password',
+                    'message' => 'Veuillez saisir un mot de passe',
                 ]),
                 new Length([
                     'min' => 6,
-                    'minMessage' => 'Your password should be at least {{ limit }} characters',
+                    'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} caractères',
                     // max length allowed by Symfony for security reasons
                     'max' => 4096,
                 ]),
@@ -41,11 +41,11 @@ class ModifyPasswordType extends AbstractType
                 'row_attr' => ['class' => 'input-control corp'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez saisir un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
@@ -57,7 +57,7 @@ class ModifyPasswordType extends AbstractType
                 'row_attr' => ['class' => 'input-control corp'],
                 'label' => 'Repeter le mot de passe',
             ],
-            'invalid_message' => 'The password fields must match.',
+            'invalid_message' => 'Les mots de passe doivent étre identique',
             // Instead of being set onto the object directly,
             // this is read and encoded in the controller
             'mapped' => false,
@@ -68,8 +68,7 @@ class ModifyPasswordType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ChangePassword::class,
-            'csrf_token_id' => 'change_password',
+       
         ]);
     }
 }
