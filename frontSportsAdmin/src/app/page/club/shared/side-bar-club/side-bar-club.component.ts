@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Club } from 'src/app/club';
-import { Clubs } from 'src/app/mock-clubs';
-import { ApiService } from 'src/app/services/session-login/api.service';
+import { ClubService } from 'src/app/services/club.service';
 
 @Component({
   selector: 'side-bar-club',
@@ -10,17 +9,19 @@ import { ApiService } from 'src/app/services/session-login/api.service';
   styleUrls: ['./side-bar-club.component.scss']
 })
 export class SideBarClubComponent implements OnInit {
-  clubs = Clubs;
+  @Input() club!: Club;
 
-  constructor(private router: Router, private apiService: ApiService) { }
+  constructor(private router: Router, private clubService: ClubService) { }
 
   redirectToAddMember() {
     this.router.navigate(['./ajouter-un-membre']);
   }
 
-  ngOnInit(): void {  this.apiService.getClubs().subscribe((datas: any) => {
-    this.clubs = datas['hydra:member'];
-  });
+  ngOnInit(): void {
+    this.clubService.getClub(5).subscribe((datas: any) => {
+      console.log(datas);
+      this.club = datas;
+      console.log(this.club);
+    });
   }
-
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, empty, Observable } from 'rxjs';
 
 import { IUser } from 'src/app/IUser';
 
@@ -44,6 +44,11 @@ export class SessionLoginService {
   saveUserToLocalStorage(user: IUser) {
     this.userProfile.next(user);
     localStorage.setItem('me', JSON.stringify(user));
+  }
+
+  logout(){
+    localStorage.removeItem('me');
+
   }
 
 /*   loadUserFromLocalStorage(): IUser {
