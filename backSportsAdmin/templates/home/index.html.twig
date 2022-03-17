@@ -3,7 +3,6 @@
 {% block body %}
 
 {% if app.user %}
-<a class="btn btn-outline-secondary" href="{{ path('app_login') }}">Login</a>
 <a class="btn btn-outline-secondary" href="{{ path('app_logout') }}">Logout</a>
 {% endif %}
 {% endblock %}

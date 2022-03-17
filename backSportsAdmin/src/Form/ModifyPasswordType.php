@@ -68,7 +68,8 @@ class ModifyPasswordType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            
+            'data_class' => ChangePassword::class,
+            'csrf_token_id' => 'change_password',
         ]);
     }
 }

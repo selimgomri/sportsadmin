@@ -26,7 +26,7 @@ class ModifyPasswordController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER');
         $user = $this->getUser();
         $changePassword = new ChangePassword();
-        
+        $user = new User();
         // rattachement du formulaire avec la class changePassword
         $form = $this->createForm(ModifyPasswordType::class);
         $form->handleRequest($request);
