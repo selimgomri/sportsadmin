@@ -9,6 +9,7 @@ import { IUser } from 'src/app/IUser';
 })
 export class ListMembersComponent implements OnInit {
 
+  @Input() user!: IUser;
   usersNumber!: number;
   constructor() { }
 
