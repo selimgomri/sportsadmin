@@ -17,8 +17,8 @@ export class PageMyclubsComponent implements OnInit {
     this.router.navigate(['./dashboard']);
   }
 
-  redirectToEditMyClub() {
-    this.router.navigate(['./editer-mon-club']);
+  redirectToCreateMyClub() {
+    this.router.navigate(['./creer-mon-club']);
   }
 
   ngOnInit(): void {

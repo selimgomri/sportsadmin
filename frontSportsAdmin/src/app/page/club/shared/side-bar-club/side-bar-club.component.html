@@ -1,14 +1,21 @@
 <div class="side-bar">
-  <div class="d-flex justify-content-center" *ngFor="let club of clubs" >
-    <img
+  <div class="d-flex justify-content-center">
+    <img *ngIf="club.logo != null"
       class="logoClub"
       src="https://localhost:8000/images/logo/{{ club.logo }}"
       alt=""
       height="120"
       width="120"
     />
+    <img *ngIf="club.logo == null"
+      class="logoClub"
+      src="/assets/img/LogoSportsAdmin.png"
+      alt=""
+      height="120"
+      width="120"
+    />
   </div>
-  <div *ngFor="let club of clubs"
+  <div
     class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column"
     id="sidebar"
   >
