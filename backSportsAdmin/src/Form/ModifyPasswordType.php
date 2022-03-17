@@ -35,6 +35,7 @@ class ModifyPasswordType extends AbstractType
             'label' => 'Ancien mot de passe',
         ])
         ->add('Password', RepeatedType::class, [
+            'row_attr' => ['class' => 'form-control corp'],
             'type' => PasswordType::class,
             'first_options' => [
                 'attr' => ['autocomplete' => 'new-password'],
@@ -68,8 +69,7 @@ class ModifyPasswordType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ChangePassword::class,
-            'csrf_token_id' => 'change_password',
+            
         ]);
     }
 }
