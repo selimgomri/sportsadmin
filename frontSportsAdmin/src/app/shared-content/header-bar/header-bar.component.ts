@@ -7,6 +7,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { IUser } from 'src/app/IUser';
 import { SessionLoginService } from 'src/app/services/session-login/session-login.service';
 
@@ -22,7 +23,7 @@ export class HeaderBarComponent implements OnInit, OnChanges {
 
   user!: IUser;
 
-  constructor(private auth: SessionLoginService) {}
+  constructor(private auth: SessionLoginService, private router: Router) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.titleChanged.emit(this.title);
@@ -32,5 +33,13 @@ export class HeaderBarComponent implements OnInit, OnChanges {
     this.auth.me().subscribe((data) => {
       this.user = data;
     });
+
   }
+
+  logout(){
+    this.auth.logout();
+    this.router.navigate(['']);
+  }
+
+
 }
