@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Field } from './field';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm, NgModel } from '@angular/forms';
+import { FieldService } from 'src/app/services/field.service';
 
 @Component({
   selector: 'app-form-modal',
@@ -19,38 +20,52 @@ export class FormModalComponent {
 
   @ViewChild('addField') addField!: NgForm;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private apiService: FieldService, private modalService: NgbModal) {}
 
   closeResult = '';
 
-  openLg(content: any) {
+  openLg(content: any)
+  {
     this.modalService.open(content, { size: 'lg' }).result.then(
-      (result) => {
+      (result) =>
+      {
         this.closeResult = `Closed with: ${result}`;
       },
-      (reason) => {
+      (reason) =>
+      {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       }
     );
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
+  private getDismissReason(reason: any): string
+  {
+    if (reason === ModalDismissReasons.ESC)
+    {
       return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+    }
+    else if (reason === ModalDismissReasons.BACKDROP_CLICK)
+    {
       return 'by clicking on a backdrop';
-    } else {
+    }
+    else
+    {
       return `with: ${reason}`;
     }
   }
 
   submitted = false;
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm)
+  {
     this.submitted = true;
     console.log(this.supplyFields);
     form.resetForm();
     this.optionName = '';
     this.optionSelect = [];
+    this.apiService.createField(this.supplyFields).subscribe((res:any) =>
+    {
+      console.log('user created successfully!');
+    })
   }
 
   onSubmit2(form: NgForm, formOption: NgModel) {
