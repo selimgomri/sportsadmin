@@ -2,7 +2,11 @@
   <div class="row">
     <div class="col">
       <div>
-        <img
+        <img *ngIf="user.photo == null"
+        src="/assets/img/person-circle.svg"
+        width="200"
+        class="rounded-circle"/>
+        <img *ngIf="user.photo != null"
           src="https://localhost:8000/images/users/{{ user?.photo }}
           " class="photo"
         />
