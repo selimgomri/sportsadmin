@@ -123,13 +123,20 @@ public function reset(Request $request, UserPasswordHasherInterface $userPasswor
         // The session is cleaned up after the password has been changed.
         $this->cleanSessionAfterReset();
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('reussite');
     }
 
     return $this->render('reset_password/reset.html.twig', [
         'resetForm' => $form->createView(),
     ]);
 }
+#[Route('/reussite', name:'reussite')]
+    function index(): Response
+        {
+        return $this->render('reset_password/reussite.html.twig', [
+            
+        ]);
+    }
 
     public function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer, TranslatorInterface $translator): RedirectResponse
     {

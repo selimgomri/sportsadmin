@@ -6,6 +6,7 @@ use App\Entity\ChangePassword;
 use App\Form\ModifyPasswordType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -38,12 +39,20 @@ class ModifyPasswordController extends AbstractController
             $this->entityManager->flush();
             $this->addFlash('notice', 'Votre mot de passe à bien été changé !');
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('resultat');
         }
 
         return $this->render('modify_password/modify.html.twig', array(
             'modifyForm' => $form->createView(),
             'user' => $user,
         ));
+    }
+
+    #[Route('/resultat', name:'resultat')]
+    function index(): Response
+        {
+        return $this->render('modify_password/resultat.html.twig', [
+            
+        ]);
     }
 }
