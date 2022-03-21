@@ -71,80 +71,80 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     use TimestampableEntity;
 
     #[ORM\Id]
-#[ORM\GeneratedValue]
-#[ORM\Column(type:'integer')]
-#[Groups(['read_profile'])]
-private $id;
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type:'integer')]
+    #[Groups(['read_profile'])]
+    private $id;
 
     #[ORM\Column(type:'string', length:180, unique:true)]
-#[Groups(['read_profile'])]
-private $email;
+    #[Groups(['read_profile'])]
+    private $email;
 
     #[ORM\Column(type:'json')]
-#[Groups(['read_profile'])]
-private $roles = [];
+    #[Groups(['read_profile'])]
+    private $roles = [];
 
     #[ORM\Column(type:'string')]
-private $password;
+    private $password;
 
     #[ORM\Column(type:'string', length:255)]
-#[Groups(['read_profile'])]
-private $lastname;
+    #[Groups(['read_profile'])]
+    private $lastname;
 
     #[ORM\Column(type:'string', length:255)]
-#[Groups(['read_profile'])]
-private $firstname;
+    #[Groups(['read_profile'])]
+    private $firstname;
 
     #[ORM\Column(type:'date')]
-#[Groups(['read_profile'])]
-private $birthdate;
+    #[Groups(['read_profile'])]
+    private $birthdate;
 
     #[ORM\Column(type:'string', length:255, nullable:true)]
-#[Groups(['read_profile'])]
-private $address;
+    #[Groups(['read_profile'])]
+    private $address;
 
     #[ORM\Column(type:'string', length:255, nullable:true)]
-#[Groups(['read_profile'])]
-private $phone;
+    #[Groups(['read_profile'])]
+    private $phone;
 
     #[ORM\Column(type:'integer', nullable:true)]
-private $license_number;
+    private $license_number;
 
     #[ORM\Column(type:'string', length:255, nullable:true)]
-private $category;
+    private $category;
 
     #[ORM\ManyToOne(targetEntity:Guardian::class, inversedBy:'users')]
-private $guardian;
+    private $guardian;
 
     #[ORM\OneToMany(mappedBy:'user', targetEntity:ClubUser::class)]
-private $clubUsers;
+    private $clubUsers;
 
     #[ORM\OneToMany(mappedBy:'user', targetEntity:Document::class)]
-private $documents;
+    private $documents;
 
     #[ORM\ManyToOne(targetEntity:Subscription::class, inversedBy:'users')]
-private $subscription;
+    private $subscription;
 
     #[ORM\OneToMany(mappedBy:'user', targetEntity:Invoice::class)]
-private $invoices;
+    private $invoices;
 
     #[ORM\OneToMany(mappedBy:'user', targetEntity:UserField::class)]
-private $userFields;
+    private $userFields;
 
     #[ORM\Column(type:'string', length:255)]
-#[Groups(['read_profile'])]
-private $sexe;
+    #[Groups(['read_profile'])]
+    private $sexe;
 
     #[ORM\Column(type:'string', length:255, nullable:true)]
-#[Groups(["read_profile", "read_detail_profile"])]
-private $photo;
+    #[Groups(["read_profile", "read_detail_profile"])]
+    private $photo;
 
     /**
      * @Vich\UploadableField(mapping="user_image", fileNameProperty="photo")
      */
     public ? File $file = null;
 
-public function __construct()
+    public function __construct()
     {
         $this->clubUsers = new ArrayCollection();
         $this->documents = new ArrayCollection();
@@ -154,325 +154,337 @@ public function __construct()
 
     public function getId() : ?int
     {
-    return $this->id;
-}
+        return $this->id;
+    }
 
-function getEmail(): ?string
+    public function getEmail(): ?string
     {
-    return $this->email;
-}
+        return $this->email;
+    }
 
-function setEmail(string $email): self
+    public function setEmail(string $email): self
     {
-    $this->email = $email;
+        $this->email = $email;
 
-    return $this;
-}
+        return $this;
+    }
 
 /**
  * A visual identifier that represents this user.
  *
  * @see UserInterface
  */
-function getUserIdentifier(): string
+    public function getUserIdentifier(): string
     {
-    return (string) $this->email;
-}
+        return (string) $this->email;
+    }
 
 /**
  * @see UserInterface
  */
-function getRoles(): array
-{
-    $roles = $this->roles;
-    // guarantee every user at least has ROLE_USER
-    $roles[] = 'ROLE_USER';
-
-    return array_unique($roles);
-}
-
-function setRoles(array $roles): self
+    public function getRoles(): array
     {
-    $this->roles = $roles;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
 
-    return $this;
-}
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
 
 /**
  * @see PasswordAuthenticatedUserInterface
  */
-function getPassword(): string
+    public function getPassword(): string
     {
-    return $this->password;
-}
+        return $this->password;
+    }
 
-function setPassword(string $password): self
+    public function setPassword(string $password): self
     {
-    $this->password = $password;
+        $this->password = $password;
 
-    return $this;
-}
+        return $this;
+    }
 
 /**
  * @see UserInterface
  */
-function eraseCredentials()
+    public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
     // $this->plainPassword = null;
     }
 
-function getLastname(): ?string
+    public function getLastname(): ?string
     {
-    return $this->lastname;
-}
+        return $this->lastname;
+    }
 
-function setLastname(string $lastname): self
+    public function setLastname(string $lastname): self
     {
-    $this->lastname = $lastname;
+        $this->lastname = $lastname;
 
-    return $this;
-}
+        return $this;
+    }
 
-function getFirstname(): ?string
+    public function getFirstname(): ?string
     {
-    return $this->firstname;
-}
+        return $this->firstname;
+    }
 
-function setFirstname(string $firstname): self
+    public function setFirstname(string $firstname): self
     {
-    $this->firstname = $firstname;
+        $this->firstname = $firstname;
 
-    return $this;
-}
+        return $this;
+    }
 
-function getBirthdate(): ?\DateTimeInterface
-{
-    return $this->birthdate;
-}
+    public function getBirthdate(): ?\DateTimeInterface
+    {
+        return $this->birthdate;
+    }
 
     public function setBirthdate(\DateTimeInterface$birthdate): self
     {
-    $this->birthdate = $birthdate;
+        $this->birthdate = $birthdate;
 
-    return $this;
-}
+        return $this;
+    }
 
-function getAddress(): ?string
+    public function getAddress(): ?string
     {
-    return $this->address;
-}
+        return $this->address;
+    }
 
-function setAddress(string $address): self
+    public function setAddress(string $address): self
     {
-    $this->address = $address;
+        $this->address = $address;
 
-    return $this;
-}
+        return $this;
+    }
 
-function getPhone(): ?string
+    public function getPhone(): ?string
     {
-    return $this->phone;
-}
+        return $this->phone;
+    }
 
-function setPhone(?string $phone): self
+    public function setPhone(?string $phone): self
     {
-    $this->phone = $phone;
+        $this->phone = $phone;
 
-    return $this;
-}
+        return $this;
+    }
 
-function getLicenseNumber(): ?int
+    public function getLicenseNumber(): ?int
     {
-    return $this->license_number;
-}
+        return $this->license_number;
+    }
 
-function setLicenseNumber(?int $license_number): self
+    public function setLicenseNumber(?int $license_number): self
     {
-    $this->license_number = $license_number;
+        $this->license_number = $license_number;
 
-    return $this;
-}
+        return $this;
+    }
 
-function getCategory(): ?string
+    public function getCategory(): ?string
     {
-    return $this->category;
-}
+        return $this->category;
+    }
 
-function setCategory(?string $category): self
+    public function setCategory(?string $category): self
     {
-    $this->category = $category;
+        $this->category = $category;
 
-    return $this;
-}
+        return $this;
+    }
 
-function getGuardian(): ?Guardian
+    public function getGuardian(): ?Guardian
     {
-    return $this->guardian;
-}
+        return $this->guardian;
+    }
 
-function setGuardian(?Guardian $guardian): self
+    public function setGuardian(?Guardian $guardian): self
     {
-    $this->guardian = $guardian;
+        $this->guardian = $guardian;
 
-    return $this;
-}
+        return $this;
+    }
 
 /**
  * @return Collection|ClubUser[]
  */
-function getClubUsers(): Collection
+    public function getClubUsers(): Collection
     {
-    return $this->clubUsers;
-}
-
-function addClubUser(ClubUser $clubUser): self
-    {
-    if (!$this->clubUsers->contains($clubUser)) {
-        $this->clubUsers[] = $clubUser;
-        $clubUser->setUser($this);
+        return $this->clubUsers;
     }
 
-    return $this;
-}
-
-function removeClubUser(ClubUser $clubUser): self
+    public function addClubUser(ClubUser $clubUser): self
     {
-    if ($this->clubUsers->removeElement($clubUser)) {
-        // set the owning side to null (unless already changed)
-        if ($clubUser->getUser() === $this) {
-            $clubUser->setUser(null);
+        if (!$this->clubUsers->contains($clubUser)) 
+        {
+            $this->clubUsers[] = $clubUser;
+            $clubUser->setUser($this);
         }
+
+        return $this;
     }
 
-    return $this;
-}
+    public function removeClubUser(ClubUser $clubUser): self
+    {
+        if ($this->clubUsers->removeElement($clubUser)) 
+        {
+            // the owning side to null (unless already changed)
+            if ($clubUser->getUser() === $this) 
+            {
+                $clubUser->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 
 /**
  * @return Collection|Document[]
  */
-function getDocuments(): Collection
+    public function getDocuments(): Collection
     {
     return $this->documents;
-}
-
-function addDocument(Document $document): self
-    {
-    if (!$this->documents->contains($document)) {
-        $this->documents[] = $document;
-        $document->setUser($this);
     }
 
-    return $this;
-}
-
-function removeDocument(Document $document): self
+    public function addDocument(Document $document): self
     {
-    if ($this->documents->removeElement($document)) {
-        // set the owning side to null (unless already changed)
-        if ($document->getUser() === $this) {
-            $document->setUser(null);
+        if (!$this->documents->contains($document)) 
+        {
+            $this->documents[] = $document;
+            $document->setUser($this);
         }
+
+        return $this;
     }
 
-    return $this;
-}
-
-function getSubscription(): ?Subscription
+    public function removeDocument(Document $document): self
     {
-    return $this->subscription;
-}
+        if ($this->documents->removeElement($document)) 
+        {
+            // set the owning side to null (unless already changed)
+            if ($document->getUser() === $this) 
+            {
+                $document->setUser(null);
+            }
+        }
 
-function setSubscription(?Subscription $subscription): self
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
     {
-    $this->subscription = $subscription;
+        return $this->subscription;
+    }
 
-    return $this;
-}
+    public function setSubscription(?Subscription $subscription): self
+    {
+        $this->subscription = $subscription;
+
+        return $this;
+    }
 
 /**
  * @return Collection|Invoice[]
  */
-function getInvoices(): Collection
+    public function getInvoices(): Collection
     {
-    return $this->invoices;
-}
-
-function addInvoice(Invoice $invoice): self
-    {
-    if (!$this->invoices->contains($invoice)) {
-        $this->invoices[] = $invoice;
-        $invoice->setUser($this);
+        return $this->invoices;
     }
 
-    return $this;
-}
-
-function removeInvoice(Invoice $invoice): self
+    public function addInvoice(Invoice $invoice): self
     {
-    if ($this->invoices->removeElement($invoice)) {
-        // set the owning side to null (unless already changed)
-        if ($invoice->getUser() === $this) {
-            $invoice->setUser(null);
+        if (!$this->invoices->contains($invoice)) 
+        {
+            $this->invoices[] = $invoice;
+            $invoice->setUser($this);
         }
+
+        return $this;
     }
 
-    return $this;
-}
+    public function removeInvoice(Invoice $invoice): self
+    {
+        if ($this->invoices->removeElement($invoice)) 
+        {
+            // set the owning side to null (unless already changed)
+            if ($invoice->getUser() === $this) 
+            {
+                $invoice->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 
 /**
  * @return Collection|UserField[]
  */
-function getUserFields(): Collection
+    public function getUserFields(): Collection
     {
-    return $this->userFields;
-}
-
-function addUserField(UserField $userField): self
-    {
-    if (!$this->userFields->contains($userField)) {
-        $this->userFields[] = $userField;
-        $userField->setUser($this);
+        return $this->userFields;
     }
 
-    return $this;
-}
-
-function removeUserField(UserField $userField): self
+    public function addUserField(UserField $userField): self
     {
-    if ($this->userFields->removeElement($userField)) {
-        // set the owning side to null (unless already changed)
-        if ($userField->getUser() === $this) {
-            $userField->setUser(null);
+        if (!$this->userFields->contains($userField)) 
+        {
+            $this->userFields[] = $userField;
+            $userField->setUser($this);
         }
+
+        return $this;
     }
 
-    return $this;
-}
+    public function removeUserField(UserField $userField): self
+    {
+        if ($this->userFields->removeElement($userField)) 
+        {
+            // set the owning side to null (unless already changed)
+            if ($userField->getUser() === $this) 
+            {
+                $userField->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 
     public function getSexe(): ?string
     {
     return $this->sexe;
-}
+    }
 
-function setSexe(string $sexe): self
+    public function setSexe(string $sexe): self
     {
-    $this->sexe = $sexe;
+        $this->sexe = $sexe;
 
-    return $this;
-}
+        return $this;
+    }
 
-function getPhoto(): ?string
+    public function getPhoto(): ?string
     {
-    return $this->photo;
-}
+        return $this->photo;
+    }
 
-function setPhoto(?string $photo): self
+    public function setPhoto(?string $photo): self
     {
-    $this->photo = $photo;
+        $this->photo = $photo;
 
-    return $this;
-}
+        return $this;
+    }
 
 /**
  * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
@@ -483,19 +495,20 @@ function setPhoto(?string $photo): self
  *
  * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
  */
-function setFile(?File $file = null): void
+    public function setFile(?File $file = null): void
     {
-    $this->file = $file;
+        $this->file = $file;
 
-    if (null !== $file) {
-        // It is required that at least one field changes if you are using doctrine
-        // otherwise the event listeners won't be called and the file is lost
-        $this->updatedAt = new \DateTimeImmutable();
+        if (null !== $file)    
+        {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
-}
 
-function getFile(): ?File
+    public function getFile(): ?File
     {
-    return $this->file;
-}
+        return $this->file;
+    }
 }
