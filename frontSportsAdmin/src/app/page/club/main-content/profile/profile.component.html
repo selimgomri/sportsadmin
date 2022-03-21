@@ -3,8 +3,14 @@
     <div class="row">
       <div class ="col">
         <div class="form-group">
-          <img src="https://localhost:8000/images/users/{{ user?.photo }}
-          ">
+          <img *ngIf="user.photo == null"
+        src="/assets/img/person-circle.svg"
+        width="200"
+        class="rounded-circle"/>
+        <img *ngIf="user.photo != null"
+          src="https://localhost:8000/images/users/{{ user?.photo }}
+          " class="photo"
+        />
           <input
           formControlName="photo"
           class="form-control photo"

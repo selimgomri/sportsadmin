@@ -55,7 +55,6 @@ export class ProfileComponent implements OnInit {
       .subscribe((res: any) => {
         console.log('Profile updated successfully!');
         this.user = this.form.value;
-        console.log(this.user);
       });
   }
 }

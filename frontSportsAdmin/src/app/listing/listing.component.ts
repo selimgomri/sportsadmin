@@ -6,12 +6,16 @@ import {
   Output,
   QueryList,
   ViewChildren,
+  PipeTransform
 } from '@angular/core';
 import { IUser } from '../IUser';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
+import { DecimalPipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 export type SortColumn = keyof IUser | '';
 export type SortDirection = 'asc' | 'desc' | '';
@@ -52,12 +56,13 @@ export class NgbdSortableHeader {
   selector: 'app-listing',
   templateUrl: './listing.component.html',
   styleUrls: ['./listing.component.scss'],
+  providers: [DecimalPipe]
 })
 export class ListingComponent {
   users: IUser[] = [];
   sortedUsers = this.users;
   page = 1;
-  pageSize = 4;
+  pageSize = 5;
   closeResult = '';
   id!: number;
   user!: IUser;
@@ -66,32 +71,29 @@ export class ListingComponent {
   @Output() length = new EventEmitter<number>();
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
+  //users$: Observable<IUser[]>;
+  //filter = new FormControl('');
+  term!: string;
 
-  onSort({ column, direction }: SortEvent) {
-    // resetting other headers
-    this.headers.forEach((header) => {
-      if (header.sortable !== column) {
-        header.direction = '';
-      }
-    });
-
-    // sorting members
-    if (direction === '' || column === '') {
-      this.sortedUsers = this.users;
-    } else {
-      this.sortedUsers = [...this.users].sort((a: any, b: any) => {
-        const res = compare(a[column], b[column]);
-        return direction === 'asc' ? res : -res;
-      });
-    }
-  }
-
-  constructor(
-    private apiService: UsersService,
+  constructor(pipe: DecimalPipe,private apiService: UsersService,
     private modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute) {
+   /* this.users$ = this.filter.valueChanges.pipe(
+      startWith(''),
+      map(text => this.search(text, pipe))
+    );
+    console.log(this.users$);*/
+  }
+
+  search(text: any, pipe: PipeTransform): IUser[] {
+    return this.sortedUsers.filter(user => {
+      const term = text.toLowerCase();
+      return user.firstname.toLowerCase().includes(term)
+          || pipe.transform(user.lastname).includes(term)
+          || pipe.transform(user.licenseNumber).includes(term)
+    });
+  }
 
   ngOnInit(): void {
     this.apiService.getUsers().subscribe((datas: any) => {
@@ -113,6 +115,41 @@ export class ListingComponent {
       sexe: new FormControl('', [Validators.required]),
     });
   }
+
+  filter() {
+    /* this.apiService.getUsersFiltered('Nathalie').subscribe((datas: any) => {
+      this.users = datas['hydra:member'];
+      this.sortedUsers = this.users;
+      this.length.emit(this.users.length);
+    }) */
+  }
+
+  onSort({ column, direction }: SortEvent) {
+    // resetting other headers
+    this.headers.forEach((header) => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
+
+    // sorting members
+    if (direction === '' || column === '') {
+      this.sortedUsers = this.users;
+    } else {
+      this.sortedUsers = [...this.users].sort((a: any, b: any) => {
+        const res = compare(a[column], b[column]);
+        return direction === 'asc' ? res : -res;
+      });
+    }
+  }
+
+  /*search(text: string, pipe: PipeTransform): IUser[] {
+    return this.users.filter(user => {
+      const term = text.toLowerCase();
+      return user.firstname.toLowerCase().includes(term)
+          || pipe.transform(user.lastname).includes(term)
+    });
+  }*/
 
   get f() {
     return this.form.controls;
@@ -170,4 +207,7 @@ export class ListingComponent {
         this.router.navigateByUrl('liste-membres');
       });
   }
+
+
+
 }
