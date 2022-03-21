@@ -1,4 +1,4 @@
-$base-color: #4AC285;
+$base-color: #4ac285;
 $primary: var(--primary-color);
 $secondary: var(--secondary-color);
 
@@ -20,7 +20,7 @@ $secondary: var(--secondary-color);
 
 button {
   border-radius: 10px;
-  background-color : $base-color;
+  background-color: $base-color;
   border: none;
   font-weight: bold;
   margin: 30px;
@@ -32,7 +32,7 @@ button {
 
 .button-create {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 svg {
@@ -50,15 +50,14 @@ img {
   cursor: pointer;
 }
 
-@media screen and (max-width : 600px) {
-
- .clubs {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  margin: 30px;
+@media screen and (max-width: 600px) {
+  .clubs {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
   }
 
   .button-create {
@@ -69,5 +68,4 @@ img {
     margin-top: 60px;
     margin-bottom: 0px;
   }
-
 }

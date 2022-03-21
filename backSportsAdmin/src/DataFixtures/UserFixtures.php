@@ -51,17 +51,17 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
             $password = $this->hasher->hashPassword($user, '123456');
 
-        $user->setPassword($password);
-        $user->setLastname($faker->lastName);
-        $user->setFirstname($faker->firstNameFemale);
-        $user->setRoles(['ROLE_USER']);
-        $user->setBirthdate($faker->dateTimeBetween('-70years', '-15years'));
-        $user->setAddress($faker->address);
-        $user->setLicenseNumber(123456789);
-        $user->setPhone("0102030405");
-        $user->setSexe("Feminin");
-        $user->setGuardian($this->getReference(GuardianFixtures::GUARDIAN_REFERENCE));
-        $user->setSubscription($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE));
+            $user->setPassword($password);
+            $user->setLastname($faker->lastName);
+            $user->setFirstname($faker->firstNameFemale);
+            $user->setRoles(['ROLE_USER']);
+            $user->setBirthdate($faker->dateTimeBetween('-70years', '-15years'));
+            $user->setAddress($faker->address);
+            $user->setLicenseNumber(123456789);
+            $user->setPhone("0102030405");
+            $user->setSexe("Feminin");
+            $user->setGuardian($this->getReference(GuardianFixtures::GUARDIAN_REFERENCE));
+            $user->setSubscription($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE));
 
             $manager->persist($user);
         }

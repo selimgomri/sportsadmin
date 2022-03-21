@@ -4,7 +4,8 @@
       <div>
         <img
           src="https://localhost:8000/images/users/{{ user?.photo }}
-          " class="photo"
+          "
+          class="photo"
         />
       </div>
       <p class="info">Rôle: {{ user?.roles }}</p>
@@ -40,7 +41,7 @@
         <p class="italic">Genre:</p>
         <p class="info">{{ user?.sexe }}</p>
       </div>
-      <a href="#">Modifier mon mot de passe</a>
+      <a href="https://127.0.0.1:8000/modify">Modifier mon mot de passe</a>
 
       <button (click)="openXl(content)">
         <svg
@@ -72,9 +73,10 @@
         </div>
         <div class="modal-body">
           <div class="container">
-
-            <app-profile (submit)="c('Close click')" [user]='user'></app-profile>
-
+            <app-profile
+              (submit)="c('Close click')"
+              [user]="user"
+            ></app-profile>
           </div>
         </div>
       </ng-template>

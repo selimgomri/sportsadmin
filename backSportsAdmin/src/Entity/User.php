@@ -5,13 +5,13 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\Api\MeAction;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use App\Controller\Api\UserImageAction;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -71,73 +71,73 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     use TimestampableEntity;
 
     #[ORM\Id]
-#[ORM\GeneratedValue]
-#[ORM\Column(type:'integer')]
-#[Groups(['read_profile'])]
-private $id;
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type:'integer')]
+    #[Groups(['read_profile'])]
+    private $id;
 
     #[ORM\Column(type:'string', length:180, unique:true)]
-#[Groups(['read_profile'])]
-private $email;
+    #[Groups(['read_profile'])]
+    private $email;
 
     #[ORM\Column(type:'json')]
-#[Groups(['read_profile'])]
-private $roles = [];
+    #[Groups(['read_profile'])]
+    private $roles = [];
 
     #[ORM\Column(type:'string')]
-private $password;
+    private $password;
 
     #[ORM\Column(type:'string', length:255)]
-#[Groups(['read_profile'])]
-private $lastname;
+    #[Groups(['read_profile'])]
+    private $lastname;
 
     #[ORM\Column(type:'string', length:255)]
-#[Groups(['read_profile'])]
-private $firstname;
+    #[Groups(['read_profile'])]
+    private $firstname;
 
     #[ORM\Column(type:'date')]
-#[Groups(['read_profile'])]
-private $birthdate;
+    #[Groups(['read_profile'])]
+    private $birthdate;
 
     #[ORM\Column(type:'string', length:255, nullable:true)]
-#[Groups(['read_profile'])]
-private $address;
+    #[Groups(['read_profile'])]
+    private $address;
 
     #[ORM\Column(type:'string', length:255, nullable:true)]
-#[Groups(['read_profile'])]
-private $phone;
+    #[Groups(['read_profile'])]
+    private $phone;
 
     #[ORM\Column(type:'integer', nullable:true)]
-private $license_number;
+    private $license_number;
 
     #[ORM\Column(type:'string', length:255, nullable:true)]
-private $category;
+    private $category;
 
     #[ORM\ManyToOne(targetEntity:Guardian::class, inversedBy:'users')]
-private $guardian;
+    private $guardian;
 
     #[ORM\OneToMany(mappedBy:'user', targetEntity:ClubUser::class)]
-private $clubUsers;
+    private $clubUsers;
 
     #[ORM\OneToMany(mappedBy:'user', targetEntity:Document::class)]
-private $documents;
+    private $documents;
 
     #[ORM\ManyToOne(targetEntity:Subscription::class, inversedBy:'users')]
-private $subscription;
+    private $subscription;
 
     #[ORM\OneToMany(mappedBy:'user', targetEntity:Invoice::class)]
-private $invoices;
+    private $invoices;
 
     #[ORM\OneToMany(mappedBy:'user', targetEntity:UserField::class)]
-private $userFields;
+    private $userFields;
 
     #[ORM\Column(type:'string', length:255)]
-#[Groups(['read_profile'])]
-private $sexe;
+    #[Groups(['read_profile'])]
+    private $sexe;
 
     #[ORM\Column(type:'string', length:255, nullable:true)]
-#[Groups(["read_profile", "read_detail_profile"])]
-private $photo;
+    #[Groups(["read_profile", "read_detail_profile"])]
+    private $photo;
 
     /**
      * @Vich\UploadableField(mapping="user_image", fileNameProperty="photo")
@@ -169,19 +169,19 @@ private $photo;
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
+/**
+ * A visual identifier that represents this user.
+ *
+ * @see UserInterface
+ */
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
+/**
+ * @see UserInterface
+ */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -198,9 +198,9 @@ private $photo;
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
+/**
+ * @see PasswordAuthenticatedUserInterface
+ */
     public function getPassword(): string
     {
         return $this->password;
@@ -213,9 +213,9 @@ private $photo;
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
+/**
+ * @see UserInterface
+ */
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
@@ -318,9 +318,9 @@ private $photo;
         return $this;
     }
 
-    /**
-     * @return Collection|ClubUser[]
-     */
+/**
+ * @return Collection|ClubUser[]
+ */
     public function getClubUsers(): Collection
     {
         return $this->clubUsers;
@@ -328,7 +328,8 @@ private $photo;
 
     public function addClubUser(ClubUser $clubUser): self
     {
-        if (!$this->clubUsers->contains($clubUser)) {
+        if (!$this->clubUsers->contains($clubUser)) 
+        {
             $this->clubUsers[] = $clubUser;
             $clubUser->setUser($this);
         }
@@ -338,9 +339,11 @@ private $photo;
 
     public function removeClubUser(ClubUser $clubUser): self
     {
-        if ($this->clubUsers->removeElement($clubUser)) {
-            // set the owning side to null (unless already changed)
-            if ($clubUser->getUser() === $this) {
+        if ($this->clubUsers->removeElement($clubUser)) 
+        {
+            // the owning side to null (unless already changed)
+            if ($clubUser->getUser() === $this) 
+            {
                 $clubUser->setUser(null);
             }
         }
@@ -348,17 +351,18 @@ private $photo;
         return $this;
     }
 
-    /**
-     * @return Collection|Document[]
-     */
+/**
+ * @return Collection|Document[]
+ */
     public function getDocuments(): Collection
     {
-        return $this->documents;
+    return $this->documents;
     }
 
     public function addDocument(Document $document): self
     {
-        if (!$this->documents->contains($document)) {
+        if (!$this->documents->contains($document)) 
+        {
             $this->documents[] = $document;
             $document->setUser($this);
         }
@@ -368,9 +372,11 @@ private $photo;
 
     public function removeDocument(Document $document): self
     {
-        if ($this->documents->removeElement($document)) {
+        if ($this->documents->removeElement($document)) 
+        {
             // set the owning side to null (unless already changed)
-            if ($document->getUser() === $this) {
+            if ($document->getUser() === $this) 
+            {
                 $document->setUser(null);
             }
         }
@@ -390,9 +396,9 @@ private $photo;
         return $this;
     }
 
-    /**
-     * @return Collection|Invoice[]
-     */
+/**
+ * @return Collection|Invoice[]
+ */
     public function getInvoices(): Collection
     {
         return $this->invoices;
@@ -400,7 +406,8 @@ private $photo;
 
     public function addInvoice(Invoice $invoice): self
     {
-        if (!$this->invoices->contains($invoice)) {
+        if (!$this->invoices->contains($invoice)) 
+        {
             $this->invoices[] = $invoice;
             $invoice->setUser($this);
         }
@@ -410,9 +417,11 @@ private $photo;
 
     public function removeInvoice(Invoice $invoice): self
     {
-        if ($this->invoices->removeElement($invoice)) {
+        if ($this->invoices->removeElement($invoice)) 
+        {
             // set the owning side to null (unless already changed)
-            if ($invoice->getUser() === $this) {
+            if ($invoice->getUser() === $this) 
+            {
                 $invoice->setUser(null);
             }
         }
@@ -420,9 +429,9 @@ private $photo;
         return $this;
     }
 
-    /**
-     * @return Collection|UserField[]
-     */
+/**
+ * @return Collection|UserField[]
+ */
     public function getUserFields(): Collection
     {
         return $this->userFields;
@@ -430,7 +439,8 @@ private $photo;
 
     public function addUserField(UserField $userField): self
     {
-        if (!$this->userFields->contains($userField)) {
+        if (!$this->userFields->contains($userField)) 
+        {
             $this->userFields[] = $userField;
             $userField->setUser($this);
         }
@@ -440,9 +450,11 @@ private $photo;
 
     public function removeUserField(UserField $userField): self
     {
-        if ($this->userFields->removeElement($userField)) {
+        if ($this->userFields->removeElement($userField)) 
+        {
             // set the owning side to null (unless already changed)
-            if ($userField->getUser() === $this) {
+            if ($userField->getUser() === $this) 
+            {
                 $userField->setUser(null);
             }
         }
@@ -450,14 +462,9 @@ private $photo;
         return $this;
     }
 
-    public function getUsername(): string
-    {
-        return $this->email;
-    }
-
     public function getSexe(): ?string
     {
-        return $this->sexe;
+    return $this->sexe;
     }
 
     public function setSexe(string $sexe): self
@@ -479,20 +486,21 @@ private $photo;
         return $this;
     }
 
-    /**
-     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the update. If this
-     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-     * must be able to accept an instance of 'File' as the bundle will inject one here
-     * during Doctrine hydration.
-     *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
-     */
+/**
+ * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+ * of 'UploadedFile' is injected into this setter to trigger the update. If this
+ * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+ * must be able to accept an instance of 'File' as the bundle will inject one here
+ * during Doctrine hydration.
+ *
+ * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+ */
     public function setFile(?File $file = null): void
     {
         $this->file = $file;
 
-        if (null !== $file) {
+        if (null !== $file)    
+        {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();

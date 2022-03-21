@@ -80,7 +80,6 @@ public function checkEmail(): Response
 public function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher, TranslatorInterface $translator, string $token = null): Response
 {
     if ($token) {
-        var_dump($token);
         // We store the token in session and remove it from the URL, to avoid the URL being
         // loaded in a browser and potentially leaking the token to 3rd party JavaScript.
         $this->storeTokenInSession($token);
@@ -124,13 +123,20 @@ public function reset(Request $request, UserPasswordHasherInterface $userPasswor
         // The session is cleaned up after the password has been changed.
         $this->cleanSessionAfterReset();
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('reussite');
     }
 
     return $this->render('reset_password/reset.html.twig', [
         'resetForm' => $form->createView(),
     ]);
 }
+#[Route('/reussite', name:'reussite')]
+    function index(): Response
+        {
+        return $this->render('reset_password/reussite.html.twig', [
+            
+        ]);
+    }
 
     public function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer, TranslatorInterface $translator): RedirectResponse
     {
@@ -171,10 +177,10 @@ public function reset(Request $request, UserPasswordHasherInterface $userPasswor
         ])
     ;
 
-        $mailer->send($email);
-    
-        // Store the token object in session for retrieval in check-email route.
-        $this->setTokenObjectInSession($resetToken);
+    $mailer->send($email);
+
+    // Store the token object in session for retrieval in check-email route.
+    $this->setTokenObjectInSession($resetToken);
 
         return $this->redirectToRoute('app_check_email');
     }
