@@ -52,7 +52,6 @@ export class NgbdSortableHeader {
   }
 }
 
-
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
@@ -72,30 +71,20 @@ export class ListingComponent {
   @Output() length = new EventEmitter<number>();
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
-  users$: Observable<IUser[]>;
-  filter = new FormControl('');
+  //users$: Observable<IUser[]>;
+  //filter = new FormControl('');
+  term!: string;
 
   constructor(pipe: DecimalPipe,private apiService: UsersService,
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute) {
-    this.users$ = this.filter.valueChanges.pipe(
+   /* this.users$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text, pipe))
     );
+    console.log(this.users$);*/
   }
-  /*constructor(
-    private apiService: UsersService,
-    private modalService: NgbModal,
-    private router: Router,
-    private route: ActivatedRoute,
-    pipe: DecimalPipe
-  ) {
-    this.filter.valueChanges.pipe(
-      startWith(''),
-      map(text => this.search(text, pipe))
-    );
-  }*/
 
   search(text: any, pipe: PipeTransform): IUser[] {
     return this.sortedUsers.filter(user => {
@@ -125,6 +114,14 @@ export class ListingComponent {
       phone: new FormControl('', [Validators.required]),
       sexe: new FormControl('', [Validators.required]),
     });
+  }
+
+  filter() {
+    /* this.apiService.getUsersFiltered('Nathalie').subscribe((datas: any) => {
+      this.users = datas['hydra:member'];
+      this.sortedUsers = this.users;
+      this.length.emit(this.users.length);
+    }) */
   }
 
   onSort({ column, direction }: SortEvent) {
