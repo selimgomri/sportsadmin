@@ -6,7 +6,7 @@ import {
   Output,
   QueryList,
   ViewChildren,
-  PipeTransform
+  PipeTransform,
 } from '@angular/core';
 import { IUser } from '../IUser';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -56,7 +56,7 @@ export class NgbdSortableHeader {
   selector: 'app-listing',
   templateUrl: './listing.component.html',
   styleUrls: ['./listing.component.scss'],
-  providers: [DecimalPipe]
+  providers: [DecimalPipe],
 })
 export class ListingComponent {
   users: IUser[] = [];
@@ -73,13 +73,16 @@ export class ListingComponent {
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
   //users$: Observable<IUser[]>;
   //filter = new FormControl('');
-  term!: string;
+  term?: string;
 
-  constructor(pipe: DecimalPipe,private apiService: UsersService,
+  constructor(
+    pipe: DecimalPipe,
+    private apiService: UsersService,
     private modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute) {
-   /* this.users$ = this.filter.valueChanges.pipe(
+    private route: ActivatedRoute
+  ) {
+    /* this.users$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text, pipe))
     );
@@ -87,16 +90,18 @@ export class ListingComponent {
   }
 
   search(text: any, pipe: PipeTransform): IUser[] {
-    return this.sortedUsers.filter(user => {
+    return this.sortedUsers.filter((user) => {
       const term = text.toLowerCase();
-      return user.firstname.toLowerCase().includes(term)
-          || pipe.transform(user.lastname).includes(term)
-          || pipe.transform(user.licenseNumber).includes(term)
+      return (
+        user.firstname.toLowerCase().includes(term) ||
+        pipe.transform(user.lastname).includes(term) ||
+        pipe.transform(user.licenseNumber).includes(term)
+      );
     });
   }
 
   ngOnInit(): void {
-    this.apiService.getUsers().subscribe((datas: any) => {
+    this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
       this.users = datas['hydra:member'];
       this.sortedUsers = this.users;
       this.length.emit(this.users.length);
@@ -116,12 +121,13 @@ export class ListingComponent {
     });
   }
 
-  filter() {
-    /* this.apiService.getUsersFiltered('Nathalie').subscribe((datas: any) => {
+  filterName(term: any) {
+    console.log(term);
+    this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
       this.users = datas['hydra:member'];
       this.sortedUsers = this.users;
       this.length.emit(this.users.length);
-    }) */
+    });
   }
 
   onSort({ column, direction }: SortEvent) {
@@ -158,8 +164,7 @@ export class ListingComponent {
   delete(id: number) {
     this.apiService.deleteUser(id).subscribe((res) => {
       console.log(res);
-      this.sortedUsers = this.sortedUsers.filter((item) =>
-        item.id !== id)
+      this.sortedUsers = this.sortedUsers.filter((item) => item.id !== id);
 
       console.log('Post deleted successfully!');
     });
@@ -207,7 +212,4 @@ export class ListingComponent {
         this.router.navigateByUrl('liste-membres');
       });
   }
-
-
-
 }

@@ -68,7 +68,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @Vich\Uploadable
  */
-#[ApiFilter(SearchFilter::class, properties:['firstname' => 'istart'])]
+#[ApiFilter(SearchFilter::class, properties:['firstname' => 'ipartial', 'lastname' => 'ipartial'] )]
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {

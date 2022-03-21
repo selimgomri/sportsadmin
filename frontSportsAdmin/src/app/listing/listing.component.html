@@ -10,9 +10,7 @@
         id="table-filtering-search"
         class="form-control"
         type="text"
-
-        [(ngModel)]="term"
-        ngOnChanges="filter(term)"
+        (keypress)="filterName($event)"
       />
     </div>
   </div>
