@@ -10,7 +10,8 @@
         id="table-filtering-search"
         class="form-control"
         type="text"
-        (keypress)="filterName($event)"
+        [(ngModel)]="test"
+        (change)="filterName(test)"
       />
     </div>
   </div>
@@ -33,7 +34,8 @@
       <tr
         class="list-item"
         *ngFor="
-          let user of sortedUsers | slice: (page - 1) * pageSize:page * pageSize"
+          let user of sortedUsers | slice: (page - 1) * pageSize:page * pageSize
+        "
       >
         <td>
           <div class="p-2 d-flex flex-row align-items-center mb-2">
@@ -51,7 +53,9 @@
             />
             <div class="d-flex flex-column ml-2">
               <span class="d-block">
-                <span class="text-muted">{{user.firstname}} {{user.lastname}}</span>
+                <span class="text-muted"
+                  >{{ user.firstname }} {{ user.lastname }}</span
+                >
                 <!-- <ngb-highlight
                   [result]="user.firstname"
                   [term]="filter.value"

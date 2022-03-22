@@ -73,7 +73,7 @@ export class ListingComponent {
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
   //users$: Observable<IUser[]>;
   //filter = new FormControl('');
-  term?: string;
+  test?: any;
 
   constructor(
     pipe: DecimalPipe,
