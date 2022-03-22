@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiService.getClub(5).subscribe((res) => {
+    this.apiService.getClub(2).subscribe((res) => {
       this.primaryColor = res.primarycolor;
       this.secondaryColor = res.secondarycolor;
       this.changeTheme(this.primaryColor, this.secondaryColor);
