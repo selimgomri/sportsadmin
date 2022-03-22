@@ -4,7 +4,10 @@ $secondary: var(--secondary-color);
 
 .mb-3 {
   padding-top: 50px;
-  padding-bottom: 50px;
+}
+
+label {
+  margin-left: 150px;
 }
 
 input {

@@ -71,8 +71,6 @@ export class ListingComponent {
   @Output() length = new EventEmitter<number>();
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
-  //users$: Observable<IUser[]>;
-  //filter = new FormControl('');
   test?: any;
 
   constructor(
@@ -81,24 +79,8 @@ export class ListingComponent {
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute
-  ) {
-    /* this.users$ = this.filter.valueChanges.pipe(
-      startWith(''),
-      map(text => this.search(text, pipe))
-    );
-    console.log(this.users$);*/
-  }
+  ) {}
 
-  search(text: any, pipe: PipeTransform): IUser[] {
-    return this.sortedUsers.filter((user) => {
-      const term = text.toLowerCase();
-      return (
-        user.firstname.toLowerCase().includes(term) ||
-        pipe.transform(user.lastname).includes(term) ||
-        pipe.transform(user.licenseNumber).includes(term)
-      );
-    });
-  }
 
   ngOnInit(): void {
     this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
