@@ -108,7 +108,7 @@ export class ListingComponent {
     });
 
     this.form = new FormGroup({
-      //photo: new FormControl('', [Validators.required]),
+      photo: new FormControl('', [Validators.required]),
       id: new FormControl(''),
       roles: new FormControl('', [Validators.required]),
       lastname: new FormControl('', [Validators.required]),
@@ -149,14 +149,6 @@ export class ListingComponent {
       });
     }
   }
-
-  /*search(text: string, pipe: PipeTransform): IUser[] {
-    return this.users.filter(user => {
-      const term = text.toLowerCase();
-      return user.firstname.toLowerCase().includes(term)
-          || pipe.transform(user.lastname).includes(term)
-    });
-  }*/
 
   get f() {
     return this.form.controls;
