@@ -1,4 +1,5 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
+import { IUser } from 'src/app/IUser';
 
 
 @Component({
@@ -8,14 +9,14 @@ import { Component, OnInit} from '@angular/core';
 })
 export class ListMembersComponent implements OnInit {
 
-  users!: number;
+  @Input() user!: IUser;
+  usersNumber!: number;
   constructor() { }
 
   ngOnInit(): void {
   }
 
   getUsersLength(users:number) {
-    console.log(users);
-    this.users = users;
+    this.usersNumber = users;
   }
 }

@@ -15,6 +15,10 @@ export class UsersService {
     return this.http.get<IUser>(`${environment.baseUrl}/api/users`, { withCredentials: true });
   }
 
+  getUsersFiltered(name: string): Observable<IUser> {
+    return this.http.get<IUser>(`${environment.baseUrl}/api/users?firstname=${name}`, { withCredentials: true });
+  }
+
   createUser(data: any): Observable<any> {
     return this.http.post(`${environment.baseUrl}/api/users`, data, { withCredentials: true });
   }
