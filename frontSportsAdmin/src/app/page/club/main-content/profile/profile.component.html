@@ -3,14 +3,18 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-          <img *ngIf="user.photo == null"
-        src="/assets/img/person-circle.svg"
-        width="200"
-        class="rounded-circle"/>
-        <img *ngIf="user.photo != null"
-          src="https://localhost:8000/images/users/{{ user?.photo }}
-          " class="photo"
-        />
+          <img
+            *ngIf="user.photo == null"
+            src="/assets/img/person-circle.svg"
+            width="200"
+            class="rounded-circle"
+          />
+          <img
+            *ngIf="user.photo != null"
+            src="https://localhost:8000/images/users/{{ user?.photo }}
+          "
+            class="photo"
+          />
           <input
             formControlName="photo"
             class="form-control photo"
@@ -19,8 +23,8 @@
           />
         </div>
       </div>
-      <div class="col">
-        <div class="form-group" *ngIf="user.roles.indexOf('ROLE_ADMIN') === 0">
+      <div class="col" *ngIf="user.roles.indexOf('ROLE_ADMIN') === 0">
+        <div class="form-group">
           <label for="lastname">Rôle</label>
           <select formControlName="roles" class="form-select role">
             <option value="" disabled selected hidden>Administrateur</option>
