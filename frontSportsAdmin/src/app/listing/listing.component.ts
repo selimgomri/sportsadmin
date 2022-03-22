@@ -108,7 +108,7 @@ export class ListingComponent {
     });
 
     this.form = new FormGroup({
-      photo: new FormControl('', [Validators.required]),
+      //photo: new FormControl('', [Validators.required]),
       id: new FormControl(''),
       roles: new FormControl('', [Validators.required]),
       lastname: new FormControl('', [Validators.required]),
