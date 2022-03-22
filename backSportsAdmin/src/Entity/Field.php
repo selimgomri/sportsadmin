@@ -9,7 +9,17 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FieldRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    collectionOperations:[
+        'get',
+        'post',
+    ],
+    itemOperations:[
+        'get',
+        'put',
+        'delete',
+    ]
+)]
 class Field
 {
     #[ORM\Id]
@@ -26,7 +36,7 @@ class Field
     #[ORM\Column(type: 'json', nullable: true)]
     private $choice = [];
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: 'string', length: 10)]
     private $required;
 
     #[ORM\Column(type: 'integer', nullable: true)]

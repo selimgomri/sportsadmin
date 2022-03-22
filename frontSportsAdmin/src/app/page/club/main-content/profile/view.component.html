@@ -12,7 +12,12 @@
           class="photo"
         />
       </div>
-      <p class="info">Rôle: {{ user?.roles }}</p>
+      <p class="info" *ngIf="user.roles.indexOf('ROLE_ADMIN') === 0">
+        Rôle: Administrateur
+      </p>
+      <p class="info" *ngIf="user.roles.indexOf('ROLE_USER') === 0">
+        Rôle: Membre
+      </p>
     </div>
     <div class="col">
       <div>
