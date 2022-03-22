@@ -10,8 +10,8 @@
         id="table-filtering-search"
         class="form-control"
         type="text"
-        [(ngModel)]="test"
-        (change)="filterName(test)"
+        [ngModel]="test"
+        (ngModelChange)="filterName($event)"
       />
     </div>
   </div>

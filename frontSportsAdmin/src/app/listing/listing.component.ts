@@ -123,6 +123,7 @@ export class ListingComponent {
 
   filterName(term: any) {
     console.log(term);
+
     this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
       this.users = datas['hydra:member'];
       this.sortedUsers = this.users;
