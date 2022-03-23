@@ -4,18 +4,26 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
+//use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Core\Exception\InvalidArgumentException;
 use App\Controller\Api\MeAction;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Controller\Api\UserImageAction;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass:UserRepository::class)]
@@ -68,7 +76,84 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @Vich\Uploadable
  */
-#[ApiFilter(SearchFilter::class, properties:['firstname' => 'ipartial', 'lastname' => 'ipartial'] )]
+/* #[ApiFilter(SearchFilter::class, properties:['firstname' => 'ipartial', 'lastname' => 'ipartial'] )] */
+#[ApiFilter(SimpleSearchFilter::class, properties:["firstname", "lastname"])]
+
+/**
+ * Selects entities where each search term is found somewhere
+ * in at least one of the specified properties.
+ * Search terms must be separated by spaces.
+ * Search is case insensitive.
+ * All specified properties type must be string.
+ * @package App\Filter
+ */
+class SimpleSearchFilter extends AbstractContextAwareFilter
+{
+    private $searchParameterName;
+
+    /**
+     * Add configuration parameter
+     * {@inheritdoc}
+     * @param string $searchParameterName The parameter whose value this filter searches for
+     */
+    public function __construct(ManagerRegistry $managerRegistry, ?RequestStack $requestStack = null, LoggerInterface $logger = null, array $properties = null, NameConverterInterface $nameConverter = null, string $searchParameterName = 'simplesearch')
+    {
+        parent::__construct($managerRegistry, $requestStack, $logger, $properties, $nameConverter);
+
+        $this->searchParameterName = $searchParameterName;
+    }
+
+    /** {@inheritdoc} */
+    protected function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null, array $context = [])
+    {
+        if (null === $value || $property !== $this->searchParameterName) {
+            return;
+        }
+
+        $words = explode(' ', $value);
+        foreach ($words as $word) {
+            if (empty($word)) continue;
+
+            $this->addWhere($queryBuilder, $word, $queryNameGenerator->generateParameterName($property));
+        }
+    }
+
+    private function addWhere($queryBuilder, $word, $parameterName)
+    {
+        $alias = $queryBuilder->getRootAliases()[0];
+
+        // Build OR expression
+        $orExp = $queryBuilder->expr()->orX();
+        foreach ($this->getProperties() as $prop => $ignoored) {
+            $orExp->add($queryBuilder->expr()->like('LOWER('. $alias. '.' . $prop. ')', ':' . $parameterName));
+        }
+
+        $queryBuilder
+            ->andWhere('(' . $orExp . ')')
+            ->setParameter($parameterName, '%' . strtolower($word). '%');
+    }
+
+    /** {@inheritdoc} */
+    public function getDescription(string $resourceClass): array
+    {
+        $props = $this->getProperties();
+        if (null===$props) {
+            throw new InvalidArgumentException('Properties must be specified');
+        }
+        return [
+            $this->searchParameterName => [
+                'property' => implode(', ', array_keys($props)),
+                'type' => 'string',
+                'required' => false,
+                'swagger' => [
+                    'description' => 'Selects entities where each search term is found somewhere in at least one of the specified properties',
+                ]
+            ]
+        ];
+    }
+
+}
+
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
