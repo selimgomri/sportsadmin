@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Club } from 'src/app/club';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,18 +11,24 @@ import { ClubService } from 'src/app/services/club.service';
   styleUrls: ['./edit-club.component.scss'],
 })
 export class EditClubComponent implements OnInit {
-  //model: Edit = new Edit();
-  @Input() club!: Club;
+  club!: Club;
+  clubId!: any;
   file: File | undefined;
   form!: FormGroup;
   id!: number;
 
-  constructor(private http: HttpClient, private clubService: ClubService) {
+  constructor(private http: HttpClient, private router: Router,
+    private clubService: ClubService,
+    private ActivatedRoute: ActivatedRoute) {
     this.changeTheme(this.primarycolor, this.secondarycolor); // Set default theme
+
+    this.ActivatedRoute.queryParams.subscribe((params: Params) => {
+      this.clubId = params;
+    });
   }
 
   ngOnInit(): void {
-    this.clubService.getClub(5).subscribe((datas: any) => {
+    this.clubService.getClub(this.clubId['id']).subscribe((datas: any) => {
       this.club = datas;
       //this.id = this.club.id;
     });
