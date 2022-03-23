@@ -101,6 +101,7 @@ export class LicensedUsersComponent {
   filterName(term: any) {
     this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
       this.licensedUsers = datas['hydra:member'].filter((user: any) => user.license_number != null);
+      this.sortedUsers = this.licensedUsers;
       this.length.emit(this.licensedUsers.length);
     });
   }
