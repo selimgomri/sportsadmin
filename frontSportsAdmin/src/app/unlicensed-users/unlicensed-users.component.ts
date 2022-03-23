@@ -102,6 +102,7 @@ export class UnlicensedUsersComponent implements OnInit {
   filterName(term: any) {
     this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
       this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licence_number == null);
+      this.sortedUsers = this.unlicensedUsers;
       this.length.emit(this.unlicensedUsers.length);
     });
   }
