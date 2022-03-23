@@ -1,9 +1,9 @@
-
 <div class="mb-3 row">
   <label
     for="table-filtering-search"
     class="col-xs-3 col-sm-auto col-form-label fw-bold"
-    >Rechercher un membre:</label>
+    >Rechercher un membre:</label
+  >
   <div class="col-xs-3 col-sm-auto">
     <input
       id="table-filtering-search"
@@ -52,9 +52,7 @@
             />
             <div class="d-flex flex-column ml-2">
               <span class="d-block">
-                <span class="text-muted"
-                  >{{ user.firstname }} {{ user.lastname }}</span
-                >
+                <span>{{ user.firstname }} {{ user.lastname }}</span>
                 <!-- <ngb-highlight
                   [result]="user.firstname"
                   [term]="filter.value"
@@ -66,7 +64,7 @@
               </span>
 
               <span class="text-muted">Loisirs</span>
-              <span class="text-muted">{{ user.license_number}}</span>
+              <span class="text-muted">{{ user.licenseNumber }}</span>
             </div>
           </div>
         </td>
@@ -104,13 +102,19 @@
                   <div class="row">
                     <div class="col">
                       <div class="form-group">
-                        <img *ngIf="user.photo == null"
-                        src="/assets/img/person-circle.svg"
-                        width="200"
-                        class="rounded-circle"/>
-                        <img *ngIf="user.photo != null"
-                          src="https://localhost:8000/images/users/{{ user?.photo }}
-                          " class="photo"
+                        <img
+                          *ngIf="user.photo == null"
+                          src="/assets/img/person-circle.svg"
+                          width="200"
+                          class="rounded-circle"
+                        />
+                        <img
+                          *ngIf="user.photo != null"
+                          src="https://localhost:8000/images/users/{{
+                            user?.photo
+                          }}
+                          "
+                          class="photo"
                         />
                         <!--<input
                               formControlName="photo"
@@ -246,8 +250,9 @@
               </div>
               <div class="modal-body">
                 <p>
-                  Êtes-vous sûr de vouloir supprimer {{ user.firstname | uppercase }}
-                  {{ user.lastname | uppercase}} de la liste des membres ?
+                  Êtes-vous sûr de vouloir supprimer
+                  {{ user.firstname | uppercase }}
+                  {{ user.lastname | uppercase }} de la liste des membres ?
                 </p>
               </div>
               <div class="modal-footer">

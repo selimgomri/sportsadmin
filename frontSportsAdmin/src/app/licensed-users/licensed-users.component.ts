@@ -1,13 +1,11 @@
 import {
   Component,
-  OnInit,
   Directive,
   EventEmitter,
   Input,
   Output,
   QueryList,
   ViewChildren,
-  PipeTransform,
 } from '@angular/core';
 import { IUser } from '../IUser';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -53,17 +51,16 @@ export class NgbdSortableHeader {
 @Component({
   selector: 'app-licensed-users',
   templateUrl: './licensed-users.component.html',
-  styleUrls: ['./licensed-users.component.scss']
+  styleUrls: ['./licensed-users.component.scss'],
+  providers: [DecimalPipe],
 })
-export class LicensedUsersComponent implements OnInit {
-  licensedUsers!: IUser[];
-  //users: IUser[] = [];
+export class LicensedUsersComponent {
+  licensedUsers: IUser[] = [];
   sortedUsers = this.licensedUsers;
   page = 1;
   pageSize = 5;
   closeResult = '';
   id!: number;
-  user!: IUser;
   form!: FormGroup;
 
   @Output() length = new EventEmitter<number>();
@@ -102,7 +99,7 @@ export class LicensedUsersComponent implements OnInit {
   }
 
   filterName(term: any) {
-    this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
+    this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
       this.licensedUsers = datas['hydra:member'].filter((user: any) => user.license_number != null);
       this.length.emit(this.licensedUsers.length);
     });
@@ -129,9 +126,7 @@ export class LicensedUsersComponent implements OnInit {
 
   delete(id: number) {
     this.apiService.deleteUser(id).subscribe((res) => {
-      console.log(res);
       this.sortedUsers = this.sortedUsers.filter((item) => item.id !== id);
-
       console.log('Post deleted successfully!');
     });
   }
@@ -173,7 +168,6 @@ export class LicensedUsersComponent implements OnInit {
   submit() {
     this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
       this.licensedUsers = datas['hydra:member'].filter((user: any) => user.license_number != null);
-      console.log('VOILA', this.licensedUsers);
     });
   }
 

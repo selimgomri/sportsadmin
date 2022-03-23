@@ -6,7 +6,6 @@ import {
   Output,
   QueryList,
   ViewChildren,
-  PipeTransform,
 } from '@angular/core';
 import { IUser } from '../IUser';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -14,8 +13,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
 import { DecimalPipe } from '@angular/common';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 
 export type SortColumn = keyof IUser | '';
 export type SortDirection = 'asc' | 'desc' | '';
@@ -121,6 +118,7 @@ export class ListingComponent {
     // sorting members
     if (direction === '' || column === '') {
       this.sortedUsers = this.users;
+      console.log('COUCOU');
     } else {
       this.sortedUsers = [...this.users].sort((a: any, b: any) => {
         const res = compare(a[column], b[column]);

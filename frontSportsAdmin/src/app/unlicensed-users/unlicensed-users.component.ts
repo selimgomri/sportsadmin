@@ -79,7 +79,7 @@ export class UnlicensedUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
-      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.license_number == null);
+      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber == null);
       this.sortedUsers = this.unlicensedUsers;
       this.length.emit(this.unlicensedUsers.length);
     });
@@ -100,10 +100,13 @@ export class UnlicensedUsersComponent implements OnInit {
   }
 
   filterName(term: any) {
-    this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
-      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.license_number == null);
-      this.sortedUsers = this.unlicensedUsers;
+    console.log('TERM', term);
+    this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
+      console.log('DATAS', datas);
+      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licenceNumber == null);
       this.length.emit(this.unlicensedUsers.length);
+      console.log('NON LICENCIES', this.unlicensedUsers);
+
     });
   }
 
@@ -167,7 +170,7 @@ export class UnlicensedUsersComponent implements OnInit {
 
   submit() {
     this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
-      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.license_number != null);
+      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.license_number === null);
     });
   }
 

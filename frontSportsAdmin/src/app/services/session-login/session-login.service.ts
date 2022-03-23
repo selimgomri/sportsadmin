@@ -15,7 +15,7 @@ export class SessionLoginService {
     email: '',
     phone: '',
     roles: [],
-    license_number: 0,
+    licenseNumber: 0,
     password: '',
     birthdate: new Date(),
     sexe: '',
