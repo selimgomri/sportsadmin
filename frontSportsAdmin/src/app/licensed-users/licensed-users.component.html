@@ -33,7 +33,8 @@
       <tr
         class="list-item"
         *ngFor="
-          let user of sortedUsers | slice: (page - 1) * pageSize:page * pageSize
+          let user of licensedUsers
+            | slice: (page - 1) * pageSize:page * pageSize
         "
       >
         <td>
@@ -310,7 +311,7 @@
   <ngb-pagination
     [(page)]="page"
     [pageSize]="pageSize"
-    [collectionSize]="users.length"
+    [collectionSize]="licensedUsers.length"
     [boundaryLinks]="false"
     [rotate]="true"
   >

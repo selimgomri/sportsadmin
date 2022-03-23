@@ -48,16 +48,15 @@ export class NgbdSortableHeader {
     this.sort.emit({ column: this.sortable, direction: this.direction });
   }
 }
-
 @Component({
-  selector: 'app-listing',
-  templateUrl: './listing.component.html',
-  styleUrls: ['./listing.component.scss'],
+  selector: 'app-licensed-users',
+  templateUrl: './licensed-users.component.html',
+  styleUrls: ['./licensed-users.component.scss'],
   providers: [DecimalPipe],
 })
-export class ListingComponent {
-  users: IUser[] = [];
-  sortedUsers = this.users;
+export class LicensedUsersComponent {
+  licensedUsers: IUser[] = [];
+  sortedUsers = this.licensedUsers;
   page = 1;
   pageSize = 5;
   closeResult = '';
@@ -79,9 +78,9 @@ export class ListingComponent {
 
   ngOnInit(): void {
     this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
-      this.users = datas['hydra:member'];
-      this.sortedUsers = this.users;
-      this.length.emit(this.users.length);
+      this.licensedUsers = datas['hydra:member'].filter((user: any) => user.license_number != null);
+      this.sortedUsers = this.licensedUsers;
+      this.length.emit(this.licensedUsers.length);
     });
 
     this.form = new FormGroup({
@@ -101,9 +100,8 @@ export class ListingComponent {
 
   filterName(term: any) {
     this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
-      this.users = datas['hydra:member'];
-      this.sortedUsers = this.users;
-      this.length.emit(this.users.length);
+      this.licensedUsers = datas['hydra:member'].filter((user: any) => user.license_number != null);
+      this.length.emit(this.licensedUsers.length);
     });
   }
 
@@ -117,24 +115,18 @@ export class ListingComponent {
 
     // sorting members
     if (direction === '' || column === '') {
-      this.sortedUsers = this.users;
+      this.sortedUsers = this.licensedUsers;
     } else {
-      this.sortedUsers = [...this.users].sort((a: any, b: any) => {
+      this.sortedUsers = [...this.licensedUsers].sort((a: any, b: any) => {
         const res = compare(a[column], b[column]);
         return direction === 'asc' ? res : -res;
       });
     }
   }
 
-  get f() {
-    return this.form.controls;
-  }
-
   delete(id: number) {
     this.apiService.deleteUser(id).subscribe((res) => {
-      console.log(res);
       this.sortedUsers = this.sortedUsers.filter((item) => item.id !== id);
-
       console.log('Post deleted successfully!');
     });
   }
@@ -174,11 +166,9 @@ export class ListingComponent {
   }
 
   submit() {
-    this.apiService
-      .updateUser(this.form.value.id, this.form.value)
-      .subscribe((res: any) => {
-        console.log('User updated successfully!');
-        this.router.navigateByUrl('liste-membres');
-      });
+    this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
+      this.licensedUsers = datas['hydra:member'].filter((user: any) => user.license_number != null);
+    });
   }
+
 }

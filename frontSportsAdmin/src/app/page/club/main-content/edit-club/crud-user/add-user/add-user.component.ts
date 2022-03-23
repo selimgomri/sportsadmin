@@ -23,6 +23,7 @@ export class AddUserComponent implements OnInit {
       phone: new FormControl('', Validators.required),
       birthdate: new FormControl('', Validators.required),
       address: new FormControl,
+      license_number: new FormControl,
       password: new FormControl('', Validators.required),
     });
 
