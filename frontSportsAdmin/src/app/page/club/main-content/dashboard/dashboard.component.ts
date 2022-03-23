@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,15 +6,13 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent{
+  clubId!: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
 
+  }
   redirectToAddMember2() {
     this.router.navigate(['./ajouter-un-membre2']);
   }
-
-  ngOnInit(): void {
-  }
-
 }
