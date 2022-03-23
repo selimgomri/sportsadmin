@@ -108,10 +108,8 @@ export class ListingComponent {
   }
 
   onSort({ column, direction }: SortEvent) {
-    console.log('POPO', column, direction);
     // resetting other headers
     this.headers.forEach((header) => {
-      console.log('HEADER',header);
       if (header.sortable !== column) {
         header.direction = '';
       }
@@ -120,8 +118,6 @@ export class ListingComponent {
     // sorting members
     if (direction === '' || column === '') {
       this.sortedUsers = this.users;
-      console.log('USERS', this.users);
-
     } else {
       this.sortedUsers = [...this.users].sort((a: any, b: any) => {
         const res = compare(a[column], b[column]);
@@ -137,9 +133,7 @@ export class ListingComponent {
 
   delete(id: number) {
     this.apiService.deleteUser(id).subscribe((res) => {
-      console.log(res);
       this.sortedUsers = this.sortedUsers.filter((item) => item.id !== id);
-
       console.log('Post deleted successfully!');
     });
   }

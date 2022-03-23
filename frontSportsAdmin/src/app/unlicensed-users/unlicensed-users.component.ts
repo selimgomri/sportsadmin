@@ -102,13 +102,11 @@ export class UnlicensedUsersComponent implements OnInit {
   filterName(term: any) {
     this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
       this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licence_number == null);
-      //this.sortedUsers = this.unlicensedUsers;
       this.length.emit(this.unlicensedUsers.length);
     });
   }
 
   onSort({ column, direction }: SortEvent) {
-    console.log('COUCOU', column, direction);
     this.headers.forEach((header) => {
       if (header.sortable !== column) {
         header.direction = '';
@@ -116,11 +114,9 @@ export class UnlicensedUsersComponent implements OnInit {
     });
     if (direction === '' || column === '') {
       this.sortedUsers = this.unlicensedUsers;
-      console.log('unlicensed1', this.sortedUsers);
     } else {
       this.sortedUsers = [...this.unlicensedUsers].sort((a: any, b: any) => {
         const res = compare(a[column], b[column]);
-      console.log('unlicenced2', this.unlicensedUsers);
         return direction === 'asc' ? res : -res;
       });
     }
