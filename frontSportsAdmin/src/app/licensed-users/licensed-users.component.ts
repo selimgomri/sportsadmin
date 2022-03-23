@@ -77,7 +77,7 @@ export class LicensedUsersComponent {
 
 
   ngOnInit(): void {
-    this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
+    this.apiService.getUsersFiltered('').subscribe((datas: any) => {
       this.licensedUsers = datas['hydra:member'].filter((user: any) => user.license_number != null);
       this.sortedUsers = this.licensedUsers;
       this.length.emit(this.licensedUsers.length);
@@ -166,7 +166,7 @@ export class LicensedUsersComponent {
   }
 
   submit() {
-    this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
+    this.apiService.getUsersFiltered('').subscribe((datas: any) => {
       this.licensedUsers = datas['hydra:member'].filter((user: any) => user.license_number != null);
     });
   }
