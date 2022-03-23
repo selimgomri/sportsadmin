@@ -17,6 +17,7 @@ export class SideBarClubComponent implements OnInit {
     private clubService: ClubService,
     private ActivatedRoute: ActivatedRoute
   ) {
+    //recup de l'id du club dans l'url
     this.ActivatedRoute.queryParams.subscribe((params: Params) => {
       this.clubId = params;
     });
@@ -27,6 +28,7 @@ export class SideBarClubComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //recup des donnée du club par l'id
     this.clubService.getClub(this.clubId['id']).subscribe((datas: any) => {
       this.club = datas;
     });
@@ -34,6 +36,7 @@ export class SideBarClubComponent implements OnInit {
 
   redirectToEditClub() {
     this.router.navigate(['./editer-mon-club'], {
+      //mise en place du parametre id d'un club
       queryParams: { id: this.clubId['id'] },
     });
   }

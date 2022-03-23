@@ -1,26 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent{
   clubId!: any;
 
-  constructor(private router: Router, private ActivatedRoute: ActivatedRoute) {
-    this.ActivatedRoute.queryParams.subscribe((params: Params) => {
-      this.clubId = params;
-      console.log(this.clubId['id']);
-    });
+  constructor(private router: Router) {
+
   }
   redirectToAddMember2() {
     this.router.navigate(['./ajouter-un-membre2']);
-  }
-
-  ngOnInit(): void {
-    this.clubId = this.router.url;
-    console.log('club id', this.clubId);
   }
 }

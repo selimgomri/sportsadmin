@@ -31,6 +31,7 @@ export class PageMyclubsComponent implements OnInit {
     // this.getClub();
 
     this.router.navigate(['./dashboard'], {
+      //mise en place du parametre id d'un club
       queryParams: { id: id },
     });
   }

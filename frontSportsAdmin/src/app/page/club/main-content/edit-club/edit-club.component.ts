@@ -21,16 +21,17 @@ export class EditClubComponent implements OnInit {
     private clubService: ClubService,
     private ActivatedRoute: ActivatedRoute) {
     this.changeTheme(this.primarycolor, this.secondarycolor); // Set default theme
-
+    //recup de l'id du club dans l'url
     this.ActivatedRoute.queryParams.subscribe((params: Params) => {
       this.clubId = params;
     });
   }
 
   ngOnInit(): void {
+    //recup des donnée du club par l'id
     this.clubService.getClub(this.clubId['id']).subscribe((datas: any) => {
       this.club = datas;
-      //this.id = this.club.id;
+
     });
 
     this.form = new FormGroup({
