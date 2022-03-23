@@ -43,6 +43,8 @@ import { CreateClubComponent } from './page/club/main-content/crud-club/create-c
 import { CreateProfileComponent } from './page/club/main-content/crud-club/create-profile.component';
 import { CreateClubViewComponent } from './page/club/view/create-club-view/create-club-view.component';
 import { CreateProfileViewComponent } from './page/club/view/create-profile-view/create-profile-view.component';
+import { LicensedUsersComponent } from './licensed-users/licensed-users.component';
+import { UnlicensedUsersComponent } from './unlicensed-users/unlicensed-users.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,7 +81,9 @@ import { CreateProfileViewComponent } from './page/club/view/create-profile-view
     CreateProfileComponent,
     CreateClubComponent,
     CreateClubViewComponent,
-    CreateProfileViewComponent
+    CreateProfileViewComponent,
+    LicensedUsersComponent,
+    UnlicensedUsersComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

@@ -33,7 +33,7 @@
       <tr
         class="list-item"
         *ngFor="
-          let user of sortedUsers | slice: (page - 1) * pageSize:page * pageSize
+          let user of licensedUsers | slice: (page - 1) * pageSize:page * pageSize
         "
       >
         <td>
@@ -246,8 +246,8 @@
               </div>
               <div class="modal-body">
                 <p>
-                  Êtes-vous sûr de vouloir supprimer {{ user.firstname | uppercase }}
-                  {{ user.lastname | uppercase}} de la liste des membres ?
+                  Êtes-vous sûr de vouloir supprimer {{ user.firstname | uppercase}}
+                  {{ user.lastname | uppercase }} de la liste des membres ?
                 </p>
               </div>
               <div class="modal-footer">
@@ -305,7 +305,7 @@
   <ngb-pagination
     [(page)]="page"
     [pageSize]="pageSize"
-    [collectionSize]="users.length"
+    [collectionSize]="licensedUsers.length"
     [boundaryLinks]="false"
     [rotate]="true"
   >

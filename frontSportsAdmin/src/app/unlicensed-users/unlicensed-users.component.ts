@@ -1,12 +1,12 @@
 import {
   Component,
+  OnInit,
   Directive,
   EventEmitter,
   Input,
   Output,
   QueryList,
   ViewChildren,
-  PipeTransform,
 } from '@angular/core';
 import { IUser } from '../IUser';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -14,8 +14,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
 import { DecimalPipe } from '@angular/common';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 
 export type SortColumn = keyof IUser | '';
 export type SortDirection = 'asc' | 'desc' | '';
@@ -51,16 +49,15 @@ export class NgbdSortableHeader {
     this.sort.emit({ column: this.sortable, direction: this.direction });
   }
 }
-
 @Component({
-  selector: 'app-listing',
-  templateUrl: './listing.component.html',
-  styleUrls: ['./listing.component.scss'],
+  selector: 'app-unlicensed-users',
+  templateUrl: './unlicensed-users.component.html',
+  styleUrls: ['./unlicensed-users.component.scss'],
   providers: [DecimalPipe],
 })
-export class ListingComponent {
-  users: IUser[] = [];
-  sortedUsers = this.users;
+export class UnlicensedUsersComponent implements OnInit {
+  unlicensedUsers: IUser[] = [];
+  sortedUsers = this.unlicensedUsers;
   page = 1;
   pageSize = 5;
   closeResult = '';
@@ -82,9 +79,9 @@ export class ListingComponent {
 
   ngOnInit(): void {
     this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
-      this.users = datas['hydra:member'];
-      this.sortedUsers = this.users;
-      this.length.emit(this.users.length);
+      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.license_number == null);
+      this.sortedUsers = this.unlicensedUsers;
+      this.length.emit(this.unlicensedUsers.length);
     });
 
     this.form = new FormGroup({
@@ -103,41 +100,33 @@ export class ListingComponent {
   }
 
   filterName(term: any) {
-    this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
-      this.users = datas['hydra:member'];
-      this.sortedUsers = this.users;
-      this.length.emit(this.users.length);
+    this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
+      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.license_number == null);
+      this.sortedUsers = this.unlicensedUsers;
+      this.length.emit(this.unlicensedUsers.length);
     });
   }
 
   onSort({ column, direction }: SortEvent) {
-    // resetting other headers
     this.headers.forEach((header) => {
       if (header.sortable !== column) {
         header.direction = '';
       }
     });
 
-    // sorting members
     if (direction === '' || column === '') {
-      this.sortedUsers = this.users;
+      this.sortedUsers = this.unlicensedUsers;
     } else {
-      this.sortedUsers = [...this.users].sort((a: any, b: any) => {
+      this.sortedUsers = [...this.unlicensedUsers].sort((a: any, b: any) => {
         const res = compare(a[column], b[column]);
         return direction === 'asc' ? res : -res;
       });
     }
   }
 
-  get f() {
-    return this.form.controls;
-  }
-
   delete(id: number) {
     this.apiService.deleteUser(id).subscribe((res) => {
-      console.log(res);
       this.sortedUsers = this.sortedUsers.filter((item) => item.id !== id);
-
       console.log('Post deleted successfully!');
     });
   }
@@ -177,11 +166,9 @@ export class ListingComponent {
   }
 
   submit() {
-    this.apiService
-      .updateUser(this.form.value.id, this.form.value)
-      .subscribe((res: any) => {
-        console.log('User updated successfully!');
-        this.router.navigateByUrl('liste-membres');
-      });
+    this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
+      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.license_number != null);
+    });
   }
+
 }
