@@ -33,7 +33,7 @@
       <tr
         class="list-item"
         *ngFor="
-          let user of licensedUsers
+          let user of sortedUsers
             | slice: (page - 1) * pageSize:page * pageSize
         "
       >

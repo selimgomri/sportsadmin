@@ -108,8 +108,10 @@ export class ListingComponent {
   }
 
   onSort({ column, direction }: SortEvent) {
+    console.log('POPO', column, direction);
     // resetting other headers
     this.headers.forEach((header) => {
+      console.log('HEADER',header);
       if (header.sortable !== column) {
         header.direction = '';
       }
@@ -118,10 +120,13 @@ export class ListingComponent {
     // sorting members
     if (direction === '' || column === '') {
       this.sortedUsers = this.users;
+      console.log('USERS', this.users);
+
     } else {
       this.sortedUsers = [...this.users].sort((a: any, b: any) => {
         const res = compare(a[column], b[column]);
         return direction === 'asc' ? res : -res;
+
       });
     }
   }

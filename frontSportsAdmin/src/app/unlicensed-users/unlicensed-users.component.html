@@ -23,6 +23,7 @@
             >Membre <i class="fa-solid fa-sort"></i
           ></span>
         </th>
+
         <th scope="col"><span class="ml-2">Validité de licence</span></th>
         <th scope="col"><span class="ml-2">Catégorie</span></th>
         <th scope="col"><span class="ml-2">Contact</span></th>
@@ -33,7 +34,7 @@
       <tr
         class="list-item"
         *ngFor="
-          let user of unlicensedUsers
+          let user of sortedUsers
             | slice: (page - 1) * pageSize:page * pageSize
         "
       >
