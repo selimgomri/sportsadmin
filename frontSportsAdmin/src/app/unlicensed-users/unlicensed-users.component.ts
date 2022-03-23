@@ -82,7 +82,6 @@ export class UnlicensedUsersComponent implements OnInit {
       this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.license_number == null);
       this.sortedUsers = this.unlicensedUsers;
       this.length.emit(this.unlicensedUsers.length);
-      console.log('NON LICENCIES NGONIT', this.unlicensedUsers);
     });
 
     this.form = new FormGroup({
@@ -113,7 +112,6 @@ export class UnlicensedUsersComponent implements OnInit {
         header.direction = '';
       }
     });
-
     if (direction === '' || column === '') {
       this.sortedUsers = this.unlicensedUsers;
     } else {
