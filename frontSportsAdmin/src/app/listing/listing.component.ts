@@ -78,7 +78,7 @@ export class ListingComponent {
 
 
   ngOnInit(): void {
-    this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
+    this.apiService.getUsersFiltered('').subscribe((datas: any) => {
       this.users = datas['hydra:member'];
       this.sortedUsers = this.users;
       this.length.emit(this.users.length);
