@@ -16,6 +16,7 @@ $secondary: var(--secondary-color);
 
 .clubs {
   display: inline-flex;
+  flex-wrap: wrap;
 }
 
 button {

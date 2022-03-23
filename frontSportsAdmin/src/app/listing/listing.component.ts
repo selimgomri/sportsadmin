@@ -118,7 +118,6 @@ export class ListingComponent {
     // sorting members
     if (direction === '' || column === '') {
       this.sortedUsers = this.users;
-      console.log('COUCOU');
     } else {
       this.sortedUsers = [...this.users].sort((a: any, b: any) => {
         const res = compare(a[column], b[column]);

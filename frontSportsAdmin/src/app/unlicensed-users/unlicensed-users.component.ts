@@ -79,9 +79,10 @@ export class UnlicensedUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
-      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber == null);
+      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.license_number == null);
       this.sortedUsers = this.unlicensedUsers;
       this.length.emit(this.unlicensedUsers.length);
+      console.log('NON LICENCIES NGONIT', this.unlicensedUsers);
     });
 
     this.form = new FormGroup({
@@ -103,7 +104,7 @@ export class UnlicensedUsersComponent implements OnInit {
     console.log('TERM', term);
     this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
       console.log('DATAS', datas);
-      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licenceNumber == null);
+      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licence_number == null);
       this.length.emit(this.unlicensedUsers.length);
       console.log('NON LICENCIES', this.unlicensedUsers);
 
