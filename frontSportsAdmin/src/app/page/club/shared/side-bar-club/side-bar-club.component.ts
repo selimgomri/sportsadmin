@@ -28,6 +28,7 @@ export class SideBarClubComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     //recup des donnée du club par l'id
     this.clubService.getClub(this.clubId['id']).subscribe((datas: any) => {
       this.club = datas;
@@ -38,6 +39,7 @@ export class SideBarClubComponent implements OnInit {
     this.router.navigate(['./editer-mon-club'], {
       //mise en place du parametre id d'un club
       queryParams: { id: this.clubId['id'] },
+
     });
   }
 }
