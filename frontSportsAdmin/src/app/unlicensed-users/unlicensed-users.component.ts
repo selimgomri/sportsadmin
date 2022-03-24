@@ -40,6 +40,7 @@ export interface SortEvent {
   },
 })
 export class NgbdSortableHeader {
+  user!: IUser;
   @Input() sortable: SortColumn = '';
   @Input() direction: SortDirection = '';
   @Output() sort = new EventEmitter<SortEvent>();

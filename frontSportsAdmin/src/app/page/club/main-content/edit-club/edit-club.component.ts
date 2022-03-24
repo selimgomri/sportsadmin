@@ -92,7 +92,6 @@ export class EditClubComponent implements OnInit {
   */
 
   submit() {
-    console.log(this.form.value);
     this.clubService
       .updateClub(this.club.id, this.form.value)
       .subscribe((res: any) => {
