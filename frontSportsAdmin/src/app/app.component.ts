@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BrowserModule, Title } from '@angular/platform-browser';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ApiService } from './services/session-login/api.service';
-import { Club } from 'src/app/club';
-import { Clubs } from './mock-clubs';
+
 
 @Component({
   selector: 'app-root',
@@ -15,13 +12,18 @@ export class AppComponent implements OnInit {
   title = 'frontSportsAdmin';
   primaryColor! : string;
   secondaryColor! : string;
+  clubId!: any;
 
 
   constructor(
     private route: Router,
-
+    private ActivatedRoute: ActivatedRoute,
     private apiService : ApiService,
-  ) {}
+  ) {
+    this.ActivatedRoute.queryParams.subscribe((params: Params) => {
+      this.clubId = params;
+    });
+  }
 
   setHeader() {
     let path = this.route.url.split('/')[1];
@@ -29,7 +31,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiService.getClub(3).subscribe((res) => {
+    this.apiService.getClub(this.clubId['id']).subscribe((res) => {
       this.primaryColor = res.primarycolor;
       this.secondaryColor = res.secondarycolor;
       this.changeTheme(this.primaryColor, this.secondaryColor);

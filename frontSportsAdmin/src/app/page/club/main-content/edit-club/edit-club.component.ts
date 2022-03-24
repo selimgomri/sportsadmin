@@ -93,9 +93,14 @@ export class EditClubComponent implements OnInit {
 
   submit() {
     this.clubService
-      .updateClub(this.club.id, this.form.value)
+      .updateClub(this.clubId['id'], this.form.value)
       .subscribe((res: any) => {
         console.log('club updated successfully!');
+        this.router.navigate(['./dashboard'], {
+          //mise en place du parametre id d'un club
+          queryParams: { id: this.clubId['id'] },
+        });
       });
+      this.changeTheme(this.primarycolor, this.secondarycolor);
   }
 }

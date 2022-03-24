@@ -14,14 +14,12 @@ export class DashboardComponent implements OnInit {
       this.clubId = params;
     });
   }
- 
+
   usersNumber!: number;
   licensedNumber!: number;
   unlicensedNumber!: number;
 
-  redirectToAddMember2() {
-    this.router.navigate(['./ajouter-un-membre2']);
-  }
+
   getUsersLength(users:any) {
     this.usersNumber = users;
   }
