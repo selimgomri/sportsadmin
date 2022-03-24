@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ClubService } from './services/club.service';
 import { ApiService } from './services/session-login/api.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,9 +18,7 @@ export class AppComponent implements OnInit {
   constructor(
     private clubService: ClubService,
     private activatedRoute: ActivatedRoute
-  ) {
-
-  }
+  ) {}
 
   /*   setHeader() {
     let path = this.route.url.split('/')[1];
@@ -28,15 +27,11 @@ export class AppComponent implements OnInit {
  */
   ngOnInit(): void {
     const params = new URLSearchParams(window.location.search)
-
     this.clubId = params.get('id');
     this.clubService.getClub(this.clubId).subscribe((res) => {
-      console.log('RESULT', res);
       this.primaryColor = res.primarycolor;
       this.secondaryColor = res.secondarycolor;
       this.changeTheme(this.primaryColor, this.secondaryColor);
-
-      console.log('clubId', this.clubId['id']);
     });
   }
 

@@ -12,7 +12,10 @@ label {
 
 input {
    border-radius: 30px;
-   width: 400px;
+}
+
+.input-search{
+  width: 400px;
 }
 
 .searchbar, .search-export {
@@ -133,3 +136,8 @@ input, select {
 .modal-content {
   border-radius: 30px;
 }
+
+.update {
+  display: flex;
+  justify-content: flex-end;
+  }

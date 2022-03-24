@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router, Params  } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -9,8 +9,12 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent implements OnInit {
-
-  constructor(private apiService: UsersService, private formBuilder: FormBuilder, private router: Router) {}
+  clubId!: any;
+  constructor(private apiService: UsersService, private formBuilder: FormBuilder, private router: Router, private ActivatedRoute: ActivatedRoute) {
+    this.ActivatedRoute.queryParams.subscribe((params: Params) => {
+      this.clubId = params;
+    });
+  }
 
   form!: FormGroup;
 
@@ -34,11 +38,12 @@ export class AddUserComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form.value);
     this.apiService.createUser(this.form.value).subscribe((res:any) => {
          console.log('user created successfully!');
-         console.log(this.form.value);
-         this.router.navigateByUrl('liste-membres');
+         this.router.navigate(['./liste-membres'], {
+          //mise en place du parametre id d'un club
+          queryParams: { id: this.clubId['id'] },
+        });
     })
 
   }
