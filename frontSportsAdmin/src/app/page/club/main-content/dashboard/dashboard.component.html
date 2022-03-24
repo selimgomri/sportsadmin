@@ -25,7 +25,7 @@
       <h5>Nombre total de licenciés: 52</h5>
       <h5>Licenciés en attente de renouvellement: 34</h5>
     </div>
-    <button [routerLink]="['/liste-membres']">
+    <button [routerLink]="['/liste-membres/']" [queryParams]="{IdClubMember: clubId['id']}">
       Gestion des membres
     </button>
   </div>

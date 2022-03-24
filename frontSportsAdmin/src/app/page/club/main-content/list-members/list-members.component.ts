@@ -13,6 +13,7 @@ export class ListMembersComponent implements OnInit {
   usersNumber!: number;
   licensedUsers!: IUser[];
   unlicensedUsers!: IUser[];
+
   constructor(private apiService: UsersService) {}
 
   ngOnInit(): void {}
