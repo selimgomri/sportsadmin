@@ -20,23 +20,23 @@
     id="sidebar"
   >
     <ul class="nav flex-column text-white">
-      <a [routerLink]="['/dashboard']" class="nav-link h3 text-white my-2">
+      <a [routerLink]="['/dashboard']" [queryParams]="{id: clubId['id']}" class="nav-link h3 text-white my-2">
         <span class="club">{{club.name | titlecase}}</span>
       </a>
-      <li [routerLink]="['/mes-clubs']" class="nav-link">
+      <li [routerLink]="['/mes-clubs']" [queryParams]="{id: clubId['id']}"class="nav-link">
         <span class="mx-2"><i class="bi bi-house"></i> Mes Clubs</span>
       </li>
-      <li [routerLink]="['/dashboard']" class="nav-link">
+      <li [routerLink]="['/dashboard']" [queryParams]="{id: clubId['id']}" class="nav-link">
         <span class="mx-2"
           ><i class="bi bi-speedometer2"></i> Tableau de bord</span
         >
       </li>
-      <li [routerLink]="['/liste-membres']" class="nav-link">
+      <li [routerLink]="['/liste-membres']" [queryParams]="{id: clubId['id']}" class="nav-link">
         <span class="mx-2"
           ><i class="bi bi-people"></i> Gestion des membres</span
         >
       </li>
-      <li [routerLink]="['/gestion-des-cotisations']" class="nav-link">
+      <li [routerLink]="['/gestion-des-cotisations']" [queryParams]="{id: clubId['id']}" class="nav-link">
         <span class="mx-2"
           ><i class="bi bi-currency-euro"></i> Gestion des cotisations</span
         >
@@ -55,11 +55,11 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
-              <a class="dropdown-item" [routerLink]="['/editer-mon-club']"
+              <a class="dropdown-item" (click)="redirectToEditClub()"
                 ><i class="bi bi-pencil-square"></i> Editer mon Club</a
               >
             </li>
-            <li [routerLink]="['/ajouter-un-membre']" class="dropdown-item">
+            <li [routerLink]="['/ajouter-un-membre']" [queryParams]="{id: clubId['id']}" class="dropdown-item">
               <i class="bi bi-pencil-square"></i> Editer fiche membre
             </li>
             <li>

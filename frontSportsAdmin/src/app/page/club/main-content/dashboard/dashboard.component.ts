@@ -1,14 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  clubId!: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private ActivatedRoute: ActivatedRoute) {
+    this.ActivatedRoute.queryParams.subscribe((params: Params) => {
+      this.clubId = params;
+    });
+  }
+ 
   usersNumber!: number;
   licensedNumber!: number;
   unlicensedNumber!: number;
@@ -25,7 +31,8 @@ export class DashboardComponent implements OnInit {
   getUnlicensedLength(users:any) {
     this.unlicensedNumber = users;
   }
-  ngOnInit(): void {
-  }
 
+  ngOnInit(): void {
+
+  }
 }

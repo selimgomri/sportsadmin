@@ -1,26 +1,46 @@
 <div class="container-fluid button-create">
-  <button class="btn btn-success" (click)="redirectToCreateMyClub()"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-  </svg> Créer un Club</button>
+  <button class="btn btn-success" (click)="redirectToCreateMyClub()">
+    <svg
+      class="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+      ></path>
+    </svg>
+    Créer un Club
+  </button>
 </div>
 <div class="container-fluid clubs">
-  <div class="container club" *ngFor="let club of clubs" (click)="redirectToDashboard()">
+  <div
+    class="container club"
+    *ngFor="let club of clubs"
+    (click)="redirectToDashboard(club.id)"
+  >
     <div class="logo">
-     <img *ngIf="club.logo != null"
-      class ="logo"
-      src="https://localhost:8000/images/logo/{{ club.logo }}"
-      width=200px
-     />
-     <img *ngIf="club.logo == null"
-     class="logoClub"
-     src="/assets/img/LogoSportsAdmin.png"
-     alt=""
-     height="120"
-     width="120"
-   />
+      <img
+        *ngIf="club.logo != null"
+        class="logo"
+        src="https://localhost:8000/images/logo/{{ club.logo }}"
+        width="200px"
+      />
+      <img
+        *ngIf="club.logo == null"
+        class="logoClub"
+        src="/assets/img/LogoSportsAdmin.png"
+        alt=""
+        height="120"
+        width="120"
+      />
     </div>
     <div class="club-name">
-        <h1>{{ club.name }}</h1>
+      <h1>{{ club.name }}</h1>
     </div>
   </div>
 </div>

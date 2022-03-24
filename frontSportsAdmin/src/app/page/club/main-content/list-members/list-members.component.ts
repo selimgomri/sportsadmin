@@ -1,4 +1,8 @@
 import { Component, Input, OnInit} from '@angular/core';
+import { IUser } from 'src/app/IUser';
+import { UsersService } from 'src/app/services/users.service';
+import { ActivatedRoute,  Params } from '@angular/router';
+
 
 @Component({
   selector: 'app-list-members',
@@ -9,10 +13,15 @@ import { Component, Input, OnInit} from '@angular/core';
 export class ListMembersComponent implements OnInit {
 
   usersNumber!: number;
-  licensedNumber!: number;
-  unlicensedNumber!: number;
+  licensedUsers!: IUser[];
+  unlicensedUsers!: IUser[];
+  clubId!: any;
 
-  constructor() {}
+  constructor(private apiService: UsersService, private ActivatedRoute: ActivatedRoute) {
+    this.ActivatedRoute.queryParams.subscribe((params: Params) => {
+      this.clubId = params;
+    });
+  }
 
   ngOnInit(): void {}
 
