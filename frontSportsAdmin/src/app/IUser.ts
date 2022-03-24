@@ -5,7 +5,7 @@ export interface IUser {
   email: string;
   phone: string;
   roles: string[];
-  licenseNumber: number;
+  licenseNumber: string;
   password: string;
   birthdate: Date;
   sexe: string;

@@ -78,11 +78,10 @@ export class UnlicensedUsersComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
-      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.license_number == null);
+    this.apiService.getUsersFiltered('').subscribe((datas: any) => {
+      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber == null);
       this.sortedUsers = this.unlicensedUsers;
       this.length.emit(this.unlicensedUsers.length);
-      console.log('NON LICENCIES NGONIT', this.unlicensedUsers);
     });
 
     this.form = new FormGroup({
@@ -96,18 +95,15 @@ export class UnlicensedUsersComponent implements OnInit {
       firstname: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       sexe: new FormControl('', [Validators.required]),
-      license_number: new FormControl('')
+      licenseNumber: new FormControl('')
     });
   }
 
   filterName(term: any) {
-    console.log('TERM', term);
     this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
-      console.log('DATAS', datas);
       this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licence_number == null);
+      this.sortedUsers = this.unlicensedUsers;
       this.length.emit(this.unlicensedUsers.length);
-      console.log('NON LICENCIES', this.unlicensedUsers);
-
     });
   }
 
@@ -117,7 +113,6 @@ export class UnlicensedUsersComponent implements OnInit {
         header.direction = '';
       }
     });
-
     if (direction === '' || column === '') {
       this.sortedUsers = this.unlicensedUsers;
     } else {
@@ -171,7 +166,7 @@ export class UnlicensedUsersComponent implements OnInit {
 
   submit() {
     this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
-      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.license_number === null);
+      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber === null);
     });
   }
 

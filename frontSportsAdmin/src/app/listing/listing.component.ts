@@ -79,7 +79,7 @@ export class ListingComponent {
 
 
   ngOnInit(): void {
-    this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
+    this.apiService.getUsersFiltered('').subscribe((datas: any) => {
       this.users = datas['hydra:member'];
       this.sortedUsers = this.users;
       this.length.emit(this.users.length);
@@ -96,7 +96,7 @@ export class ListingComponent {
       firstname: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       sexe: new FormControl('', [Validators.required]),
-      license_number: new FormControl('')
+      licenseNumber: new FormControl('')
     });
   }
 
@@ -123,6 +123,7 @@ export class ListingComponent {
       this.sortedUsers = [...this.users].sort((a: any, b: any) => {
         const res = compare(a[column], b[column]);
         return direction === 'asc' ? res : -res;
+
       });
     }
   }
@@ -133,9 +134,7 @@ export class ListingComponent {
 
   delete(id: number) {
     this.apiService.deleteUser(id).subscribe((res) => {
-      console.log(res);
       this.sortedUsers = this.sortedUsers.filter((item) => item.id !== id);
-
       console.log('Post deleted successfully!');
     });
   }

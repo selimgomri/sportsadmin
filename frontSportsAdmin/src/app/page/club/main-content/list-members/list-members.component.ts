@@ -3,6 +3,7 @@ import { IUser } from 'src/app/IUser';
 import { UsersService } from 'src/app/services/users.service';
 import { ActivatedRoute,  Params } from '@angular/router';
 
+
 @Component({
   selector: 'app-list-members',
   templateUrl: './list-members.component.html',
@@ -26,5 +27,11 @@ export class ListMembersComponent implements OnInit {
 
   getUsersLength(users:number) {
     this.usersNumber = users;
+  }
+  getLicensedLength(users:number) {
+    this.licensedNumber = users;
+  }
+  getUnlicensedLength(users:number) {
+    this.unlicensedNumber = users;
   }
 }
