@@ -25,7 +25,7 @@
       <h5>Nombre total de licenciés: 52</h5>
       <h5>Licenciés en attente de renouvellement: 34</h5>
     </div>
-    <button [routerLink]="['/liste-membres/']" [queryParams]="{IdClubMember: clubId['id']}">
+    <button [routerLink]="['/liste-membres/']" [queryParams]="{id: clubId['id']}">
       Gestion des membres
     </button>
   </div>
@@ -54,7 +54,7 @@
       <h1>+150€</h1>
       <p>depuis 1 mois</p>
     </div>
-    <button [routerLink]="['/gestion-des-cotisations']">
+    <button [routerLink]="['/gestion-des-cotisations']" [queryParams]="{id: clubId['id']}">
       Gestion des cotisations
     </button>
   </div>
