@@ -16,6 +16,42 @@ export class UsersService {
     });
   }
 
+  getLicensedUsers(): Observable<IUser> {
+    return this.http.get<IUser>(
+      `${environment.baseUrl}/api/users?exists[licenseNumber]=true`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  getLicensedFilteredUsers(name: string): Observable<IUser> {
+    return this.http.get<IUser>(
+      `${environment.baseUrl}/api/users?exists[licenseNumber]=true&simplesearch=${name}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  getUnlicensedUsers(): Observable<IUser> {
+    return this.http.get<IUser>(
+      `${environment.baseUrl}/api/users?exists[licenseNumber]=false`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  getUnlicensedFilteredUsers(name: string): Observable<IUser> {
+    return this.http.get<IUser>(
+      `${environment.baseUrl}/api/users?exists[licenseNumber]=false&simplesearch=${name}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
   getUsersFiltered(name: string): Observable<IUser> {
     return this.http.get<IUser>(
       `${environment.baseUrl}/api/users?simplesearch=${name}`,

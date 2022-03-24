@@ -10,7 +10,6 @@ import {
 import { IUser } from '../IUser';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
 import { DecimalPipe } from '@angular/common';
 
@@ -70,15 +69,12 @@ export class LicensedUsersComponent {
 
   constructor(
     private apiService: UsersService,
-    private modalService: NgbModal,
-    private router: Router,
-    private route: ActivatedRoute
+    private modalService: NgbModal
   ) {}
 
-
   ngOnInit(): void {
-    this.apiService.getUsersFiltered('').subscribe((datas: any) => {
-      this.licensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber != null);
+    this.apiService.getLicensedUsers().subscribe((datas: any) => {
+      this.licensedUsers = datas['hydra:member'];
       this.sortedUsers = this.licensedUsers;
       this.length.emit(this.licensedUsers.length);
     });
@@ -94,14 +90,15 @@ export class LicensedUsersComponent {
       firstname: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       sexe: new FormControl('', [Validators.required]),
-      licenseNumber: new FormControl('')
+      licenseNumber: new FormControl(''),
     });
   }
 
   filterName(term: any) {
-    this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
-      this.licensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber != null);
+    this.apiService.getLicensedFilteredUsers(term).subscribe((datas: any) => {
+      this.licensedUsers = datas['hydra:member'];
       this.sortedUsers = this.licensedUsers;
+      console.log('datas',datas['hydra:member']);
       this.length.emit(this.licensedUsers.length);
     });
   }
@@ -166,10 +163,9 @@ export class LicensedUsersComponent {
     }
   }
 
-  submit() {
+  /*  submit() {
     this.apiService.getUsersFiltered('').subscribe((datas: any) => {
       this.licensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber != null);
     });
-  }
-
+  } */
 }

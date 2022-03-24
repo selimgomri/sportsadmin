@@ -19,9 +19,7 @@ export class SideBarClubComponent implements OnInit {
 
   ngOnInit(): void {
     this.clubService.getClub(3).subscribe((datas: any) => {
-      console.log(datas);
       this.club = datas;
-      console.log(this.club);
     });
   }
 }
