@@ -71,7 +71,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @Vich\Uploadable
  */
 // api/src/Filter/SimpleSearchFilter.php
-#[ApiFilter(SimpleSearchFilter::class, properties:["firstname", "lastname"])]
+#[ApiFilter(SimpleSearchFilter::class, properties:["firstname", "lastname", "licenseNumber" ])]
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
