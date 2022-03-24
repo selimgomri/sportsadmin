@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <span class="inline">
     <h1>Nombre total de membres : {{ usersNumber }}</h1>
-    <button class="btn-success" [routerLink]="['/ajouter-membre']">
+    <button class="btn-success" [routerLink]="['/ajouter-membre']" [queryParams]="{id: clubId['id']}">
       <svg
         class="w-6 h-6"
         fill="none"

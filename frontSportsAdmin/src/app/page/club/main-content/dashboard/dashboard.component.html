@@ -25,7 +25,7 @@
       <h5>Nombre total de licenciés: {{ licensedNumber }}</h5>
       <h5>Licenciés en attente de renouvellement: {{ unlicensedNumber }}</h5>
     </div>
-    <button [routerLink]="['/liste-membres']">
+    <button [routerLink]="['/liste-membres/']" [queryParams]="{id: clubId['id']}">
       Gestion des membres
     </button>
   </div>
@@ -55,7 +55,7 @@
       <h5>Cotisations réglées: 1000€</h5>
       <h5>Cotisations en attente de paiement: 287€</h5>
     </div>
-    <button [routerLink]="['/gestion-des-cotisations']">
+    <button [routerLink]="['/gestion-des-cotisations']" [queryParams]="{id: clubId['id']}">
       Gestion des cotisations
     </button>
   </div>
