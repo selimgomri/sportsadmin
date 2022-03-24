@@ -79,7 +79,7 @@ export class UnlicensedUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getUsersFiltered('').subscribe((datas: any) => {
-      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.license_number == null);
+      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber == null);
       this.sortedUsers = this.unlicensedUsers;
       this.length.emit(this.unlicensedUsers.length);
     });
@@ -95,7 +95,7 @@ export class UnlicensedUsersComponent implements OnInit {
       firstname: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       sexe: new FormControl('', [Validators.required]),
-      license_number: new FormControl('')
+      licenseNumber: new FormControl('')
     });
   }
 
@@ -166,7 +166,7 @@ export class UnlicensedUsersComponent implements OnInit {
 
   submit() {
     this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
-      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.license_number === null);
+      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber === null);
     });
   }
 

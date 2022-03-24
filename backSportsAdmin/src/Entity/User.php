@@ -5,7 +5,6 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
-//use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Api\MeAction;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Controller\Api\UserImageAction;
@@ -71,7 +70,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @Vich\Uploadable
  */
-//#[ApiFilter(SearchFilter::class, properties:['firstname' => 'ipartial', 'lastname' => 'ipartial'] )]
 // api/src/Filter/SimpleSearchFilter.php
 #[ApiFilter(SimpleSearchFilter::class, properties:["firstname", "lastname"])]
 
@@ -116,8 +114,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['read_profile'])]
     private $phone;
 
-    #[ORM\Column(type:'integer', nullable:true)]
-    private $license_number;
+    #[ORM\Column(type:'string',length:255, nullable:true)]
+    private $licenseNumber;
 
     #[ORM\Column(type:'string', length:255, nullable:true)]
     private $category;
@@ -291,14 +289,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getLicenseNumber(): ?int
+    public function getLicenseNumber(): ?string
     {
-        return $this->license_number;
+        return $this->licenseNumber;
     }
 
-    public function setLicenseNumber(?int $license_number): self
+    public function setLicenseNumber(?string $licenseNumber): self
     {
-        $this->license_number = $license_number;
+        $this->licenseNumber = $licenseNumber;
 
         return $this;
     }

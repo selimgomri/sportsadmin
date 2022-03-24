@@ -95,7 +95,7 @@ export class ListingComponent {
       firstname: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       sexe: new FormControl('', [Validators.required]),
-      license_number: new FormControl('')
+      licenseNumber: new FormControl('')
     });
   }
 
