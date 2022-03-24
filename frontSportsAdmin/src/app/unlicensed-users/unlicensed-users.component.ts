@@ -11,7 +11,6 @@ import {
 import { IUser } from '../IUser';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
 import { DecimalPipe } from '@angular/common';
 
@@ -72,15 +71,12 @@ export class UnlicensedUsersComponent implements OnInit {
 
   constructor(
     private apiService: UsersService,
-    private modalService: NgbModal,
-    private router: Router,
-    private route: ActivatedRoute
+    private modalService: NgbModal
   ) {}
 
-
   ngOnInit(): void {
-    this.apiService.getUsersFiltered('').subscribe((datas: any) => {
-      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber == null);
+    this.apiService.getUnlicensedUsers().subscribe((datas: any) => {
+      this.unlicensedUsers = datas['hydra:member'];
       this.sortedUsers = this.unlicensedUsers;
       this.length.emit(this.unlicensedUsers.length);
     });
@@ -96,13 +92,13 @@ export class UnlicensedUsersComponent implements OnInit {
       firstname: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       sexe: new FormControl('', [Validators.required]),
-      licenseNumber: new FormControl('')
+      licenseNumber: new FormControl(''),
     });
   }
 
   filterName(term: any) {
-    this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
-      this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licence_number == null);
+    this.apiService.getUnlicensedFilteredUsers(term).subscribe((datas: any) => {
+      this.unlicensedUsers = datas['hydra:member'];
       this.sortedUsers = this.unlicensedUsers;
       this.length.emit(this.unlicensedUsers.length);
     });
@@ -165,10 +161,9 @@ export class UnlicensedUsersComponent implements OnInit {
     }
   }
 
-  submit() {
-    this.apiService.getUsersFiltered('e').subscribe((datas: any) => {
+  /*  submit() {
+    this.apiService.getUsersFiltered('').subscribe((datas: any) => {
       this.unlicensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber === null);
     });
-  }
-
+  } */
 }

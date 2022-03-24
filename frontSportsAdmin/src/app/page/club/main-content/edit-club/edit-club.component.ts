@@ -16,21 +16,38 @@ export class EditClubComponent implements OnInit {
   file: File | undefined;
   form!: FormGroup;
   id!: number;
+  primarycolor!: string;
+  secondarycolor!: string;
 
-  constructor(private http: HttpClient, private router: Router,
+  /*   secondarycolor = '#4AC285';
+   */
+  constructor(
+    private router: Router,
     private clubService: ClubService,
-    private ActivatedRoute: ActivatedRoute) {
+    private ActivatedRoute: ActivatedRoute
+  ) {
     this.changeTheme(this.primarycolor, this.secondarycolor); // Set default theme
     //recup de l'id du club dans l'url
     this.ActivatedRoute.queryParams.subscribe((params: Params) => {
-      this.clubId = params;
+      this.clubId = params.id;
     });
   }
 
   ngOnInit(): void {
     //recup des donnée du club par l'id
-    this.clubService.getClub(this.clubId['id']).subscribe((datas: any) => {
+    console.log('CLUBID', this.clubId);
+    this.clubService.getClub(this.clubId).subscribe((datas: any) => {
       this.club = datas;
+      if (this.club.primarycolor) {
+        this.primarycolor = this.club.primarycolor;
+      } else {
+        this.primarycolor = '#F6F4F5';
+      }
+      if (this.club.secondarycolor) {
+        this.secondarycolor = this.club.secondarycolor;
+      } else {
+        this.secondarycolor = '#4AC285';
+      }
     });
 
     this.form = new FormGroup({
@@ -42,17 +59,7 @@ export class EditClubComponent implements OnInit {
     });
   }
 
-  /* get f() {
-    return this.form.controls;
-  }
 
-  onSubmit() {
-    console.log({
-      file: this.file,
-    });
-
-    //faire un httpPost à la place du console.log afin d'envoyer au server back
-  } */
 
   setColor1(newColor: string) {
     console.log('value', newColor);
@@ -64,32 +71,11 @@ export class EditClubComponent implements OnInit {
     this.secondarycolor = newColor;
   }
 
-  primarycolor = '#F6F4F5';
-  secondarycolor = '#4AC285';
-
   changeTheme(primary: string, secondary: string) {
     document.documentElement.style.setProperty('--primary-color', primary);
     document.documentElement.style.setProperty('--secondary-color', secondary);
   }
 
-  /* onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-
-    if (file) {
-      this.file = file;
-
-      console.log(file);
-
-      const formData = new FormData();
-
-      formData.append('thumbnail', file);
-
-      const upload$ = this.http.post('/api/me', formData);
-
-      upload$.subscribe();
-    }
-  }
-  */
 
   submit() {
     this.clubService
