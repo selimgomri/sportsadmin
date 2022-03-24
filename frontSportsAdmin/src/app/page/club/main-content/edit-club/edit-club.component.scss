@@ -42,6 +42,10 @@ svg {
   display: none;
 }
 
+.container-hidden {
+  height:400px;
+}
+
 @media screen and (max-width: 600px) {
   .edit {
     display: flex;

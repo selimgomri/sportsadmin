@@ -31,7 +31,6 @@ export class EditClubComponent implements OnInit {
     //recup des donnée du club par l'id
     this.clubService.getClub(this.clubId['id']).subscribe((datas: any) => {
       this.club = datas;
-
     });
 
     this.form = new FormGroup({

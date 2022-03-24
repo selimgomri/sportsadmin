@@ -52,7 +52,7 @@ export class CreateClubComponent implements OnInit {
     console.log(this.form.value);
     this.apiService.createClub(this.form.value).subscribe((res:any) => {
          console.log('club created successfully!');
-         this.router.navigateByUrl('dashboard');
+         this.router.navigateByUrl('mes-clubs');
     })
   }
 }

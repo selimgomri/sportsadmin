@@ -78,7 +78,7 @@ export class LicensedUsersComponent {
 
   ngOnInit(): void {
     this.apiService.getUsersFiltered('').subscribe((datas: any) => {
-      this.licensedUsers = datas['hydra:member'].filter((user: any) => user.license_number != null);
+      this.licensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber != null);
       this.sortedUsers = this.licensedUsers;
       this.length.emit(this.licensedUsers.length);
     });
@@ -94,13 +94,14 @@ export class LicensedUsersComponent {
       firstname: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       sexe: new FormControl('', [Validators.required]),
-      license_number: new FormControl('')
+      licenseNumber: new FormControl('')
     });
   }
 
   filterName(term: any) {
     this.apiService.getUsersFiltered(term).subscribe((datas: any) => {
-      this.licensedUsers = datas['hydra:member'].filter((user: any) => user.license_number != null);
+      this.licensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber != null);
+      this.sortedUsers = this.licensedUsers;
       this.length.emit(this.licensedUsers.length);
     });
   }
@@ -167,7 +168,7 @@ export class LicensedUsersComponent {
 
   submit() {
     this.apiService.getUsersFiltered('').subscribe((datas: any) => {
-      this.licensedUsers = datas['hydra:member'].filter((user: any) => user.license_number != null);
+      this.licensedUsers = datas['hydra:member'].filter((user: any) => user.licenseNumber != null);
     });
   }
 

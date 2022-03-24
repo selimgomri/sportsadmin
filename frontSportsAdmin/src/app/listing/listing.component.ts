@@ -39,6 +39,7 @@ export interface SortEvent {
   },
 })
 export class NgbdSortableHeader {
+  user!: IUser;
   @Input() sortable: SortColumn = '';
   @Input() direction: SortDirection = '';
   @Output() sort = new EventEmitter<SortEvent>();
@@ -56,7 +57,7 @@ export class NgbdSortableHeader {
   providers: [DecimalPipe],
 })
 export class ListingComponent {
-  users: IUser[] = [];
+  users : IUser[] = [];
   sortedUsers = this.users;
   page = 1;
   pageSize = 5;
@@ -86,7 +87,7 @@ export class ListingComponent {
 
     this.form = new FormGroup({
       //photo: new FormControl('', [Validators.required]),
-      id: new FormControl(''),
+      //id: new FormControl(''),
       roles: new FormControl('', [Validators.required]),
       lastname: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
@@ -95,7 +96,7 @@ export class ListingComponent {
       firstname: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       sexe: new FormControl('', [Validators.required]),
-      license_number: new FormControl('')
+      licenseNumber: new FormControl('')
     });
   }
 
@@ -122,6 +123,7 @@ export class ListingComponent {
       this.sortedUsers = [...this.users].sort((a: any, b: any) => {
         const res = compare(a[column], b[column]);
         return direction === 'asc' ? res : -res;
+
       });
     }
   }
@@ -132,9 +134,7 @@ export class ListingComponent {
 
   delete(id: number) {
     this.apiService.deleteUser(id).subscribe((res) => {
-      console.log(res);
       this.sortedUsers = this.sortedUsers.filter((item) => item.id !== id);
-
       console.log('Post deleted successfully!');
     });
   }

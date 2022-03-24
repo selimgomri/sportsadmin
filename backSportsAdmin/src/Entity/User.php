@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Api\MeAction;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Controller\Api\UserImageAction;
+use App\Filter\SimpleSearchFilter;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,6 +18,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 #[ORM\Entity(repositoryClass:UserRepository::class)]
 #[ApiResource(
@@ -68,7 +70,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @Vich\Uploadable
  */
-#[ApiFilter(SearchFilter::class, properties:['firstname' => 'ipartial', 'lastname' => 'ipartial'] )]
+// api/src/Filter/SimpleSearchFilter.php
+#[ApiFilter(SimpleSearchFilter::class, properties:["firstname", "lastname", "licenseNumber" ])]
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -111,8 +114,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['read_profile'])]
     private $phone;
 
-    #[ORM\Column(type:'integer', nullable:true)]
-    private $license_number;
+    #[ORM\Column(type:'string',length:255, nullable:true)]
+    private $licenseNumber;
 
     #[ORM\Column(type:'string', length:255, nullable:true)]
     private $category;
@@ -173,19 +176,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-/**
- * A visual identifier that represents this user.
- *
- * @see UserInterface
- */
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-/**
- * @see UserInterface
- */
+    /**
+     * @see UserInterface
+     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -202,9 +205,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-/**
- * @see PasswordAuthenticatedUserInterface
- */
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
     public function getPassword(): string
     {
         return $this->password;
@@ -217,9 +220,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-/**
- * @see UserInterface
- */
+    /**
+     * @see UserInterface
+     */
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
@@ -286,14 +289,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getLicenseNumber(): ?int
+    public function getLicenseNumber(): ?string
     {
-        return $this->license_number;
+        return $this->licenseNumber;
     }
 
-    public function setLicenseNumber(?int $license_number): self
+    public function setLicenseNumber(?string $licenseNumber): self
     {
-        $this->license_number = $license_number;
+        $this->licenseNumber = $licenseNumber;
 
         return $this;
     }
@@ -322,9 +325,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-/**
- * @return Collection|ClubUser[]
- */
+    /**
+     * @return Collection|ClubUser[]
+     */
     public function getClubUsers(): Collection
     {
         return $this->clubUsers;
@@ -332,8 +335,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function addClubUser(ClubUser $clubUser): self
     {
-        if (!$this->clubUsers->contains($clubUser)) 
-        {
+        if (!$this->clubUsers->contains($clubUser)) {
             $this->clubUsers[] = $clubUser;
             $clubUser->setUser($this);
         }
@@ -343,11 +345,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeClubUser(ClubUser $clubUser): self
     {
-        if ($this->clubUsers->removeElement($clubUser)) 
-        {
+        if ($this->clubUsers->removeElement($clubUser)) {
             // the owning side to null (unless already changed)
-            if ($clubUser->getUser() === $this) 
-            {
+            if ($clubUser->getUser() === $this) {
                 $clubUser->setUser(null);
             }
         }
@@ -355,18 +355,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-/**
- * @return Collection|Document[]
- */
+    /**
+     * @return Collection|Document[]
+     */
     public function getDocuments(): Collection
     {
-    return $this->documents;
+        return $this->documents;
     }
 
     public function addDocument(Document $document): self
     {
-        if (!$this->documents->contains($document)) 
-        {
+        if (!$this->documents->contains($document)) {
             $this->documents[] = $document;
             $document->setUser($this);
         }
@@ -376,11 +375,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeDocument(Document $document): self
     {
-        if ($this->documents->removeElement($document)) 
-        {
+        if ($this->documents->removeElement($document)) {
             // set the owning side to null (unless already changed)
-            if ($document->getUser() === $this) 
-            {
+            if ($document->getUser() === $this) {
                 $document->setUser(null);
             }
         }
@@ -400,9 +397,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-/**
- * @return Collection|Invoice[]
- */
+    /**
+     * @return Collection|Invoice[]
+     */
     public function getInvoices(): Collection
     {
         return $this->invoices;
@@ -410,8 +407,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function addInvoice(Invoice $invoice): self
     {
-        if (!$this->invoices->contains($invoice)) 
-        {
+        if (!$this->invoices->contains($invoice)) {
             $this->invoices[] = $invoice;
             $invoice->setUser($this);
         }
@@ -421,11 +417,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeInvoice(Invoice $invoice): self
     {
-        if ($this->invoices->removeElement($invoice)) 
-        {
+        if ($this->invoices->removeElement($invoice)) {
             // set the owning side to null (unless already changed)
-            if ($invoice->getUser() === $this) 
-            {
+            if ($invoice->getUser() === $this) {
                 $invoice->setUser(null);
             }
         }
@@ -433,9 +427,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-/**
- * @return Collection|UserField[]
- */
+    /**
+     * @return Collection|UserField[]
+     */
     public function getUserFields(): Collection
     {
         return $this->userFields;
@@ -443,8 +437,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function addUserField(UserField $userField): self
     {
-        if (!$this->userFields->contains($userField)) 
-        {
+        if (!$this->userFields->contains($userField)) {
             $this->userFields[] = $userField;
             $userField->setUser($this);
         }
@@ -454,11 +447,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeUserField(UserField $userField): self
     {
-        if ($this->userFields->removeElement($userField)) 
-        {
+        if ($this->userFields->removeElement($userField)) {
             // set the owning side to null (unless already changed)
-            if ($userField->getUser() === $this) 
-            {
+            if ($userField->getUser() === $this) {
                 $userField->setUser(null);
             }
         }
@@ -468,7 +459,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getSexe(): ?string
     {
-    return $this->sexe;
+        return $this->sexe;
     }
 
     public function setSexe(string $sexe): self
@@ -490,21 +481,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-/**
- * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
- * of 'UploadedFile' is injected into this setter to trigger the update. If this
- * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
- * must be able to accept an instance of 'File' as the bundle will inject one here
- * during Doctrine hydration.
- *
- * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
- */
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
     public function setFile(?File $file = null): void
     {
         $this->file = $file;
 
-        if (null !== $file)    
-        {
+        if (null !== $file) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();

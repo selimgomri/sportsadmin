@@ -17,15 +17,15 @@
       </svg>
     </div>
     <div class="infos">
-      <h4>Nombre total de membres: 87</h4>
+      <h4>Nombre total de membres:</h4>
     </div>
     <div class="gained-members">
-      <h1>+15</h1>
-      <p>depuis 1 mois</p>
-      <h5>Nombre total de licenciés: 52</h5>
-      <h5>Licenciés en attente de renouvellement: 34</h5>
+      <h1>{{ usersNumber }}</h1>
+      <!-- <p>depuis 1 mois</p> -->
+      <h5>Nombre total de licenciés: {{ licensedNumber }}</h5>
+      <h5>Licenciés en attente de renouvellement: {{ unlicensedNumber }}</h5>
     </div>
-    <button [routerLink]="['/liste-membres']">
+    <button [routerLink]="['/liste-membres/']" [queryParams]="{id: clubId['id']}">
       Gestion des membres
     </button>
   </div>
@@ -48,14 +48,18 @@
       </svg>
     </div>
     <div class="infos">
-      <h4>Total des cotisations: 1287€</h4>
+      <h4>Total des cotisations:</h4>
     </div>
     <div class="total-cotisations">
-      <h1>+150€</h1>
-      <p>depuis 1 mois</p>
+      <h1>1287€</h1>
+      <h5>Cotisations réglées: 1000€</h5>
+      <h5>Cotisations en attente de paiement: 287€</h5>
     </div>
-    <button [routerLink]="['/gestion-des-cotisations']">
+    <button [routerLink]="['/gestion-des-cotisations']" [queryParams]="{id: clubId['id']}">
       Gestion des cotisations
     </button>
   </div>
 </div>
+<app-listing [style.display]="'none'" (length)="getUsersLength($event)"></app-listing>
+<app-licensed-users [style.display]="'none'" (length)="getLicensedLength($event)"></app-licensed-users>
+<app-unlicensed-users [style.display]="'none'"(length)="getUnlicensedLength($event)"></app-unlicensed-users>

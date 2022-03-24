@@ -5,30 +5,39 @@ import { IUser } from '../IUser';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getUsers(): Observable<IUser> {
-    return this.http.get<IUser>(`${environment.baseUrl}/api/users`, { withCredentials: true });
+    return this.http.get<IUser>(`${environment.baseUrl}/api/users`, {
+      withCredentials: true,
+    });
   }
 
   getUsersFiltered(name: string): Observable<IUser> {
-    return this.http.get<IUser>(`${environment.baseUrl}/api/users?firstname=${name}`, { withCredentials: true });
+    return this.http.get<IUser>(
+      `${environment.baseUrl}/api/users?simplesearch=${name}`,
+      { withCredentials: true }
+    );
   }
 
   createUser(data: any): Observable<any> {
-    return this.http.post(`${environment.baseUrl}/api/users`, data, { withCredentials: true });
+    return this.http.post(`${environment.baseUrl}/api/users`, data, {
+      withCredentials: true,
+    });
   }
 
   deleteUser(id: number): Observable<any> {
-    return this.http.delete(`${environment.baseUrl}/api/users/${id}`, { withCredentials: true });
+    return this.http.delete(`${environment.baseUrl}/api/users/${id}`, {
+      withCredentials: true,
+    });
   }
 
   updateUser(id: number, data: IUser): Observable<any> {
-    return this.http
-    .put(`${environment.baseUrl}/api/users/${id}`, data, { withCredentials: true });
+    return this.http.put(`${environment.baseUrl}/api/users/${id}`, data, {
+      withCredentials: true,
+    });
   }
 }

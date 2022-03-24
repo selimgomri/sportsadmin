@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Clubs } from '../../../mock-clubs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/session-login/api.service';
 import { ClubService } from 'src/app/services/club.service';
 
@@ -11,12 +11,11 @@ import { ClubService } from 'src/app/services/club.service';
 })
 export class PageMyclubsComponent implements OnInit {
   clubs = Clubs;
-  clubId!: any;
+  clubId!: number;
 
   constructor(
     private router: Router,
     private apiService: ApiService,
-    private ActivatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -28,15 +27,18 @@ export class PageMyclubsComponent implements OnInit {
 
 
   redirectToDashboard(id: number) {
-    // this.getClub();
-
+    this.clubId = id;
     this.router.navigate(['./dashboard'], {
       //mise en place du parametre id d'un club
       queryParams: { id: id },
+
     });
   }
 
   redirectToCreateMyClub() {
-    this.router.navigate(['./creer-mon-club']);
+    this.router.navigate(['./creer-mon-club'], {
+      //mise en place du parametre id d'un club
+      queryParams: { id: this.clubId },
+    });
   }
 }
