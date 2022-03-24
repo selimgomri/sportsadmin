@@ -51,6 +51,10 @@ img {
   cursor: pointer;
 }
 
+.container {
+  height: 450px;
+}
+
 @media screen and (max-width: 600px) {
   .clubs {
     display: flex;
