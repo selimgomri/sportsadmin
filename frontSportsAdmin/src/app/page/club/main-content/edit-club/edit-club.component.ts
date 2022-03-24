@@ -21,7 +21,7 @@ export class EditClubComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.clubService.getClub(5).subscribe((datas: any) => {
+    this.clubService.getClub(3).subscribe((datas: any) => {
       this.club = datas;
       //this.id = this.club.id;
     });

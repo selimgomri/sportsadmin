@@ -37,6 +37,7 @@ export class AddUserComponent implements OnInit {
     console.log(this.form.value);
     this.apiService.createUser(this.form.value).subscribe((res:any) => {
          console.log('user created successfully!');
+         console.log(this.form.value);
          this.router.navigateByUrl('liste-membres');
     })
 
