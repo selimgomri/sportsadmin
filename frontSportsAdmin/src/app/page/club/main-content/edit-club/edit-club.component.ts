@@ -35,9 +35,10 @@ export class EditClubComponent implements OnInit {
 
   ngOnInit(): void {
     //recup des donnée du club par l'id
-    console.log('CLUBID', this.clubId);
-    this.clubService.getClub(this.clubId).subscribe((datas: any) => {
+    console.log('CLUBID', this.clubId['id']);
+    this.clubService.getClub(this.clubId['id']).subscribe((datas: any) => {
       this.club = datas;
+      console.log('CLUBID', this.club.primarycolor);
       if (this.club.primarycolor) {
         this.primarycolor = this.club.primarycolor;
       } else {
@@ -87,5 +88,6 @@ export class EditClubComponent implements OnInit {
           queryParams: { id: this.clubId['id'] },
         });
       });
+      this.changeTheme(this.primarycolor, this.secondarycolor);
   }
 }
