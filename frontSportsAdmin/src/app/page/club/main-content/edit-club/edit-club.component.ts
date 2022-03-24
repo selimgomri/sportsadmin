@@ -29,7 +29,7 @@ export class EditClubComponent implements OnInit {
     this.changeTheme(this.primarycolor, this.secondarycolor); // Set default theme
     //recup de l'id du club dans l'url
     this.ActivatedRoute.queryParams.subscribe((params: Params) => {
-      this.clubId = params.id;
+      this.clubId = params;
     });
   }
 
@@ -87,6 +87,5 @@ export class EditClubComponent implements OnInit {
           queryParams: { id: this.clubId['id'] },
         });
       });
-      this.changeTheme(this.primarycolor, this.secondarycolor);
   }
 }
