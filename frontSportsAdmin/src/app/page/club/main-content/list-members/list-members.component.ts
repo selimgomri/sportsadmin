@@ -14,6 +14,8 @@ export class ListMembersComponent implements OnInit {
 
   usersNumber!: number;
   licensedUsers!: IUser[];
+  licensedNumber!: number;
+  unlicensedNumber!: number;
   unlicensedUsers!: IUser[];
   clubId!: any;
 
