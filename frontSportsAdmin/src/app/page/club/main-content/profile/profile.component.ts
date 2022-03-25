@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
 
     this.form = new FormGroup({
       photo: new FormControl('', [Validators.required]),
-      roles: new FormControl('', [Validators.required]),
+      //roles: new FormControl('', [Validators.required]),
       lastname: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
       birthdate: new FormControl('', [Validators.required]),
