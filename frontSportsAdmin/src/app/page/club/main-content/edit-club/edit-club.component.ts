@@ -25,15 +25,14 @@ export class EditClubComponent implements OnInit {
     private router: Router,
     private clubService: ClubService,
     private ActivatedRoute: ActivatedRoute
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.changeTheme(this.primarycolor, this.secondarycolor); // Set default theme
     //recup de l'id du club dans l'url
     this.ActivatedRoute.queryParams.subscribe((params: Params) => {
-      this.clubId = params;
+      this.clubId = params.id;
     });
-  }
-
-  ngOnInit(): void {
     //recup des donnée du club par l'id
     console.log('CLUBID', this.clubId);
     this.clubService.getClub(this.clubId).subscribe((datas: any) => {
@@ -59,8 +58,6 @@ export class EditClubComponent implements OnInit {
     });
   }
 
-
-
   setColor1(newColor: string) {
     console.log('value', newColor);
     this.primarycolor = newColor;
@@ -76,15 +73,14 @@ export class EditClubComponent implements OnInit {
     document.documentElement.style.setProperty('--secondary-color', secondary);
   }
 
-
   submit() {
     this.clubService
-      .updateClub(this.clubId['id'], this.form.value)
+      .updateClub(this.clubId, this.form.value)
       .subscribe((res: any) => {
         console.log('club updated successfully!');
         this.router.navigate(['./dashboard'], {
           //mise en place du parametre id d'un club
-          queryParams: { id: this.clubId['id'] },
+          queryParams: { id: this.clubId },
         });
       });
   }
