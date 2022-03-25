@@ -1,0 +1,9 @@
+<side-bar-club fxFlex="15"></side-bar-club>
+<div fxFlex="85">
+  <header-bar
+    fxLayout="column"
+    (titleChanged)="changedTitle($event)"
+    [title]="title"
+  ></header-bar>
+  <ajout-user></ajout-user>
+</div>
