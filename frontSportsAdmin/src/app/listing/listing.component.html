@@ -168,8 +168,8 @@
                         <label for="roles">Rôle</label>
                         <select formControlName="roles" class="form-select">
                           <option value="" disabled selected hidden>Administrateur</option>
-                          <option value="ROLE_ADMIN">Administrateur</option>
-                          <option value="ROLE_USER">Membre</option>
+                          <option value="[ROLE_ADMIN]">Administrateur</option>
+                          <option value="[ROLE_USER]">Membre</option>
                         </select>
                       </div>
                       <div class="form-group">
@@ -197,6 +197,15 @@
                           class="form-control"
                           type="text"
                           [(ngModel)]="user.sexe"
+                        />
+                      </div>
+                      <div class="form-group" style="display:none">
+                        <label for="id">id</label>
+                        <input
+                          formControlName="id"
+                          class="form-control"
+                          type="text"
+                          [(ngModel)]="user.id"
                         />
                       </div>
 

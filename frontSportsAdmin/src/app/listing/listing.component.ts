@@ -57,7 +57,7 @@ export class NgbdSortableHeader {
   providers: [DecimalPipe],
 })
 export class ListingComponent {
-  users : IUser[] = [];
+  users: IUser[] = [];
   sortedUsers = this.users;
   page = 1;
   pageSize = 5;
@@ -77,7 +77,6 @@ export class ListingComponent {
     private route: ActivatedRoute
   ) {}
 
-
   ngOnInit(): void {
     this.apiService.getUsersFiltered('').subscribe((datas: any) => {
       this.users = datas['hydra:member'];
@@ -87,8 +86,8 @@ export class ListingComponent {
 
     this.form = new FormGroup({
       //photo: new FormControl('', [Validators.required]),
-      //id: new FormControl(''),
-      roles: new FormControl('', [Validators.required]),
+      id: new FormControl(''),
+      //roles: new FormControl('', [Validators.required]),
       lastname: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
       birthdate: new FormControl('', [Validators.required]),
@@ -96,7 +95,7 @@ export class ListingComponent {
       firstname: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       sexe: new FormControl('', [Validators.required]),
-      licenseNumber: new FormControl('')
+      licenseNumber: new FormControl(''),
     });
   }
 
@@ -123,7 +122,6 @@ export class ListingComponent {
       this.sortedUsers = [...this.users].sort((a: any, b: any) => {
         const res = compare(a[column], b[column]);
         return direction === 'asc' ? res : -res;
-
       });
     }
   }
@@ -174,11 +172,9 @@ export class ListingComponent {
   }
 
   submit() {
+    console.log('sent datas', this.form.value);
     this.apiService
       .updateUser(this.form.value.id, this.form.value)
-      .subscribe((res: any) => {
-        console.log('User updated successfully!');
-        this.router.navigateByUrl('liste-membres');
-      });
+      .subscribe((res: any) => {});
   }
 }

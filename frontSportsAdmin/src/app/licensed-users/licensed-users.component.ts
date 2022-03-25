@@ -99,7 +99,6 @@ export class LicensedUsersComponent {
     this.apiService.getLicensedFilteredUsers(term).subscribe((datas: any) => {
       this.licensedUsers = datas['hydra:member'];
       this.sortedUsers = this.licensedUsers;
-      console.log('datas',datas['hydra:member']);
       this.length.emit(this.licensedUsers.length);
     });
   }
